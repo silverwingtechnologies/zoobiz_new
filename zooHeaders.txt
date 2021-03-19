@@ -1,0 +1,70 @@
+#VAR1#, is now a proud member of ZooBiz #VAR2# region. Thank you #VAR3#, for referring.
+
+
+Shivani Patel Has Joined Zoobiz Surat. Big Thank you from Zoobiz. Keep Referring!
+
+
+{#var#} Has Joined Zoobiz {#var#}. Big Thank you from Zoobiz. Keep Referring!
+-----------------------------------------
+
+
+New Member Registration in #VAR1# Name: #VAR2# Company Name: #VAR3# Thanks Team ZooBiz.
+
+Shivani Patel Has Joined Zoobiz Surat. Referred by "Mihir Mehta"
+
+
+{#var#} Has Joined Zoobiz {#var#}. Referred by "{#var#}"
+------------------------------------
+
+
+Dear #VAR1#,
+Congratulations and welcome to the infinite world of Zoobiz.
+Its your time to Zoobiz! All the best !
+	  
+
+"Shivani Gupta, 
+Congratulations & Welcome to Infinite World of Zoobiz. 
+Its Your Time to Zoobiz! Good Luck!"
+
+
+{#var#}, 
+Congratulations & Welcome to Infinite World of Zoobiz. 
+Its Your Time to Zoobiz! Good Luck!
+
+
+****************************************************************************
+APPOVED TEMPLATES:
+#VAR1# Members are waiting to connect with you on Zoobiz. Complete your profile and grow your business. Lets Zoobiz !
+- zoobiz.in
+
+
+Completed Profile attracts #VAR1# business. Fill in your details and make the most of Zoobiz !
+
+
+It takes #VAR1# secs to complete Profile and Grow Business. Why Wait ? Lets Zoobiz !
+- zoobiz.in
+
+Dear #VAR1#, You have requested to reset your password for ZooBiz Admin Panel. Please click below link to reset the same. #VAR2# Thanks Team ZooBiz
+
+_______________________________________________________________
+ Dear {#var#},
+Your Account Has Gone For Approval. We Will Notify, Once Approved.
+Team Zoobiz
+  {#var#},
+Congratulations & Welcome To Infinite World of Zoobiz. You Can Download The App From Following Link.
+Android: {#var#}
+IOS: {#var#}
+Team Zoobiz
+
+
+Account Approval Message
+Dear #VAR1#,
+Your Account has gone for approval. We will notify, once approved.
+Team Zoobiz
+
+Welcome Message On Register
+#VAR1#,
+Congratulations & Welcome To Infinite World of Zoobiz. You Can Download The App From Following Link.
+Android: #VAR2#
+IOS: #VAR3#
+Team Zoobiz

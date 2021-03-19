@@ -1,0 +1,1473 @@
+jQuery(document).ready(function($){
+    //your custom2.js code here
+});
+
+
+
+function  getStates() {
+  var country_id = $("#country_id").val();
+  $.ajax({
+        url: "getStates.php",
+        cache: false,
+        type: "POST",
+        data: {country_id : country_id,getStates:'getStates'},
+        success: function(response){
+            $('#state_id').html(response);
+          
+            
+        }
+     });
+}
+
+function  getCity() {
+  var state_id = $("#state_id").val();
+  $.ajax({
+        url: "getCities.php",
+        cache: false,
+        type: "POST",
+        data: {state_id : state_id,getCity:'getCity'},
+        success: function(response){
+            $('#city_id').html(response);
+          
+            
+        }
+     });
+}
+
+
+function  getArea() {
+  var city_id = $("#city_id").val();
+  $.ajax({
+        url: "getArea.php",
+        cache: false,
+        type: "POST",
+        data: {city_id : city_id,getArea:'getArea'},
+        success: function(response){
+            $('#area_id').html(response);
+          
+            
+        }
+     });
+}
+
+function  getLatLong() {
+  var area_id = $("#area_id").val();
+  $.ajax({
+        url: "getArea.php",
+        cache: false,
+        type: "POST",
+        data: {area_id : area_id,getLatLong:'getLatLong'},
+        success: function(response){
+             // $('#area_id').html(response);
+            var fields = response.split('~');
+            document.getElementById('lat').value = fields[0];
+            document.getElementById('lng').value = fields[1];
+
+            initialize();
+            
+        }
+     });
+}
+
+function DeleteAll(deleteValue) {
+    // var myArray = [];
+    // var val = [];
+    var oTable = $("#example").dataTable();
+    // $(".multiDelteCheckbox:checked", oTable.fnGetNodes()).each(function(i) {
+    //     if (val != "") {
+    //         val[i] = val + "," + $(this).val();
+    //     } else {
+    //         val = $(this).val();
+    //     }
+    // });
+
+    var val = [];
+          $(".multiDelteCheckbox:checked", oTable.fnGetNodes()).each(function(i) {
+            val[i] = $(this).val();
+          });
+    if(val=="") {
+      swal(
+        'Warning !',
+        'Please Select at least 1 item !',
+        'warning'
+      );
+    } else {
+      // alert(val);
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              // $('form.deleteForm'+id).submit();
+          $.ajax({
+              url: "controller/deleteController.php",
+              cache: false,
+              type: "POST",
+              data: {ids : val,deleteValue
+                :deleteValue},
+              success: function(response){
+                console.log(response)
+                if(response==1) {
+                  // document.location.reload(true);
+                  history.go(0);
+                } else {
+                  // document.location.reload(true);
+                  history.go(0);
+                }
+              }
+            });
+
+             
+            } else {
+              // swal("Your data is safe!");
+            }
+          });
+    }
+}
+
+function  getSubCategory() {
+  var business_categories = $("#business_categories").val();
+  $.ajax({
+        url: "getBusSubCategory.php",
+        cache: false,
+        type: "POST",
+        data: {business_categories : business_categories},
+        success: function(response){
+            $('#business_categories_sub').html(response);
+        }
+     });
+}
+
+
+function  getFloorList() {
+	var no_of_floor = $("#no_of_floor").val();
+	var floor_type = $("#floor_type").val();
+	$.ajax({
+        url: "getFloorList.php",
+        cache: false,
+        type: "POST",
+        data: {no_of_floor : no_of_floor,floor_type:floor_type},
+        success: function(response){
+        		$('#floorResp').html(response);
+        	
+            
+        }
+     });
+}
+
+function  editAgent(agent_id) {
+  
+  $.ajax({
+        url: "editAgent.php",
+        cache: false,
+        type: "POST",
+        data: {agent_id : agent_id},
+        success: function(response){
+            $('#agentEditDiv').html(response);
+        }
+     });
+}
+
+
+function  otherCheck() {
+  var business_categories_sub = $("#business_categories_sub").val();
+  if (business_categories_sub=='Other') {
+    if (business_categories_sub=='Other') {
+      $("#ProfessionalTypeOther").show();
+    }else {
+      $("#ProfessionalTypeOther").hide();
+    }
+
+  }
+
+}
+
+
+function DeleteBlock(block_id) {
+    // alert(block_id);
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                // $('form.deleteForm'+id).submit();
+                $.ajax({
+                url: "controller/blockController.php",
+                cache: false,
+                type: "POST",
+                data: {deleteBlock : block_id},
+                success: function(response){
+                  console.log(response)
+                  if(response==1) {
+                    
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "success",
+                          });
+                    document.location.reload(true);
+                  } else {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "error",
+                          });
+                  }
+                }
+              });
+             
+            } else {
+              //swal("Your data is safe!");
+            }
+          });
+
+}
+
+function DeleteFloor(floor_id) {
+    // alert(floor_id);
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                // $('form.deleteForm'+id).submit();
+                $.ajax({
+                url: "controller/floorController.php",
+                cache: false,
+                type: "POST",
+                data: {deleteFloor : floor_id},
+                success: function(response){
+                  console.log(response)
+                  if(response==1) {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "success",
+                          });
+                    document.location.reload(true);
+                  } else {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "error",
+                          });
+                  }
+                }
+              });
+
+             
+            } else {
+              //swal("Your data is safe!");
+            }
+          });
+
+
+
+}
+
+
+function DeleteUnit(unit_id) {
+    // alert(unit_id);
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                // $('form.deleteForm'+id).submit();
+                $.ajax({
+                url: "controller/unitController.php",
+                cache: false,
+                type: "POST",
+                data: {deleteUnit : unit_id},
+                success: function(response){
+                  console.log(response)
+                  if(response==1) {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "success",
+                          });
+                    document.location.reload(true);
+                  } else {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "error",
+                          });
+                  }
+                }
+              });
+
+             
+            } else {
+              //swal("Your data is safe!");
+            }
+          });
+
+
+
+}
+
+
+function DeleteParking(parking_id) {
+    // alert(parking_id);
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                // $('form.deleteForm'+id).submit();
+                $.ajax({
+                url: "controller/parkingController.php",
+                cache: false,
+                type: "POST",
+                data: {deleteParking_id : parking_id},
+                success: function(response){
+                  console.log(response)
+                  if(response==1) {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "success",
+                          });
+                    document.location.reload(true);
+                  } else {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "error",
+                          });
+                  }
+                }
+              });
+
+             
+            } else {
+              //swal("Your data is safe!");
+            }
+          });
+
+
+
+}
+
+
+function editFloor (floor_id,floor_name) {
+    $('#floorId').val(floor_id);
+    $('#oldFloorname').val(floor_name);
+
+}
+
+
+function editBlock (block_id,block_name) {
+    $('#floorId').val(block_id);
+    $('#oldFloorname').val(block_name);
+
+}
+
+
+function editParking (parking_id,parking_name,society_parking_id) {
+    $('#parking_id').val(parking_id);
+    $('#oldParkingName').val(parking_name);
+    $('#society_parking_id').val(society_parking_id);
+
+}
+
+function addParking(parking_id,Type,parking_name,society_parking_id) {
+   $('#addParking').modal('show');
+  $('#P_id').val(parking_id);
+  $('#sParking_id').val(society_parking_id);
+  $('#pType').html(Type);
+  $('#parkingName').html(parking_name);
+
+}
+
+function updateParking(parking_id,Type,parking_name,society_parking_id,unit_id,vehicle_no) {
+   $('#updateParking').modal('show');
+  $('#P_id11').val(parking_id);
+  $('#sParking_id1').val(society_parking_id);
+  $('#unitId').val(unit_id);
+  $('#vehicle_no').val(vehicle_no);
+  $('#pType1').html(Type);
+  $('#parkingName1').html(parking_name);
+
+   $.ajax({
+        url: "getParkingDetails.php",
+        cache: false,
+        type: "POST",
+        data: {unit_id : unit_id},
+        success: function(response){
+            $('#getParkingDetails').html(response);
+        }
+      });
+
+}
+
+
+$('#summernoteImgage').summernote({
+  height: 400,
+  tabsize: 2,
+  toolbar: [
+  [ 'style', [ 'style' ] ],
+  [ 'font', [ 'bold', 'italic', 'underline', 'clear'] ],
+  [ 'fontname', [ 'fontname' ] ],
+  [ 'fontsize', [ 'fontsize' ] ],
+  [ 'color', [ 'color' ] ],
+  [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+  [ 'table', [ 'table' ] ],
+  [ 'insert', [ 'link','picture'] ],
+  [ 'view', [ 'undo', 'redo', 'codeview', 'help' ] ]
+  ],
+  callbacks: {
+    onImageUpload: function(image) {
+      uploadImage(image[0]);
+    }
+  }
+});
+ function uploadImage(image) {
+  var data = new FormData();
+  data.append("image", image);
+  $.ajax({
+    url: 'controller/noticeBoardImage.php',
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: data,
+    type: "post",
+    success: function(url) {
+      var image = $('<img width=320>').attr('src', url);
+      console.log(image);
+      $('#summernoteImgage').summernote("insertNode", image[0]);
+    },
+    error: function(data) {
+      console.log(data);
+    }
+  });
+}
+
+function checkMobileSociety() {
+  var secretary_mobile= $('#secretary_mobile').val();
+  
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {secretary_mobile : secretary_mobile,checkSocietyMobile:'checkSocietyMobile'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This mobile number is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn").disabled=false;
+           }
+        }
+      });
+}
+
+
+function checkMobileUser() {
+  var userMobile= $('#userMobile').val();
+  
+     $.ajax({
+        url: "controller/userController.php",
+        cache: false,
+        type: "POST",
+        data: {userMobile : userMobile,checkUserMobile:'checkUserMobile'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This mobile number is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn").disabled=false;
+           }
+        }
+      });
+}
+
+
+function checkMobileUserTenant() {
+  var userMobile= $('#userMobileTenant').val();
+  
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {userMobile : userMobile,checkUserMobile:'checkUserMobile'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtnTenat").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This mobile number is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtnTenat").disabled=false;
+           }
+        }
+      });
+}
+
+
+
+function checkEmailUser() {
+  var userEmail= $('#userEmail').val();
+    if (userEmail!='') {
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {userEmail : userEmail,checkEmailMobile:'checkEmailMobile'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This Email is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn").disabled=false;
+           }
+        }
+      });
+    } else {
+      document.getElementById("socAddBtn").disabled=false;
+    }
+}
+
+function checkEmailUserTenant() {
+  var userEmail= $('#userEmailTenant').val();
+    if (userEmail!='') {
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {userEmail : userEmail,checkEmailMobile:'checkEmailMobile'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtnTenat").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This Email is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtnTenat").disabled=false;
+           }
+        }
+      });
+    } else {
+       document.getElementById("socAddBtnTenat").disabled=false;
+    }
+}
+
+function checkMobileUser1() {
+  var userMobile= $('#userMobile1').val();
+  
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {userMobile : userMobile,checkUserMobile:'checkUserMobile'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn1").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This mobile number is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn1").disabled=false;
+           }
+        }
+      });
+}
+
+
+
+function checkEmailUser1() {
+  var userEmail= $('#userEmail1').val();
+ 
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {userEmail : userEmail,checkEmailMobile:'checkEmailMobile'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn1").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This Email is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn1").disabled=false;
+           }
+        }
+      });
+}
+
+
+function checkMobileSocietyEdit() {
+
+  var secretary_mobile= $('#secretary_mobile').val();
+  var secretary_mobile_old= $('#secretary_mobile_old').val();
+  if (secretary_mobile_old!=secretary_mobile) {
+    // alert("call");
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {secretary_mobile : secretary_mobile,secretary_mobile_old:secretary_mobile_old,checkSocietyMobileEdit:'checkSocietyMobileEdit'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This Mobile Number  is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn").disabled=false;
+           }
+        }
+      });
+    } else {
+         document.getElementById("socAddBtn").disabled=false;
+    }
+}
+
+function checkemailSociety() {
+  var secretary_email= $('#secretary_email').val();
+  
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {secretary_email : secretary_email,checkSocietyEmail:'checkSocietyEmail'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'Email already used'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn").disabled=false;
+           }
+        }
+      });
+}
+
+
+function checkemailSocietyEdit() {
+
+  var secretary_email= $('#secretary_email').val();
+  var secretary_email_old= $('#secretary_email_old').val();
+  if (secretary_email_old!=secretary_email) {
+    // alert("call");
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {secretary_email : secretary_email,secretary_email_old:secretary_email_old,checkSocietyEmailEdit:'checkSocietyEmailEdit'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'Email already used'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn").disabled=false;
+           }
+        }
+      });
+    } else {
+         document.getElementById("socAddBtn").disabled=false;
+    }
+}
+
+
+function checkMobileEmp() {
+  var emp_mobile= $('#empNumber').val();
+  
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {emp_mobile : emp_mobile,checkUserEmp:'checkUserEmp'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This mobile number is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn").disabled=false;
+           }
+        }
+      });
+}
+
+
+function checkMobileEmpEdit() {
+  var emp_mobile= $('#empNumber').val();
+  var empNumberOld= $('#empNumberOld').val();
+  if (empNumberOld!=emp_mobile) {
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {emp_mobile : emp_mobile,checkUserEmp:'checkUserEmp'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This mobile number is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn").disabled=false;
+           }
+        }
+      });
+    }
+}
+
+
+
+function checkMobileUserEdit() {
+  var userMobile= $('#userMobile').val();
+  var userMobileOld= $('#userMobileOld').val();
+  if (userMobile!='') {
+    if (userMobile!=userMobileOld) {
+     $.ajax({
+        url: "controller/uniqueController.php",
+        cache: false,
+        type: "POST",
+        data: {userMobile : userMobile,checkUserMobile:'checkUserMobile'},
+        success: function(response){
+           if (response==1) {
+                document.getElementById("socAddBtn").disabled=true;
+              Lobibox.notify('error', {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'fa fa-times-circle',
+                msg: 'This mobile number is Already Used.'
+                });
+                  
+           } else {
+               document.getElementById("socAddBtn").disabled=false;
+           }
+        }
+      });
+   }
+  } else {
+    document.getElementById("socAddBtn").disabled=false;
+  }
+}
+
+
+function checkEmailUserEdit() {
+  var userEmail= $('#userEmail').val();
+  var userEmailOld= $('#userEmailOld').val();
+  if (userEmail!='') {
+    if (userEmail!=userEmailOld) {
+       $.ajax({
+          url: "controller/uniqueController.php",
+          cache: false,
+          type: "POST",
+          data: {userEmail : userEmail,checkEmailMobile:'checkEmailMobile'},
+          success: function(response){
+             if (response==1) {
+                  document.getElementById("socAddBtn").disabled=true;
+                Lobibox.notify('error', {
+                  pauseDelayOnHover: true,
+                  continueDelayOnInactiveTab: false,
+                  position: 'top right',
+                  icon: 'fa fa-times-circle',
+                  msg: 'This Email is Already Used.'
+                  });
+                    
+             } else {
+                 document.getElementById("socAddBtn").disabled=false;
+             }
+          }
+        });
+      }
+     } else {
+       document.getElementById("socAddBtn").disabled=false;
+    }
+}
+
+
+ function changePlan(society_id) {
+   $.ajax({
+      url: "getPlan.php",
+      cache: false,
+      type: "POST",
+      data: {society_id : society_id},
+      success: function(response){
+          document.getElementById("planFormRes").innerHTML=response;
+      }
+    });
+
+
+}
+
+
+
+
+/*$(document).on('keyup', '.select2-search__field', function (e) {  
+       var country_id = $("#country_id").val();
+       var city_id = $("#city_id").val();
+       var state_id = $("#state_id").val();
+       var search = $("#search").val();
+        $.ajax({
+        url: "getSocieties.php",
+        cache: false,
+        type: "POST",
+        data: {city_id : city_id,search : search,getSociety:'getSociety'},
+        success: function(response){
+            $('#society_id').html(response);
+          
+            
+        }
+     });
+       
+
+
+});*/
+
+function  getSubCategorySp() {
+  var local_service_master_id = $("#local_service_master_id").val();
+  $.ajax({
+        url: "getSubCategory.php",
+        cache: false,
+        type: "POST",
+        data: {local_service_master_id : local_service_master_id,getSubCategory:'getSubCategory'},
+        success: function(response){
+            $('#local_service_provider_sub_id').html(response);
+          
+            
+        }
+     });
+}
+
+
+function deletePost(feed_id) {
+    // alert(block_id);
+    swal({
+            title: "Are you sure to Delete this Post ?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                // $('form.deleteForm'+id).submit();
+                $.ajax({
+                url: "controller/newsFeedController.php",
+                cache: false,
+                type: "POST",
+                data: {feed_id_delete : feed_id},
+                success: function(response){
+                  console.log(response)
+                  if(response==1) {
+                    
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "success",
+                          });
+                    document.location.reload(true);
+                  } else {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "error",
+                          });
+                  }
+                }
+              });
+             
+            } else {
+              //swal("Your data is safe!");
+            }
+          });
+
+}
+
+function deleteComment(comments_id) {
+    // alert(block_id);
+    swal({
+            title: "Are you sure delete this Comment ?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                // $('form.deleteForm'+id).submit();
+                $.ajax({
+                url: "controller/newsFeedController.php",
+                cache: false,
+                type: "POST",
+                data: {comments_id_delete : comments_id},
+                success: function(response){
+                  console.log(response)
+                  if(response==1) {
+                    
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "success",
+                          });
+                    document.location.reload(true);
+                  } else {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "error",
+                          });
+                  }
+                }
+              });
+             
+            } else {
+              //swal("Your data is safe!");
+            }
+          });
+
+}
+
+
+
+function deleteSpCategory(local_service_provider_id) {
+    // alert(block_id);
+    swal({
+            title: "Are you sure to Delete this Category ?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                // $('form.deleteForm'+id).submit();
+                $.ajax({
+                url: "controller/serviceProviderController.php",
+                cache: false,
+                type: "POST",
+                data: {local_service_provider_id_delete : local_service_provider_id},
+                success: function(response){
+                  console.log(response)
+                  if(response==1) {
+                    
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "success",
+                          });
+                    document.location.reload(true);
+                  }
+                }
+              });
+             
+            } else {
+            }
+          });
+
+}
+
+function deleteSpSubCategory(local_service_provider_sub_id) {
+    // alert(block_id);
+    swal({
+            title: "Are you sure to Delete this Sub Category ?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                // $('form.deleteForm'+id).submit();
+                $.ajax({
+                url: "controller/serviceProviderController.php",
+                cache: false,
+                type: "POST",
+                data: {local_service_provider_sub_id_delete : local_service_provider_sub_id},
+                success: function(response){
+                  console.log(response)
+                  if(response==1) {
+                         swal("Poof! Your data has been deleted!", {
+                            icon: "success",
+                          });
+                    document.location.reload(true);
+                  } 
+                }
+              });
+             
+            } else {
+            }
+          });
+
+}
+
+
+function editCategory(local_service_provider_id,service_provider_category_name,service_provider_category_image,menu_icon_old) {
+  $('#req_icon').css('display','none');
+  if(menu_icon_old==""){
+    
+     $('#req_icon').css('display','block');
+  } else {
+     $('#req_icon').css('display','none');
+  }
+   $("#local_service_provider_id").val(local_service_provider_id);
+   $("#service_provider_category_name").val(service_provider_category_name);
+   $("#service_provider_category_image").val(service_provider_category_image);
+   $("#cat_icon_old").val(menu_icon_old);
+    
+
+}
+
+function editSubCategory(business_category_id,local_service_provider_sub_id,service_provider_sub_category_name,service_provider_sub_category_image) {
+   $("#local_service_provider_sub_id").val(local_service_provider_sub_id);
+   $("#service_provider_sub_category_name").val(service_provider_sub_category_name);
+   $("#service_provider_sub_category_image").val(service_provider_sub_category_image);
+
+   options = $('#business_category_id').children('select').children('option');
+   // alert(business_category_id);
+
+    //the following does not seem to work since the elements of options are DOM ones not jquery's
+    // option11 = options.find("[value='" + business_category_id + "']");
+    //alert(option.attr("value")); //undefined
+
+    $('#business_category_id option[value='+business_category_id+']').attr('selected','selected');
+    
+
+}
+
+
+
+function  getCategorySp() {
+
+  $.ajax({
+        url: "https://www.fincasys.com/main_api/local_service_provider_controller.php",
+        cache: false,
+        type: "POST",
+         dataType: 'JSON',
+        data: {getLocalServiceProviders : 'getLocalServiceProviders'},
+        success: function(response){
+          // console.log(response['local_service_provider'][1]);
+            
+          $.each(response.local_service_provider, function (key, value) {
+              $("#dropDownDest").append($('<option></option>').val(value.local_service_provider_id+'~'+value.service_provider_category_name).html(value.service_provider_category_name));
+          });
+
+          $('#dropDownDest').change(function () {
+              // alert($(this).val());
+              //Code to select image based on selected car id
+          })
+            
+        }
+     });
+}
+
+function showError(msg) {
+  swal(msg, {
+    icon: "error",
+  });
+}
+$('.eventPrice').hide();
+
+$('input[type=radio][name=event_type]').change(function() {
+    if (this.value == '1') {
+      $('.eventPrice').show();
+
+    }
+    else if (this.value == '0') {
+      $('.eventPrice').hide();
+      
+    }
+});
+
+function hideData() {
+  var empType = $('.employment_type').val();
+  if (empType=='Not employed' || empType=='Student' || empType=='Others') {
+    $('.proExtDiv').hide();
+  } else {
+    $('.proExtDiv').show();
+  }
+
+}
+
+ $(".onlyNumber,#secretary_mobile,#trlDays,#emp_sallary,#no_of_option,#month_working_days,#working_days,#leave_days,#no_of_person,#no_of_month,#expAmoint,#no_of_unit_bill,#no_of_unit,#no_of_blocks,#no_of_floor,#emrNumber,#userMobile,#ownerMobile,#empNumber,#cMobile,#editMobile1,#noofCar,#noofBike,#person_limit_day,#person_limit").keydown(function (e) {
+    // Allow: backspace, delete, tab, escape, enter and .
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+         // Allow: Ctrl+A, Command+A
+        (e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
+         // Allow: home, end, left, right, down, up
+        (e.keyCode >= 35 && e.keyCode <= 40)) {
+             // let it happen, don't do anything
+             return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+});
+
+
+
+$('.form-btn').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+     swal({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        buttons: ['Cancel', 'Yes, I am sure !'],
+      })
+     .then((willDelete) => {
+        if (willDelete) {
+          form.submit();
+        }
+      });
+
+});
+
+
+
+$('.content-wrapper').click(function(e) {
+   if($("#wrapper").hasClass("toggled")){
+      $('#wrapper').removeClass("toggled"); 
+         e.preventDefault();
+      } 
+});
+ $('.toggle-menu').click(function(event){
+     event.stopPropagation();
+ });
+
+
+
+function  getSocietyData(society_id) {
+ 
+  $.ajax({
+        url: "controller/cronGetData.php",
+        cache: false,
+        type: "POST",
+        data: {society_id : society_id},
+        success: function(response){
+            $('#BlockResp').html(response);
+            
+        }
+     });
+}
+
+function getPenalty(penalty_id) {
+      // alert(receive_bill_id);
+      $.ajax({
+      url: "getPenalty.php",
+      cache: false,
+      type: "POST",
+      data: {penalty_id : penalty_id},
+      success: function(response){
+      $('#billPayDiv').html(response);
+      
+      
+      }
+      });
+}
+
+
+$(".docOnly").change(function () {
+     var fileExtension = ['jpeg', 'jpg', 'png', 'doc','docx', 'pdf', 'jpg','csv', 'xls' , 'xlsx'];
+    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        // alert("Only formats are allowed : "+fileExtension.join(', '));
+        swal("Only formats are allowed : "+fileExtension.join(', '), {icon: "error", });
+        $('.idProof').val('');
+    }
+});
+
+$(".idProof").change(function () {
+     var fileExtension = ['jpeg', 'jpg', 'png', 'doc','docx', 'pdf', 'jpg'];
+    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        // alert("Only formats are allowed : "+fileExtension.join(', '));
+        swal("Only formats are allowed : "+fileExtension.join(', '), {icon: "error", });
+        $('.idProof').val('');
+    }
+});
+
+$(".photoOnly").change(function () {
+     // alert(this.files[0].size);
+     var fileExtension = ['jpeg', 'jpg', 'png'];
+    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        // alert("Only formats are allowed : "+fileExtension.join(', '));
+        swal("Only formats are allowed : "+fileExtension.join(', '), {icon: "error", });
+        $('.photoOnly').val('');
+    }
+});
+
+
+//   21sept2020
+$(".allow_decimal").keydown(function (evt) {
+     var self = $(this);
+   self.val(self.val().replace(/[^0-9\.]/g, ''));
+ 
+ 
+   if ( evt.keyCode==190 &&  self.val().indexOf('.') > -1 ) 
+   {
+     evt.preventDefault();
+   }
+
+ if ($.inArray(evt.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+         // Allow: Ctrl+A, Command+A
+        (evt.keyCode == 65 && ( evt.ctrlKey === true || evt.metaKey === true ) ) || 
+         // Allow: home, end, left, right, down, up
+        (evt.keyCode >= 35 && evt.keyCode <= 40)) {
+             // let it happen, don't do anything
+             return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((evt.shiftKey || (evt.keyCode < 48 || evt.keyCode > 57)) && (evt.keyCode < 96 || evt.keyCode > 105)) {
+        evt.preventDefault();
+    }
+
+});
+function DeleteGallaryFolder(delete_frame_id) {
+    
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+ 
+                // $('form.deleteForm'+id).submit();
+                $.ajax({
+                url: "controller/utilityBannerController.php",
+                cache: false,
+                type: "POST",
+                data: {delete_frame_id : delete_frame_id},
+                success: function(response){
+                   
+                  if(response==1) {
+                         swal("Folder has been deleted Successfully", {
+                            icon: "success",
+                          });
+                    document.location.reload(true);
+                  } else {
+                         swal("Something Went wrong, Please try again.", {
+                            icon: "error",
+                          });
+                  }
+                }
+              });
+
+             
+            } else {
+              //swal("Your data is safe!");
+            }
+          });
+
+
+
+}
+//21sept2020
+
+//22sept2020
+function  getCityNew() {
+  var state_id = $("#state_id").val();
+  var cmp= "yes";
+  $.ajax({
+        url: "getCities.php",
+        cache: false,
+        type: "POST",
+        data: {state_id : state_id,getCity:'getCity',cmp:cmp},
+        success: function(response){
+            $('#city_id').html(response);
+          
+            
+        }
+     });
+}
+//22sept2020
+
+//23sept2020
+function popitup(url) {
+  newwindow=window.open(url,'name','height=800,width=800, location=0');
+  if (window.focus) {newwindow.focus()}
+  return false;
+}
+ /*$("body").on("click", "#btnExport", function () {
+            html2canvas($('#pdfId')[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("invoice");
+                }
+            });
+        });*/
+//23sept2020
+
+
+//28sept
+$(document).on('change', '#frame_id', function() { 
+  
+    var frame_id = $("#frame_id option:selected").val();
+
+  
+  $.ajax({
+        url: "getFrame.php",
+        cache: false,
+        type: "POST",
+        data: {frame_id : frame_id},
+        success: function(response){
+            $('#frame_img').html(response);
+          
+            
+        }
+     });
+});
+//28sept
+
+
+//5oct2020
+function  isUnlimited() {
+   var is_unlimited = $("#is_unlimited option:selected").val();
+  if(is_unlimited=="0"){
+    $('#cpn_use_div').css('display','block');
+  } else {
+    $('#cpn_use_div').css('display','none');
+  }
+}
+
+$(document).on('click', '#generate', function() { 
+  var isGen = 'yes';
+   $.ajax({
+        url: "getCpnCode.php",
+        cache: false,
+        type: "POST",
+        data: {isGen : isGen},
+        success: function(response){
+            $('#coupon_code_div').html(response);
+          
+            
+        }
+     });
+});
+
+$(document).on('blur', '#coupon_code', function() { 
+  var checkCpnCode = 'yes';
+   var coupon_code = $('#coupon_code').val();
+   $.ajax({
+        url: "getCpnCode.php",
+        cache: false,
+        type: "POST",
+        data: {checkCpnCode : checkCpnCode,coupon_code:coupon_code},
+        success: function(response){
+             if(response=="0"){
+              $('#isValidCpn').val('0');
+             } else {
+              $('#isValidCpn').val('1');
+             }
+          
+            
+        }
+     });
+});
+//5oct2020
+//7oct2020
+function  referBy() {
+    var refer_by = $("#refer_by option:selected").val();
+    if(refer_by=="2"){
+      $('#remark_lbl').css('display','none');
+      $('#remark_div').css('display','none');
+
+      $('#refere_by_name_lbl').css('display','block');
+      $('#refere_by_name_div').css('display','block');
+
+      $('#refere_by_phone_number_lbl').css('display','block');
+      $('#refere_by_phone_number_div').css('display','block');
+    } else if(refer_by=="3"){
+      $('#refere_by_name_lbl').css('display','none');
+      $('#refere_by_name_div').css('display','none');
+
+      $('#refere_by_phone_number_lbl').css('display','none');
+      $('#refere_by_phone_number_div').css('display','none');
+
+      $('#remark_lbl').css('display','block');
+      $('#remark_div').css('display','block');
+    } else {
+        $('#refere_by_name_lbl').css('display','none');
+      $('#refere_by_name_div').css('display','none');
+
+      $('#refere_by_phone_number_lbl').css('display','none');
+      $('#refere_by_phone_number_div').css('display','none');
+
+      $('#remark_lbl').css('display','none');
+      $('#remark_div').css('display','none');
+    }
+}
+//7oct2020

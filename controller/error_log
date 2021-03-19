@@ -1,0 +1,2 @@
+[20-Jul-2020 10:08:25 Asia/Calcutta] PHP Notice:  Undefined variable: gst_number in /home/jwme8shws8vy/public_html/zoobiz.in/controller/registerController.php on line 46
+[20-Jul-2020 10:08:25 Asia/Calcutta] PHP Notice:  Undefined index: whatsapp_number in /home/jwme8shws8vy/public_html/zoobiz.in/zooAdmin/lib/model.php on line 12
