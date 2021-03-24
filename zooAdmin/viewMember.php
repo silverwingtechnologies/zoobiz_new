@@ -806,7 +806,9 @@ if(strtotime($today) <=   strtotime($validDateToEdit) ||1 ) {
             <option value="">-- Select --</option>
             <option <?php if($refer_by==1){ echo "selected";} ?> value="1">Social Media</option>
             <option  <?php if($refer_by==2){ echo "selected";} ?> value="2">Member / Friend</option>
-            <option   <?php if($refer_by==3){ echo "selected";} ?> value="3">Other</option>
+
+            <?php /* <option   <?php if($refer_by==3){ echo "selected";} ?> value="3">Other</option> */ ?>
+            
           </select>
         </div>
 

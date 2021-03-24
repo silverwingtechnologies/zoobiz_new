@@ -249,7 +249,7 @@ if (isset($_GET['id'])) {
                                     <option value="">-- Select --</option>
                                     <option value="1">Social Media</option>
                                     <option value="2">Member / Friend</option>
-                                    <option   value="3">Other</option>
+                                <?php /* ?> <option   value="3">Other</option> <?php */ ?> 
                                 </select>
                             </div>
                         </div>

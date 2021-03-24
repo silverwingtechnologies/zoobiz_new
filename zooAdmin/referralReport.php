@@ -19,7 +19,7 @@ error_reporting(0);
            <option  <?php if ( isset($_REQUEST['refer_by']) &&   $_REQUEST['refer_by'] ==0 ) { echo 'selected';} ?>  value="0">All</option>
             <option  <?php if ( isset($_REQUEST['refer_by']) &&   $_REQUEST['refer_by'] ==1 ) { echo 'selected';} ?> value="1">Social Media</option>
             <option  <?php if ( isset($_REQUEST['refer_by']) &&   $_REQUEST['refer_by'] ==2 ) { echo 'selected';} ?>  value="2">Member / Friend</option>
-            <option   <?php if ( isset($_REQUEST['refer_by']) &&   $_REQUEST['refer_by'] ==3 ) { echo 'selected';} ?> value="3">Other</option>
+            <?php /* <option   <?php if ( isset($_REQUEST['refer_by']) &&   $_REQUEST['refer_by'] ==3 ) { echo 'selected';} ?> value="3">Other</option> */ ?>
            
         </select>
          
@@ -66,9 +66,11 @@ error_reporting(0);
                    
                   <th>User Mobile</th>
                    <th>refer by</th>
+                   <?php  if ( $_GET['refer_by'] != 1 ) {  ?>
                    <th>Refer Person Name</th>
                    <th>Refer Person Phone No.</th>
-                    <th>ReMark</th>
+                 <?php } ?> 
+                   <!--  <th>ReMark</th> -->
                    <th>Date</th>
                    <th>View Profile</th>
                     <th>Edit</th> 
@@ -135,9 +137,11 @@ error_reporting(0);
                   else if($refer_by=="2") {echo "Member / Friend";}
                   else if($refer_by=="3") {echo "Other";}
                    ?></td>
+                   <?php  if ( $_GET['refer_by'] != 1 ) {  ?>
                   <td><?php echo wordwrap($refere_by_name,20,"<br>\n"); ?></td>
                   <td><?php echo  $refere_by_phone_number ; ?></td> 
-                  <td><?php echo wordwrap($remark,20,"<br>\n"); ?></td> 
+                <?php } ?> 
+                  <?php /* <td><?php echo wordwrap($remark,20,"<br>\n"); ?></td>   */ ?>
                   <td data-order="<?php echo date("U",strtotime($register_date)); ?>"><?php echo date("d-m-Y h:i:s A",strtotime($register_date));  ?></td>
                   <td>
                     <?php 

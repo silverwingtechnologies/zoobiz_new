@@ -980,8 +980,8 @@ hr {
 
 .btn-primary:hover {
 	color: #fff;
-	background-color: #5365ce;
-	border-color: #5365ce
+	background-color: #197066;
+	border-color: #197066
 }
 
 .btn-primary.focus, .btn-primary:focus {
@@ -990,14 +990,14 @@ hr {
 
 .btn-primary.disabled, .btn-primary:disabled {
 	color: #fff;
-	background-color: #5365ce;
-	border-color: #5365ce
+	background-color: #197066;
+	border-color: #197066
 }
 
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
 	color: #fff;
-	background-color: #5365ce;
-	border-color: #5365ce
+	background-color: #197066;
+	border-color: #197066
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
@@ -1038,21 +1038,21 @@ hr {
 }
 .btn-success:hover {
 	color: #fff;
-	background-color: #26b376;
-	border-color: #26b376
+	background-color: #197066;
+	border-color: #197066
 }
 .btn-success.focus, .btn-success:focus {
 	box-shadow:none;
 }
 .btn-success.disabled, .btn-success:disabled {
 	color: #fff;
-	background-color: #26b376;
-	border-color: #26b376
+	background-color: #197066;
+	border-color: #197066
 }
 .btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {
 	color: #fff;
-	background-color: #26b376;
-	border-color: #26b376
+	background-color: #197066;
+	border-color: #197066
 }
 .btn-success:not(:disabled):not(.disabled).active:focus, .btn-success:not(:disabled):not(.disabled):active:focus, .show>.btn-success.dropdown-toggle:focus {
 	box-shadow:none;
@@ -1065,21 +1065,21 @@ hr {
 }
 .btn-info:hover {
 	color: #fff;
-	background-color: #07b3d2;
-	border-color: #07b3d2
+	background-color: #197066;
+	border-color: #197066
 }
 .btn-info.focus, .btn-info:focus {
 	box-shadow:none;
 }
 .btn-info.disabled, .btn-info:disabled {
 	color: #fff;
-	background-color: #07b3d2;
-	border-color: #07b3d2
+	background-color: #197066;
+	border-color: #197066
 }
 .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show>.btn-info.dropdown-toggle {
 	color: #fff;
-	background-color: #07b3d2;
-	border-color: #07b3d2
+	background-color: #197066;
+	border-color: #197066
 }
 .btn-info:not(:disabled):not(.disabled).active:focus, .btn-info:not(:disabled):not(.disabled):active:focus, .show>.btn-info.dropdown-toggle:focus {
 	box-shadow:none;
@@ -5519,8 +5519,8 @@ textarea {
 
 .btn-success:hover {
   color: #fff;
-  background-color:#4E1653;
-  border-color:#0F98D7;
+  background-color:#197066;
+  border-color:#197066;
 }
 
 .border-fincasys {

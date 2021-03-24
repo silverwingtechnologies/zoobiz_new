@@ -38,7 +38,7 @@
               <tbody>
                 <?php
                 $i=1;
-                $q=$d->select("zoobiz_admin_master,role_master"," role_master.role_id = zoobiz_admin_master.role_id   order by zoobiz_admin_master.admin_name asc   ");
+                $q=$d->select("role_master,zoobiz_admin_master"," role_master.role_id = zoobiz_admin_master.role_id   order by zoobiz_admin_master.admin_name asc   ");
                 while ($data=mysqli_fetch_array($q)) {
                   extract($data);
                   ?>
