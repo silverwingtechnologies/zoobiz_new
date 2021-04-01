@@ -254,6 +254,13 @@ if(empty($arr_data) || $arr_data['order_status'] !="Success"){
 
          	$q4= $d->update("zoobizlastid",$a11,"id='1'");
          	if($q and $q3 and $q4) {
+
+                $a15 =array(
+                'user_id'=> $user_id,
+                 );
+                $q5= $d->update("transection_master",$a15,"user_mobile='$$user_mobile'");
+
+
          		$d->delete("users_master_temp","tracking_id='$tracking_id'");
          		$con -> commit();
          		unset($_SESSION['salutation']);

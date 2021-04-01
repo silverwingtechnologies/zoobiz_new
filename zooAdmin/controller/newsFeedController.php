@@ -195,8 +195,8 @@ $timeline_id  = $con->insert_id;
         if($q==TRUE) {
          
 
-         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='android'");
-         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='ios'");
+         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='android' and timeline_alert=0");
+         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='ios' and timeline_alert=0 ");
 
          //8march21
           /*$last_auto_id=$d->last_auto_id("timeline_master");
@@ -220,7 +220,7 @@ $new_timeline_id  = $timeline_id;
 
 //9dec2020
 if($send_notification_to_user==1){ 
-         $d->insertAllUserNotificationTimeline("ZooBiz",$feed_msg,"timeline",'',"active_status=0  ",'1',$new_timeline_id);
+         $d->insertAllUserNotificationTimeline("ZooBiz",$feed_msg,"timeline",'',"active_status=0  and timeline_alert=0 ",'1',$new_timeline_id);
 
          
 

@@ -286,19 +286,19 @@ include("common/front_header.php");
                     </div>
                     <div id="app-slider" class="owl-carousel owl-theme">
                         <div class="item">
-                            <img src="img/screen/Screenshot_1.jpg" alt="">
+                            <img src="img/screen/S1.jpg" alt="">
                         </div>
                         <div class="item">
-                            <img src="img/screen/Screenshot_2.jpg" alt="">
+                            <img src="img/screen/S2.jpg" alt="">
                         </div>
                         <div class="item">
-                            <img src="img/screen/Screenshot_3.jpg" alt="">
+                            <img src="img/screen/S3.jpg" alt="">
                         </div>
                         <div class="item">
-                            <img src="img/screen/Screenshot_4.jpg" alt="">
+                            <img src="img/screen/S4.jpg" alt="">
                         </div>
                         <div class="item">
-                            <img src="img/screen/Screenshot_5.jpg" alt="">
+                            <img src="img/screen/S5.jpg" alt="">
                         </div>
                     </div>
                     <img src="img/iphone.png" alt="image">

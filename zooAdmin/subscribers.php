@@ -39,7 +39,7 @@
                   
 
 
-                  $q=$d->select("subscribe_master","","ORDER BY created_date DESC");
+                  $q=$d->select("subscribe_master","","group by mobile,email ORDER BY created_date DESC");
                   $i = 0;
                   while($row=mysqli_fetch_array($q))
                   {

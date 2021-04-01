@@ -12,17 +12,13 @@ error_reporting(0);
          
        </div>
         <div class="col-sm-6">
-          <div class="">
-            <div id="dateragne-picker">
-                <div class="input-daterange input-group">
-                <input readonly="" type="text" class="form-control" autocomplete="off" required="" placeholder="Start Date" name="from" value="<?php echo $_GET['from']; ?>" />
+            <div class="input-daterange input-group">
+                <input readonly="" type="text" class="form-control" autocomplete="off"   placeholder="Start Date" id="FromDate" name="from" value="<?php if ( !isset($_GET['from'])) { echo date('Y-m-01');} else {  echo $_GET['from']; } ?>"  />
                 <div class="input-group-prepend">
                  <span class="input-group-text">to</span>
                 </div>
-                <input readonly="" type="text" class="form-control" autocomplete="off" required="" placeholder="End Date" name="toDate" value="<?php echo $_GET['toDate']; ?>" />
+                <input readonly="" type="text" class="form-control" autocomplete="off"   placeholder="End Date" id="ToDate" name="toDate" value="<?php if ( !isset($_GET['toDate'])) { echo date('Y-m-t');} else { echo $_GET['toDate'];  } ?>" />
                </div>
-              </div>
-          </div>
         </div>
          <div class="col-lg-2 col-3">
             <label  class="form-control-label"> </label>

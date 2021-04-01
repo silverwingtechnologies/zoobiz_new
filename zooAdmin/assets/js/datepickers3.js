@@ -4,7 +4,8 @@ $(document).ready(function() {
     date.setDate(date.getDate());
 
     $('#default-datepicker').datepicker({
-        format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+         autoclose: true
     });
     $('#autoclose-datepicker,#autoclose-datepicker1').datepicker({
         autoclose: true,

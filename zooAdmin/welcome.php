@@ -12,7 +12,7 @@
               <div class="media align-items-center">
               <div class="media-body">
                 <p class="text-white">Category</p>
-                <h4 class="text-white line-height-5"><?php echo $d->count_data_direct("business_category_id","business_categories"," category_status = 0 "); ?></h4>
+                <h4 class="text-white line-height-5"><?php echo $d->count_data_direct("business_category_id","business_categories","category_status=0 OR category_status =2 "); ?></h4>
               </div>
               <div class="w-circle-icon rounded-circle  border-white">
                 <img class="myIcon" src="img/icons/block.png"></div>

@@ -1322,7 +1322,7 @@ $m->set_data('timeline_text',htmlspecialchars($timeline_text));
 
 					$nResident->noti("timeline",$timeleine_photo, 0, $fcmArray, $title, $description, $new_feed_id,0,$profile_u);
 					$nResident->noti_ios("timeline", $timeleine_photo, 0, $fcmArrayIos, $title, $description, $new_feed_id,0,$profile_u);
-					$d->insert_myactivity($user_id,"0","", "Post Added","activity.png");
+					$d->insert_myactivity($user_id,"0","", $timeline_text." Post Added","activity.png");
 					$response["message"] = "Posted Successfully";
 					$response["status"] = "200";
 					echo json_encode($response);
@@ -1456,7 +1456,7 @@ $m->set_data('timeline_text',htmlspecialchars($timeline_text));
 //23oct2020
 					$nResident->noti("timeline", $timeleine_photo, 0, $fcmArray, $title, $description, $new_feed_id,0, $profile_u);
 					$nResident->noti_ios("timeline", $timeleine_photo, 0, $fcmArrayIos, $title, $description, $new_feed_id,0, $profile_u);
-					$d->insert_myactivity($user_id,"0","", "Post Added","activity.png");
+					$d->insert_myactivity($user_id,"0","",$timeline_text. " Post Added","activity.png");
 					$response["message"] = "Posted successfully";
 					$response["status"] = "200";
 					echo json_encode($response);
@@ -1519,7 +1519,7 @@ $m->set_data('timeline_text',htmlspecialchars($timeline_text));
 //23oct2020
 					$nResident->noti("timeline", "", 0, $fcmArray, $title, $description, $new_feed_id,1, $profile_u );
 					$nResident->noti_ios("timeline", "", 0, $fcmArrayIos, $title, $description, $new_feed_id ,1, $profile_u);
-					$d->insert_myactivity($user_id,"0","", "Post Added","activity.png");
+					$d->insert_myactivity($user_id,"0","", $timeline_text." Post Added","activity.png");
 					
 					$response["message"] = "Posted successfully";
 					$response["status"] = "200";
@@ -2871,7 +2871,7 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
 			);
 			$d->update("timeline_master", $a1, "timeline_id='$timeline_id'");
 			if ($d == TRUE) {
-				$d->insert_myactivity($user_id,"0","", "Post Updated","activity.png");
+				$d->insert_myactivity($user_id,"0","", $timeline_text."Post Updated","activity.png");
 				$response["message"] = "Updated Successfully";
 				$response["status"] = "200";
 				echo json_encode($response);

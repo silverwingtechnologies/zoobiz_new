@@ -315,8 +315,9 @@ $q=$d->select("package_master","package_id='$plan_id'","");
          	'plan_id'=> $m->get_data('plan_id'),
          	'plan_renewal_date'=> $m->get_data('plan_renewal_date'),
          );
-         $q=$d->insert("users_master",$a);
-         $user_id= $con->insert_id;
+        /* $q=$d->insert("users_master",$a);
+         $user_id= $con->insert_id;*/
+         $user_id=0;
          $m->set_data('razorpay_order_id', '');
          $m->set_data('razorpay_payment_id', '');
          $m->set_data('razorpay_signature', '');
@@ -363,7 +364,7 @@ $q=$d->select("package_master","package_id='$plan_id'","");
          	unset($_SESSION['city_id']);
 
          	$_SESSION['show_success']="yes";
-         	$_SESSION['msg']="Registration Successfully !";
+         	//$_SESSION['msg']="Registration Successfully !";
 
               if($_POST['cpn_success'] ==1){
 

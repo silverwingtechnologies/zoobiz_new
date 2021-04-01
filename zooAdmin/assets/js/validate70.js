@@ -2052,7 +2052,7 @@ $("#adminFrm").validate({
                 }
             },
             admin_mobile:{
-                required: false
+                required: true
             },
 
              password:{  required:true,  noSpace:true, minlength: 5, pwcheck:true },
@@ -2082,7 +2082,9 @@ $("#adminFrm").validate({
                 remote:"Email Already Exists"
             },
             admin_mobile:{
-                required: "Please enter mobile number"
+                required: "Please enter mobile number",
+                maxlength: "PLEASE ENTER AT LEAST 10 digits.",
+                minlength: "PLEASE ENTER AT LEAST 10 digits."
             },
             password:{
                 required:"please enter new password"

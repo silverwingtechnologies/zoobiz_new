@@ -68,6 +68,24 @@ $where="";
         </select>
         </div>
 
+        <div class="col-sm-5"  >
+
+
+        <div class="input-daterange input-group">
+                <input readonly="" type="text" class="form-control" autocomplete="off"   placeholder="Start Date" id="FromDate" name="from" value="<?php if ( !isset($_GET['from'])) { echo date('Y-m-01');} else {  echo $_GET['from']; } ?>"  />
+                <div class="input-group-prepend">
+                 <span class="input-group-text">to</span>
+                </div>
+                <input readonly="" type="text" class="form-control" autocomplete="off"   placeholder="End Date" id="ToDate" name="toDate" value="<?php if ( !isset($_GET['toDate'])) { echo date('Y-m-t');} else { echo $_GET['toDate'];  } ?>" />
+               </div>
+
+
+        
+
+           
+       </div>
+
+
         <div class="col-lg-2 col-3">
             <label  class="form-control-label"> </label>
               <input  class="btn btn-success" type="submit" name="getReport" class="form-control" value="Get Report">
@@ -99,10 +117,30 @@ $where="";
                 </thead>
                 <tbody>
                   <?php
-                  
+                  if ( !isset($_GET['from'])) {
+            $_GET['from'] = date('Y-m-01');
+            $_GET['toDate'] = date('Y-m-t');
+           } 
+
+             extract(array_map("test_input" , $_GET));
+                $from = date('Y-m-d', strtotime($from));
+                $toDate = date('Y-m-d', strtotime($toDate));
+                $date=date_create($from);
+                $dateTo=date_create($toDate);
+                $nFrom= date_format($date,"Y-m-d");
+                $nTo= date_format($dateTo,"Y-m-d");
+                 $where = "";
 
 
-                  $q=$d->select("transection_master,users_master","transection_master.user_id=users_master.user_id AND transection_master.payment_status='success' $where ","ORDER BY transection_master.transection_id DESC");
+                if(isset($_GET['from']) && isset($_GET['toDate']) ){
+
+                  $nFrom = $nFrom.' 00:00:00';
+                  $nTo = $nTo.' 23:59:59';
+                  $where =" and  transection_master.transection_date  BETWEEN '$nFrom' AND '$nTo' ";
+                }
+ 
+
+                  $q=$d->select("transection_master,users_master,user_employment_details","user_employment_details.user_id = users_master.user_id and   transection_master.user_id=users_master.user_id AND transection_master.payment_status='success' $where ","ORDER BY transection_master.transection_id DESC");
                   $i = 0;
                   while($row=mysqli_fetch_array($q))
                   {

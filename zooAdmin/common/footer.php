@@ -208,7 +208,7 @@
     
     <!--Form Validatin Script-->
     <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="assets/js/validate68.js"></script>
+    <script type="text/javascript" src="assets/js/validate70.js"></script>
     <script src="assets/js/custom68.js"></script>
     
     <!--Select Plugins Js-->
@@ -230,7 +230,7 @@
     <script src="assets/plugins/material-datepicker/js/bootstrap-material-datetimepicker.min.js"></script>
     <script src="assets/plugins/material-datepicker/js/ja.js"></script>
      <script src="assets/js/dataTables4.js"></script> 
-    <script src="assets/js/datepickers2.js"></script> 
+    <script src="assets/js/datepickers3.js"></script> 
     <script type="">
     $(window).load(function() {
     $('.ajax-loader').hide();

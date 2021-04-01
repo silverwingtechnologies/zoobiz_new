@@ -136,7 +136,7 @@
           
           
           <div class="form-group row">
-            <label for="input-10" class="col-sm-4 col-form-label">Reply</label>
+            <label for="input-10" class="col-sm-4 col-form-label">Reply <span class="required">*</span></label>
             <div class="col-sm-8" id="">
               <textarea maxlength="300" class="form-control" required="" id="reply" name="reply"></textarea>
             </div>

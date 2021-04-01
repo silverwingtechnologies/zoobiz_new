@@ -295,10 +295,10 @@ $difference_days= $d->plan_days_left($plan_renewal_date);
    if(    $difference_days <= 0  ){ 
    // echo  $difference_days. " days left"; 
  
-    
+    if(0){ 
    ?>
    <button data-toggle="modal" data-target="#replyModal" class="btn btn-success btn-sm" type="">Renew </button>
- <?php  
+ <?php  }
 
   }  else {
   echo  $difference_days  . " days left"; 

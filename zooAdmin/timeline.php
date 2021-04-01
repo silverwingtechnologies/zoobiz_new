@@ -2,6 +2,7 @@
   <head>
     <meta charset="uft-8">
     <meta name="viewport" content="width=device-width">
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
      </head>
      <style type="text/css">
@@ -219,7 +220,11 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
 
                  // echo time_elapsed_string($data_notification['created_date']); ?></a> 
         <br>
-        <p style="word-break: break-all !important;">  <?php echo $data_notification['timeline_text']; ?> </p>
+        <p style="word-break: break-all !important;padding-right: 75px !important;padding-left: 75px !important;">  <?php echo html_entity_decode($data_notification['timeline_text']); 
+ echo "dfgf";
+echo json_decode($data_notification['timeline_text']);
+ 
+        ?> </p>
         <?php 
         if($data_notification['meetup_user_id1'] != 0  &&  $data_notification['meetup_user_id2'] != 0 ){
           $meetup_user_id1 = $data_notification['meetup_user_id1'];
@@ -231,8 +236,8 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
           $meetup_user_id2_data=mysqli_fetch_array($meetup_user_id2_q);
 
            ?>
-           <p style="word-break: break-all !important;">#iamzoobiz</p>
-           <div class="form-group row">
+           <p style="word-break: break-all !important;padding-right: 75px !important;padding-left: 75px !important;">#iamzoobiz</p>
+           <div class="form-group row" style="padding-right: 75px !important;padding-left: 75px !important;">
             <div class="col-lg-5" style="text-align: center;">
            
             <a      href="viewMember?id=<?php echo $meetup_user_id1_data['user_id']; ?>"> 
@@ -260,7 +265,7 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
        if (mysqli_num_rows($video_qry)>0) {
         while($feeData22=mysqli_fetch_array($video_qry)) {
           ?>
-           <div id="carousel-4<?php echo $fedCount1; ?>" class="carousel slide" data-ride="carousel">
+           <div style="padding-right: 75px !important;padding-left: 75px !important;"  id="carousel-4<?php echo $fedCount1; ?>" class="carousel slide" data-ride="carousel">
             <video style="max-height:450px;" class="d-block w-100" controls controlsList="nodownload">
       <source  src="../img/timeline/<?php echo $feeData22['video_name']; ?>"    type="video/mp4">
       
@@ -278,7 +283,7 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
 
        ?>
      
-       <div id="carousel-4<?php echo $fedCount1; ?>" class="carousel slide" data-ride="carousel">
+       <div style="padding-right: 75px !important;padding-left: 75px !important;"  id="carousel-4<?php echo $fedCount1; ?>" class="carousel slide" data-ride="carousel">
           <ul class="carousel-indicators">
             <?php while($feeData11=mysqli_fetch_array($fi)) {
 
@@ -328,7 +333,7 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
 
 
 
-        <ul class="horizontal">
+        <ul class="horizontal" style="padding-right: 75px !important;padding-left: 75px !important;">
            
         
                 <li>
@@ -377,7 +382,7 @@ $totalCmt = mysqli_num_rows($qcomment);
           <br>
         <!-- <input type="textbox" class="textbox form-control" placeholder="Write a comment" size="45">    <br> <br> -->
 
-<span id="showNewsFeedIfo<?php echo $timeline_id;?>" style="display: block;">
+<span   id="showNewsFeedIfo<?php echo $timeline_id;?>" style="display: block;">
         <?php 
         $counterCmt = 1;
         if ($totalCmt>0) {
@@ -387,7 +392,7 @@ $totalCmt = mysqli_num_rows($qcomment);
 
             if($counterCmt==1){
          ?>
-        <div class="facebook-card-comments">
+        <div style="padding-right: 75px !important;padding-left: 75px !important;" class="facebook-card-comments">
 
            <span style="float: left; ">
           <img  onerror="this.src='img/user.png'" class="imgRedonda1 lazyload" src="../img/infinity.gif"  data-src="../img/users/members_profile/<?php echo $data_comment['user_profile_pic']; ?>" width="10%">
@@ -400,7 +405,7 @@ $totalCmt = mysqli_num_rows($qcomment);
 
            <p>
           <a style="padding-left: 5px !important;" href="viewMember?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?> </a> <span class="pull-right"><?php echo time_elapsed_string($data_comment['modify_date']); ?></span>
-          <br> <?php echo $data_comment['msg']; ?>    
+          <br> <?php echo html_entity_decode($data_comment['msg']); ?>    
          </p>
         
  
@@ -420,7 +425,7 @@ $totalCmt = mysqli_num_rows($qcomment);
           <i title="Delete Comment" class="text-danger fa fa-trash-o "  data-toggle="modal" data-target="#editFloor" onclick="deleteComment('<?php echo $comments_id; ?>')"></i>
         </span>
             <p>
-          <a style="padding-left: 5px !important;"  href="viewMember?id=<?php echo $data_Sub_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_Sub_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_Sub_comment['modify_date']); ?></span> <br><?php echo $data_Sub_comment['msg']; ?> 
+          <a style="padding-left: 5px !important;"  href="viewMember?id=<?php echo $data_Sub_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_Sub_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_Sub_comment['modify_date']); ?></span> <br><?php echo html_entity_decode($data_Sub_comment['msg']); ?> 
           </p>
 
           
@@ -438,7 +443,8 @@ $totalCmt = mysqli_num_rows($qcomment);
          } ?>
 </span>
 <?php //IS_387 ?>
-   <div id="collapse<?php echo $timeline_id;?>" class="collapse"   style="">
+   <div id="collapse<?php echo $timeline_id;?>" class="collapse"  
+    style="max-height: 150px !important;overflow-y: scroll !important;">
                   <div class="">
                     <?php 
         
@@ -459,7 +465,7 @@ $totalCmt = mysqli_num_rows($qcomment);
           <i title="Delete Comment" class="text-danger fa fa-trash-o "  data-toggle="modal" data-target="#editFloor" onclick="deleteComment('<?php echo $comments_id; ?>')"></i>
         </span>
             <p>
-          <a style="padding-left: 5px !important;"  href="viewMember?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_comment['modify_date']); ?></span> <br><?php echo $data_comment['msg']; ?> 
+          <a style="padding-left: 5px !important;"  href="viewMember?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_comment['modify_date']); ?></span> <br><?php echo html_entity_decode($data_comment['msg']); ?> 
           </p>
 
           
@@ -480,7 +486,7 @@ $totalCmt = mysqli_num_rows($qcomment);
           <i title="Delete Comment" class="text-danger fa fa-trash-o "  data-toggle="modal" data-target="#editFloor" onclick="deleteComment('<?php echo $comments_id; ?>')"></i>
         </span>
             <p>
-          <a style="padding-left: 5px !important;"  href="viewMember?id=<?php echo $data_Sub_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_Sub_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_Sub_comment['modify_date']); ?></span> <br><?php echo $data_Sub_comment['msg']; ?> 
+          <a style="padding-left: 5px !important;"  href="viewMember?id=<?php echo $data_Sub_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_Sub_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_Sub_comment['modify_date']); ?></span> <br><?php echo html_entity_decode($data_Sub_comment['msg']); ?> 
           </p>
 
           
@@ -506,7 +512,7 @@ $totalCmt = mysqli_num_rows($qcomment);
         </span>
         
         <p class=" cls-content text-justify ">
-          <a   href="viewMember?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?></a> <?php echo $data_comment['msg']; ?> at <?php echo date("d-m-Y H:i A", strtotime($data_comment['modify_date'])); ?>  
+          <a   href="viewMember?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?></a> <?php echo html_entity_decode($data_comment['msg']); ?> at <?php echo date("d-m-Y H:i A", strtotime($data_comment['modify_date'])); ?>  
          </p>
 
            
