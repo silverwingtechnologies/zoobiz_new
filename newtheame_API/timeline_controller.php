@@ -1692,7 +1692,7 @@ $m->set_data('timeline_text',htmlspecialchars($timeline_text));
 
 
 				if ($parent_comments_id != 0) {
-					$quc = $d->selectRow("users_master.user_token,users_master.device,users_master.user_id","users_master,timeline_comments", "timeline_comments.user_id=users_master.user_id AND timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id!='$user_id' and timeline_alert=0 ");
+					$quc = $d->selectRow("users_master.user_token,users_master.device,users_master.user_id","users_master,timeline_comments", "timeline_comments.user_id=users_master.user_id AND timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id!='$user_id' and timeline_alert=0 and timeline_comments.parent_comments_id = '$parent_comments_id' ");
 				} else {
 					$quc = $d->selectRow("users_master.user_token,users_master.device,users_master.user_id","users_master,timeline_master", "timeline_master.user_id=users_master.user_id AND timeline_master.timeline_id='$timeline_id' AND users_master.user_id!='$user_id' and timeline_alert=0 ");
 				}
@@ -1973,7 +1973,7 @@ $NewData=mysqli_fetch_array($gu);
 				$q = $d->delete("timeline_like_master", "timeline_id='$timeline_id'");
 				$q = $d->delete("user_notification", "timeline_id='$timeline_id'");
 				$q = $d->delete("timeline_photos_master", "timeline_id='$timeline_id'");
-				$d->insert_myactivity($user_id,"0","",$NewData['timeline_text']. " News Feed Deleted","activity.png");
+				$d->insert_myactivity($user_id,"0","",$NewData['timeline_text']. " Post Deleted","activity.png");
 				$response["message"] = "Deleted Successfully";
 				$response["status"] = "200";
 				echo json_encode($response);

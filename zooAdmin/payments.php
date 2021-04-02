@@ -140,7 +140,7 @@ $where="";
                 }
  
 
-                  $q=$d->select("transection_master,users_master,user_employment_details","user_employment_details.user_id = users_master.user_id and   transection_master.user_id=users_master.user_id AND transection_master.payment_status='success' $where ","ORDER BY transection_master.transection_id DESC");
+                  $q=$d->select("transection_master,users_master"," transection_master.user_id=users_master.user_id AND transection_master.payment_status='success' $where ","ORDER BY transection_master.transection_id DESC");
                   $i = 0;
                   while($row=mysqli_fetch_array($q))
                   {
@@ -151,7 +151,15 @@ $where="";
                   <tr>
                     
                     <td class="text-right"><?php echo $i; ?></td>
-                    <td><a href="viewMember?id=<?php echo $row['user_id'];?>"> <?php echo $row['user_full_name']; ?></td>
+                    <?php 
+                    $u_id=$row['user_id'];
+                    $comp_pr=$d->select(" user_employment_details","user_id='$u_id'");
+if(mysqli_num_rows($comp_pr) > 0  ){
+                    ?>
+                    <td><a href="viewMember?id=<?php echo $row['user_id'];?>"> <?php echo $row['user_full_name']; ?></a></td>
+                    <?php }  else {?> 
+                     <td> <span title="Profile Not Completed"> <?php echo $row['user_full_name']; ?> </span></td>
+                     <?php }?> 
                     <td><?php echo $row['package_name']; ?></td>
                     <td><?php echo $row['payment_mode']; ?></td>
                     <td class="text-right"><?php echo $row['transection_amount']; ?></td>

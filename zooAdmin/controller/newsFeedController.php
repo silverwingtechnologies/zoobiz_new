@@ -88,7 +88,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 
 if(isset($comments_id_delete)) {
- $adm_data=$d->selectRow("msg","timeline_comments"," comments_id='$comments_id'");
+ $adm_data=$d->selectRow("*","timeline_comments"," comments_id='$comments_id_delete'");
  $data_q=mysqli_fetch_array($adm_data);
 
 
@@ -96,6 +96,13 @@ if(isset($comments_id_delete)) {
  $q=$d->delete("timeline_comments","comments_id='$comments_id_delete' ");
 
  if($q>0) {
+$other_user_id = $data_q['user_id'];
+$other_timeline_id = $data_q['timeline_id'];
+$msg = $data_q['msg'];
+ 
+  $user_notification=$d->delete("user_notification"," other_user_id ='$other_user_id' and timeline_id='$other_timeline_id' and notification_desc like '%".$msg."%'");
+
+
      $_SESSION['msg'] = $data_q['msg']." Timeline Comment Deleted";
     $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
   echo 1;
@@ -286,8 +293,8 @@ if($send_notification_to_user==1){
     }
 
 
-    $fcmArray=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='android' and user_id=".$user_id);
-$fcmArrayIos=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='ios' and user_id=".$user_id);
+    $fcmArray=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='android' and timeline_alert=0 and user_id=".$user_id);
+$fcmArrayIos=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='ios' and timeline_alert=0  and user_id=".$user_id);
 
 
     $nResident->noti("$notiImg",$society_id,$fcmArray,"ZooBiz",$feed_msg,'announcement');
@@ -369,8 +376,8 @@ if($q==TRUE) {
 }
 
 
-$fcmArray=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='android' and user_id=".$user_id);
-$fcmArrayIos=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='ios' and user_id=".$user_id);
+$fcmArray=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='android' and timeline_alert=0 and user_id=".$user_id);
+$fcmArrayIos=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='ios' and timeline_alert=0 and user_id=".$user_id);
 
 $nResident->noti("$notiImg",$society_id,$fcmArray,"ZooBiz",$feed_msg,'announcement');
 $nResident->noti_ios("$notiImg",$society_id,$fcmArrayIos,"ZooBiz",$feed_msg,'announcement');

@@ -787,7 +787,7 @@ $zoobiz_settings_master_data=mysqli_fetch_array($zoobiz_settings_master_qry);
 		else   if (isset($complete_profile) && $complete_profile == 'complete_profile' && filter_var($user_id, FILTER_VALIDATE_INT) == true) {
 			$con->autocommit(FALSE);
 
-
+$org_user_id= $user_id;
 //add custom business category
 			if(isset($custom_category_name) && $custom_category_name!='' && $business_category_id =='-1' && $business_sub_category_id =="-1"){
 				$custom_category_name_new = strtolower($custom_category_name);
@@ -1360,7 +1360,12 @@ $zoobiz_settings_master_data=mysqli_fetch_array($zoobiz_settings_master_qry);
 
 
 				if($business_category_id =='-1' && $business_sub_category_id =="-1"){
-					$response["message"] = "Account Approval Pending";
+					$a11 = array(
+						'user_token'=>''
+					);
+					$d->update("users_master", $a11, "user_id='$org_user_id'  ");
+
+					$response["message"] = "Account Approval Pending......";
 					$response["status"] = "202";
 					echo json_encode($response);
 					exit;
