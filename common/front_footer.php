@@ -79,6 +79,10 @@
 <script language="javascript" type="text/javascript" src="js/json.js"></script>
 <script type="text/javascript">
 
+
+
+
+
   $('#addNewMemberccAvenue').on("click",function(event) {
     $("#registerFrm").attr("action", "controller/ccavRequestHandler.php");
     if($('#coupon_code').val() ==""){
@@ -744,6 +748,23 @@ google.maps.event.addDomListener(window, 'load', initialize);
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
   })();
+
+  /*Tawk_API.onLoad = function(){
+    $('#myForm').trigger("reset");
+
+    $("#offline0Field").val('');
+    alert($("#offline0Field").val());
+    $("#offline1Field").val('');
+    $("#offline2Field").val('');
+    //place your code here
+};*/
+
+ $('#formSubmit').on('click',function(e){  
+  alert();
+});
+
+ 
+
 </script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="assets/plugins/notifications/js/notifications.min.js"></script>
@@ -779,5 +800,6 @@ timer: 4000
 <?php
 unset($_SESSION['msg1']);
 } ?>
+
 </body>
 </html>

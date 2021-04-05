@@ -3,6 +3,7 @@
     <meta charset="uft-8">
     <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
      </head>
      <style type="text/css">
@@ -221,8 +222,7 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
                  // echo time_elapsed_string($data_notification['created_date']); ?></a> 
         <br>
         <p style="word-break: break-all !important;padding-right: 75px !important;padding-left: 75px !important;">  <?php echo html_entity_decode($data_notification['timeline_text']); 
- echo "dfgf";
-echo json_decode($data_notification['timeline_text']);
+ echo "&#127462;;";
  
         ?> </p>
         <?php 

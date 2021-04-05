@@ -101,7 +101,7 @@ echo $name[1].'<br>';
      $a1 = array(
             'photo_name' =>$photo_name. "jpeg" ,
           );
-
+  
           $d->update("timeline_photos_master", $a1, "timeline_photo_id = '$timeline_photo_id'"); 
   }
                 /* mysqli_query($d->conn, "update timeline_photos_master SET photo_name =photo_name+ 'jpeg' where timeline_photo_id = '$timeline_photo_id' ");*/

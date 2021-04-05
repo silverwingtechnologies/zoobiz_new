@@ -2222,7 +2222,7 @@ setTimeout(function() {
        $('#refer_friend_id').html('');
        $('#refer_friend_name').val('');
    } 
-  }, 500);
+  }, 600);
 });
  
 
