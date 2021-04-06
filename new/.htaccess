@@ -1,0 +1,17 @@
+RewriteEngine On
+ 
+RewriteCond %{REQUEST_URI} ^/404/$
+RewriteRule ^(.*)$ 404.php?f=$1 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME}.php !-f
+RewriteRule ^/?([a-zA-Z0-9_-]+)$ socialProfile.php?f=$1 [L,QSA]
+
+
+
+#RewriteCond %{REQUEST_URI}  404       [NC]
+#RewriteRule ^.*$ 404.php [L]
+
+
+
+ RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]

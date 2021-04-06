@@ -6,7 +6,15 @@
       <div class="col-sm-6">
         <h4 class="page-title"> Subscribers</h4>
       </div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3 col-6">
+        <div class="btn-group float-sm-right">
+        
+          <a href="javascript:void(0)" onclick="DeleteAll('deleteSubscribe');" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fa fa-trash-o fa-lg"></i> Delete </a>
 
+
+        </div>
+      </div>
       
 
      
@@ -25,6 +33,7 @@
               <table id="example" class="table table-bordered">
                 <thead>
                   <tr>
+                     <th class="text-center">select</th>
                     <th class="text-right">#</th>
                     <th>Name</th>
                     <th>Mobile NUmber</th>
@@ -48,7 +57,9 @@
                   
                   ?>
                   <tr>
-                    
+                     <td class='text-center'>
+                        <input type="checkbox" class="multiDelteCheckbox"  value="<?php echo $row['subscribe_id']; ?>">
+                      </td>
                     <td class="text-right"><?php echo $i; ?></td>
                      
                     <td><?php echo $row['name']; ?></td>

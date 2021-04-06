@@ -6,7 +6,7 @@
         <h4 class="page-title">Member Plans</h4>
         <ol class="breadcrumb">
            <li class="breadcrumb-item"><a href="welcome">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Plans</li>
+            <li class="breadcrumb-item active" aria-current="page">Member Plans</li>
          </ol>
      </div>
      <div class="col-sm-3">

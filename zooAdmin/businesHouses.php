@@ -12,6 +12,52 @@
        </div>
      </div>
    </div>
+
+   <form action="" method="get">
+      <div class="row pt-2 pb-2">
+         
+         <div class="col-sm-4">
+          <div class="">
+            <?php //echo "<pre>"; print_r($_GET); echo "</pre>";?>
+
+             <select type="text"   id="filter_business_category_id" 
+             onchange="getSubCategory2();"   class="form-control single-select" name="filter_business_category_id">
+
+
+             
+                            <option value="">-- Select --</option>
+                            <option  <?php if( isset($_GET['filter_business_category_id']) &&   $_GET['filter_business_category_id'] == 0 ) { echo 'selected';} ?>  value="0">All</option>
+                            <?php $qb=$d->select("business_categories"," category_status in (0,2)  ","");
+                            while ($bData=mysqli_fetch_array($qb)) {?>
+                              <option <?php if( isset($_GET['filter_business_category_id']) && $_GET['filter_business_category_id']== $bData['business_category_id']) { echo 'selected';} ?> value="<?php echo $bData['business_category_id']; ?>"><?php echo $bData['category_name']; ?></option>
+                            <?php } ?> 
+                          </select>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="">
+             <select id="filter_business_categories_sub"  class="form-control single-select" name="filter_business_categories_sub" type="text"   >
+                            <option value="">-- Select --</option>
+                            <option <?php if( isset($_GET['filter_business_categories_sub']) &&   $_GET['filter_business_categories_sub'] == 0 ) { echo 'selected';} ?>  value="0">All</option>
+                            <?php if(isset($_GET['filter_business_category_id']) && $_GET['filter_business_category_id'] !=0  ) {
+                            $business_category_id =  $_GET['filter_business_category_id'];
+
+                              $q3=$d->select("business_sub_categories","business_category_id='$business_category_id' and sub_category_status in (0,2) ","");
+                              while ($blockRow=mysqli_fetch_array($q3)) {
+                                ?>
+                                <option <?php if( isset($_GET['filter_business_categories_sub']) &&  $blockRow['business_sub_category_id']== $_GET['filter_business_categories_sub']) { echo 'selected';} ?> value="<?php echo $blockRow['business_sub_category_id'];?>"><?php echo $blockRow['sub_category_name'];?></option>
+                              <?php } } ?>
+                            </select>
+          </div>
+        </div>
+
+         <div class="col-lg-2 col-3">
+            <label  class="form-control-label"> </label>
+              <input  class="btn btn-success" type="submit" name="getReport" class="form-control" value="Search">
+          </div>
+     </div>
+   </form>
+ </div>
    <!-- End Breadcrumb-->
 
 
@@ -34,8 +80,37 @@
               </thead>
               <tbody>
                 <?php 
+
+
+                $business_categories_qry=$d->select("business_categories"," category_status != 2  ");
+     $business_categories_array = array();         
+     $business_categories_ids =  array();         
+while($business_categories_data=mysqli_fetch_array($business_categories_qry)) {
+   $business_categories_array[$business_categories_data['business_category_id']] = $business_categories_data['category_name'];
+   $business_categories_ids[]= $business_categories_data['business_category_id'];
+}
+
+$business_categories_ids = implode(",", $business_categories_ids);
+$business_sub_categories_qry=$d->select("business_sub_categories","   business_category_id in ($business_categories_ids)   ");
+     $business_sub_categories_array = array();         
+       
+while($business_sub_categories_data=mysqli_fetch_array($business_sub_categories_qry)) {
+   $business_sub_categories_array[$business_sub_categories_data['business_sub_category_id']] = $business_sub_categories_data['sub_category_name'];
+   
+}
+
+ $where="";
+                  if(isset($_GET['filter_business_category_id']) && $_GET['filter_business_category_id'] !=0 ){
+                    $filter_business_category_id = $_GET['filter_business_category_id'];
+                    $where .=" and  user_employment_details.business_category_id ='$filter_business_category_id' ";
+                  }
+                  if(isset($_GET['filter_business_categories_sub']) && $_GET['filter_business_categories_sub'] != 0 ){
+                    $filter_business_sub_category_id = $_GET['filter_business_categories_sub'];
+                    $where .=" and user_employment_details.business_sub_category_id ='$filter_business_sub_category_id' ";
+                  } 
+
                 $i=1;
-              $q=$d->select("users_master,business_houses,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND business_houses.user_id= users_master.user_id ","ORDER BY business_houses.order_id ASC");
+              $q=$d->select("users_master,business_houses,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND business_houses.user_id= users_master.user_id $where ","ORDER BY business_houses.order_id ASC");
               $alredyAray=array();
                while ($data=mysqli_fetch_array($q)) {
                 extract($data);
@@ -69,7 +144,7 @@
  </div>
 </div><!-- End Row-->
 
-</div>
+ 
 <!-- End container-fluid-->
 
 </div><!--End content-wrapper-->

@@ -19,6 +19,26 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 {
 
 
+if($_POST['deleteValue']=="deleteSubscribe") {
+    $idCount = count($ids);
+    for ($i=0; $i <$idCount ; $i++) { 
+     $gu=$d->select("subscribe_master","subscribe_id='$ids[$i]' ");
+     $NewData=mysqli_fetch_array($gu);
+       $q=$d->delete("subscribe_master","subscribe_id ='$ids[$i]'");
+       $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by",$NewData['email']." Subscriber Deleted");
+    }
+      if($q>0) {
+        echo 1;
+        
+        $_SESSION['msg']="Subscribers Deleted."; 
+
+      } else {
+        echo 0;
+        $_SESSION['msg1']="Something Wrong"; 
+      }
+  }
+
+
 //16feb21
   if($_POST['deleteValue']=="deleteInterest") {
     $idCount = count($ids);
