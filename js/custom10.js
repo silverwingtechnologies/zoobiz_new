@@ -159,6 +159,10 @@ function  getSubCategorySp() {
   
 });
   
+
+  if($('#refer_friend_name').length){
+
+   
  var inputxx = document.getElementById('refer_friend_name');
 inputxx.onkeydown = function() {
     var key = event.keyCode || event.charCode;
@@ -183,7 +187,7 @@ inputxx.onkeydown = function() {
            }
     }
 };
-
+}
 
 
 

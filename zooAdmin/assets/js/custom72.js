@@ -332,6 +332,27 @@ function  getSubCategory2() {
         }
      });
 }
+
+//7april2021
+function  getMembersOfCategory() {
+  var business_category_id = $("#business_category_id").val();
+     $.ajax({
+        url: "getCategoryUsers.php",
+        cache: false,
+        type: "POST",
+        data: {business_category_id : business_category_id},
+        beforeSend: function(){
+           $('#user_id').html('');
+        },
+        success: function(response){
+            $('#user_id').html('');
+            $('#user_id').html(response);
+        }
+     });
+}
+//7april2021
+
+
 //27oct
 function  getSendTo() {
   var send_to = $("#send_to").val();

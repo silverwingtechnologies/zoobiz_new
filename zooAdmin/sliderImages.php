@@ -102,7 +102,7 @@
                 <label for="input-12" class="col-sm-2 col-form-label">Business Category </label>
                 <div class="col-sm-10">
 
-                   <select type="text"      class="form-control single-select" id="business_category_id" name="business_category_id">
+                   <select type="text" onchange="getMembersOfCategory();"      class="form-control single-select" id="business_category_id" name="business_category_id">
                      <option value="">-- Select --</option>
                         <?php
                            $q31=$d->select("business_categories","category_status=0","ORDER BY category_name ASC");
@@ -145,7 +145,7 @@
               <div class="form-group row">
                 <label for="input-12" class="col-sm-2 col-form-label">Member </label>
                 <div class="col-sm-10">
-                  <select class="form-control single-select" id="trlDays" type="text" maxlength="12"  name="user_id">
+                  <select class="form-control single-select" id="user_id" type="text" maxlength="12"  name="user_id">
                     <option> -- Select --</option>
                     <  <?php 
                 $i=1;
