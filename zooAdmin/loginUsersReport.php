@@ -7,6 +7,10 @@
       <div class="row pt-2 pb-2">
         <div class="col-sm-4">
           <h4 class="page-title">App Not Login Members</h4>
+           <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">App Not Login Members</li>
+         </ol>
            <a class="btn btn-sm btn-secondary" href="loginUsersReport"> View Login Users</a>
        </div>
         <div class="col-sm-6">
@@ -137,6 +141,10 @@
       <div class="row pt-2 pb-2">
         <div class="col-sm-4">
           <h4 class="page-title">App Login Members</h4>
+          <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">App Login Members</li>
+         </ol>
           <a class="btn btn-sm btn-secondary" href="loginUsersReport?notLogin=notLogin"> View Not Login Users</a>
        </div>
         <div class="col-sm-6">

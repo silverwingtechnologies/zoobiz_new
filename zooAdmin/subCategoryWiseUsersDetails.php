@@ -4,7 +4,11 @@
       <div class="row pt-2 pb-2">
         <div class="col-sm-6">
           <h4 class="page-title">Sub Category Wise Users Details</h4>
-         
+           <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+           <li class="breadcrumb-item"><a href="subCategoryWiseUsersReport">Citywise Business Sub Categories</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Sub Category Wise Users Details</li>
+         </ol>
        </div>
        <div class="col-sm-6">
          

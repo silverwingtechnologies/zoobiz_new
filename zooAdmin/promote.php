@@ -16,6 +16,17 @@ extract($promotion_master_data);
         <?php  } else {?>
         <h4 class="page-title">Add Seasonal Greetings</h4>
         <?php } ?>
+
+         <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+           
+           <li class="breadcrumb-item"><a href="promoteBusiness">Seasonal Greetings List</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><?php if(isset($promotion_id)){?>
+         Edit Seasonal Greetings 
+        <?php  } else {?>
+        Add Seasonal Greetings 
+        <?php } ?></li>
+         </ol>
         
       </div>
       

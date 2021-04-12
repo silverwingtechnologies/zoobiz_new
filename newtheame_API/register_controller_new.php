@@ -654,8 +654,11 @@ if($payment_getway_master_data['paytm_is_live_mode']=="Yes"){
 
     $payment_gateway_array['paytm_merchant_id'] = $payment_getway_master_data['paytm_merchant_id'];
 $payment_gateway_array['paytm_merrchant_key'] =html_entity_decode( $payment_getway_master_data['paytm_merrchant_key']);
+$payment_gateway_array['paytm_is_live_mode'] = true;
 
 } else {
+
+$payment_gateway_array['paytm_is_live_mode'] = false;
 	$payment_gateway_array["host_url"] = "https://securegw-stage.paytm.in/";
     $payment_gateway_array["call_back_url"] =   "https://securegw-stage.paytm.in/theia/paytmCallback"; 
 
@@ -683,10 +686,12 @@ if($payment_getway_master_data['ccav_live_mode']=="Yes"){
     $payment_gateway_array["ccav_mode_url"]=  "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
     $payment_gateway_array["ccav_rsa_url"]=  $base_url.'/controller/GetRSA.php';
     $payment_gateway_array['trans_url'] ="https://secure.ccavenue.com/transaction/initTrans";
+    $payment_gateway_array['ccav_live_mode'] = true;
 } else {
     $payment_gateway_array["ccav_mode_url"]= "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
     $payment_gateway_array["ccav_rsa_url"]=  $base_url.'/controller/GetRSA.php';
     $payment_gateway_array['trans_url'] ="https://test.ccavenue.com/transaction/initTrans";
+    $payment_gateway_array['ccav_live_mode'] = false;
 }
 
 
@@ -1249,7 +1254,7 @@ $org_user_id= $user_id;
 					$u_qry = $d->selectRow("*","users_master", "user_id='$user_id' ");
 					$u_details = mysqli_fetch_array($u_qry);
 //$office_mem_arr = array('7990247516', '8866489158');
-					$office_mem_arr = array( '8866489158');
+					$office_mem_arr = array( '8866489158','7990247516','9099360078');
 
 					if($business_category_id !='-1' && $business_sub_category_id !="-1"){
 						if(!in_array($u_details['user_mobile'], $office_mem_arr) ){

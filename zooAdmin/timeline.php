@@ -222,7 +222,7 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
                  // echo time_elapsed_string($data_notification['created_date']); ?></a> 
         <br>
         <p style="word-break: break-all !important;padding-right: 75px !important;padding-left: 75px !important;">  <?php echo html_entity_decode($data_notification['timeline_text']); 
- echo "&#127462;;";
+ 
  
         ?> </p>
         <?php 
@@ -238,7 +238,7 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
            ?>
            <p style="word-break: break-all !important;padding-right: 75px !important;padding-left: 75px !important;">#iamzoobiz</p>
            <div class="form-group row" style="padding-right: 75px !important;padding-left: 75px !important;">
-            <div class="col-lg-5" style="text-align: center;">
+            <div class="col-lg-4" style="text-align: center;">
            
             <a      href="viewMember?id=<?php echo $meetup_user_id1_data['user_id']; ?>"> 
 
@@ -246,8 +246,8 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
            <p style="word-break: break-all !important;"><?php echo $meetup_user_id1_data['user_full_name']; ?></p>
            </a>
          </div>
-         <div class="col-lg-2" style="text-align: center;"><p style="word-break: break-all !important;">Are <br>Saying </p><img  class="imgRedonda lazyload" src="../img/infinity.gif"   data-src="../img/lets_meet_icon.png" width="100%"></div>
-         <div class="col-lg-5" style="text-align: center;">
+         <div class="col-lg-4" style="text-align: center;"><p style="word-break: break-all !important;">Are <br>Saying </p><img  class="imgRedonda lazyload" src="../img/infinity.gif"   data-src="../img/lets_meet_icon.png" width="100%"></div>
+         <div class="col-lg-4" style="text-align: center;">
             <a     href="viewMember?id=<?php echo $meetup_user_id2_data['user_id']; ?>"> 
            <img  onerror="this.src='img/user.png'" class="imgRedonda lazyload" src="../img/infinity.gif" data-src="../img/users/members_profile/<?php echo $meetup_user_id2_data['user_profile_pic']; ?>" width="10%">
            <p style="word-break: break-all !important;"><?php echo $meetup_user_id2_data['user_full_name']; ?></p>

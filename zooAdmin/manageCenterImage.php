@@ -5,15 +5,24 @@ extract($_REQUEST);
   <div class="container-fluid">
     <!-- Breadcrumb-->
     <div class="row pt-2 pb-2">
-      <div class="col-sm-6">
+      <div class="col-sm-9">
         <h4 class="page-title">
           <?php if(isset($editCenterImage) && $editCenterImage=="editCenterImage" && isset($promotion_rel_center_id) ){
             echo "Edit Center Image";
                 } else  {?> Manage Center Image <?php } ?> </h4>
+
+                 <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+
+           <li class="breadcrumb-item"><a href="promoteBusiness">Seasonal Greetings List</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> <?php if(isset($editCenterImage) && $editCenterImage=="editCenterImage" && isset($promotion_rel_center_id) ){
+            echo "Edit Center Image";
+                } else  {?> Manage Center Image <?php } ?></li>
+         </ol>
         
       </div>
       
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <div class="btn-group float-right">
 
           <?php /* if( isset($promotion_id) ) {?>

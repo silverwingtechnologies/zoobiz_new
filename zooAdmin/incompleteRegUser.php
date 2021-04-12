@@ -7,10 +7,16 @@ error_reporting(0);
       <!-- Breadcrumb-->
       <form action="" method="get">
       <div class="row pt-2 pb-2">
-        <div class="col-sm-4">
+        <div class="col-sm-12">
           <h4 class="page-title">Incomplete User Registration Report</h4>
-         
+          <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Incomplete User Registration Report</li>
+         </ol>
        </div>
+     </div>
+     <div class="row pt-2 pb-2">
+      <div class="col-sm-4"></div>
         <div class="col-sm-6">
             <div class="input-daterange input-group">
                 <input readonly="" type="text" class="form-control" autocomplete="off"   placeholder="Start Date" id="FromDate" name="from" value="<?php if ( !isset($_GET['from'])) { echo date('Y-m-01');} else {  echo $_GET['from']; } ?>"  />

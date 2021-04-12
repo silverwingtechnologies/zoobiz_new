@@ -2,6 +2,23 @@
 	  extract($_POST);?>
 <div class="content-wrapper">
   <div class="container-fluid">
+      <!-- Breadcrumb-->
+      <div class="row pt-2 pb-2">
+        <div class="col-sm-9">
+          <h4 class="page-title">App Version</h4>
+          <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">App Version</li>
+         </ol>
+       </div>
+       <div class="col-sm-3">
+         <div class="btn-group float-sm-right">
+         
+          <a href="#" data-toggle="modal" data-target="#addUPI" class="btn btn-sm btn-primary waves-effect waves-light"><i class="fa fa-plus mr-1"></i> Add New </a>
+       </div>
+     </div>
+   </div>
+   <!-- End Breadcrumb-->
   	 <div class="row">
       <div class="col-lg-12">
         <div class="card">

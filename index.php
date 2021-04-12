@@ -102,18 +102,7 @@ include("common/front_header.php");
                     <div class="overlay overlay-dark opacity-7"></div>
                     <img src="img/banner5.jpg" data-bgcolor="#e0e0e0" alt=""  data-bgposition="top center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="9" class="rev-slidebg" data-no-retina>
                     <!-- layers -->
-                    <div class="tp-caption tp-resizeme z-index-15"
-                    data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                    data-y="['middle','middle','middle','middle']" data-voffset="['-150','-155','-155','-155']"
-                    data-whitespace="nowrap" data-responsive_offset="on"
-                    data-width="['none','none','none','none']" data-type="text"
-                    data-textalign="['center','center','center','center']"
-                    data-transform_idle="o:1;"
-                    data-transform_in="x:-50px;opacity:0;s:2000;e:Power3.easeOut;"
-                    data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
-                    data-start="1000" data-splitin="none" data-splitout="none">
-                    <h2 class="font-xlight">Grow Your </h2>
-                </div>
+                    
                 <div class="tp-caption tp-resizeme z-index-15"
                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                 data-y="['middle','middle','middle','middle']" data-voffset="['-70','-70','-70','-70']"
@@ -124,7 +113,7 @@ include("common/front_header.php");
                 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
                 data-transform_out="s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
                 data-start="900" data-splitin="none" data-splitout="none">
-                <h2 class="font-bold">Business Through Networking</h2>
+                <h2 class="font-bold">Infinite Opportunities</h2>
             </div>
                    <!--  <div class="tp-caption tp-resizeme z-index-15"
                          data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"

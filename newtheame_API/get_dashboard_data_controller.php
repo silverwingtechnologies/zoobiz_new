@@ -222,7 +222,7 @@ $response["unread_chat"] =$chatCount.'';
              $response["user_timeline_space_details"] = array();
                
              $space_arr = array();
-             $space_arr['is_show'] = true;
+             $space_arr['is_show'] = false;
 
              if($timeline_photos_master_d['used_space']!= NULL){
 
@@ -246,7 +246,7 @@ $response["unread_chat"] =$chatCount.'';
             }
              if( $space_arr['used_space'] >= $zoobiz_settings_master_d['user_timeline_upload_limit_in_gb']){
                 //$space_arr['is_full'] = true;
-                $space_arr['is_full'] = false;
+                $space_arr['is_full'] = true;
              } else {
                 $space_arr['is_full'] = false;
              }

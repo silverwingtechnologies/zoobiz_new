@@ -9,6 +9,11 @@ error_reporting(0);
       <div class="row pt-2 pb-2">
         <div class="col-sm-4">
           <h4 class="page-title">Member Details Report -Empty Data</h4>
+          <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Member Details Report</li>
+         </ol>
+         
           <a class="btn btn-sm btn-secondary" href="userInfo"> View Not Empty Details</a>
        </div>
      </div>

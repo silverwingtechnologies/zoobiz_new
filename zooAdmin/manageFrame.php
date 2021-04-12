@@ -5,15 +5,22 @@ extract($_REQUEST);
   <div class="container-fluid">
     <!-- Breadcrumb-->
     <div class="row pt-2 pb-2">
-      <div class="col-sm-6">
+      <div class="col-sm-9">
         <h4 class="page-title">
           <?php if(isset($editFrame) && $editFrame=="editFrame" && isset($promotion_rel_frame_id) ){
             echo "Edit Frame";
                 } else  {?> Manage Promotion Frames <?php } ?> </h4>
-        
+        <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+           
+           <li class="breadcrumb-item"><a href="promoteBusiness">Seasonal Greetings List</a></li>
+            <li class="breadcrumb-item active" aria-current="page">  <?php if(isset($editFrame) && $editFrame=="editFrame" && isset($promotion_rel_frame_id) ){
+            echo "Edit Frame";
+                } else  {?> Manage Promotion Frames <?php } ?></li>
+         </ol>
       </div>
       
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <div class="btn-group float-right">
 
           <?php /*if( isset($promotion_id) ) {?>

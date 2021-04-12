@@ -7,11 +7,17 @@ error_reporting(0);
     <!-- Breadcrumb-->
     <form action="" method="get">
       <div class="row pt-2 pb-2">
-        <div class="col-sm-4">
+        <div class="col-sm-12">
           <h4 class="page-title">Not Use Seasonal Greetings Report</h4>
+           <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Not Use Seasonal Greetings Report</li>
+         </ol>
            <a class="btn btn-sm btn-secondary" href="useSeasonalGreetingReport?promotion_id=<?php echo $_REQUEST['promotion_id'];?>"> Seasonal Greeting Used</a>
         </div>
-         
+      </div>
+        <div class="row pt-2 pb-2">  
+          <div class="col-sm-4"></div>
        <div class="col-sm-6">
          <?php 
         

@@ -5,7 +5,10 @@
         <div class="col-sm-6">
           <?php   ?>
           <h4 class="page-title">Not Active User From <?php echo $_REQUEST['days'];?> Days -App </h4>
-           
+            <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Not Active Users</li>
+         </ol>
        </div>
 
        

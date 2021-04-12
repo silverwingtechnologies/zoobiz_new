@@ -4,7 +4,10 @@
       <div class="row pt-2 pb-2">
         <div class="col-sm-9">
           <h4 class="page-title">Countries</h4>
-          
+          <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Countries</li>
+         </ol>
        </div>
        <div class="col-sm-3">
           <a class="btn btn-danger btn-sm" href="countries?t=Active" ><?php echo $d->count_data_direct("country_id","countries","flag=1"); ?> Country Activated</a>

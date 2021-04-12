@@ -20,7 +20,7 @@ if(isset($_GET['f'])){
   }
 
   if($title=="" || $title== ucwords("index") || $title==ucwords("index.php")  ){
-    $title ="Grow Your Business Through  Networking";
+    $title ="Infinite Opportunities";
   }
 
 

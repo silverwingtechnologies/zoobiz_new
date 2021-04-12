@@ -4,7 +4,10 @@
       <div class="row pt-2 pb-2">
         <div class="col-sm-9">
           <h4 class="page-title">Feedback</h4>
-          
+          <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Feedback</li>
+         </ol>
        </div>
        <div class="col-sm-3">
          <div class="btn-group float-sm-right">
@@ -13,7 +16,7 @@
           if (mysqli_num_rows($q) > 0  ){ ?>
            <a href="javascript:void(0)" onclick="DeleteAll('deleteFeedback');" class="btn  btn-sm btn-danger pull-right"><i class="fa fa-trash-o fa-lg"></i> Delete </a>
            <?php } ?> 
-         </button>
+        
 
        </div>
      </div>

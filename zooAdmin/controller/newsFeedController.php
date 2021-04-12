@@ -231,9 +231,9 @@ if($send_notification_to_user==1){
 
          
 
-
-         $nResident->noti("timeline",$notiImg,0,$fcmArray,"ZooBiz",$feed_msg,$new_timeline_id);
-         $nResident->noti_ios("timeline",$notiImg,0,$fcmArrayIos,"ZooBiz",$feed_msg,$new_timeline_id);
+         $profile_u ="https://zoobiz.in/img/fav.png";
+         $nResident->noti("timeline",$notiImg,0,$fcmArray,"ZooBiz",$feed_msg,$new_timeline_id,0,$profile_u);
+         $nResident->noti_ios("timeline",$notiImg,0,$fcmArrayIos,"ZooBiz",$feed_msg,$new_timeline_id,0,$profile_u);
 }
 //9dec2020
          $_SESSION['msg']=$feed_msg. " new post added"; 

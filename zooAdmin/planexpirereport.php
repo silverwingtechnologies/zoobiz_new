@@ -7,14 +7,20 @@ error_reporting(0);
       <!-- Breadcrumb-->
       <form action="" method="get">
       <div class="row pt-2 pb-2">
-        <div class="col-sm-3">
+        <div class="col-sm-12">
           <h4 class="page-title">Membership Plan Expire Report</h4>
+           <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Membership Plan Expire Report</li>
+         </ol>
+
          <?php if ( !isset($_GET['from'])) { $_GET['from'] = date('Y-m-01');}
          if ( !isset($_GET['toDate'])) { $_GET['toDate'] = date('Y-m-t', strtotime('+1 month'));   }   ?>
        </div>
 
-
-
+</div>
+ <div class="row pt-2 pb-2">
+<div class="col-sm-5"></div>
        <div class="col-sm-5"  >
 
 
