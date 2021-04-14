@@ -56,6 +56,23 @@ if(isset($package_id))
                 </div>
 
               </div>
+
+              <div class="form-group row">
+                <label for="gst_slab_id" class="col-sm-2 col-form-label">IS Only coupon package? <span class="required">*</span></label>
+                <div class="col-sm-10">
+
+                  
+                 <select   name="is_cpn_package"    class="form-control single-select" name="gst_slab_id" type="text" >
+                            <option <?php if($is_cpn_package == 0){ echo "selected";} ?> value="0">No</option>
+                            <option <?php if($is_cpn_package == 1){ echo "selected";} ?>  value="1">Yes</option>
+                              
+                          </select>
+
+                         
+                </div>
+
+              </div>
+
               <div class="form-group row">
                 <label for="input-10" class="col-sm-2 col-form-label">Package Description <span class="required">*</span></label>
                 <div class="col-sm-10">
@@ -192,6 +209,23 @@ if(isset($package_id))
                   </div>
 
                 </div>
+
+                  <div class="form-group row">
+                <label for="gst_slab_id" class="col-sm-2 col-form-label">IS Only coupon package? <span class="required">*</span></label>
+                <div class="col-sm-10">
+
+                  
+                 <select   name="is_cpn_package"   class="form-control single-select" name="gst_slab_id" type="text" >
+                            <option <?php if($is_cpn_package == 0){ echo "selected";} ?> value="0">No</option>
+                            <option <?php if($is_cpn_package == 1){ echo "selected";} ?>  value="1">Yes</option>
+                              
+                          </select>
+
+                         
+                </div>
+
+              </div>
+
                 <div class="form-group row">
                   <label for="input-10" class="col-sm-2 col-form-label">Package Description <span class="required">*</span></label>
                   <div class="col-sm-10">

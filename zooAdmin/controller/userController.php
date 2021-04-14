@@ -696,8 +696,7 @@ echo  "here";exit; */
    
    
     $a =array(
-      'salutation'=> $m->get_data('salutation'),
-      'country_code'=> $m->get_data('country_code'),
+      'salutation'=> $m->get_data('salutation'), 
       'user_first_name'=> $m->get_data('user_first_name'),
       'user_last_name'=> $m->get_data('user_last_name'),
       'user_full_name'=> $m->get_data('user_full_name'),

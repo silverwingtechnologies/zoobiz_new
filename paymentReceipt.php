@@ -59,6 +59,11 @@ $where=" and users_master.invoice_download=1  ";
     if( isset($_GET['downloadInvoice']) ){
         $where="";
     }
+
+    if(isset($_GET['transection_date']) && $_GET['transection_date']!= '' ){
+      $transection_date = date("Y-m-d", strtotime($_GET['transection_date'])); 
+      $where .=" and ( DATE(transection_master.transection_date) ='$transection_date' OR  DATE(user_employment_details.complete_profile_date) ='$transection_date' )   ";
+    }
    $qry =  $qp=$d->select("transection_master, user_employment_details ,business_adress_master,users_master,states,countries","countries.country_id=business_adress_master.country_id AND transection_master.user_id = users_master.user_id and
       user_employment_details.user_id = users_master.user_id and
       business_adress_master.user_id = users_master.user_id and
@@ -221,7 +226,18 @@ $where=" and users_master.invoice_download=1  ";
                   </div>
                   <div class="col-sm-6  text-right">
                     <h4><B>Invoice No. : # Invoice<?php echo $mData['zoobiz_id'];?>   <b></h4>
-                    <b>Invoice Date:</b> <?php echo date("d-m-Y", strtotime($mData['complete_profile_date'])); ?><br>
+                    <b>Invoice Date:</b> <?php 
+
+$reg_comp_date=strtotime(date("d-m-Y", strtotime($mData['complete_profile_date']))); 
+$trans_date=strtotime(date("d-m-Y", strtotime($mData['transection_date'])));
+ 
+if($reg_comp_date > $trans_date)
+{
+    $inv_date = $mData['complete_profile_date'];
+} else {
+    $inv_date = $mData['transection_date'];
+}
+                    echo date("d-m-Y", strtotime($inv_date)); ?><br>
 
                         <b>Received Date:</b> <?php if($mData['complete_profile_date'] !="0000-00-00 00:00:00") { echo date("d-m-Y h:i A", strtotime($mData['transection_date'])); }   ?><br>
 
@@ -289,7 +305,7 @@ $where=" and users_master.invoice_download=1  ";
       business_adress_master.user_id = users_master.user_id and
       states.state_id = business_adress_master.state_id and
       users_master.user_id='$user_id' $where group by transection_master.user_id ");*/
-$qryNew =$d->select("  transection_master, package_master,users_master "," 
+$qryNew =$d->select("  transection_master, package_master,users_master,user_employment_details ","   user_employment_details.user_id = users_master.user_id and
       users_master.user_id = transection_master.user_id and
       package_master.package_id = transection_master.package_id and
       users_master.user_id='$user_id'     and (transection_master.is_paid = 0 and   transection_master.coupon_id  =0 )  $where   group by transection_master.user_id  ");

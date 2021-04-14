@@ -1384,8 +1384,7 @@ messages: {
     } ,
     company_contact_number: {
         required : "Please enter Company contact number",
-        minlength:"PLEASE ENTER AT LEAST 5 digits.",
-        minlength:"PLEASE ENTER AT LEAST 15 digits."
+        minlength:"PLEASE ENTER AT LEAST 6 digits." 
     } 
     ,
     company_website: {

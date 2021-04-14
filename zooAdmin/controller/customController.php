@@ -211,5 +211,35 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 		}
 	}
 	//11march2021
+
+
+	//14april2021
+	else if (isset($_POST['updateClassifieds'])) {
+
+		 $org_qry = $d->select("zoobiz_settings_master","setting_id ='$setting_id'");
+		 $org_data=mysqli_fetch_array($org_qry);
+
+         $m->set_data('classified_max_audio_duration',$classified_max_audio_duration);
+         $m->set_data('classified_max_document_select',$classified_max_document_select);
+         $m->set_data('classified_max_image_select',$classified_max_image_select);
+         $m->set_data('classifieds_sel_multiple_cities',$classifieds_sel_multiple_cities);
+		 $a = array(
+		 	'classified_max_audio_duration'=>$m->get_data('classified_max_audio_duration'),
+		 	'classified_max_document_select'=>$m->get_data('classified_max_document_select'),
+		 	'classified_max_image_select'=>$m->get_data('classified_max_image_select'),
+		 	'classifieds_sel_multiple_cities'=>$m->get_data('classifieds_sel_multiple_cities')
+		 	 );
+		 $q = $d->update("zoobiz_settings_master",$a,"setting_id ='$setting_id'");
+
+		if($q==TRUE) {
+            $_SESSION['msg']="Classified Settings Updated";
+             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
+			header('location:../customSettings');
+		} else {
+			$_SESSION['msg1']="Something went wrong.";
+			header('location:../customSettings');
+		}
+	}
+	//14april2021
 }
 ?>

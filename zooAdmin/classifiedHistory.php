@@ -11,11 +11,11 @@ $request_id = (int)$request_id;
   <div class="container-fluid">
     <div class="row pt-2 pb-2">
       <div class="col-sm-12">
-        <h4 class="page-title">Classified Details</h4>
+        <h4 class="page-title">View Classifieds</h4>
          <ol class="breadcrumb">
            <li class="breadcrumb-item"><a href="welcome">Home</a></li>
            <li class="breadcrumb-item"><a href="classifieds">Classifieds</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Classifieds</li>
+            <li class="breadcrumb-item active" aria-current="page">View Classifieds</li>
          </ol>
        
       </div>

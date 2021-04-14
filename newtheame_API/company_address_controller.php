@@ -129,6 +129,23 @@ if (isset($_POST) && !empty($_POST)) {
 
 			$qA2 = $d->selectRow("city_id,city_name","cities", "country_id='$country_id' AND state_id='$state_id' AND city_flag=1", "");
 
+			//CLASSIFIED SETTINGS START
+			 $zoobiz_settings_master = $d->select("zoobiz_settings_master","","");
+             $zoobiz_settings_masterData = mysqli_fetch_array($zoobiz_settings_master);
+
+             if($zoobiz_settings_masterData['classifieds_sel_multiple_cities'] == "1"){
+             	$response["classifieds_sel_multiple_cities"] =true;
+             } else {
+             	$response["classifieds_sel_multiple_cities"] =false;
+             }
+             
+             $response["classified_max_image_select"] = (int)$zoobiz_settings_masterData["classified_max_image_select"];
+			 $response["classified_max_audio_duration"] =(int) $zoobiz_settings_masterData["classified_max_audio_duration"];
+			 $response["classified_max_document_select"] =(int) $zoobiz_settings_masterData["classified_max_document_select"];
+			//CLASSIFIED SETTINGS END	 
+
+				 
+
 			if (mysqli_num_rows($qA2) > 0) {
 
 				$response["cities"] = array();
@@ -141,6 +158,8 @@ if (isset($_POST) && !empty($_POST)) {
 					array_push($response["cities"], $cities);
 
 				}
+
+
 
 				$response["message"] = "City Data";
 				$response["status"] = "200";

@@ -26,6 +26,10 @@ class dao implements interface1
 
 
       $left_days = ($end_date - $start_date)/60/60/24;
+
+      if($left_days<0 ){
+        $left_days = 0 ; 
+      }
       return $left_days;
     }
     //11march21

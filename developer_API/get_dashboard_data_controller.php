@@ -27,6 +27,8 @@ while($getBLockUserData=mysqli_fetch_array($getBLockUserQry)) {
 $blocked_users = implode(",", $blocked_users); 
 
 
+
+
 $response["rating_dialogue"] =false;
 //check login start
             $q = $d->selectRow("user_id, plan_renewal_date,user_token,active_status","users_master", "user_id='$user_id' AND user_mobile='$user_mobile' AND user_id!=0  ");
@@ -59,6 +61,7 @@ $response["rating_dialogue"] =false;
                         exit();
                     }
                 }
+
 
                 if ($today > $plan_expire_date) {
                         $msg = "Your Plan Has been Expired on $plan_expire_date, Please Contact ZooBiz Support Team";

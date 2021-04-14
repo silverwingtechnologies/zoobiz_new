@@ -14,16 +14,39 @@ if (isset($_POST) && !empty($_POST)) {
 
 			$response["package"] = array();
 
-			$app_data = $d->selectRow("inapp_ios_purchase_id, package_amount,package_id,gst_slab_id,package_name,package_amount,packaage_description,package_amount,package_amount,no_of_month,time_slab","package_master", "package_status=0", "");
+			$app_data = $d->selectRow("inapp_ios_purchase_id, package_amount,package_id,gst_slab_id,package_name,package_amount,packaage_description,package_amount,package_amount,no_of_month,time_slab","package_master", "package_status=0 and is_cpn_package= 0 ", "");
+
+
+							if(isset($city_id)){
+							   $company_master_qry = $d->selectRow("city_id,company_id","company_master", " city_id ='$city_id' and is_master = 0  ", "");
+							                        $response["payment_gateway_array"] = array();
+							                        if (mysqli_num_rows($company_master_qry) > 0) {
+							                            $company_master_data = mysqli_fetch_array($company_master_qry);
+							                            $company_id = $company_master_data['company_id'];
+							                        } else {
+							                            $company_id = 1;
+							                        }
+
+							}else {
+							    $company_id = 1;
+							}
+
+ 
+                        $city_id = $data['city_id'];
+                         $cur_qry = $d->selectRow("currency_symbol","company_master, payment_getway_master, currency_master", "company_master.company_id = '$company_id' and  payment_getway_master.company_id = company_master.company_id and currency_master.currency_id = payment_getway_master.currency_id ", "");
+                         $cur_data = mysqli_fetch_array($cur_qry);
 
 			if (mysqli_num_rows($app_data) > 0) {
 
 				while ($data = mysqli_fetch_array($app_data)) {
 
+
+
 			// find gst_amount
 					$gst_amount = $data["package_amount"] * 18 / 100;
 
 					$package = array();
+					$package["currency_symbol"] = $cur_data['currency_symbol'];
 					$package["package_id"] = $data["package_id"];
 
 					if($data['gst_slab_id'] !="0"){
@@ -45,8 +68,8 @@ if (isset($_POST) && !empty($_POST)) {
 
 
 
-
-					$package["package_name"] = $data["package_name"] . ' (₹ ' . $data["package_amount"] . ' + '.$slab_percentage.') (₹ '.number_format($data["package_amount"] + $gst_amount, 2, '.', '').')';
+					$package["package_name_only"] = $data["package_name"];
+					$package["package_name"] = $data["package_name"] . ' ( '.$package["currency_symbol"] . $data["package_amount"] . ' + '.$slab_percentage.') ( '.$package["currency_symbol"].number_format($data["package_amount"] + $gst_amount, 2, '.', '').')';
 					$package["package_description"] = $data["packaage_description"];
 					$package["package_amount"] = $data["package_amount"];
 					$package["package_with_amount"] = number_format($data["package_amount"] + $gst_amount, 2, '.', '');

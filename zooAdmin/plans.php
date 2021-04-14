@@ -33,6 +33,7 @@
                       <th class="text-center">#</th>
                       <th class="text-right">#</th>
                       <th>Package Name</th>
+                      <th>Only Coupon<br>Package</th>
                       <th>Description</th>
                       <th>IAP Apple ID</th>
                       <th class="text-right">Amount Without GST</th>
@@ -69,6 +70,7 @@
                     </td>
                         <td class="text-right"><?php echo $i++; ?></td>
                         <td><?php echo $package_name; ?></td>
+                        <td><?php if($is_cpn_package == 0){ echo "No";} else echo 'Yes'; ?></td>
                         <td><?php echo $packaage_description; ?></td>
                         <td><?php echo $inapp_ios_purchase_id; ?></td>
                         <td class="text-right"><?php echo $package_amount; ?></td>

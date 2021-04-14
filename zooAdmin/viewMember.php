@@ -390,9 +390,11 @@ $difference_days= $d->plan_days_left($plan_renewal_date);
       user_employment_details.user_id = users_master.user_id and
       business_adress_master.user_id = users_master.user_id and
       states.state_id = business_adress_master.state_id and
-      users_master.user_id='$user_id' and transection_master.is_paid = 0     order by transection_master.transection_id desc    ");
- 
+      users_master.user_id='$user_id' and transection_master.is_paid = 0   group by DATE(transection_master.transection_date)  order by transection_master.transection_id asc    ");
     if($transection_master_data_new['is_paid'] == 0 && mysqli_num_rows($qp)  > 0 ){
+
+      
+   
       ?> 
       <hr>
       <div class="media align-items-center">
@@ -411,9 +413,13 @@ $difference_days= $d->plan_days_left($plan_renewal_date);
  //23sept2020 
 
        
-   
+   if(mysqli_num_rows($qp) > 1){
+    $invoice_no = 1;
+  } else {
+    $invoice_no = '';
+  }
 
-
+while ($transection_master_data_new2=mysqli_fetch_array($qp)) {
         if($invoice_download=="1"  ){
 
  //
@@ -422,16 +428,19 @@ $difference_days= $d->plan_days_left($plan_renewal_date);
 
 
           <br>
-          <a target="_blank"  href="../paymentReceipt.php?user_id=<?php echo $user_id; ?>&download=true" class=" btn-sm btn-info"><i class="fa fa-download"></i>Download</a>
+          <a target="_blank"  href="../paymentReceipt.php?user_id=<?php echo $user_id; ?>&download=true&transection_date=<?php echo date("Y-m-d", strtotime($transection_master_data_new2['transection_date'])); ?>" class=" btn-sm btn-info"><i class="fa fa-download"></i>Download Invoice <?php echo $invoice_no;?> </a>
 
           <br>
-          <a onclick="return popitup('../paymentReceipt.php?user_id=<?php echo $user_id; ?>')" href="#" class=" btn-sm btn-warning"><i class="fa fa-print"></i>Print Invoice</a>
-        <?php } ?>
+          <a onclick="return popitup('../paymentReceipt.php?user_id=<?php echo $user_id; ?>&transection_date=<?php echo date("Y-m-d", strtotime($transection_master_data_new2['transection_date'])); ?>')" href="#" class=" btn-sm btn-warning"><i class="fa fa-print"></i>Print Invoice Invoice <?php echo $invoice_no;?> </a>
+        <?php }
+        $invoice_no++;
+         } ?>
       </div>                   
     </div>
   </div>
 
   <?php
+
  //9nov2020
 }  else {
 
@@ -460,8 +469,8 @@ $difference_days= $d->plan_days_left($plan_renewal_date);
 </div>
 <?php 
 
-
 }
+ 
  //9nov2020
 
 

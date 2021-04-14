@@ -5,10 +5,7 @@ error_reporting(0);
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumb-->
- 
-
-<!-- <h4 class="page-title">Invoice Report</h4> -->
-<?php //25nov2020 
+  <?php  
 
  $where ="";
   if ( isset($_GET['from']) && $_GET['from'] !='' && isset($_GET['toDate']) && $_GET['toDate'] !='' ) { 
@@ -19,7 +16,7 @@ error_reporting(0);
                 $dateTo=date_create($toDate);
                 $nFrom= date_format($date,"Y-m-d 00:00:01");
                 $nTo= date_format($dateTo,"Y-m-d 23:59:59");
-                $where .=" and  user_employment_details.complete_profile_date  BETWEEN '$nFrom' AND '$nTo'";
+                $where .=" and  transection_master.transection_date  BETWEEN '$nFrom' AND '$nTo'";
 }
  if (isset($_GET['company_id'])!='' && $_GET['company_id'] != 0 ) { 
                  extract(array_map("test_input" , $_GET));
@@ -37,68 +34,33 @@ $transCond ="";
   $transCond   .=" and  transection_master.is_paid  = 0 and transection_master.coupon_id  = 0 ";
 }
 $where .=$transCond;
-
- /*$summ_qry=$d->select("users_master,user_employment_details,company_master,transection_master","company_master.company_id= users_master.company_id and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0      $where group by transection_master.user_id   ","");
- $paid_total = 0 ;
- $free_total = 0 ; 
- while ($summ_data=mysqli_fetch_array($summ_qry)) {
-    if (isset($_GET['paid_trans'])  && $_GET['paid_trans'] == 1) { 
-      $free_total += $summ_data['transection_amount'] ;
-    } else  {
-       $paid_total += $summ_data['transection_amount'] ;
-    }
-}*/
+ 
 
 ?> 
 <div class="row pt-2 pb-2">
       <div class="col-sm-6">
-        <h4 class="page-title">  Invoice Report </h4>
+        <h4 class="page-title"> Renew Invoice Report </h4>
          <ol class="breadcrumb">
            <li class="breadcrumb-item"><a href="welcome">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Invoice Report</li>
+            <li class="breadcrumb-item active" aria-current="page">Renew Invoice Report</li>
          </ol>
       </div>
-
-
-<?php /*if (isset($_GET['paid_trans'])  && ( $_GET['paid_trans'] == 2 ) ) { } else {?>
-       <div class="col-sm-3">
-         
-           <span class="badge badge-pill badge-success m-1"> <span >Paid <i class="fa fa-inr"></i> <?php  echo number_format($paid_total,2,'.',''); ?> </span > </span > 
-        
-      </div>
-       <div class="col-sm-3">
-         
-          <a href="couponReport"> <span class="badge badge-pill badge-danger m-1"> <span >Free <i class="fa fa-inr"></i><?php echo number_format($free_total,2,'.',''); ?> </span > </span > </a>
-        
-      </div>
-<?php }*/ ?> 
+ 
 
 </div>
-<?php //25nov2020
+<?php  
 $_REQUEST['paid_trans'] = 0 ; ?> 
       <form action="" method="get">
       <div class="row pt-2 pb-2">
 
-<?php /*
-        <div class="col-sm-2">
-           
-       
-        <select name="paid_trans"  class="form-control single-select">
-           <option  <?php if ( isset($_REQUEST['paid_trans']) &&   $_REQUEST['paid_trans'] ==0  ) { echo 'selected';} ?>    value="0">Paid</option>
-           <option <?php if ( isset($_REQUEST['paid_trans']) &&   $_REQUEST['paid_trans'] ==1 ) { echo 'selected';} ?>   value="1">Free</option>
-          <option <?php if ( isset($_REQUEST['paid_trans']) &&   $_REQUEST['paid_trans'] ==2 ) { echo 'selected';} ?>   value="2">Coupon</option>
-           
-        </select>
-         
-       </div>
-<?php */ ?>
+ 
 
         <div class="col-sm-3">
           <?php 
         
    
           $qry=$d->select("company_master"," status=0","ORDER BY company_name ASC");
-          //onchange="this.form.submit();"
+       
           ?>
        
         <select name="company_id"  class="form-control single-select">
@@ -155,7 +117,7 @@ $_REQUEST['paid_trans'] = 0 ; ?>
                    <th>Package Name</th>
                    <th class="text-right">Package Amount</th>
                    <th>Payment Mode</th>
-                    <th>Refered By</th>
+                
                    <th>Transaction Date</th>
                    <th>Download Invoice</th>
                      
@@ -166,16 +128,11 @@ $_REQUEST['paid_trans'] = 0 ; ?>
                 $i=1;
                
          
-               $renew_trans_ids= array('0');
-               $plan_renew_master_qry=$d->select(" plan_renew_master ","","");
-                 while ($plan_renew_master_data=mysqli_fetch_array($plan_renew_master_qry)) {
-                  $renew_trans_ids [] =$plan_renew_master_data['transaction_id'];
-                 }
-                 $renew_trans_ids = implode(",",$renew_trans_ids);
+               
+            
+ $q3=$d->select("users_master,user_employment_details,company_master,transection_master,business_categories,business_sub_categories, plan_renew_master ","plan_renew_master.transaction_id =transection_master.transection_id and   company_master.company_id= users_master.company_id AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id  and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.office_member=0 AND users_master.active_status= 0       $where group by DATE(plan_renew_master.renew_date),plan_renew_master.user_id  order by plan_renew_master.renew_date  asc  ","");
 
- $q3=$d->select("users_master,user_employment_details,company_master,transection_master,business_categories,business_sub_categories ","company_master.company_id= users_master.company_id AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id  and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.office_member=0 AND users_master.active_status= 0    and transection_master.transection_id not in ($renew_trans_ids)   $where group by transection_master.user_id order by user_employment_details.complete_profile_date  asc  ","");
-
-  
+   
  
                while ($data=mysqli_fetch_array($q3)) {
                 extract($data);
@@ -198,16 +155,8 @@ $_REQUEST['paid_trans'] = 0 ; ?>
 } else  {
   echo $payment_mode;
 }  ?></td> 
-                    <td><?php if($refer_by=="1") {echo "Social Media";} 
-                  else if($refer_by=="2") {echo "Member / Friend </br>(".$refere_by_name." - ". $refere_by_phone_number .")";}
-                  else if($refer_by=="3") {
-
-                    if($remark !=""){
-                      echo "Other </br>(".$remark .")";
-                    }
-                    echo "Other";}
-                   ?></td>
-                  <td data-order="<?php echo date("U",strtotime($complete_profile_date)); ?>"><?php echo date("d-m-Y h:i:s A",strtotime($complete_profile_date));  ?></td>
+                    
+                  <td data-order="<?php echo date("U",strtotime($renew_date)); ?>"><?php echo date("d-m-Y h:i:s A",strtotime($renew_date));  ?></td>
                   <td>
                     <?php 
 
@@ -216,7 +165,7 @@ $_REQUEST['paid_trans'] = 0 ; ?>
 
  
                       ?> 
-                     <a target="_blank"  href="../paymentReceipt.php?user_id=<?php echo $user_id; ?>&downloadInvoice=true&transection_date=<?php echo date("Y-m-d", strtotime($complete_profile_date)); ?>" class=" btn-sm btn-info"><i class="fa fa-download"></i>Download</a>
+                     <a target="_blank"  href="../paymentReceipt.php?user_id=<?php echo $user_id; ?>&downloadInvoice=true&transection_date=<?php echo date("Y-m-d", strtotime($renew_date)); ?>" class=" btn-sm btn-info"><i class="fa fa-download"></i>Download</a>
                    <?php }  ?> 
                   </td>
 
@@ -236,8 +185,7 @@ $_REQUEST['paid_trans'] = 0 ; ?>
 </div>
 <!-- End container-fluid-->
 
-</div><!--End content-wrapper-->
-<!--Start Back To Top Button-->
+</div>
 
 
   

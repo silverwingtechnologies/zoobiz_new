@@ -458,6 +458,62 @@
   </form>
       <?php  } //11march21 ?>
 </fieldset>
+
+
+
+
+<fieldset class="scheduler-border">
+  <?php 
+
+  ?>
+                <legend  class="scheduler-border">Classifieds Settings</legend>  
+                 <form id="customClassifieds" action="controller/customController.php" method="POST" enctype="multipart/form-data">
+                <div class="form-group row">
+                <label for="input-10" class="col-sm-2 col-form-label">Select Multiple Cities <span class="text-danger">*</span></label>
+                <div class="col-sm-10">
+                   <select id="classifieds_sel_multiple_cities" required="" class="form-control single-select" name="classifieds_sel_multiple_cities" type="text" >
+                            <option value="">-- Select --</option>
+                            <option  <?php   if(   $classifieds_sel_multiple_cities=="1"){  ?>selected <?php }?> value="1">Yes</option>
+                            <option <?php   if(  $classifieds_sel_multiple_cities=="0"){  ?>selected <?php }?> value="0">No</option>
+                             
+                           
+                          </select>
+                </div>
+              </div>
+ 
+              
+
+               <div class="form-group row">
+                       <label class="col-lg-2 col-form-label form-control-label">Maximum Image Select  <span class="required">*</span></label>
+                      <div class="col-lg-4">
+                        <input minlength="1" maxlength="3" max="100"  class="form-control onlyNumber  " name="classified_max_image_select" type="text" value="<?php echo $classified_max_image_select; ?>" required="">
+                      </div>
+                    </div>
+
+                      <div class="form-group row">
+                       <label class="col-lg-2 col-form-label form-control-label">Maximum Document Select  <span class="required">*</span></label>
+                      <div class="col-lg-4">
+                        <input minlength="1" maxlength="3" max="100"  class="form-control onlyNumber  " name="classified_max_document_select" type="text" value="<?php echo $classified_max_document_select; ?>" required="">
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                       <label class="col-lg-2 col-form-label form-control-label">Maximum Audio Duration (in Miliseconds)  <span class="required">*</span></label>
+                      <div class="col-lg-4">
+                        <input minlength="1" maxlength="8" max="10000000"  class="form-control onlyNumber " name="classified_max_audio_duration" type="text" value="<?php echo $classified_max_audio_duration; ?>" required="">
+                      </div>
+                    </div>
+
+  <div class="form-footer text-center">
+    <input type="hidden" name="setting_id" value="<?php echo $setting_id;?>">
+                     <button name="updateClassifieds" type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i> Update</button>
+                   </div>
+
+  </form>
+     
+</fieldset>
+
+
 <?php /* 
 //31dec2020 ?>
 <fieldset class="scheduler-border">
