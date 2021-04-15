@@ -38,7 +38,8 @@
            </div>
            <div class="media-body text-left ml-3">
              <div class="progress-wrapper">
-               <?php echo $_SESSION['admin_email']; ?>
+               <marquee scrollamount="3"> <a href="mailto:<?php echo $user_email;?>"  >  <?php echo $_SESSION['admin_email']; ?></a>   </marquee>
+               
             </div>                   
           </div>
 
@@ -98,7 +99,7 @@
 </div>
 <div class="tab-pane active" id="edit">
   <form id="profileDetailFrm" action="controller/profileController.php" method="post" enctype="multipart/form-data">
-    <?php  
+    <?php   
       if(isset($_SESSION['zoobiz_admin_id'])) {
       $q=$d->select("zoobiz_admin_master","zoobiz_admin_id='$_SESSION[zoobiz_admin_id]'");
       $data=mysqli_fetch_array($q);

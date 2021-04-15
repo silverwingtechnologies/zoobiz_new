@@ -130,14 +130,15 @@ $q = $d->insert("seasonal_greeting_share_master",$a);
 				
 				if($users_master_data['user_mobile'] != $user_mobile  ){
 
-if(isset($country_code)){
+if(!isset($country_code)){
 				$country_code ='+91';
 			}  
 
 
 					$q11 = $d->select("users_master", "user_mobile='$user_mobile' and user_id !='$user_id'  and  country_code ='$country_code' ");
-					$data = mysqli_fetch_array($q11);
-					if ($data > 0) {
+					
+					if (mysqli_num_rows($q11) > 0  ) {
+						$data = mysqli_fetch_array($q11);
 						$response["message"] = "Mobile Number Is Already Registered";
 						$response["status"] = "201";
 						echo json_encode($response);
@@ -159,7 +160,7 @@ if(isset($country_code)){
 
 					$d->send_otp($user_mobile, $otp);
 					
-					$response["message"] = "OTP Sent to New Mobile Number";
+					$response["message"] = "OTP Sent to New Mobile Number" ;
 					$response["status"] = "200";
 					$response["otp_dialog"] = true;
 					echo json_encode($response);

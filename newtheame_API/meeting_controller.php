@@ -625,6 +625,8 @@ $title ="Meetup";//$u_data['user_full_name']." Rescheduled Meeting";
 } 
 else if ($_POST['getAprrovedMeetings'] == "getAprrovedMeetings" && filter_var($user_id, FILTER_VALIDATE_INT) == true  ) {
 
+
+
   $active_usr_qry=$d->select("users_master","active_status=0");
   $active_user_arr = array();
   while($active_usr_data=mysqli_fetch_array($active_usr_qry)) { 
@@ -637,6 +639,16 @@ else if ($_POST['getAprrovedMeetings'] == "getAprrovedMeetings" && filter_var($u
   $response['approvedMeeting'] = array();
   if(mysqli_num_rows($q3)>0){ 
    while ($q3_data=mysqli_fetch_array($q3)) {
+
+if($q3_data['member_id'] == $user_id){
+
+ $member_id = $q3_data['user_id'];
+} else {
+   $member_id = $q3_data['member_id'];
+}
+$ios_op_u_data = $d->select("users_master", "  user_id = '$member_id'");
+$ios_op_u = mysqli_fetch_array($ios_op_u_data);
+
 
       $approvedMeeting = array();
       $meetup_date = $q3_data['date'];
@@ -669,13 +681,16 @@ $member_id = $q3_data['member_id'];
 $opp_user = $d->select("users_master", "  user_id = '$member_id'");
       $opp_user_data = mysqli_fetch_array($opp_user);
 
+
+ 
+
      
       $approvedMeeting["date"] = $meetup_date1;
       $approvedMeeting["end_date"] = $meetup_date2;
       $approvedMeeting["place"] =$q3_data['place'];
       $approvedMeeting["meetup_with"] ="Meetup With ". $opp_user_data['user_full_name'];
 
-      $approvedMeeting["meetup_with_ios"] ="Meetup With ". $opp_user_data['user_full_name'];
+      $approvedMeeting["meetup_with_ios"] ="Meetup With ". $ios_op_u['user_full_name'];
       $approvedMeeting["agenda"] =$q3_data['agenda'];
       $approvedMeeting["user_id"] =$q3_data['user_id'];
       $approvedMeeting["member_id"] =$q3_data['member_id'];

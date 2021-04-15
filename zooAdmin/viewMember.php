@@ -952,6 +952,16 @@ if($userData['active_status']=="0"){
             ?>" >
           </div>
         </div>
+
+        <div class="form-group row">
+         <label class="col-lg-3 col-form-label form-control-label">Country Code <span class="required">*</span></label>
+         <div class="col-lg-9">
+           <select class="form-control single-select" name="country_code" type="text" required="">
+                          <?php include '../common/country_code_option_list.php'; ?>
+                        </select>
+        </div>
+      </div>
+
         <div class="form-group row">
           <label class="col-lg-3 col-form-label form-control-label">Mobile Number <span class="required">*</span></label>
           <div class="col-lg-9">

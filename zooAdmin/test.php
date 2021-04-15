@@ -1,13 +1,12 @@
 <?php 
+$todayDate= date('Y-m-d'); 
+$plan_expire_date = "2021-04-13";
 
-$array = array('150', '12','79','267','50','523');
-$array1=  sort($array);
 
-echo "<pre>";print_r($array1);
-echo $array1[1];
-/*for($t= 0 ; $t<count($array); $t++){
-    
-    
-    
-}*/
+$is_plan_expired =0;
+    if (strtotime($todayDate)>strtotime($plan_expire_date)) {
+       $is_plan_expired =1;
+    }
+
+    echo '7777'.$is_plan_expired;exit;
 ?>

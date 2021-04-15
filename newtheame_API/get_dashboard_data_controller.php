@@ -30,6 +30,39 @@ if (isset($_POST) && !empty($_POST)) {
                 $LoginDetails=array();
                 $data = mysqli_fetch_array($q);
                 $plan_expire_date = $data['plan_renewal_date'];
+
+$response["message"] = 'Success';
+
+                 $difference_days= $d->plan_days_left($plan_expire_date);
+                $dayCnt = $difference_days;
+    if($dayCnt == 0){
+        $dayCnt = "Today";
+    }
+    
+    
+$response["message"]="success.";
+if ($difference_days <= 30) {
+    $response["difference_days"] =$difference_days;
+
+    $response["renew_message"] ="Your subscription is expiring in ".$dayCnt." days. Please renew soon!";
+    $response["show_renew"] =true;
+     $response["message_title"] ="Renew Plan";
+     $msg = "Your subscription is expiring in ".$dayCnt." days, Choose to renew from below options";
+$response["message"] = $msg;
+} else {
+     $response["difference_days"] =$difference_days;
+     $response["renew_message"] ="";
+    $response["show_renew"] =false;
+}
+
+
+$todayDate= date('Y-m-d'); 
+    $response["is_plan_expired"] =false;
+    if (strtotime($todayDate)>strtotime($plan_expire_date)) {
+       $response["is_plan_expired"] =true;
+       $response["show_renew"] =false;
+    }
+
                 $qqq = $d->selectRow("version_code_android,version_code_android_view,version_code_ios,version_code_ios_view","app_version_master", "");
                 $dataqqq = mysqli_fetch_array($qqq);
                 if (mysqli_num_rows($qqq) > 0) {
@@ -49,25 +82,7 @@ if (isset($_POST) && !empty($_POST)) {
                     }
                 }
 
-                $difference_days= $d->plan_days_left($plan_expire_date);
-                $dayCnt = $difference_days;
-    if($dayCnt == 0){
-        $dayCnt = "Today";
-    }
-if ($difference_days <= 30) {
-    $response["difference_days"] =$difference_days;
-
-    $response["renew_message"] ="Your Subscription Plan is going to expire in ".$dayCnt.", Renew.";
-    $response["show_renew"] =true;
-     $response["message_title"] ="Renew Plan";
-} else {
-     $response["difference_days"] =$difference_days;
-     $response["renew_message"] ="Your Subscription Plan is going to expire in ".$dayCnt.", Renew.";
-    $response["show_renew"] =false;
-}
-
-
-
+                
 //13APRIL2021
  
 
@@ -761,7 +776,13 @@ if($memberAdded > 0 ){
 
     //set usage time end
             
-                $response["message"]="success.";
+
+           
+
+
+
+
+                
              
             $response["status"]="200";
             echo json_encode($response);

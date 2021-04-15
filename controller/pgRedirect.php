@@ -2,16 +2,23 @@
 header("Pragma: no-cache");
 header("Cache-Control: no-cache");
 header("Expires: 0");
+
+
 // following files need to be included
 include 'frontObjectController.php';
+
 include '../zooAdmin/fcm_file/user_fcm.php';
+
+
 		$nResident = new firebase_resident();
 require_once("config_paytm.php");
+
 require_once("encdec_paytm.php");
 
 
 
 
+ 
 //start
 $amount_to_be_paid = 0;
 		//insert into temp start
@@ -21,7 +28,7 @@ $amount_to_be_paid = 0;
        echo 1;
        exit();
      } else*/ {
-      echo 0;
+ 
       $user_first_name = ucfirst($user_first_name);
       $user_last_name = ucfirst($user_last_name);
           $gst_number = '';//strtoupper($gst_number);
@@ -452,6 +459,11 @@ $q=$d->select("package_master","package_id='$plan_id'","");
          }
      } 
 //end
+
+if($amount_to_be_paid<1){
+$amount_to_be_paid = 1;
+}
+
 if($_POST['cpn_success'] ==1){
     $amount_to_be_paid = 0 ; 
 }
@@ -461,21 +473,23 @@ if($amount_to_be_paid > 0  ){
 $checkSum = "";
 $paramList = array();
 
-$ORDER_ID = $_POST["ORDER_ID"];
+$ORDER_ID =$order_id;
 $CUST_ID = $_POST["CUST_ID"];
 $INDUSTRY_TYPE_ID = $_POST["INDUSTRY_TYPE_ID"];
 $CHANNEL_ID = $_POST["CHANNEL_ID"];
+
 $TXN_AMOUNT = $_POST["TXN_AMOUNT"];
 
 // Create an array having all required parameters for creating checksum.
-$paramList["MID"] = PAYTM_MERCHANT_MID;
-$paramList["ORDER_ID"] = $ORDER_ID;
+$paramList["MID"] = PAYTM_MERCHANT_MID; 
+$paramList["ORDER_ID"] = $order_id;
 $paramList["CUST_ID"] = $CUST_ID;
 $paramList["INDUSTRY_TYPE_ID"] = $INDUSTRY_TYPE_ID;
 $paramList["CHANNEL_ID"] = $CHANNEL_ID;
 $paramList["TXN_AMOUNT"] = $amount_to_be_paid;
 $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
 $paramList["CALLBACK_URL"] =   $base_url.'controller/pgResponse.php';
+ 
  
 
 //Here checksum string will return by getChecksumFromArray() function.
@@ -490,6 +504,7 @@ $checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
 	<center><h1>Please do not refresh this page...</h1></center>
 		<form method="post" action="<?php echo PAYTM_TXN_URL ?>" name="f1">
 		<table border="1">
+            <input type="hidden" name="PAYTM_MERCHANT_KEY" value="<?php echo PAYTM_MERCHANT_KEY ?>">
 			<tbody>
 			<?php
 			foreach($paramList as $name => $value) {

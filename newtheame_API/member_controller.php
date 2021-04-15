@@ -981,6 +981,7 @@ if ($city_id != 0) {
 	      //   array_push($response["tagWiseUsers"], $member);
 $arr_key= array();
 
+$tag_array = array();
 		while ($data = mysqli_fetch_array($meq)) {
 			
 
@@ -990,11 +991,11 @@ $arr_key= array();
 
 			for ($g=0; $g < count($search_key_array) ; $g++) { 
 
-				if($search_key_array[$g]!="" && !in_array(strtolower($search_key_array[$g]), $arr_key)){
-					$arr_key[] = strtolower($search_key_array[$g]);
+				if($search_key_array[$g]!="" && !in_array(trim(strtolower($search_key_array[$g])), $arr_key)){
+					$arr_key[] = trim(strtolower($search_key_array[$g]));
 					$member  = array();
 					 $member["user_id"] = $data["user_id"];
-			         $member["search_keyword"] = html_entity_decode($search_key_array[$g]); ;
+			         $member["search_keyword"] = trim(html_entity_decode($search_key_array[$g])) ;
 			         $member["category_id"] =$data["business_category_id"]."-".$data["business_sub_category_id"];
 			         $member["business_category_id"] =$data["business_category_id"];
 			         $member["business_sub_category_id"] =$data["business_sub_category_id"];

@@ -16,7 +16,7 @@ include("common/front_header.php");
                                 <a class="nav-link " style="color: #2abcaa !important;" href="register">     <i class="fas fa-plus"></i> <b>Register in ZooBiz</b></a>
                             </li>
                             <?php //1july2020 ?>
-                            <a class="nav-link active pagescroll text-lowercase" style="color: #2abcaa !important;" href="#">  <!-- <button type="submit" id="submit_btn1" class="button gradient-btn w-60"> contact@zoobiz.com</button> --> <i class="fas fa-envelope"></i> <b>contact@zoobiz.in</b></a>
+                            <a href='mailto:contact@zoobiz.in' class="nav-link active pagescroll text-lowercase" style="color: #2abcaa !important;" href="#">  <!-- <button type="submit" id="submit_btn1" class="button gradient-btn w-60"> contact@zoobiz.com</button> --> <i class="fas fa-envelope"></i> <b>contact@zoobiz.in</b></a>
                         </li>
 
                         <li class="nav-item">
@@ -527,7 +527,7 @@ include("common/front_header.php");
                         <br>
                           <!--   <p class="bottom10">+91 99783 66366</p>
                             <p class="bottom10">+91 98259 54333</p> -->
-                            <h5 class="bottom10"><a href="mailto:contact@zoobiz.com"><i style="color: #2abcaa !important;" class="fas fa-envelope"></i> contact@zoobiz.in</a></h5>
+                            <h5 class="bottom10"><a href="mailto:contact@zoobiz.in"><i style="color: #2abcaa !important;" class="fas fa-envelope"></i> contact@zoobiz.in</a></h5>
                             <!-- <h5 class="bottom10"><i style="color: #2abcaa !important;" class="fas fa-clock"></i> Mon-Fri: 10AM - 5PM</h5> -->
                         </div>
 
@@ -544,7 +544,7 @@ Ahmedabad, Gujarat, India (380054)</h5>
                         <br>
                           <!--   <p class="bottom10">+91 99783 66366</p>
                             <p class="bottom10">+91 98259 54333</p> -->
-                            <h5 class="bottom10"><a href="mailto:contact@zoobiz.com"><i style="color: #2abcaa !important;" class="fas fa-envelope"></i> contact@zoobiz.in</a></h5>
+                            <h5 class="bottom10"><a href="mailto:contact@zoobiz.in"><i style="color: #2abcaa !important;" class="fas fa-envelope"></i> contact@zoobiz.in</a></h5>
                             <!-- <h5 class="bottom10"><i style="color: #2abcaa !important;" class="fas fa-clock"></i> Mon-Fri: 10AM - 5PM</h5> -->
                         </div>
                         <!-- <ul class="social-icons no-border mb-4 mb-md-0 wow fadeInUp" data-wow-delay="300ms">

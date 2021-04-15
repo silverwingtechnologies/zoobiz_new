@@ -14,18 +14,18 @@ class firebase_resident
             $registrationIds = array_unique($registrationIds);
         }*/
 
-        
+            $is_plan_expired= false;
 
         if (is_array($registrationIds)) {
             $registrationIds=$registrationIds;
             $registrationIds = array_unique($registrationIds);
-            // $registrationIds = array_values($registrationIds);
+            $registrationIds = array_values($registrationIds);
 
               //15february2021
           $d = new dao();
         $today_date_for_token = date('Y-m-d');
          for ($xd=0; $xd <count($registrationIds) ; $xd++) { 
-             $users_master_token_qry = $d->select("users_master","user_token = '$registrationIds[$xd]' ");
+             $users_master_token_qry = $d->select("users_master, user_employment_details"," user_employment_details.user_id =users_master.user_id and   users_master.user_token = '$registrationIds[$xd]' ");
              $users_master_token_data = mysqli_fetch_array($users_master_token_qry);
               
              if( $today_date_for_token > $users_master_token_data['plan_renewal_date']){
@@ -34,13 +34,24 @@ class firebase_resident
                       }
          }
         //15february2021
-//$registrationIds = array($registrationIds);
+         $registrationIds = implode(",", $registrationIds);
+          $registrationIds = explode(",", $registrationIds);
+
+ 
+        
+ //$registrationIds = array($registrationIds);
         } else {
+             $users_master_token_qry = $d->select("users_master, user_employment_details"," user_employment_details.user_id =users_master.user_id and   users_master.user_token = '$registrationIds' ");
+             $users_master_token_data = mysqli_fetch_array($users_master_token_qry);
+              
+             if( $today_date_for_token > $users_master_token_data['plan_renewal_date']){
+                        $is_plan_expired= true;
+                 }
             $registrationIds = array($registrationIds);
         }
 
  
-        
+
         if ($image=='' && $profile=='') {
             $image= "https://www.zoobiz.in/img/logo.png";
         }
@@ -67,6 +78,7 @@ class firebase_resident
             'sound'=>'iphone_notification',
             'is_profile' =>$is_profile,
             'profile' =>$profile,
+            'is_plan_expired' => $is_plan_expired,
             'short_name' =>$short_name
         );
     
@@ -77,6 +89,12 @@ class firebase_resident
              'priority' => 'high',
              'data'    => $data
         );
+   /*if($title=="ZooBiz"){
+    echo "<pre>";print_r($registrationIds);
+ 
+echo "<pre>";print_r(json_encode($fields));
+             
+        }*/
         // echo "<pre>";print_r( json_encode($fields));
          $headers = array(
             'Authorization: key=' . API_ACCESS_KEY,
@@ -91,7 +109,10 @@ class firebase_resident
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
         $result = curl_exec($ch);
-        
+        /*if($title=="ZooBiz"){
+echo "<pre>";print_r($result);
+            exit;
+        }*/
         curl_close($ch);
         $result = json_decode($result, true);
 
@@ -122,7 +143,9 @@ class firebase_resident
           $d = new dao();
         $today_date_for_token = date('Y-m-d');
          for ($xd=0; $xd <count($registrationIds) ; $xd++) { 
-             $users_master_token_qry = $d->select("users_master","user_token = '$registrationIds[$xd]' ");
+             $users_master_token_qry = $d->select("users_master, user_employment_details"," user_employment_details.user_id =users_master.user_id and   users_master.user_token = '$registrationIds[$xd]' ");
+
+             
              $users_master_token_data = mysqli_fetch_array($users_master_token_qry);
               
              if( $today_date_for_token > $users_master_token_data['plan_renewal_date']){
@@ -131,7 +154,8 @@ class firebase_resident
                       }
          }
         //15february2021
-
+$registrationIds = implode(",", $registrationIds);
+          $registrationIds = explode(",", $registrationIds);
 //$registrationIds = array($registrationIds);
         } else {
             $registrationIds = array($registrationIds);
@@ -219,7 +243,17 @@ class firebase_resident
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
         $result = curl_exec($ch);
+ /* if($title=="ZooBiz"){
+    echo "<pre>";print_r($registrationIds);
+ 
+echo "<pre>";print_r(json_encode($fields));
+             
+        }
 
+        if($title=="ZooBiz"){
+echo "<pre>";print_r($result);
+            exit;
+        }*/ 
         //echo "<pre>";print_r($result );exit;
         curl_close($ch);
         $result = json_decode($result, true);
