@@ -5,7 +5,7 @@ include '../zooAdmin/lib/model.php';
 $d = new dao();
 $m = new model();
 extract(array_map("test_input" , $_POST));
-if (isset($refer_friend_name) && strlen($refer_friend_name) >=3) { ?>
+if (isset($refer_friend_name) && strlen($refer_friend_name) > 2) { ?>
 	 
 	
 	<?php

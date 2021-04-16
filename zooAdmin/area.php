@@ -233,10 +233,6 @@
     }
     function bindDataToForm(address,lat,lng,pin_code,serviceable_area_locality){
        // document.getElementById('poi_point_address').value = address;
-       <?php if($_SESSION['zoobiz_admin_id'] ==7 ) { ?>  
-       alert();
-     <?php } ?> 
-      alert();
        document.getElementById('lat').value = lat;
        document.getElementById('lng').value = lng;
        document.getElementById('pincode').value = pin_code;

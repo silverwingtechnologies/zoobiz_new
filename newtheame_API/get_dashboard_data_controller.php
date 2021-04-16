@@ -33,21 +33,44 @@ if (isset($_POST) && !empty($_POST)) {
 
 $response["message"] = 'Success';
 
-                 $difference_days= $d->plan_days_left($plan_expire_date);
-                $dayCnt = $difference_days;
-    if($dayCnt == 0){
-        $dayCnt = "Today";
+               //  $difference_days= $d->plan_days_left($plan_expire_date);
+$currDate = date("Y-m-d");
+$startTimeStamp = strtotime($plan_expire_date);
+$endTimeStamp = strtotime($currDate);
+$timeDiff = abs($endTimeStamp - $startTimeStamp);
+$numberDays = $timeDiff/86400;  // 86400 seconds in one day
+$difference_days = intval($numberDays);
+ if($difference_days == 0){
+        $difference_days = 1;
     }
+$dayCnt = $difference_days;
+   
     
-    
+
 $response["message"]="success.";
-if ($difference_days <= 30) {
+
+if($difference_days < 0 || $difference_days==0 ){
+     $response["difference_days"] =$difference_days;
+
+    $response["renew_message"] ="Your subscription is Expired. Please renew!";
+    $response["show_renew"] =false;
+     $response["message_title"] ="Renew Plan";
+     $msg = "Your subscription is Expired, Choose to renew from below options.";
+} else  if ($difference_days <= 30) {
     $response["difference_days"] =$difference_days;
 
-    $response["renew_message"] ="Your subscription is expiring in ".$dayCnt." days. Please renew soon!";
+ if($dayCnt == 1){
+        $response["renew_message"] ="Your subscription is going to expire today. Please renew soon!";
+         $msg = "Your subscription is going to expire today. Please renew soon!";
+
+    } else {
+         $response["renew_message"] ="Your subscription is expiring in ".($dayCnt+1)." days. Please renew soon!" ;
+          $msg = "Your subscription is expiring in ".($dayCnt+1)." days, Choose to renew from below options.";
+    }
+   
     $response["show_renew"] =true;
      $response["message_title"] ="Renew Plan";
-     $msg = "Your subscription is expiring in ".$dayCnt." days, Choose to renew from below options";
+    
 $response["message"] = $msg;
 } else {
      $response["difference_days"] =$difference_days;
@@ -275,7 +298,7 @@ $todayDate= date('Y-m-d');
 
                                     //13APRIL2021
                 if ($today > $plan_expire_date) {
-                    $msg = "Your Subscription has expired on  $plan_expire_date, Please choose to renew from below options ";
+                    $msg = "Your Subscription has expired on  $plan_expire_date, Please choose to renew from below options.";
                     $response["message"] = $msg;
                     $msg_title = "Plan Expired.";
                     $response["message"] = $msg;

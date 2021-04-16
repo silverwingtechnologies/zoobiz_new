@@ -520,12 +520,12 @@ $response["short_name"] =strtoupper(substr($data_app["user_first_name"], 0, 1).s
 				}
 
 
-$transection_master_qry_new=$d->select("transection_master","user_id='$user_id'" ,"");
+$transection_master_qry_new=$d->select("transection_master","user_id='$user_id'" ," order by transection_id desc");
     $transection_master_data_new=mysqli_fetch_array($transection_master_qry_new);
     if($transection_master_data_new['is_paid'] == 0){
 
     	if($data_app["invoice_download"]=="1"    ){
-					$response["invoice_download_url"]=$base_url."paymentReceipt.php?user_id=".$data_app["user_id"]."&download=true";
+					$response["invoice_download_url"]=$base_url."paymentReceipt.php?user_id=".$data_app["user_id"]."&download=true&transection_date=".date("Y-m-d", strtotime($transection_master_data_new['transection_date']));
 				} else {
 					$response["invoice_download_url"]="";
 				}

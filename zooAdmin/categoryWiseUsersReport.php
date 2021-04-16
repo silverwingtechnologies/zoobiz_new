@@ -19,7 +19,19 @@
 
    <form action="" method="get">
       <div class="row pt-2 pb-2">
-         
+         <div class="col-sm-4">
+            <select type="text"   id="filter_city_id"     class="form-control single-select" name="filter_city_id">
+
+
+             
+                            <option value="">-- Select --</option>
+                            <option  <?php if( isset($_GET['filter_city_id']) &&   $_GET['filter_city_id'] == 0 ) { echo 'selected';} ?>  value="0">All</option>
+                            <?php $qb=$d->select("cities"," city_flag = 1","");
+                            while ($bData=mysqli_fetch_array($qb)) {?>
+                              <option <?php if( isset($_GET['filter_city_id']) && $_GET['filter_city_id']== $bData['city_id']) { echo 'selected';} ?> value="<?php echo $bData['city_id']; ?>"><?php echo $bData['city_name']; ?></option>
+                            <?php } ?> 
+                          </select>
+         </div>
          <div class="col-sm-4">
           <div class="">
             <?php //echo "<pre>"; print_r($_GET); echo "</pre>";?>
@@ -90,8 +102,12 @@
                   <td><?php echo $category_name; ?></td>
                  <td class="text-right">
                    <?php 
-                   
-                   $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND user_employment_details.business_category_id='$business_category_id' AND users_master.office_member=0 AND users_master.active_status=0  ","");
+                   $where12="";
+                   if(isset($_GET['filter_city_id']) && $_GET['filter_city_id'] !=0 ){
+                    $filter_city_id = $_GET['filter_city_id'];
+                    $where12 .=" and  users_master.city_id ='$filter_city_id' ";
+                  }
+                   $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND user_employment_details.business_category_id='$business_category_id' AND users_master.office_member=0 AND users_master.active_status=0  $where12 ","");
                   echo mysqli_num_rows($q3);
 
                   ?>  

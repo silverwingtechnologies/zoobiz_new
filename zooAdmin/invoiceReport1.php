@@ -19,7 +19,7 @@ error_reporting(0);
                 $dateTo=date_create($toDate);
                 $nFrom= date_format($date,"Y-m-d 00:00:01");
                 $nTo= date_format($dateTo,"Y-m-d 23:59:59");
-                $where .=" and  transection_master.transection_date  BETWEEN '$nFrom' AND '$nTo'";
+                $where .=" and  user_employment_details.complete_profile_date  BETWEEN '$nFrom' AND '$nTo'";
 }
  if (isset($_GET['city_id'])!='' && $_GET['city_id'] != 0 ) { 
                  extract(array_map("test_input" , $_GET));
@@ -33,11 +33,8 @@ $transCond ="";
 }  else  if (isset($_GET['paid_trans'])  && $_GET['paid_trans'] == 2 ) { 
                  extract(array_map("test_input" , $_GET));
                 $transCond   .="  and transection_master.coupon_id != 0 ";
-}  else  if (isset($_GET['paid_trans'])  && $_GET['paid_trans'] == 0 ) { 
-                 extract(array_map("test_input" , $_GET));
-                $transCond   .="  and  transection_master.is_paid  = 0 and transection_master.coupon_id  = 0 ";
-}     else {
-  $transCond   .="   ";
+}  else {
+  $transCond   .=" and  transection_master.is_paid  = 0 and transection_master.coupon_id  = 0 ";
 }
 $where .=$transCond;
 
@@ -55,15 +52,11 @@ $where .=$transCond;
 ?> 
 <div class="row pt-2 pb-2">
       <div class="col-sm-6">
-        <h4 class="page-title"> Member Register & Payment Report </h4>
-        <ol class="breadcrumb">
-           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Member Register & Payment Report</li>
-         </ol>
+        <h4 class="page-title">  Invoice Report </h4>
       </div>
 
 
-<?php /*if (isset($_GET['paid_trans'])  && ( $_GET['paid_trans'] == 2 ) ) { } else {?>
+<?php if (isset($_GET['paid_trans'])  && ( $_GET['paid_trans'] == 2 ) ) { } else {?>
        <div class="col-sm-3">
          
            <span class="badge badge-pill badge-success m-1"> <span >Paid <i class="fa fa-inr"></i> <?php  echo number_format($paid_total,2,'.',''); ?> </span > </span > 
@@ -74,19 +67,19 @@ $where .=$transCond;
           <a href="couponReport"> <span class="badge badge-pill badge-danger m-1"> <span >Free <i class="fa fa-inr"></i><?php echo number_format($free_total,2,'.',''); ?> </span > </span > </a>
         
       </div>
-<?php }*/ ?> 
+<?php } ?> 
 
 </div>
-<?php //25nov2020 ?> 
+<?php //25nov2020
+$_REQUEST['paid_trans'] = 0 ; ?> 
       <form action="" method="get">
       <div class="row pt-2 pb-2">
 
+<?php /*
         <div class="col-sm-2">
            
        
         <select name="paid_trans"  class="form-control single-select">
-           <option  <?php if ( isset($_REQUEST['paid_trans']) &&   $_REQUEST['paid_trans'] =='4'  ) { echo 'selected';} ?>    value="4">All</option>
-
            <option  <?php if ( isset($_REQUEST['paid_trans']) &&   $_REQUEST['paid_trans'] ==0  ) { echo 'selected';} ?>    value="0">Paid</option>
            <option <?php if ( isset($_REQUEST['paid_trans']) &&   $_REQUEST['paid_trans'] ==1 ) { echo 'selected';} ?>   value="1">Free</option>
           <option <?php if ( isset($_REQUEST['paid_trans']) &&   $_REQUEST['paid_trans'] ==2 ) { echo 'selected';} ?>   value="2">Coupon</option>
@@ -94,7 +87,7 @@ $where .=$transCond;
         </select>
          
        </div>
-
+<?php */ ?>
 
         <div class="col-sm-3">
           <?php 
@@ -151,23 +144,16 @@ $where .=$transCond;
                  
                   <th class="text-right">#</th>
                  <th>City Name</th>
-                  <th>BUSINESS Name</th>
+                  <th>Business Name</th>
                   <th>User Name</th>
                    <th>Device</th>
                   <th>Mobile</th>
                    <th>Package Name</th>
                    <th class="text-right">Package Amount</th>
-
-                   <?php if($_REQUEST['paid_trans']==2 || $_REQUEST['paid_trans']==4){  ?>
-                    <th class="text-right" > Coupon Per/ Amount</th>
-                   <th class="text-right" >Coupon Amount</th>
-                    <th>Coupon Name</th>
-                     <th>Coupon Code</th> 
-                   <?php } ?>
                    <th>Payment Mode</th>
                     <th>Refered By</th>
                    <th>Transaction Date</th>
-                   
+                   <th>Download Invoice</th>
                      
                 </tr>
               </thead>
@@ -179,17 +165,8 @@ $where .=$transCond;
                
               /*  $q3=$d->select("transection_master,company_master,users_master,user_employment_details ","user_employment_details.user_id =users_master.user_id and   company_master.company_id =transection_master.company_id and users_master.user_id =transection_master.user_id and    users_master.active_status= 0 and users_master.user_payment_mode != 0   $where  ","");*/
 // /and users_master.user_payment_mode = 0
+ $q3=$d->select("users_master,user_employment_details,cities,transection_master,business_categories,business_sub_categories ","cities.city_id= users_master.city_id AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id  and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.office_member=0 AND users_master.active_status= 0       $where group by transection_master.user_id order by user_employment_details.complete_profile_date  asc  ","");
 
-
-if(isset($_REQUEST['paid_trans']) && ($_REQUEST['paid_trans']==2   ) ){
-    $q3=$d->select("transection_master,coupon_master,user_employment_details,users_master, company_master ,business_categories,business_sub_categories,cities "," cities.city_id= users_master.city_id  AND  user_employment_details.user_id =users_master.user_id and company_master.company_id =users_master.company_id  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id and   coupon_master.coupon_id =transection_master.coupon_id and users_master.user_id =transection_master.user_id  and users_master.office_member=0 AND    users_master.active_status= 0  $where  ","");
-  } else if( isset($_REQUEST['paid_trans']) && (  $_REQUEST['paid_trans']==4 ) ){
-
-    $q3=$d->select(" user_employment_details,users_master, company_master ,business_categories,business_sub_categories,cities, transection_master  LEFT JOIN coupon_master on  transection_master.coupon_id =     coupon_master.coupon_id       "," cities.city_id= users_master.city_id  AND  user_employment_details.user_id =users_master.user_id and company_master.company_id =users_master.company_id  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id and    users_master.user_id =transection_master.user_id  and users_master.office_member=0 AND    users_master.active_status= 0  $where  ","");
-    
-  } else {
-     $q3=$d->select("users_master,user_employment_details,cities,transection_master ,business_categories,business_sub_categories ","cities.city_id= users_master.city_id  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and users_master.office_member=0 AND  users_master.active_status= 0       $where group by transection_master.user_id   ","");
-  }
   
  
                while ($data=mysqli_fetch_array($q3)) {
@@ -204,25 +181,7 @@ if(isset($_REQUEST['paid_trans']) && ($_REQUEST['paid_trans']==2   ) ){
                    <td><?php echo $device; ?></td>
                   <td><?php echo $user_mobile; ?></td>
                   <td><?php echo $package_name; ?></td>
-                   <?php if($_REQUEST['paid_trans']==2 || $_REQUEST['paid_trans']==4 ){
-                    $package_master=$d->select("package_master","package_id='$package_id' ","");
-                    $package_master_data=mysqli_fetch_array($package_master);
-                ?>
-                   <td class="text-right"><?php echo $package_master_data['package_amount']; ?></td>
-                    <?php } else {  ?>
                   <td class="text-right"><?php echo $transection_amount; ?></td>
-                  <?php } if($_REQUEST['paid_trans']==2 || $_REQUEST['paid_trans']==4 ){  ?>
-                     <td class="text-right"><?php if($coupon_amount > 0){
-                    echo $coupon_amount;
-                  } else {
-                     $coupon_per= str_replace(".00","",$coupon_per);
-                    echo  $coupon_per.'%';
-                  } ?></td>
-                  <td class="text-right"><?php echo $transection_amount; ?></td>
-
-                  <td><?php echo $coupon_name; ?></td> 
-                  <td><?php echo $coupon_code; ?></td> 
-                   <?php } ?>
                   <td><?php 
                   $word = strtolower('Razorpay');
                   $word1 = 'Razorpay';
@@ -240,8 +199,12 @@ if(isset($_REQUEST['paid_trans']) && ($_REQUEST['paid_trans']==2   ) ){
                     }
                     echo "Other";}
                    ?></td>
-                  <td data-order="<?php echo date("U",strtotime($transection_date)); ?>"><?php echo date("d-m-Y h:i:s A",strtotime($transection_date));  ?></td>
-                 
+                  <td data-order="<?php echo date("U",strtotime($complete_profile_date)); ?>"><?php echo date("d-m-Y h:i:s A",strtotime($complete_profile_date));  ?></td>
+                  <td>
+                    <?php  if (isset($_GET['paid_trans'])  && ($_GET['paid_trans'] == 1 || $_GET['paid_trans'] == 2 ) ) {   echo "-";  } else { ?> 
+                     <a target="_blank"  href="../paymentReceipt.php?user_id=<?php echo $user_id; ?>&downloadInvoice=true" class=" btn-sm btn-info"><i class="fa fa-download"></i>Download</a>
+                   <?php }  ?> 
+                  </td>
 
                </tr>
 

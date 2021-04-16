@@ -70,7 +70,7 @@
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validate12.js"></script>
 <script src="js/functions3.js"></script>
-<script src="js/custom10.js"></script>
+<script src="js/custom11.js"></script>
 <script src="assets/plugins/select2/js/select2.min.js"></script>
 <script src="assets/plugins/jquery-multi-select/jquery.multi-select.js"></script>
 <script src="assets/plugins/jquery-multi-select/jquery.quicksearch.js"></script>
@@ -739,34 +739,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+
+   var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
   (function(){
     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
     s1.async=true;
-    //s1.src='https://embed.tawk.to/5ead581c203e206707f8dc74/default';
- 
-    s1.src='js/twakto.js',
+    s1.src='https://embed.tawk.to/5ead581c203e206707f8dc74/default';
     s1.charset='UTF-8';
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
   })();
 
-  /*Tawk_API.onLoad = function(){
-    $('#myForm').trigger("reset");
-
-    $("#offline0Field").val('');
-    alert($("#offline0Field").val());
-    $("#offline1Field").val('');
-    $("#offline2Field").val('');
-    //place your code here
-};*/
-
- $('#formSubmit').on('click',function(e){  
-  alert();
-});
-
- 
-
+   
 </script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="assets/plugins/notifications/js/notifications.min.js"></script>

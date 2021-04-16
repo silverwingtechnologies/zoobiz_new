@@ -2,7 +2,7 @@
     <div class="container-fluid">
       <!-- Breadcrumb-->
       <div class="row pt-2 pb-2">
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <h4 class="page-title">Members</h4>
           <ol class="breadcrumb">
            <li class="breadcrumb-item"><a href="welcome">Home</a></li> 
@@ -10,10 +10,22 @@
          </ol>
        </div>
        <div class="col-sm-3">
+           <form action="" method="gee">
+          <select type="text"  onchange="this.form.submit();"  required="" class="form-control single-select" id="showOfficeMember" name="showOfficeMember">
+
+            <option <?php if( isset($_GET['showOfficeMember']) && $_GET['showOfficeMember']=="0") {echo "selected";} ?> value="0">All Members</option>
+                 <option <?php if( isset($_GET['showOfficeMember']) && $_GET['showOfficeMember']=="No") {echo "selected";} ?> value="No">Hide Office Member</option>
+               <option <?php if( isset($_GET['showOfficeMember']) && $_GET['showOfficeMember']=="Yes") {echo "selected";} ?> value="Yes">Show Office Member</option>
+               
+               
+          </select>
+            </form>
+       </div>
+       <div class="col-sm-3">
          <div class="btn-group float-sm-right">
            <a href="member"  class="btn  btn-sm btn-primary pull-right"><i class="fa fa-plus fa-lg"></i> Add New </a>
 
-         </button>
+         </div>
 
        </div>
      </div>
@@ -45,7 +57,15 @@
               <tbody>
                 <?php 
                 $i=1;
-                  $q=$d->select("users_master,user_employment_details,business_categories,business_sub_categories"," business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND users_master.active_status=0    ","ORDER BY users_master.user_id DESC");
+                $where =" ";
+                 if( isset($_GET['showOfficeMember']) && $_GET['showOfficeMember']=="Yes") { 
+                  $where =" and users_master.office_member = '1' ";
+                 } else  if( isset($_GET['showOfficeMember']) && $_GET['showOfficeMember']=="No") { 
+                  $where =" and users_master.office_member = '0' ";
+                 }  
+
+
+                  $q=$d->select("users_master,user_employment_details,business_categories,business_sub_categories"," business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND users_master.active_status=0  $where   ","ORDER BY users_master.user_id DESC");
                while ($data=mysqli_fetch_array($q)) {
                 extract($data);
                 ?>

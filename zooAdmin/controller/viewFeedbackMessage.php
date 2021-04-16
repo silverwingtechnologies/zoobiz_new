@@ -20,5 +20,5 @@ extract(array_map("test_input" , $_POST));
 <p>Date Time : <?php echo date("d-m-Y h:i A", strtotime($feedback_date_time)); ?></p>
 
 <?php  if ($attachment!='') { ?>
-                     Attachment:  <a target="_blank" href="../img/fin_support/<?php echo $attachment;?>">View </a>
+                     Attachment:  <a target="_blank" href="../img/zoobizz_support/<?php echo $attachment;?>">View </a>
                      <?php } ?>

@@ -319,15 +319,13 @@ if(isset($addSubCategory)) {
                   'sub_category_images'=> $m->get_data('sub_category_images'),
                 );
                 $q=$d->insert("business_sub_categories",$a1);
-                $business_sub_category_id  = $con->insert_id;  
-                
                 if($q==TRUE) {
                   $_SESSION['msg']=$sub_category_name. " Sub Category Added";
                   $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
                 //3dec2020
-                 /* $last_auto_id=$d->last_auto_id("business_sub_categories");
+                  $last_auto_id=$d->last_auto_id("business_sub_categories");
                   $res=mysqli_fetch_array($last_auto_id);
-                  $business_sub_category_id=($res['Auto_increment']-1);*/
+                  $business_sub_category_id=($res['Auto_increment']-1);
                   header("Location: ../manageSubCategory?business_sub_category_id=".$business_sub_category_id);
                 //3dec2020
               //header("Location: ../subCategories");
@@ -336,8 +334,6 @@ if(isset($addSubCategory)) {
                 }
               }
               if(isset($editSubCategory)) {
-
-               
                 $extension=array("jpeg","jpg","png","gif","JPG","JPEG","PNG");
                 $uploadedFile = $_FILES['sub_category_images']['tmp_name'];
                 $ext = pathinfo($_FILES['sub_category_images']['name'], PATHINFO_EXTENSION);

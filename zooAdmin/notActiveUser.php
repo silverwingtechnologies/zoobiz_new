@@ -30,10 +30,22 @@ $today = date("Y-m-d");
  //$where= " AND CAST(last_login AS DATE) = '$login_date_start' and user_token!='' ";
 if(isset($_REQUEST['days']) && $_REQUEST['days'] > 0 ){
  // $_REQUEST['days'] = 0 ;
-   $where= " AND user_token!='' and CAST(last_login AS DATE)= DATE_SUB(CURDATE(), INTERVAL ".$day_int." DAY)  and office_member = 0 ";
 
+$currDate = date("Y-m-d");
+$date_before_1_day = date("Y-m-d", strtotime($currDate."-".$_REQUEST['days']." day"));
 
-     $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND users_master.active_status=0  AND user_employment_details.user_id=users_master.user_id $where group by users_master.user_id ","");
+/*if(strtotime($date_before_1_day) < strtotime($currDate) ){
+  $date_before_1_day =$currDate;
+}*/
+ 
+   //$where= " AND user_token!='' and CAST(last_login AS DATE)= DATE_SUB(CURDATE(), INTERVAL ".$day_int." DAY)  and office_member = 0 ";
+
+   $where= " AND user_token!='' and DATE(last_login) <= '".$date_before_1_day."'  and office_member = 0 ";
+
+/*if($_SESSION[zoobiz_admin_id] == 7 ){
+  echo $where;
+}*/
+     $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND users_master.active_status=0  AND user_employment_details.user_id=users_master.user_id  and users_master.last_login !='0000-00-00 00:00:00'  $where group by users_master.user_id  ","");
 }
                  
  
@@ -126,6 +138,7 @@ if(isset($_REQUEST['days']) && $_REQUEST['days'] > 0 ){
                   <th>Mobile</th>
                   <th>Company</th>
                    <th>Device</th>
+                    <th>no. of Days</th>
                     <th>Last Active Time</th> 
                    
                 </tr>
@@ -137,6 +150,18 @@ if(isset($_REQUEST['days']) && $_REQUEST['days'] > 0 ){
                if($_REQUEST['days'] > 0 ){ 
                while ($data=mysqli_fetch_array($q3)) {
                 extract($data);
+if($last_login !='0000-00-00 00:00:00'){
+
+                $startTimeStamp = strtotime($last_login);
+$endTimeStamp = strtotime($currDate);
+
+$timeDiff = abs($endTimeStamp - $startTimeStamp);
+
+$numberDays = $timeDiff/86400;  // 86400 seconds in one day
+
+// and you might want to convert to integer
+$numberDays = intval($numberDays);
+
                 ?>
                 <tr>
                   <!-- <td class='text-center'>
@@ -149,6 +174,7 @@ if(isset($_REQUEST['days']) && $_REQUEST['days'] > 0 ){
                   <td><?php  echo $company_name;
                    ?></td>
                   <td><?php echo $device; ?></td>
+                  <td><?php echo $numberDays; ?></td>
                  <td data-order="<?php echo date("U",strtotime($last_login)); ?>"><?php echo date("d-m-Y h:i:s A",strtotime($last_login));  ?></td>
                   <!--  <td>
                     <form action="viewMember" method="get">    
@@ -162,7 +188,7 @@ if(isset($_REQUEST['days']) && $_REQUEST['days'] > 0 ){
 
                </tr>
 
-             <?php } 
+             <?php }}  
            }
             ?> 
            </tbody>

@@ -55,7 +55,7 @@ if($business_category_id !="0"){
             'time' =>date("d M Y h:i A")
           );
 
-if($send_to_mem==0){
+if($send_to==0){
   $d->insertAllUserNotification($title,$description,"custom_notification",'',"active_status=0 $where");
    $fcmArray=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='android' $where");
          $fcmArrayIos=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='ios' $where ");
@@ -64,14 +64,14 @@ if($send_to_mem==0){
          $nResident->noti_ios("custom_notification","",$society_id,$fcmArrayIos,$title,$description,$fcm_data_array);
 
 
-       } else  if($send_to_mem==1){
+       } else  if($send_to==1){
         $d->insertAllUserNotificationToIos($title,$description,"custom_notification",'',"active_status=0 $where");
         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='ios' $where ");
 
          $nResident->noti_ios("custom_notification","",$society_id,$fcmArrayIos,$title,$description,$fcm_data_array);
 
 
-       } else if($send_to_mem==2){
+       } else if($send_to==2){
          $d->insertAllUserNotificationToAndroid($title,$description,"custom_notification",'',"active_status=0 $where");
         $fcmArray=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='android' $where");
 

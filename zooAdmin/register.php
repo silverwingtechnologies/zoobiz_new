@@ -1,10 +1,8 @@
 <?php 
 include("common/front_header.php");
-
 if (isset($_GET['id'])) {
     $_SESSION['plan_id'] = $_GET['id'];
 }
- 
 ?>
 
 <header class="site-header" id="header" style="background: #fff;">
@@ -22,7 +20,7 @@ if (isset($_GET['id'])) {
                                 <a class="nav-link " style="color: #2abcaa !important;" href="register">     <i class="fas fa-plus"></i> <b>Register in ZooBiz</b></a>
                             </li>
                             --> <?php //1july2020 ?>
-                            <a href="mailto:contact@zoobiz.in" class="nav-link active  text-lowercase" style="color: #2abcaa !important;" href="#">  <!-- <button type="submit" id="submit_btn1" class="button gradient-btn w-60"> contact@zoobiz.com</button> --> <i class="fas fa-envelope"></i> <b>contact@zoobiz.in</b></a>
+                            <a class="nav-link active pagescroll text-lowercase" style="color: #2abcaa !important;" href="#">  <!-- <button type="submit" id="submit_btn1" class="button gradient-btn w-60"> contact@zoobiz.com</button> --> <i class="fas fa-envelope"></i> <b>contact@zoobiz.in</b></a>
                         </li>
 
                         <li class="nav-item">
@@ -118,7 +116,7 @@ if (isset($_GET['id'])) {
                                     </div>
                                 </div>
 
-                                <?php /*
+
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="salutation" >Salutation <span class="required">*</span></label>
@@ -134,7 +132,6 @@ if (isset($_GET['id'])) {
                                         </select>
                                     </div>
                                 </div>
-                                <?php */ ?> 
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="user_first_name" >First name <span class="required">*</span></label>
@@ -148,7 +145,8 @@ if (isset($_GET['id'])) {
                                         <input maxlength="30"  class="form-control text-capitalize mem-alphanumeric" name="user_last_name" id="user_last_name" type="text" value="<?php if(isset($_SESSION['user_last_name'])   ){ echo $_SESSION['user_last_name']; }?>" required="" placeholder="Last Name">
                                     </div>
                                 </div>
-                           
+                            </div>
+                            <div class="row">
                               
                              
                                 <div class="col-md-6 col-sm-12">
@@ -169,20 +167,6 @@ if (isset($_GET['id'])) {
 
                                     </div>
                                 </div>
-                                 </div>
-                            <div class="row">
-                                 <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="user_mobile" >Country Code <span class="required">*</span></label>
-                                        <select class="form-control single-select" name="country_code" type="text" required="">
-                                          <?php include 'common/country_code_option_list.php'; ?>
-                                        </select>
-
-
-                                    </div>
-                                </div>
-
-
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="user_mobile" >Mobile Number (Login) <span class="required">*</span></label>
@@ -263,7 +247,7 @@ if (isset($_GET['id'])) {
                                     <option value="">-- Select --</option>
                                     <option value="1">Social Media</option>
                                     <option value="2">Member / Friend</option>
-                                <?php /* ?> <option   value="3">Other</option> <?php */ ?> 
+                                    <option   value="3">Other</option>
                                 </select>
                             </div>
                         </div>
@@ -318,53 +302,10 @@ if (isset($_GET['id'])) {
 
         
     </div>
-    <div class="  row" id="gateway_div" style="display: none;">
-        
-    </div>
-
-
-      <?php //CCAVENUE CHANGE ?>
-
- 
-<?php 
-$curTime = date("Y-m-d H:i:s");
-$tid =   strtotime($curTime); ?> 
-<input type="hidden" name="order_id" value="<?php echo $tid; ?>"/>
-<input type="hidden" name="tid" value="<?php echo $tid; ?>"/>
-<input type="hidden" name="language" value="EN"> 
-<input type="hidden" name="currency" value="INR"> 
-<input type="hidden" name="redirect_url" value="<?php echo $base_url;?>controller/ccavResponseHandler.php"> 
-<input type="hidden" name="cancel_url" value="<?php echo $base_url;?>controller/ccavResponseHandler.php"> 
- <?php //CCAVENUE CHANGE ?>
     <div class="row">  
         <div class="col-md-6 mt-4 col-sm-12" style="margin-top: 28px !important;" id="reg_btn">
-          <button type="button" id="addNewMember" name="addNewMember" class="button gradient-btn w-100 dynamicId" > Register </button>
-
-          <?php //CCAVENUE CHANGE ?>
-       
-          <button style="display: none;" type="button" id="addNewMemberccAvenue" name="addNewMemberccAvenue" class="button gradient-btn w-100 dynamicIdCCAV" > Register </button>
-
-
-<?php //paytm start ?>
-<input type="hidden" id="CHANNEL_ID" tabindex="4" maxlength="12"
-                        size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
-<input type="hidden" id="ORDER_ID" tabindex="1" maxlength="20" size="20"
-                        name="ORDER_ID" autocomplete="off"
-                        value="<?php echo  "ORDS" . rand(10000,99999999)?>">
-<input type="hidden" id="CUST_ID" tabindex="2" maxlength="12" size="12" name="CUST_ID" autocomplete="off" value="<?php echo  "CUST" . rand(10000,99999999)?>" >
-<input type="hidden" id="INDUSTRY_TYPE_ID" tabindex="4" maxlength="12" size="12" name="INDUSTRY_TYPE_ID" autocomplete="off" value="Retail">
-<?php //paytm end?>
-           <button style="display: none;" type="button" id="addNewMemberPayTm" name="addNewMemberPayTm" class="button gradient-btn w-100 dynamicIdPayTm" > Register </button>
-     
-<?php //CCAVENUE CHANGE ?>
-
+          <button type="button" id="addNewMember" name="addNewMember" class="button gradient-btn w-100" > Register </button>
       </div>
-
-
-
-
-
-  
   </div>
                            <!--   <div class="row">   
                                 

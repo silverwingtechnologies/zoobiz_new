@@ -91,7 +91,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
             $company_logo= $newFileName."_logo.".$ext;
 
           } else{
-            $_SESSION['msg1']="Invalid Business Logo";
+            $_SESSION['msg1']="Invalid Company Logo";
             header("location:../viewMember?id=$user_id");
             exit();
           }
@@ -110,12 +110,12 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
             $maxsize    = 10097152;
             
             if(($_FILES['company_broucher']['size'] >= $maxsize) || ($_FILES["company_broucher"]["size"] == 0)) {
-                $_SESSION['msg1']="Business Broucher too large. Must be less than 10 MB.";
+                $_SESSION['msg1']="Company Broucher too large. Must be less than 10 MB.";
                 header("location:../viewMember?id=$user_id");
                 exit();
             }
             if(!in_array($extId, $extensionResume) && (!empty($_FILES["company_broucher"]["type"]))) {
-                 $_SESSION['msg1']="Invalid Business Broucher File format, Only  JPG,PDF, PNG,Doc are allowed.";
+                 $_SESSION['msg1']="Invalid Company Broucher File format, Only  JPG,PDF, PNG,Doc are allowed.";
                 header("location:../viewMember?id=$user_id");
                 exit();
             }
@@ -138,12 +138,12 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
             $maxsize    = 10097152;
             
             if(($_FILES['company_profile']['size'] >= $maxsize) || ($_FILES["company_profile"]["size"] == 0)) {
-                $_SESSION['msg1']="Business Profile too large. Must be less than 10 MB.";
+                $_SESSION['msg1']="Company Profile too large. Must be less than 10 MB.";
                 header("location:../viewMember?id=$user_id");
                 exit();
             }
             if(!in_array($extId, $extensionResume) && (!empty($_FILES["company_profile"]["type"]))) {
-                 $_SESSION['msg1']="Invalid Business Profile File format, Only  JPG,PDF, PNG,Doc are allowed.";
+                 $_SESSION['msg1']="Invalid Company Profile File format, Only  JPG,PDF, PNG,Doc are allowed.";
                 header("location:../viewMember?id=$user_id");
                 exit();
             }
@@ -212,7 +212,6 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 //16feb21
    if(isset($_POST['approveCustomCat']) && $_POST['approveCustomCat']=='approveCustomCat'){
- 
      $m->set_data('business_category_id',$business_category_id);
      $m->set_data('business_sub_category_id',$business_sub_category_id);
      $m->set_data('sub_category_name',$sub_category_name);
@@ -679,7 +678,6 @@ echo  "here";exit; */
     $m->set_data('member_date_of_birth',$member_date_of_birth);
     $m->set_data('whatsapp_number',$whatsapp_number);
     $m->set_data('user_email',$user_email);
-    $m->set_data('country_code',$country_code);
     $m->set_data('alt_mobile',$alt_mobile);
     
     $m->set_data('gender',$gender);
@@ -697,7 +695,7 @@ echo  "here";exit; */
    
    
     $a =array(
-      'salutation'=> $m->get_data('salutation'), 
+      'salutation'=> $m->get_data('salutation'),
       'user_first_name'=> $m->get_data('user_first_name'),
       'user_last_name'=> $m->get_data('user_last_name'),
       'user_full_name'=> $m->get_data('user_full_name'),
@@ -992,7 +990,7 @@ if($user_profile_pic!=""){
             $company_logo= $newFileName."_logo.".$ext;
 
           } else{
-            $_SESSION['msg1']="Invalid Business Logo";
+            $_SESSION['msg1']="Invalid Company Logo";
             header("location:../viewMember?id=$user_id");
             exit();
           }
@@ -1273,14 +1271,60 @@ $androidLink = 'https://play.google.com/store/apps/details?id=com.silverwing.zoo
          }  
   //send sms to user end
        
+//send fcm to other user start
+$business_categories_qry_new = $d->select("business_categories"," business_category_id ='$business_category_id'  ","");
+          $business_categories_data_new=mysqli_fetch_array($business_categories_qry_new);
+if($business_categories_data_new['category_status'] == 0 && $office_member=="0" ){
+
+$getData = $d->select("custom_settings_master"," status = 0 and send_fcm=1 and flag = 0 ","");
+         if( mysqli_num_rows($getData) > 0){ 
+          $custom_settings_master_data = mysqli_fetch_array($getData);
+          $business_categories_qry = $d->select("business_categories"," business_category_id ='$business_category_id' ","");
+          $business_categories_data=mysqli_fetch_array($business_categories_qry);
+  
+           $title= "New Member Registered.";//" in ". $business_categories_data['category_name'] ." Category" ;
+           $description = $custom_settings_master_data['fcm_content'];
+ 
+           $description =  str_replace("USER_NAME",$user_full_name,$description);
+
+           $description =  str_replace("COMPANY_NAME",$company_name,$description);
+           $description =  str_replace("CAT_NAME",$business_categories_data['category_name'],$description);
+  
+            $where = "";
+            if($custom_settings_master_data['share_within_city'] ==1 ){
+              $where = " and  city_id ='$city_id'";
+            }
+            
+            $user_employment_details_qry = $d->select("users_master"," active_status=0 $where  ","");
+
+            $user_ids_array = array('0');
+             while ($user_employment_details_data=mysqli_fetch_array($user_employment_details_qry)) {
+              $user_ids_array[] =$user_employment_details_data['user_id'];
+             }
+             $user_ids_array = implode(",", $user_ids_array);
+
+            
+         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND  lower(device)='android' and user_id in ($user_ids_array)  ");
+         
+        $fcmArrayIos=$d->get_android_fcm("users_master "," user_token!='' AND  lower(device)='ios' and user_id in ($user_ids_array)    ");
+
+        
+       /* $last_auto_id=$d->last_auto_id("users_master");
+          $res=mysqli_fetch_array($last_auto_id);
+          $new_user_id=$res['Auto_increment'];
+
+          $new_user_id = ($new_user_id-1);*/
+         
+
+          
+         $nResident->noti("viewMemeber","",0,$fcmArray,$title,$description,$new_user_id,0,$profile_u);
+         $nResident->noti_ios("viewMemeber","",0,$fcmArrayIos,$title,$description,$new_user_id,0,$profile_u);
+       }
+     }
+//send fcm to other user end
 
 
 
-if($user_profile_pic!=""){
-            $profile_u = $base_url . "img/users/members_profile/" . $user_profile_pic;
-          } else {
-            $profile_u ="https://zoobiz.in/zooAdmin/img/user.png";
-          }
 
 
   //admin notification start            
@@ -1398,59 +1442,23 @@ $ref_mobile = $ref_users_master_data['user_mobile'];
             $ref_by_data .=" -".$remark;
          }
        }
- //send fcm to other user start
-$business_categories_qry_new = $d->select("business_categories"," business_category_id ='$business_category_id'  ","");
-          $business_categories_data_new=mysqli_fetch_array($business_categories_qry_new);
-if($business_categories_data_new['category_status'] == 0 && $office_member=="0" ){
 
-$getData = $d->select("custom_settings_master"," status = 0 and send_fcm=1 and flag = 0 ","");
-         if( mysqli_num_rows($getData) > 0){ 
-          $custom_settings_master_data = mysqli_fetch_array($getData);
-          $business_categories_qry = $d->select("business_categories"," business_category_id ='$business_category_id' ","");
-          $business_categories_data=mysqli_fetch_array($business_categories_qry);
-  
-           $title= "New Member Registered.";//" in ". $business_categories_data['category_name'] ." Category" ;
-           $description = $custom_settings_master_data['fcm_content'];
+        /*$zoobiz_admin_master=$d->select("zoobiz_admin_master","send_notification = '1'    ");
+
+        while($zoobiz_admin_master_data = mysqli_fetch_array($zoobiz_admin_master)) {
+           $adminname=$zoobiz_admin_master_data['admin_name'];
+           $uname=ucfirst($user_first_name).' '.ucfirst($user_last_name);
  
-           $description =  str_replace("USER_NAME",$user_full_name,$description);
+           $category_name = $business_categories_data['category_name'];
+           $msg2=$uname.' Has Joined '.$company_name_user. ' Referred by "'.$ref_by_data.'"'; 
 
-           $description =  str_replace("COMPANY_NAME",$company_name,$description);
-           $description =  str_replace("CAT_NAME",$business_categories_data['category_name'],$description);
-    $description =$user_full_name." from ".$company_name." also says, I am Zoobiz! Referred by ".$ref_by_data;
-            $where = "";
-            if($custom_settings_master_data['share_within_city'] ==1 ){
-              $where = " and  city_id ='$city_id'";
-            }
+
+          // "New Member Registration in $company_name_user \nName: $uname \nCompany Name: $company_name_user \n Category: $category_name \nThanks Team ZooBiz";
             
-            $user_employment_details_qry = $d->select("users_master"," active_status=0 $where  ","");
-
-            $user_ids_array = array('0');
-             while ($user_employment_details_data=mysqli_fetch_array($user_employment_details_qry)) {
-              $user_ids_array[] =$user_employment_details_data['user_id'];
-             }
-             $user_ids_array = implode(",", $user_ids_array);
-
+           // $d->send_sms($zoobiz_admin_master_data['admin_mobile'],$msg2);
+          $d->sms_to_admin_on_new_user_registration($zoobiz_admin_master_data['admin_mobile'],$uname,$cities_data['city_name'], $ref_by_data );
             
-         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND  lower(device)='android' and user_id in ($user_ids_array)  ");
-         
-        $fcmArrayIos=$d->get_android_fcm("users_master "," user_token!='' AND  lower(device)='ios' and user_id in ($user_ids_array)    ");
-
-         $d->insertAllUserNotificationMemberSpecial($title,$description,"viewMemeber",$user_profile_pic,"active_status=0 and user_id in ($user_ids_array) AND user_id != $user_id",11,$new_user_id);
-
-         
-/* $nResident->noti("viewMemeber","",0,$fcmArray,$title,$description,$user_id,1,$profile_u);
-              $nResident->noti_ios("viewMemeber","",0,$fcmArrayIos,$title,$description,$user_id,1,$profile_u);*/
-          
-         $nResident->noti("viewMemeber","",0,$fcmArray,$title,$description,$new_user_id,1,$profile_u);
-         $nResident->noti_ios("viewMemeber","",0,$fcmArrayIos,$title,$description,$new_user_id,1,$profile_u);
-
-
-       }
-     }
-
-    
-
-//send fcm to other user end
+         }*/
 
 
       $_SESSION['msg']=ucfirst($user_first_name).' '.ucfirst($user_last_name)." New Member Added";
