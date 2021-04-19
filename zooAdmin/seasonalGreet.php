@@ -16,6 +16,17 @@ extract($seasonal_greet_master_data);
         <?php  } else {?>
         <h4 class="page-title">Add Seasonal Greetings</h4>
         <?php } ?>
+
+         <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+
+           <li class="breadcrumb-item"><a href="seasonalGreetList">Seasonal Greetings List</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> <?php if(isset($seasonal_greet_id)){?>
+         Edit Seasonal Greetings 
+        <?php  } else {?>
+        Add Seasonal Greetings 
+        <?php } ?></li>
+         </ol>
         
       </div>
       
@@ -94,6 +105,16 @@ extract($seasonal_greet_master_data);
                      
                   </div>
                 </div>
+
+                <div   class="form-group row" >
+                    <label class="col-lg-2 col-form-label form-control-label">Event Date 
+                  (for sorting) <span class="required">*</span></label>
+                <div class="col-lg-4">
+                  <input  required="" readonly="" type="text" class="form-control  " name="order_date" id="autoclose-datepicker-evt" value="<?php if(isset($seasonal_greet_id)){  echo date("d-m-Y", strtotime($order_date));} ?>"  minlength="5" maxlength="50"  >
+                  
+                </div>
+                </div>
+
                </span>
  
                 

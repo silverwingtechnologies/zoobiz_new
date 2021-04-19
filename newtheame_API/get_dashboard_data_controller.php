@@ -45,34 +45,43 @@ $difference_days = intval($numberDays);
     }
 $dayCnt = $difference_days;
    
-    
+    $tran_qry = $d->selectRow("*","transection_master", " user_id='$user_id'", "order by transection_id desc");
+   $tran_data=mysqli_fetch_array($tran_qry);   
 
 $response["message"]="success.";
+if($tran_data['coupon_id'] != 0 ){
+    $btn_caption = "Subscribe";
+} else {
+    $btn_caption = "Renew";
+}
 
 if($difference_days < 0 || $difference_days==0 ){
      $response["difference_days"] =$difference_days;
 
-    $response["renew_message"] ="Your subscription is Expired. Please renew!";
+    $response["renew_message"] ="Your subscription is Expired. Please $btn_caption!";
     $response["show_renew"] =false;
-     $response["message_title"] ="Renew Plan";
-     $msg = "Your subscription is Expired, Choose to renew from below options.";
+     $response["message_title"] ="$btn_caption Plan";
+     $msg = "Your subscription is Expired, Choose to $btn_caption from below options.";
 } else  if ($difference_days <= 30) {
     $response["difference_days"] =$difference_days;
 
  if($dayCnt == 1){
-        $response["renew_message"] ="Your subscription is going to expire today. Please renew soon!";
-         $msg = "Your subscription is going to expire today. Please renew soon!";
+        $response["renew_message"] ="Your subscription is going to expire today. Please $btn_caption soon!";
+         $msg = "Your subscription is going to expire today. Please $btn_caption soon!";
 
     } else {
-         $response["renew_message"] ="Your subscription is expiring in ".($dayCnt+1)." days. Please renew soon!" ;
-          $msg = "Your subscription is expiring in ".($dayCnt+1)." days, Choose to renew from below options.";
+         $response["renew_message"] ="Your subscription is expiring in ".($dayCnt+1)." days. Please $btn_caption soon!" ;
+          $msg = "Your subscription is expiring in ".($dayCnt+1)." days, Choose to $btn_caption from below options.";
     }
    
     $response["show_renew"] =true;
-     $response["message_title"] ="Renew Plan";
+    $response["btn_caption"] =$btn_caption;
+     $response["message_title"] ="$btn_caption Plan";
     
 $response["message"] = $msg;
 } else {
+
+    $response["btn_caption"] =$btn_caption;
      $response["difference_days"] =$difference_days;
      $response["renew_message"] ="";
     $response["show_renew"] =false;

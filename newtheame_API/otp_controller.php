@@ -163,7 +163,7 @@ if(!isset($country_code)){
                 );
                 $d->update("users_master", $a1, "user_id='$user_data[user_id]'");
                 
-                if(isset($device) && isset($version_code) ) { 
+               /* if(isset($device) && isset($version_code) ) { 
                 $qqq = $d->selectRow("version_code_android,version_code_android_view,version_code_ios,version_code_ios_view","app_version_master", "");
 
                 $dataqqq = mysqli_fetch_array($qqq);
@@ -185,7 +185,7 @@ if(!isset($country_code)){
                         exit();
                     }
                 }
-            }
+            }*/
                 //22feb21
                 
 

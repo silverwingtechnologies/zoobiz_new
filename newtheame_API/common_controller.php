@@ -337,7 +337,7 @@ $approval_pending=$d->select("interest_master","added_by_member_id='$user_id' an
 //interest end
 
  
-			$full_data_query = $d->selectRow("users_master.chat_alerts,users_master.timeline_alert,user_employment_details.company_contact_number_privacy,   users_master.user_first_name, users_master.user_last_name, users_master.user_first_name,users_master.user_last_name, users_master.office_member,users_master.user_mobile,users_master.alt_mobile,
+			$full_data_query = $d->selectRow("users_master.plan_renewal_date,users_master.chat_alerts,users_master.timeline_alert,user_employment_details.company_contact_number_privacy,   users_master.user_first_name, users_master.user_last_name, users_master.user_first_name,users_master.user_last_name, users_master.office_member,users_master.user_mobile,users_master.alt_mobile,
 				users_master.invoice_download,users_master.plan_renewal_date,users_master.facebook,users_master.instagram,users_master.linkedin,users_master.twitter,users_master.whatsapp_privacy,users_master.email_privacy,
 
 				users_master.member_date_of_birth,users_master.gender, users_master.whatsapp_number, users_master.user_email,users_master.cllassified_mute,users_master.user_id,business_categories.business_category_id,business_sub_categories.business_sub_category_id,users_master.user_full_name,users_master.zoobiz_id,users_master.public_mobile,users_master.user_mobile,users_master.user_profile_pic,business_categories.category_name,business_sub_categories.sub_category_name,user_employment_details.company_email ,user_employment_details.company_name ,user_employment_details.designation,user_employment_details.company_contact_number,user_employment_details.company_website,user_employment_details.company_logo,user_employment_details.company_broucher,user_employment_details.company_profile,user_employment_details.gst_number","users_master,user_employment_details,business_categories,business_sub_categories ",
@@ -406,6 +406,9 @@ business_sub_categories.business_sub_category_id=user_employment_details.busines
 				} else {
 					$response["pincode"] = $addData["pincode"];
 				}
+
+				 
+				
 				
 				$response["add_longitude"] = $addData["add_longitude"];
 				$response["add_latitude"] = $addData["add_latitude"];
@@ -507,6 +510,10 @@ $response["short_name"] =strtoupper(substr($data_app["user_first_name"], 0, 1).s
 				}
 				if($data_app["plan_renewal_date"]!=""){
 					$response["plan_renewal_date"] = date("d/m/Y", strtotime($data_app["plan_renewal_date"]));
+
+					$response["plan_renewal_date"] = 'Plan Expire Date: '.date("d/m/Y", strtotime($data_app["plan_renewal_date"]));
+
+					
 				} else {
 					$response["plan_renewal_date"] ="";
 				}
@@ -541,6 +548,9 @@ $transection_master_qry_new=$d->select("transection_master","user_id='$user_id'"
     	$response["invoice_download_url"]="";
     }
 				 
+
+
+				 $response["search_keyword_info"]="Please add up to 5 keywords representing your business. Separate them by a (,) comma. Members will be able to reach you by your keywords also.";
 				//$response["invoice_download"] = $data_app["invoice_download"];
 				
 

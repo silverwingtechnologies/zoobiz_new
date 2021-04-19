@@ -9,6 +9,13 @@ error_reporting(0);
       <div class="row pt-2 pb-2">
         <div class="col-sm-4">
           <h4 class="page-title">Use  Seasonal Greetings Report</h4>
+           <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+           
+            <li class="breadcrumb-item active" aria-current="page">Use  Seasonal Greetings Report</li>
+         </ol>
+
+
            <a class="btn btn-sm btn-secondary" href="notUseSeasonalGreetingReport?promotion_id=<?php echo $_REQUEST['promotion_id'];?>"> Use  Seasonal Greeting Used</a>
         </div>
          

@@ -11,7 +11,12 @@ $seasonal_greet_master_d=mysqli_fetch_array($seasonal_greet_master_qry);
     <div class="row pt-2 pb-2">
       <div class="col-sm-9">
         <h4 class="page-title"><?php echo $seasonal_greet_master_d['title'];?> -  Seasonal Greetings Image List</h4>
-        
+        <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+
+           <li class="breadcrumb-item"><a href="seasonalGreetList">Seasonal Greetings List</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> <?php echo $seasonal_greet_master_d['title'];?> -  Seasonal Greetings Image List</li>
+         </ol>
       </div>
       <div class="col-sm-3">
         <div class="btn-group float-sm-right">

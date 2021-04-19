@@ -716,6 +716,14 @@ submitHandler: function(form) {
                }
            },
            noSpace:true 
+       },
+       order_date:{
+            required:{
+                depends: function(element) {
+                   return $('#seasonalGreetFrm :input[name="is_expiry"]').val() =="Yes" ;
+               }
+           },
+           noSpace:true 
        }
    },
    messages: {
@@ -728,6 +736,9 @@ submitHandler: function(form) {
     },
     end_date:{
         required:"Please select end date"
+    },
+    order_date:{
+         required:"Please select event date"
     }
 },
 submitHandler: function(form) {

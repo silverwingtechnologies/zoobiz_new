@@ -16,6 +16,10 @@ if(isset($language_id)){
     <div class="row pt-2 pb-2">
       <div class="col-sm-9">
         <h4 class="page-title"> Add Language Key Value  </h4>
+         <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Language Key Value</li>
+         </ol>
       </div> 
       <div class="col-sm-3">
         <a href="language_key_master_value_list" class="btn btn-sm btn-primary waves-effect waves-light"><i class="fa fa-list mr-1"></i>View List</a>

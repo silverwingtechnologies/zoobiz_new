@@ -36,7 +36,15 @@ extract($currency_master_data);
         <?php  } else {?>
         <h4 class="page-title">Add Currency</h4>
         <?php } ?>
-        
+         <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+            <li class="breadcrumb-item"><a href="currencyList">Currency List</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><?php if(isset($currency_id)){?>
+       Edit Currency 
+        <?php  } else {?>
+        Add Currency 
+        <?php } ?></li>
+         </ol>
       </div>
       
     </div>

@@ -11,6 +11,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
    $m->set_data('is_expiry',$is_expiry);
    $m->set_data('start_date',date("Y-m-d",strtotime($start_date)));
   $m->set_data('end_date',date("Y-m-d",strtotime($end_date)));
+  $m->set_data('order_date',date("Y-m-d",strtotime($order_date)));
   $m->set_data('status',$status);
  $m->set_data('created_by',$_SESSION[zoobiz_admin_id]);
    $created_at = date('Y-m-d H:i:s');
@@ -22,6 +23,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     'status'=> $m->get_data('status'),
     'start_date'=> $m->get_data('start_date'),
     'end_date'=> $m->get_data('end_date'),
+    'order_date' => $m->get_data('order_date'),
     'created_by'=> $m->get_data('created_by')  ,
     'created_at'=> $m->get_data('created_at') 
   );
@@ -44,11 +46,15 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
    $created_at = date('Y-m-d H:i:s');
    
   
+  $m->set_data('order_date',date("Y-m-d",strtotime($order_date)));
+
+    
   $a =array(
     'title'=> $m->get_data('title'),
     'is_expiry'=> $m->get_data('is_expiry'),
     'status'=> $m->get_data('status'),
     'start_date'=> $m->get_data('start_date'),
+    'order_date' => $m->get_data('order_date'),
     'end_date'=> $m->get_data('end_date'),
     'created_by'=> $m->get_data('created_by')  
   );

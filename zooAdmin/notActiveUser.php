@@ -4,7 +4,7 @@
       <div class="row pt-2 pb-2">
         <div class="col-sm-6">
           <?php   ?>
-          <h4 class="page-title">Not Active User From <?php echo $_REQUEST['days'];?> Days -App </h4>
+          <h4 class="page-title">Not Active User Before <?php echo $_REQUEST['days'];?> Days -App </h4>
             <ol class="breadcrumb">
            <li class="breadcrumb-item"><a href="welcome">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Not Active Users</li>
@@ -101,7 +101,7 @@ $date_before_1_day = date("Y-m-d", strtotime($currDate."-".$_REQUEST['days']." d
             <form action=""   method="post" accept-charset="utf-8">
 <div class="row pt-2 pb-2">
 
-  <label class="col-lg-3 col-form-label form-control-label">Not Active From Days <span class="required">*</span></label>
+  <label class="col-lg-3 col-form-label form-control-label">Not Active Before Days <span class="required">*</span></label>
 
               <div class="col-sm-4">
            <input min="1" minlength="1" maxlength="4" class="form-control onlyNumber " name="days" type="text" value="<?php echo $_REQUEST['days'] ; ?>" required="">

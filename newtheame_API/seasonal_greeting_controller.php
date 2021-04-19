@@ -17,7 +17,7 @@ if (isset($_POST) && !empty($_POST)) {
 
 			$today = date("Y-m-d"); 
 
-			$meq = $d->selectRow(" * ","seasonal_greet_master,seasonal_greet_image_master", "seasonal_greet_image_master.seasonal_greet_id =seasonal_greet_master.seasonal_greet_id AND   seasonal_greet_master.status='Active' AND  seasonal_greet_image_master.status='Active'  and ( seasonal_greet_master.is_expiry ='No' OR  seasonal_greet_master.end_date >= CURDATE() ) GROUP BY  seasonal_greet_master.seasonal_greet_id ");
+			$meq = $d->selectRow(" * ","seasonal_greet_master,seasonal_greet_image_master", "seasonal_greet_image_master.seasonal_greet_id =seasonal_greet_master.seasonal_greet_id AND   seasonal_greet_master.status='Active' AND  seasonal_greet_image_master.status='Active'  and ( seasonal_greet_master.is_expiry ='No' OR  seasonal_greet_master.end_date >= CURDATE() ) GROUP BY  seasonal_greet_master.seasonal_greet_id  order by order_date asc ");
 			if( mysqli_num_rows($meq) >0 ){ 
 				while ($data_app=mysqli_fetch_array($meq)) {
 					$seasonalGreetings = array();

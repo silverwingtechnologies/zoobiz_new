@@ -37,7 +37,12 @@ $font_master=$d->select("font_master","status='Active' ","");
        
         <h4 class="page-title">Manage Seasonal Greetings - <?php echo $seasonal_greet_master_d['title'];?></h4>
          
-        
+         <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="welcome">Home</a></li>
+
+           <li class="breadcrumb-item"><a href="seasonalGreetList">Seasonal Greetings List</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> Manage Seasonal Greetings - <?php echo $seasonal_greet_master_d['title'];?></li>
+         </ol>
       </div>
       
     </div>

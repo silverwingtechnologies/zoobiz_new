@@ -76,7 +76,7 @@ if (mysqli_num_rows($cron_log_master) == 0   ) {
 //send profile complete reminder SMS start
  
 //send seasonal greetings FCM end 
-$where = " AND log_time BETWEEN '$start' AND '$end'";
+/*$where = " AND log_time BETWEEN '$start' AND '$end'";
 $cron_log_master = $d->selectRow("log_id", "cron_log_master", "type=1 $where ", "");
 if (  mysqli_num_rows($cron_log_master) == 0    ) {
   $promotion_master = $d->selectRow("event_name,event_frame","promotion_master","status=0 and ( event_date = DATE_ADD(CURDATE(), INTERVAL 2 DAY) OR event_date = DATE_ADD(CURDATE(), INTERVAL 1 DAY) OR event_date = DATE_ADD(CURDATE(), INTERVAL 0 DAY) ) ", "");
@@ -99,8 +99,7 @@ if (  mysqli_num_rows($cron_log_master) == 0    ) {
     } else {
       $notiUrl = $base_url . 'img/app_icon/ic_greetings.png';
     }
-   /* $nResident->noti("promote_business", $notiUrl, 0, $fcmArray, $title, '', 'PromoteBusinessVC');
-    $nResident->noti_ios("promote_business", $notiUrl, 0, $fcmArrayIos, $title, '', "PromoteBusinessVC");*/
+    
 
     $fcm_data_array = array(
             'img' =>$notiUrl,
@@ -121,11 +120,52 @@ if (  mysqli_num_rows($cron_log_master) == 0    ) {
 
   }
   $d->insert_cron_log("Cron Run: Seasonal Greetings Notification","1");
-}
+}*/
 //send seasonal greetings FCM end
 
 
+//19April21 new seasonal greetings
+//send seasonal greetings FCM end 
+$where = " AND log_time BETWEEN '$start' AND '$end'";
+$cron_log_master = $d->selectRow("log_id", "cron_log_master", "type=6 $where ", "");
+if (  mysqli_num_rows($cron_log_master) == 0    ) {
+  $seasonal_greet_master = $d->selectRow("seasonal_greet_master.title, seasonal_greet_image_master.cover_image","seasonal_greet_master, seasonal_greet_image_master "," seasonal_greet_image_master.seasonal_greet_id =seasonal_greet_master.seasonal_greet_id and    seasonal_greet_master.status='Active' and ( order_date = DATE_ADD(CURDATE(), INTERVAL 2 DAY) OR order_date = DATE_ADD(CURDATE(), INTERVAL 1 DAY) OR order_date = DATE_ADD(CURDATE(), INTERVAL 0 DAY) ) and seasonal_greet_master.is_expiry='Yes' group by seasonal_greet_master.seasonal_greet_id ", "");
 
+  $seasonal_greet_array = array(); 
+  while ($data = mysqli_fetch_array($seasonal_greet_master)) {
+    $seasonal_greet_array[] = $data;
+    
+  }
+ if (  mysqli_num_rows($cron_log_master) == 0    ) {
+  $fcmArray = $d->get_android_fcm("users_master", "user_token!='' AND  lower(device)='android' and user_status=0      ");
+  $fcmArrayIos = $d->get_android_fcm("users_master ", " user_token!='' AND  lower(device) ='ios' and user_status=0   ");
+}
+  for ($p = 0; $p < count($seasonal_greet_array); $p++) {
+    $data = $seasonal_greet_array[$p];
+    $title = $data['title'] . " Greeting Creative is Available. Lets Zoobiz!";
+    if ($data['cover_image'] != '') {
+      $notiUrl = $base_url . 'img/promotion/' . $data['cover_image'];
+    } else {
+      $notiUrl = $base_url . 'img/app_icon/ic_greetings.png';
+    }
+  
+
+    $fcm_data_array = array(
+            'img' =>$notiUrl,
+            'title' =>$title,
+            'desc' => '',
+            'time' =>date("d M Y h:i A")
+          );
+ 
+    $nResident->noti("seasonal_greetings_new",$notiUrl,0,$fcmArray,"Seasonal Greeting",$title,$fcm_data_array);
+
+    $nResident->noti_ios("seasonal_greetings_new",$notiUrl,0,$fcmArrayIos,"Seasonal Greeting",$title,$fcm_data_array);
+ 
+  }
+  $d->insert_cron_log("Cron Run: Seasonal Greetings New Notification","6");
+}
+//send seasonal greetings FCM end
+//19april21 new seasonal greetings
 
 //meeting reminder before 1 day start
 $cron_log_master = $d->selectRow("log_id", "cron_log_master", "type=2 $where ", ""); 

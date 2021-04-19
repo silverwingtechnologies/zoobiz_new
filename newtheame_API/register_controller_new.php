@@ -1094,6 +1094,8 @@ $org_user_id= $user_id;
 
 					}
 				} else {
+
+					 
 					$ref_by_data ="";
 				//refer by user start
 					$main_users_master = $d->selectRow("*","users_master", "user_mobile = '$user_mobile' OR user_mobile ='$userMobile' or user_id='$user_id'   ");
@@ -1169,6 +1171,8 @@ $org_user_id= $user_id;
 						}
 
 					}
+
+				   
 				}
 				
 	//refer by user end 

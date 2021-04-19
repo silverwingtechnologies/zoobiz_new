@@ -375,7 +375,178 @@ if ($business_category_id == 0) {
                 $response["status"]  = "201";
                 echo json_encode($response);
             }
-        } else if ($_POST['getCllassifiedDetails'] == "getCllassifiedDetails" && filter_var($user_id, FILTER_VALIDATE_INT) == true && filter_var($cllassified_id, FILTER_VALIDATE_INT) == true) {
+        } else
+       //19APRIL21
+            if ($_POST['getCllassifiedSearch'] == "getCllassifiedSearch" && filter_var($user_id, FILTER_VALIDATE_INT) == true) {
+
+
+                $blocked_users = array('0'); 
+$getBLockUserQry = $d->selectRow("user_id, block_by","user_block_master", " block_by='$user_id' or user_id='$user_id'  ", "");
+while($getBLockUserData=mysqli_fetch_array($getBLockUserQry)) {
+        
+        if($user_id != $getBLockUserData['user_id']){
+            $blocked_users[] = $getBLockUserData['user_id'];
+        }
+
+        if($user_id != $getBLockUserData['block_by']){
+            $blocked_users[] = $getBLockUserData['block_by'];
+        }
+        
+      
+}
+$blocked_users = implode(",", $blocked_users); 
+
+
+            if ($filter_date_from != '') {
+                $from       = date("Y-m-d", strtotime($filter_date_from));
+                $toDate     = date("Y-m-d", strtotime($filter_date_to));
+                // $from = date('Y-m-d', strtotime($filter_date_from . ' -1 day'));
+                // $toDate = date('Y-m-d', strtotime($filter_date_to . ' +1 day'));
+                $date       = date_create($from);
+                $dateTo     = date_create($toDate);
+                $nFrom      = date_format($date, "Y-m-d 00:00:01");
+                $nTo        = date_format($dateTo, "Y-m-d 23:59:59");
+                $dateFilter = "c.created_date BETWEEN '$nFrom' AND '$nTo'";
+                array_push($queryAry, $dateFilter);
+            }
+            $queryAry = array();
+            
+            
+           
+            $query2 = "";
+            
+
+            
+            
+
+            
+            if ($city_id != 0) {
+                $query2 .= " and  cllassifieds_city_master.city_id IN ('$ids')";
+            }
+
+            $catSearch ='';
+            $subCatSearch ='';
+            if (trim($search) != '') {
+                $search = trim($search);
+                $query2 .= " and  ( c.cllassified_title LIKE '%$search%'    or c.cllassified_description LIKE '%$search%'  ) ";
+
+                 $catSearch =" and  (  business_categories.category_name LIKE '%$search%'  ) ";
+                 $subCatSearch =" and  (  business_sub_categories.sub_category_name LIKE '%$search%'  ) ";
+            }
+
+            $appendQuery    = implode(" AND ", $queryAry);
+             
+
+               $q              = $d->selectRow("cllassifieds_city_master.*, c.*","cllassifieds_city_master, cllassifieds_master as c  left join business_categories on  business_categories.business_category_id = c.business_category_id $catSearch   left join business_sub_categories on  business_sub_categories.business_sub_category_id = c.business_sub_category_id  $subCatSearch  ", "  
+                   c.active_status=0  AND c.cllassified_id=cllassifieds_city_master.cllassified_id and c.user_id not in ($blocked_users)   $query2  ", "GROUP BY c.cllassified_id ORDER BY c.cllassified_id DESC ");
+
+           
+            
+            $qchekc         = $d->selectRow("cllassified_mute", "users_master", "user_id='$user_id' ");
+            $muteDataCommon = mysqli_fetch_array($qchekc);
+            if (mysqli_num_rows($q) > 0) {
+                $response["discussion"] = array();
+                while ($data = mysqli_fetch_array($q)) {
+                    $qch22                                  = $d->select("user_block_master", "user_id='$user_id' AND block_by='$data[user_id]' ");
+                    $discussion                             = array();
+                   /* if(!is_null($data['category_name'])){
+                        $discussion["category_name"]           = $data['category_name'];
+                    } else {
+                        $discussion["category_name"]           = "All";
+                    }
+
+                    if(!is_null($data['sub_category_name'])){
+                        $discussion["sub_category_name"]           = $data['sub_category_name'];
+                    } else {
+                        $discussion["sub_category_name"]           = "All";
+                    }*/
+
+                    if(!is_null($data['business_category_id'])){
+                        $discussion["business_category_id"]           = $data['business_category_id'];
+                    } else {
+                        $discussion["business_category_id"]           = "0";
+                    }
+                    
+
+                    if(!is_null($data['business_sub_category_id'])){
+                        $discussion["business_sub_category_id"]           = $data['business_sub_category_id'];
+                    } else {
+                        $discussion["business_sub_category_id"]           = "0";
+                    }
+                     
+                    $discussion["cllassified_id"]           = $data['cllassified_id'];
+                    
+                    $discussion["cllassified_title"]        = html_entity_decode($data['cllassified_title']);
+                    $discussion["cllassified_description"]  = html_entity_decode($data['cllassified_description']);
+                    $discussion["user_id"]                  = html_entity_decode($data['user_id']);
+                    $discussion["created_date"]             = date('d M Y', strtotime($data['created_date']));
+                    if ($data['cllassified_photo'] != '') {
+                        $discussion["cllassified_photo"] = $base_url . 'img/cllassified/' . $data['cllassified_photo'];
+                    } else {
+                        $discussion["cllassified_photo"] = "";
+                    }
+                    if ($data['cllassified_file'] != '') {
+                        $discussion["cllassified_file"] = $base_url . 'img/cllassified/' . $data['cllassified_file'];
+                    } else {
+                        $discussion["cllassified_file"] = "";
+                    }
+                    $discussion["city"] = array();
+                    $fi                 = $d->select("cllassifieds_city_master,cities", "cities.city_id=cllassifieds_city_master.city_id AND  cllassifieds_city_master.cllassified_id='$data[cllassified_id]' ");
+                    while ($feeData = mysqli_fetch_array($fi)) {
+                        $city              = array();
+                        $city["city_id"]   = $feeData['city_id'];
+                        $city["city_name"] = $feeData['city_name'];
+                        array_push($discussion["city"], $city);
+                    }
+                    $q111                       = $d->select("users_master", "user_id='$data[user_id]'", "");
+                    $userdata                   = mysqli_fetch_array($q111);
+                    $created_by                 = $userdata['user_full_name'];
+                    $user_profile               = $base_url . "img/users/members_profile/" . $userdata['user_profile_pic'];
+
+                    if($userdata['user_profile_pic'] ==""){
+                        $discussion["user_profile"] ="";
+                    } else {
+                        $discussion["user_profile"] = $user_profile;
+                    }
+                    
+                    $discussion["created_by"]   = html_entity_decode($created_by);
+                    $qc11                       = $d->select("cllassified_mute", "user_id='$user_id' AND cllassified_id='$data[cllassified_id]'");
+                    if (mysqli_num_rows($qc11) > 0) {
+                        $discussion["mute_status"] = true;
+                    } else {
+                        $discussion["mute_status"] = false;
+                    }
+                    $discussion["total_coments"] = $d->count_data_direct("comment_id", "cllassified_comment", "cllassified_id='$data[cllassified_id]' AND prent_comment_id=0") . '';
+                    $discussion["comment"]       = array();
+                    $q3                          = $d->select("cllassified_comment", "cllassified_id='$data[cllassified_id]' AND prent_comment_id=0", "ORDER BY comment_id   DESC");
+                    while ($subData = mysqli_fetch_array($q3)) {
+                        $comment                         = array();
+                        $comment["comment_id"]           = $subData['comment_id'];
+                        $comment["user_id"]              = $subData['user_id'];
+                        $comment["comment_messaage"]     = html_entity_decode($subData['comment_messaage']);
+                        $comment["comment_created_date"] = time_elapsed_string($subData['created_date']);
+                        $q111                            = $d->select("users_master", "user_id='$subData[user_id]'", "");
+                        $userdataComment                 = mysqli_fetch_array($q111);
+                        $created_by                      = $userdataComment['user_full_name'];
+                        $comment["created_by"]           = $created_by;
+                        array_push($discussion["comment"], $comment);
+                    }
+                    if (mysqli_num_rows($qch22) == 0) {
+                        array_push($response["discussion"], $discussion);
+                    }
+                }
+                $response["cllassified_mute"] = $muteDataCommon['cllassified_mute'];
+                $response["message"]          = "Classified Data";
+                $response["status"]           = "200";
+                echo json_encode($response);
+            } else {
+                $response["message"] = "No Classifieds Available";
+                $response["status"]  = "201";
+                echo json_encode($response);
+            }
+        }
+//19APRIL21
+         else if ($_POST['getCllassifiedDetails'] == "getCllassifiedDetails" && filter_var($user_id, FILTER_VALIDATE_INT) == true && filter_var($cllassified_id, FILTER_VALIDATE_INT) == true) {
             $q = $d->select("cllassifieds_master", "active_status=0 AND  cllassified_id='$cllassified_id'  ", "ORDER BY cllassified_id DESC");
             if (mysqli_num_rows($q) > 0) {
                 $response["discussion"] = array();

@@ -6,6 +6,8 @@ if (isset($_POST) && !empty($_POST)) {
 	// error_reporting(E_ALL);
 // //C:\xampp\htdocs\zoobiz\mobileApi\timeline_controller.php
 	if ($key == $keydb) {
+		$share_app_content ="Download Zoobiz App & Grow your business across cities. \nAndroid Link:\nhttps://play.google.com/store/apps/details?id=com.silverwing.zoobiz\nIOS Link:\nhttps://apps.apple.com/us/app/zoobiz/id1550560836";
+		$charLimit = 100;
 		$response = array();
 		extract(array_map("test_input", $_POST));
 
@@ -217,6 +219,7 @@ echo "<pre>";print_r($blocked_users_new);exit;*/
 
 			if (count($dataArray) > 0) {
 				$response["feed"] = array();
+				$response["share_app_content"] =$share_app_content;
 				for ($tf=0; $tf < count($dataArray) ; $tf++) {
 $data_notification = $dataArray[$tf];
 
@@ -301,7 +304,8 @@ $data_notification = $dataArray[$tf];
 						 $feed["timeline_text"] = htmlspecialchars_decode($feed["timeline_text"], ENT_QUOTES);
 						$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
 
-
+$feed["share_timeline_text"] =html_entity_decode (substr($feed["timeline_text"], 0, $charLimit)).'...';
+   
 						$feed["user_name"] = $user_full_name;
 						$feed["city_id"] = $city_data['city_id'];
 						$feed["city_name"] = $city_data['city_name'];
@@ -761,6 +765,7 @@ if(isset($debug)){
 
 			if (count($dataArray) > 0) {
 				$response["feed"] = array();
+				$response["share_app_content"] =$share_app_content;
 				for ($tf=0; $tf < count($dataArray) ; $tf++) {
 $feed = array();
 	$data_notification = $dataArray[$tf];
@@ -908,7 +913,7 @@ $feed["mobile_privacy"]=false;
  $feed["timeline_text"] = htmlspecialchars_decode($feed["timeline_text"], ENT_QUOTES);
 						$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
  
-
+$feed["share_timeline_text"] =html_entity_decode (substr($feed["timeline_text"], 0, $charLimit)).'...';
 						
 						$feed["city_id"] = $city_data['city_id'];
 						$feed["city_name"] = $city_data['city_name'];
@@ -2205,7 +2210,7 @@ and timeline_master.user_id not in ($blocked_users) ");
 			}
 			if (count($dataArray) > 0) {
 				$response["feed"] = array();
-
+				$response["share_app_content"] =$share_app_content;
 				for ($l=0; $l < count($dataArray) ; $l++) {
 					$data_notification =$dataArray[$l];
 				 
@@ -2253,7 +2258,7 @@ if(in_array($data_notification['timeline_id'], $saved_timeline_array)){
 
 					 $feed["timeline_text"] = htmlspecialchars_decode($feed["timeline_text"], ENT_QUOTES);
 						$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
-
+$feed["share_timeline_text"] =html_entity_decode (substr($feed["timeline_text"], 0, $charLimit)).'...';
 
 $feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$feed["user_name"] = $data_notification['user_full_name'];
@@ -2642,6 +2647,7 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
 
 			if (count($dataArray) > 0) {
 				$response["feed"] = array();
+				$response["share_app_content"] =$share_app_content;
 				 for ($l=0; $l < count($dataArray) ; $l++) {
 				 	$data_notification = $dataArray[$l];
 				//while ($data_notification = mysqli_fetch_array($qnotification)) {
@@ -2685,7 +2691,7 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
 					 $feed["timeline_text"] = htmlspecialchars_decode($feed["timeline_text"], ENT_QUOTES);
 						$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
 
-
+$feed["share_timeline_text"] =html_entity_decode (substr($feed["timeline_text"], 0, $charLimit)).'...';
 					$feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$feed["user_name"] = $data_notification['user_full_name'];
 					$feed["user_id"] = $data_notification['user_id'];
@@ -2989,6 +2995,7 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
 //code optimize
 			if (count($dataArray) > 0) {
 				$response["feed"] = array();
+				$response["share_app_content"] =$share_app_content;
 				for ($l=0; $l < count($dataArray) ; $l++) {
 					$data_notification =$dataArray[$l];
 				//while ($data_notification = mysqli_fetch_array($qnotification)) {
@@ -3025,7 +3032,7 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
 
 					 $feed["timeline_text"] = htmlspecialchars_decode($feed["timeline_text"], ENT_QUOTES);
 						$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
-						
+					$feed["share_timeline_text"] =html_entity_decode (substr($feed["timeline_text"], 0, $charLimit)).'...';
 					$feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$timeline_id = $data_notification['timeline_id'];
 					$feed["feed_type"] = $data_notification['feed_type'];
