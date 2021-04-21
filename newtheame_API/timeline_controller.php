@@ -7,7 +7,7 @@ if (isset($_POST) && !empty($_POST)) {
 // //C:\xampp\htdocs\zoobiz\mobileApi\timeline_controller.php
 	if ($key == $keydb) {
 		$share_app_content ="Download Zoobiz App & Grow your business across cities. \nAndroid Link:\nhttps://play.google.com/store/apps/details?id=com.silverwing.zoobiz\nIOS Link:\nhttps://apps.apple.com/us/app/zoobiz/id1550560836";
-		$charLimit = 100;
+		$charLimit = 150;
 		$response = array();
 		extract(array_map("test_input", $_POST));
 

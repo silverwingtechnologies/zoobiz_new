@@ -138,8 +138,8 @@ $allowedMenus = array();
             <div class="media align-items-center">
             <div class="media-body">
               <a href="payments">
-              <p class="text-white"> Earning</p>
-              <h4 class="text-white line-height-5"><i class="fa fa-inr"></i> 
+              <p class="text-white"> Earning in (<i class="fa fa-inr"></i>)</p>
+             
                 <?php //24nov2020  transection_master.coupon_id = 0 added to exclude coupon amount from transactions.
                 // $count5=$d->sum_data("transection_amount","transection_master","payment_status='success' and is_paid = 0 ");
 
@@ -152,9 +152,15 @@ $asif = 0 ;
                 
                          
                   }
-                   echo   $totalMain=number_format($asif,2,'.','');
+                  $totalMain=number_format($asif,2,'.','');
+                  if(strlen($totalMain)> 7){
+
+                   echo  ' <h4 class="text-white line-height-5">'.$totalMain.'</h4>'; 
+                  } else {
+                    echo  ' <h3 class="text-white line-height-5"> '.$totalMain.'</h3>'; 
+                  }
                ?>
-             </h4>
+             
            </a>
             </div>
             <div class="w-circle-icon rounded-circle border-white">
