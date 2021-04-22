@@ -68,7 +68,7 @@ if (isset($_POST) && !empty($_POST)) {
                   $nResident->noti_ios("viewMemeber","",0,$sos_user_token,$title,$msg,$user_id);
                 }*/
 
-              $d->insert_myactivity($user_id,"0","", $userData['user_full_name']." unfollowed by you.","activity.png");
+              $d->insert_myactivity($user_id,"0","", ucfirst($userData['user_full_name'])." unfollowed by you.","activity.png");
 
                 $response["message"] = "Unfollowed Successfully";
                 $response["status"] = "200";
@@ -93,7 +93,7 @@ $qucN=$d->selectRow("user_full_name,user_token,device,user_id","users_master","u
                 $device=$userData['device'];
                 $feed_user_id=$userData['user_id'];
                 $title="Follow";  
-                $msg= $userDataN['user_full_name']. " is Following You";
+                $msg= ucfirst($userDataN['user_full_name']). " is Following You";
 
                  $notiAry = array(
                   'user_id'=>$follow_to,
@@ -124,8 +124,8 @@ if($users_master_by_data['user_profile_pic']!=""){
                 }
 
 
-                $d->insert_myactivity($user_id,"0","", '"'.$userData['user_full_name'].'" Followed',"activity.png");
-                $response["message"] = '"'.$userData['user_full_name'].'" Followed';
+                $d->insert_myactivity($user_id,"0","", '"'.ucfirst($userData['user_full_name']).'" Followed',"activity.png");
+                $response["message"] = '"'.ucfirst($userData['user_full_name']).'" Followed..';
                 $response["status"] = "200";
                 echo json_encode($response);
                 exit();
@@ -176,7 +176,7 @@ if($users_master_by_data['user_profile_pic']!=""){
                   $nResident->noti_ios("viewMemeber","",0,$sos_user_token,$title,$msg,$user_id);
                 }*/
 
-                $d->insert_myactivity($user_id,"0","", "You are not following ".$userData['user_full_name'],"activity.png");
+                $d->insert_myactivity($user_id,"0","", "You are not following ".ucfirst($userData['user_full_name']),"activity.png");
                 $response["message"] = "Un Follow Successfully";
                 $response["status"] = "200";
                 echo json_encode($response);

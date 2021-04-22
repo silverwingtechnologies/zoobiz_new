@@ -185,7 +185,7 @@ extract($coupon_master_data);
                     <button   type="button"  id="generate" class="btn btn-secondary   "><i class="fa fa-cogs"></i>Generate Coupon Code</button>
                   <?php } ?> 
                 <?php  if(isset($coupon_id)){ ?>
-                <input type="hidden" name="coupon_id" value="<?php echo $coupon_id;?>">
+                <input type="hidden" name="coupon_id" id="coupon_id" value="<?php echo $coupon_id;?>">
                 <button type="submit" name="cpnEditBtn" class="btn btn-success"><i class="fa fa-check-square-o"></i> UPDATE</button>
                 <?php  } else {?>
                 <button type="submit" name="cpnAddBtn" id="cpnAddBtn" class="btn btn-success"><i class="fa fa-check-square-o"></i> SAVE</button>

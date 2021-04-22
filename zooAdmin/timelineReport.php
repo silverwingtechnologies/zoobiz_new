@@ -50,8 +50,9 @@ error_reporting(0);
                  
                   <th class="text-right">#</th>
                  
-                  <th class="text-right">Post</th>
                   <th>Name</th>
+                  <th class="text-right">No Of Posts</th>
+                  
                   <th>Email</th>
                   <th>Mobile</th>
                   <th>Company</th>
@@ -62,7 +63,7 @@ error_reporting(0);
               <tbody>
                 <?php 
                 $i=1;
-                $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories"," business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.user_token!='' and users_master.active_status = 0","");
+                $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories"," business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id   and users_master.active_status = 0","");
                while ($data=mysqli_fetch_array($q3)) {
                 extract($data);
                 extract(array_map("test_input" , $_GET));
@@ -83,10 +84,11 @@ error_reporting(0);
                     <input type="checkbox" class="multiDelteCheckbox"  value="<?php echo $data['feedback_id']; ?>">
                   </td> -->
                   <td class="text-right"><?php echo $i++; ?></td>
+                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
                   <td class="text-right">
                     <?php echo  $totalUsage; ?>
                   </td>
-                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                  
                   <td><?php echo $user_email ; ?></td>
                   <td><?php echo $user_mobile; ?></td>
                   <td><?php  echo $company_name;

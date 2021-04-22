@@ -302,11 +302,13 @@ $data_notification = $dataArray[$tf];
 						$feed["timeline_text"] = html_entity_decode($data_notification["timeline_text"] , ENT_QUOTES);
  
 						$timeline_text =  $feed["timeline_text"] = htmlspecialchars_decode($feed["timeline_text"], ENT_QUOTES);
-						$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
+						//$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
+						$feed["strlen"] =strlen($feed["timeline_text"]);
 if(strlen($feed["timeline_text"]) > $charLimit ){
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit)).'...';
+	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+ //'"'.substr($timeline_text, 0, $charLimit).'..."';
 } else {
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit));
+	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
 }
 
    
@@ -929,9 +931,10 @@ $timeline_text = $feed["timeline_text"] = html_entity_decode($feed["timeline_tex
  
 
 if(strlen($feed["timeline_text"]) > $charLimit ){
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit)).'...';
+	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+ //'"'.substr($timeline_text, 0, $charLimit).'..."';
 } else {
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit));
+	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
 }
 						
 						$feed["city_id"] = $city_data['city_id'];
@@ -2282,9 +2285,10 @@ if(in_array($data_notification['timeline_id'], $saved_timeline_array)){
 
 
 if(strlen($feed["timeline_text"]) > $charLimit ){
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit)).'...';
+	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+ //'"'.substr($timeline_text, 0, $charLimit).'..."';
 } else {
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit));
+	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
 }
 
 $feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
@@ -2720,9 +2724,10 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
 
 
 if(strlen($feed["timeline_text"]) > $charLimit ){
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit)).'...';
+	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+ //'"'.substr($timeline_text, 0, $charLimit).'..."';
 } else {
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit));
+	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
 }
 					$feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$feed["user_name"] = $data_notification['user_full_name'];
@@ -3066,10 +3071,11 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
 						$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
 					  
 if(strlen($feed["timeline_text"]) > $charLimit ){
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit)).'...';
+	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+ //'"'.substr($timeline_text, 0, $charLimit).'..."';
 } else {
-	$feed["share_timeline_text"] =htmlspecialchars_decode (substr($timeline_text, 0, $charLimit));
-} 
+	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
+}
 					$feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$timeline_id = $data_notification['timeline_id'];
 					$feed["feed_type"] = $data_notification['feed_type'];

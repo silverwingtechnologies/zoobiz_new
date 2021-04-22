@@ -435,7 +435,7 @@ $response["m_profile"] = $m_profile2;
 
     
                   $title ="Meetup" ;//"Meeting Rejected";
-      $msg =$u_data['user_full_name']." is Suggesting, Lets Meet Later!";//$u_data['user_full_name']. " has some other schedule and cannot accept your request for meeting on ". date("d F Y",strtotime($userData['date']))." at ".$userData['time'].". Happy Networking";
+      $msg =$u_data['user_full_name']." is Suggesting, Let's Meet Later!";//$u_data['user_full_name']. " has some other schedule and cannot accept your request for meeting on ". date("d F Y",strtotime($userData['date']))." at ".$userData['time'].". Happy Networking";
 
 
       $notiAry = array(

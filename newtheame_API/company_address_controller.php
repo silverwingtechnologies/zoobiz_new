@@ -138,6 +138,12 @@ if (isset($_POST) && !empty($_POST)) {
              } else {
              	$response["classifieds_sel_multiple_cities"] =false;
              }
+
+             if($zoobiz_settings_masterData['classifieds_sel_multiple_categories'] == "1"){
+             	$response["classifieds_sel_multiple_categories"] =true;
+             } else {
+             	$response["classifieds_sel_multiple_categories"] =false;
+             }
              
              $response["classified_max_image_select"] = (int)$zoobiz_settings_masterData["classified_max_image_select"];
 			 $response["classified_max_audio_duration"] =(int) $zoobiz_settings_masterData["classified_max_audio_duration"];

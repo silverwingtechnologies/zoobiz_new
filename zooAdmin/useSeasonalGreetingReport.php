@@ -16,7 +16,7 @@ error_reporting(0);
          </ol>
 
 
-           <a class="btn btn-sm btn-secondary" href="notUseSeasonalGreetingReport?promotion_id=<?php echo $_REQUEST['promotion_id'];?>"> Use  Seasonal Greeting Used</a>
+           <a class="btn btn-sm btn-secondary" href="notUseSeasonalGreetingReport?promotion_id=<?php echo $_REQUEST['promotion_id'];?>">Seasonal Greeting Not Used</a>
         </div>
          
        <div class="col-sm-6">
@@ -80,7 +80,7 @@ error_reporting(0);
                   $where =" and seasonal_greeting_share_master.promotion_id='$promotion_id'";
                 }
 
-                $q3=$d->select("  user_employment_details, users_master, seasonal_greeting_share_master   " ," seasonal_greeting_share_master.user_id= users_master.user_id and  user_employment_details.user_id = users_master.user_id   and users_master.user_mobile!='0'  AND users_master.active_status=0   $where
+                $q3=$d->select("  user_employment_details, users_master, seasonal_greeting_share_master   " ," seasonal_greeting_share_master.user_id= users_master.user_id and seasonal_greeting_share_master.is_new = 0  and  user_employment_details.user_id = users_master.user_id   and users_master.user_mobile!='0'  AND users_master.active_status=0   $where
                   "," group by users_master.user_id ORDER BY users_master.user_full_name asc ");
  
  

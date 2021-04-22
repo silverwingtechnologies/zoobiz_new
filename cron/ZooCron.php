@@ -297,7 +297,7 @@ if(count($user_id_array) >1){
   $settings_data=mysqli_fetch_array($settings_qry);
  
  
-$cron_log_master = $d->selectRow("log_id", "cron_log_master", "type=3 $where ", ""); 
+/*$cron_log_master = $d->selectRow("log_id", "cron_log_master", "type=3 $where ", ""); 
 if (mysqli_num_rows($cron_log_master) == 0  && $settings_data['meetups_reminder_flag'] == 1 && $settings_data['meetup_reminder_days'] > 0   ) {
  
 $meetup_reminder_days = $settings_data['meetup_reminder_days'];
@@ -410,7 +410,7 @@ $fcmArray = $d->get_android_fcm("users_master", "user_token!='' AND  lower(devic
    array_push($response['Success'], "");
 
   $d->insert_cron_log("Cron Run: Timeline Reminder Notification","5");
-}
+}*/
 
 //Timeline not used from last "N" days end
 

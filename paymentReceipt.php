@@ -436,6 +436,7 @@ if($data456['paid_amount_with_gst'] > 0 ){
                             coupon_master.coupon_id = transection_master.coupon_id and 
       users_master.user_id = transection_master.user_id and
       package_master.package_id = transection_master.package_id and
+      package_master.is_cpn_package = 0 and 
       users_master.user_id='$user_id' and (transection_master.is_paid = 1 OR   transection_master.coupon_id !=0 )    group by transection_master.user_id    ");
                            if(mysqli_num_rows($cpn_qry)  > 0 ){
                           $cpn_data=mysqli_fetch_array($cpn_qry )

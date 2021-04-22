@@ -47,7 +47,39 @@ $q = $d->insert("seasonal_greeting_share_master",$a);
 			}
 
 
-		} else if (isset($edit_social_links) && $edit_social_links == 'edit_social_links' && filter_var($user_id, FILTER_VALIDATE_INT) == true) {
+		} else if ($_POST['shareSeasonalGreetNew'] == "shareSeasonalGreetNew" && filter_var($user_id, FILTER_VALIDATE_INT) == true && filter_var($seasonal_greet_id, FILTER_VALIDATE_INT) == true) {
+
+
+			$m->set_data('seasonal_greet_id', $seasonal_greet_id);
+			$m->set_data('user_id', $user_id);
+			$m->set_data('created_at', date('Y-m-d H:i:s')); 
+			$a = array(
+				'promotion_id' => $m->get_data('seasonal_greet_id'), 
+				'user_id' => $m->get_data('user_id'), 
+				'is_new' => 1,
+				'created_at' => $m->get_data('created_at') 
+			);
+
+		 
+$q = $d->insert("seasonal_greeting_share_master",$a);
+
+			if ($q == true) {
+				$seasonal_greet_master = $d->select("seasonal_greet_master", "seasonal_greet_id='$promotion_id'");
+				$seasonal_greet_master_data = mysqli_fetch_array($seasonal_greet_master);
+
+				$d->insert_myactivity($user_id,"0","", "You Share Seasonal Greting ".$seasonal_greet_master_data['title'],"activity.png");
+				$response["message"] = "Done";
+				$response["status"] = "200";
+				echo json_encode($response);
+				exit();
+			} else {
+				$response["message"] = "Fail";
+				$response["status"] = "201";
+				echo json_encode($response);
+			}
+
+
+		} else  if (isset($edit_social_links) && $edit_social_links == 'edit_social_links' && filter_var($user_id, FILTER_VALIDATE_INT) == true) {
 
 			$m->set_data('facebook', $facebook);
 			$m->set_data('instagram', $instagram);
