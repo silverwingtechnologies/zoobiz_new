@@ -677,6 +677,12 @@ while($getBLockUserData=mysqli_fetch_array($getBLockUserQry)) {
         
       
 }
+
+if(!isset($user_name)){
+    $uQry = $d->selectRow("*","users_master", " user_id='$user_id'", "");
+ $uData=mysqli_fetch_array($uQry);
+ $user_name = $uData['user_full_name'];
+}
 $blocked_users = implode(",", $blocked_users); 
 
 

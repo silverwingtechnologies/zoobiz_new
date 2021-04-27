@@ -120,6 +120,15 @@ if(isset($city_id)){
  
 }
 
+
+
+$user_employment_details_qry = $d->selectRow("business_sub_category_id","user_employment_details", "");
+	 $used_categories = array('0');
+	while ($user_employment_details_data = mysqli_fetch_array($user_employment_details_qry)) {
+		 $used_categories[] = $user_employment_details_data['business_sub_category_id'];
+	}
+$used_categories = implode(",", $used_categories);
+
  $zoobiz_settings_master_qry = $d->select("zoobiz_settings_master","","");
 	$zoobiz_settings_master_data=mysqli_fetch_array($zoobiz_settings_master_qry);
 	$max_member_per_subcategory = $zoobiz_settings_master_data['max_member_per_subcategory'];
@@ -128,7 +137,7 @@ if(isset($city_id)){
 
 			$app_data = $d->selectRow("business_sub_categories.business_sub_category_id,business_categories.business_category_id,business_sub_categories.sub_category_name,business_categories.category_name","business_categories,business_sub_categories", "
 				business_categories.category_status = 0 and
-				business_sub_categories.business_category_id=business_categories.business_category_id AND business_sub_categories.sub_category_status='0'", "ORDER BY business_sub_categories.sub_category_name ASC");
+				business_sub_categories.business_category_id=business_categories.business_category_id AND business_sub_categories.sub_category_status='0' and business_sub_categories.business_sub_category_id  in ($used_categories) ", "ORDER BY business_sub_categories.sub_category_name ASC");
 
 			if (mysqli_num_rows($app_data) > 0) {
 

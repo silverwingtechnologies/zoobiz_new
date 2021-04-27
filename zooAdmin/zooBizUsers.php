@@ -66,7 +66,7 @@
              <select id="device"  class="form-control single-select" name="device" type="text"   >
                             <option value="">All</option>
                             <option <?php if( isset($_GET['device']) &&   $_GET['device'] == 0 ) { echo 'selected';} ?>  value="0">Android Users</option>
-                             <option <?php if( isset($_GET['device']) &&   $_GET['device'] == 0 ) { echo 'selected';} ?>  value="1">iOS Users</option>
+                             <option <?php if( isset($_GET['device']) &&   $_GET['device'] == 1 ) { echo 'selected';} ?>  value="1">iOS Users</option>
                         </select>  
           </div>
         </div>

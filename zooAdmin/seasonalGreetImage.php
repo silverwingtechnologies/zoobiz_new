@@ -389,7 +389,8 @@ $stle_var= "display:block;";
                <div   class="form-group row" >
                <label class="col-lg-2 col-form-label form-control-label">From Name Font Color </label>
                   <div class="col-lg-4">
-               <input type="color" id="from_name_font_color" name="from_name_font_color" value="<?php if($seasonal_greet_image_id ){ echo $from_name_font_color; } ?>"> 
+               <input type="color" id="from_name_font_color" name="from_name_font_color" value="<?php if($seasonal_greet_image_id ){ echo $from_name_font_color; } ?>">
+               <input type="text" class="form-control"  id="from_name_font_color_text" name="from_name_font_color_text" value="<?php if($seasonal_greet_image_id ){ echo $from_name_font_color; } ?>"> 
              </div>
 
 

@@ -199,6 +199,7 @@ for ($l=0; $l < count($dataArray) ; $l++) {
                             $discussion["user_profile_pic"] ="";
                         }
                         $discussion["user_full_name"] =$user_data_arr['user_full_name'];
+                        $discussion["short_name"] =strtoupper(substr($user_data_arr["user_first_name"], 0, 1).substr($user_data_arr["user_last_name"], 0, 1) );
                     $discussion["user_mobile"] =$user_data_arr['user_mobile'];
                     $discussion["user_city"] =$city_array[$user_data_arr['city_id']];
 
@@ -206,6 +207,31 @@ for ($l=0; $l < count($dataArray) ; $l++) {
                     $discussion["cllassified_id"]           = $data['cllassified_id'];
                     $discussion["business_category_id"]     = $data['business_category_id'];
                     $discussion["business_sub_category_id"] = $data['business_sub_category_id'];
+
+
+
+                    $discussion["category_array"] = array();
+                    $fi1                 = $d->selectRow("business_categories.business_category_id,business_categories.category_name","classified_category_master,business_categories", "business_categories.business_category_id=classified_category_master.business_category_id AND  classified_category_master.classified_id='$data[cllassified_id]' ");
+                    while ($feeData1 = mysqli_fetch_array($fi1)) {
+                        $category_array              = array();
+                        $category_array["business_category_id"]   = $feeData1['business_category_id'];
+                        $category_array["category_name"] = $feeData1['category_name'];
+                        array_push($discussion["category_array"], $category_array);
+                    }
+
+
+                    $discussion["sub_category_array"] = array();
+                    $fi1                 = $d->selectRow("business_sub_categories.business_sub_category_id,business_sub_categories.sub_category_name","classified_category_master,business_sub_categories", "business_sub_categories.business_sub_category_id=classified_category_master.business_sub_category_id AND  classified_category_master.classified_id='$data[cllassified_id]' ");
+                    while ($feeData1 = mysqli_fetch_array($fi1)) {
+                        $sub_category_array              = array();
+                        $sub_category_array["business_sub_category_id"]   = $feeData1['business_sub_category_id'];
+                        $sub_category_array["sub_category_name"] = $feeData1['sub_category_name'];
+                        array_push($discussion["sub_category_array"], $sub_category_array);
+                    }
+
+
+
+
                     $discussion["cllassified_title"]        = html_entity_decode($data['cllassified_title']);
                     $discussion["cllassified_description"]  = html_entity_decode($data['cllassified_description']);
                     $discussion["user_id"]                  = html_entity_decode($data['user_id']);
@@ -345,12 +371,18 @@ while($getBLockUserData=mysqli_fetch_array($getBLockUserQry)) {
       
 }
 $blocked_users = implode(",", $blocked_users); 
-
-                            $newFileNameAaudio = rand() . $user_id;
+if(!isset($user_name)){
+    $uQry = $d->selectRow("*","users_master", " user_id='$user_id'", "");
+ $uData=mysqli_fetch_array($uQry);
+ $user_name = $uData['user_full_name'];
+}
+ 
+                            $newFileNameAaudio =$_FILES['classified_audio']['name'];// rand() . $user_id;
                             $dirPathAud = "../img/cllassified/audio/";
                             $ext = pathinfo($_FILES['classified_audio']['name'], PATHINFO_EXTENSION);
-                            move_uploaded_file($_FILES["classified_audio"]["tmp_name"],$dirPathAud . $newFileNameAaudio."_audio." . $ext);
-                            $classified_audio =  $newFileNameAaudio."_audio." . $ext;
+                            move_uploaded_file($_FILES["classified_audio"]["tmp_name"],$dirPathAud . $newFileNameAaudio);
+                            //."." . $ext
+                            $classified_audio =  $newFileNameAaudio;//."." . $ext;
              
             $m->set_data('cllassified_title', $cllassified_title);
             $m->set_data('cllassified_description', $cllassified_description);
@@ -380,7 +412,28 @@ $blocked_users = implode(",", $blocked_users);
 
             $total_docs = count($_FILES['classified_docs']['tmp_name']);
 
+$_POST['business_category_id'] = explode(",", $_POST['business_category_id']);
+$_POST['business_sub_category_id'] = explode(",", $_POST['business_sub_category_id']);
+             $total_categories = count($_POST['business_category_id']);
+
+
             if ($q1 > 0) {
+
+                //add multiple categories start
+                 for ($k = 0; $k < $total_categories; $k++) {
+                         $a1 = array(
+                                'classified_id' => $cllassified_id,
+                                'user_id' => $user_id,
+                                'business_category_id' => $_POST['business_category_id'][$k],
+                                'business_sub_category_id' => $_POST['business_sub_category_id'][$k], 
+                                'created_at' =>date("Y-m-d H:i:s")
+                            );
+                            $d->insert("classified_category_master", $a1);
+                       
+                    }
+                //add multiple categories end
+
+
 
                 //add multiple image start
                 for ($i = 0; $i < $total; $i++) {
@@ -409,7 +462,7 @@ $blocked_users = implode(",", $blocked_users);
                                     $ext ='png';
                                 }
                                 $tmp = imageResize($imageSrc, $sourceProperties[0], $sourceProperties[1], $newImageWidth, $newImageHeight);
-                                imagepng($tmp, $dirPath . $newFileName . "_feed." . $ext);
+                                imagepng($tmp, $dirPath . $newFileName . "_cls." . $ext);
                                 break;
                                 case IMAGETYPE_JPEG:
                                 $imageSrc = imagecreatefromjpeg($uploadedFile);
@@ -417,7 +470,7 @@ $blocked_users = implode(",", $blocked_users);
                                     $ext ='jpeg';
                                 }
                                 $tmp = imageResize($imageSrc, $sourceProperties[0], $sourceProperties[1], $newImageWidth, $newImageHeight);
-                                imagejpeg($tmp, $dirPath . $newFileName . "_feed." . $ext);
+                                imagejpeg($tmp, $dirPath . $newFileName . "_cls." . $ext);
                                 break;
                                 case IMAGETYPE_GIF:
                                 $imageSrc = imagecreatefromgif($uploadedFile);
@@ -425,7 +478,7 @@ $blocked_users = implode(",", $blocked_users);
                                     $ext ='gif';
                                 }*/
                                 $tmp = imageResize($imageSrc, $sourceProperties[0], $sourceProperties[1], $newImageWidth, $newImageHeight);
-                                imagegif($tmp, $dirPath . $newFileName . "_feed." . $ext);
+                                imagegif($tmp, $dirPath . $newFileName . "_cls." . $ext);
                                 break;
                                 default:
                                 $response["message"] = "Invalid Image type.";

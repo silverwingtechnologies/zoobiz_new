@@ -522,7 +522,7 @@
                 <legend  class="scheduler-border">App Popup Settings</legend>  
                  <form id="customClassifieds" action="controller/customController.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group row">
-                <label for="input-10" class="col-sm-2 col-form-label">show youtube video poup?<span class="text-danger">*</span></label>
+                <label for="input-10" class="col-sm-2 col-form-label">show youtube video Popup?<span class="text-danger">*</span></label>
                 <div class="col-sm-10">
                    <select id="show_youtube_video_poup" required="" class="form-control single-select" name="show_youtube_video_poup" type="text" >
                             <option value="">-- Select --</option>
@@ -537,7 +537,7 @@
               
 
                <div class="form-group row">
-                       <label class="col-lg-2 col-form-label form-control-label">youtube video poup link <span class="required">*</span></label>
+                       <label class="col-lg-2 col-form-label form-control-label">youtube video Popup link <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input minlength="5" maxlength="255"   class="form-control  " name="youtube_video_poup_link" type="text" value="<?php echo $youtube_video_poup_link; ?>" required="">
                       </div>

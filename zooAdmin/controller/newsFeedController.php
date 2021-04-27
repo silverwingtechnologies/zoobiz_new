@@ -103,8 +103,8 @@ $msg = $data_q['msg'];
   $user_notification=$d->delete("user_notification"," other_user_id ='$other_user_id' and timeline_id='$other_timeline_id' and notification_desc like '%".$msg."%'");
 
 
-     $_SESSION['msg'] = $data_q['msg']." Timeline Comment Deleted";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+   //  $_SESSION['msg'] = $data_q['msg']." Timeline Comment Deleted";
+    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$data_q['msg']." Timeline Comment Deleted");
   echo 1;
 } else {
   echo 0;

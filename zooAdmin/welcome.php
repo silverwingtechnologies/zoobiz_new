@@ -565,13 +565,17 @@ $today_date = date("Y-m-d");
               $nq=$d->select("users_master,user_employment_details,business_sub_categories","  business_sub_categories.incepted_user_id=user_employment_details.user_id and user_employment_details.business_category_id = '-1' and user_employment_details.business_sub_category_id = '-1'  AND   user_employment_details.user_id=users_master.user_id and users_master.user_mobile!='0' AND users_master.active_status=0 and business_sub_categories.business_category_id='-2'   "," group by users_master.user_mobile ORDER BY users_master.register_date ASC  ");
 
 
-              while ($newUserData=mysqli_fetch_array($nq)) { ?>
+              while ($newUserData=mysqli_fetch_array($nq)) {
+
+             
+                 
+               ?>
                <tr>
                  <td><?php echo $i++; ?></td>
                  <td><a href="approveMember?id=<?php echo $newUserData['user_id']; ?>"><?php echo $newUserData['user_full_name']; ?></a></td>
                  <td><?php echo $newUserData['user_email']; ?></td>
                  <td><?php echo $newUserData['user_mobile']; ?></td>
-                 <td><?php echo $newUserData['sub_category_name']; ?></td>
+                 <td><?php echo html_entity_decode(  $newUserData['sub_category_name']); ?></td>
                  </tr>
               <?php  } ?>
              </tbody>

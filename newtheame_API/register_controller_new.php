@@ -799,6 +799,12 @@ $org_user_id= $user_id;
 
 //add custom business category
 			if(isset($custom_category_name) && $custom_category_name!='' && $business_category_id =='-1' && $business_sub_category_id =="-1"){
+				$custom_category_name = html_entity_decode($custom_category_name);
+ $custom_category_name = stripslashes($custom_category_name);
+$custom_category_name = htmlentities($custom_category_name,ENT_QUOTES);
+ 
+				
+
 				$custom_category_name_new = strtolower($custom_category_name);
 				$q_cat=$d->select("business_sub_categories"," lower(sub_category_name) ='$custom_category_name_new'  and sub_category_status=0 ");
 

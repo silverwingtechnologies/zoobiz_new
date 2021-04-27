@@ -6,11 +6,16 @@ if(filter_var($id, FILTER_VALIDATE_INT) != true){
     window.location.href='manageMembers';
     </script>");
 }
-$qq=$d->select("users_master,user_employment_details,business_sub_categories","users_master.user_id='$id'  AND business_sub_categories.business_category_id='-2' and    business_sub_categories.incepted_user_id=user_employment_details.user_id AND    user_employment_details.user_id=users_master.user_id  ","");
+$qq=$d->select("users_master,business_sub_categories,user_employment_details","users_master.user_id='$id'  AND business_sub_categories.business_category_id='-2' and    business_sub_categories.incepted_user_id=user_employment_details.user_id AND    user_employment_details.user_id=users_master.user_id  ","");
 $userData=mysqli_fetch_array($qq);
 extract($userData);
 
- 
+ if($business_category_id !="-1" || $business_sub_category_id !="-1"){
+  $_SESSION['msg1']='Already Approved';
+  echo ("<script LANGUAGE='JavaScript'>
+    window.location.href='viewMember?id=".$user_id."';
+    </script>");
+ }
 
 ?>
 <div class="content-wrapper">
@@ -147,7 +152,7 @@ extract($userData);
         <label class="col-lg-3 col-form-label form-control-label">Business Website</label>
         <div class="col-lg-9">
            
-         <?php if(trim($company_website) !=''){ echo $company_website;} else { echo "Not Priovided";}  ?>
+         <?php if(trim($company_website) !=''){ echo $company_website;} else { echo "Not Provided";}  ?>
         </div>
       </div>
          
@@ -155,7 +160,7 @@ extract($userData);
         <label class="col-lg-3 col-form-label form-control-label">Business Keywords</label>
         <div class="col-lg-9">
            
-           <?php if(trim($search_keyword) !=''){ echo $search_keyword;} else { echo "Not Priovided";}  ?>
+           <?php if(trim($search_keyword) !=''){ echo $search_keyword;} else { echo "Not Provided";}  ?>
         </div>
       </div>
 
@@ -163,7 +168,7 @@ extract($userData);
       <div class="form-group row">
         <label class="col-lg-3 col-form-label form-control-label">Products And Services</label>
         <div class="col-lg-9">
-           <?php if(trim($products_servicess) !=''){ echo $products_servicess;} else { echo "Not Priovided";}  ?>
+           <?php if(trim($products_servicess) !=''){ echo $products_servicess;} else { echo "Not Provided";}  ?>
       
         </div>
       </div>
@@ -228,7 +233,7 @@ extract($userData);
         <label class="col-lg-3 col-form-label form-control-label">Business Website</label>
         <div class="col-lg-9">
            
-         <?php if(trim($company_website) !=''){ echo $company_website;} else { echo "Not Priovided";}  ?>
+         <?php if(trim($company_website) !=''){ echo $company_website;} else { echo "Not Provided";}  ?>
         </div>
       </div>
          
@@ -236,7 +241,7 @@ extract($userData);
         <label class="col-lg-3 col-form-label form-control-label">Business Keywords</label>
         <div class="col-lg-9">
            
-           <?php if(trim($search_keyword) !=''){ echo $search_keyword;} else { echo "Not Priovided";}  ?>
+           <?php if(trim($search_keyword) !=''){ echo $search_keyword;} else { echo "Not Provided";}  ?>
         </div>
       </div>
 
@@ -244,7 +249,7 @@ extract($userData);
       <div class="form-group row">
         <label class="col-lg-3 col-form-label form-control-label">Products And Services</label>
         <div class="col-lg-9">
-           <?php if(trim($products_servicess) !=''){ echo $products_servicess;} else { echo "Not Priovided";}  ?>
+           <?php if(trim($products_servicess) !=''){ echo $products_servicess;} else { echo "Not Provided";}  ?>
       
         </div>
       </div>

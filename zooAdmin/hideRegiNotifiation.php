@@ -34,7 +34,7 @@
                     Select
                   </th>
                   <th class="text-right">#</th>
-                 <th class="text-right">MObile Number</th>
+                 <th >MObile Number</th>
                 
                  
                   
