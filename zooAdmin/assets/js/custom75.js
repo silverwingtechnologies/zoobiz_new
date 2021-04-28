@@ -1,5 +1,22 @@
 jQuery(document).ready(function($){
     //your custom2.js code here
+
+     $( "#from_name_font_color_text" ).blur(function() { 
+       $('#from_name_font_color').val($('#from_name_font_color_text').val());
+      });
+
+     $( "#from_name_font_color" ).change(function() { 
+       $('#from_name_font_color_text').val($('#from_name_font_color').val());
+      });
+
+
+      $( "#to_name_font_color_text" ).blur(function() { 
+       $('#to_name_font_color').val($('#to_name_font_color_text').val());
+      });
+
+     $( "#to_name_font_color" ).change(function() { 
+       $('#to_name_font_color_text').val($('#to_name_font_color').val());
+      });
 });
 
 

@@ -68,7 +68,7 @@ $where=" and users_master.invoice_download=1  ";
       user_employment_details.user_id = users_master.user_id and
       business_adress_master.user_id = users_master.user_id and
       states.state_id = business_adress_master.state_id and
-      users_master.user_id='$user_id'  and transection_master.is_paid = 0  $where  ");
+      users_master.user_id='$user_id'  and transection_master.is_paid = 0  $where order by transection_master.transection_id desc ");
  if(mysqli_num_rows($qp)  > 0 ){
     $mData=mysqli_fetch_array($qp);
   }   else {
@@ -225,10 +225,13 @@ $where=" and users_master.invoice_download=1  ";
                     </address>
                   </div>
                   <div class="col-sm-6  text-right">
-                    <h4><B>Invoice No. : # Invoice<?php echo $mData['zoobiz_id'];?>   <b></h4>
+                    <h4><B>Invoice No. : # Invoice<?php echo $mData['zoobiz_id'].''.$mData['transection_id'];?>   <b></h4>
                     <b>Invoice Date:</b> <?php 
 
-$reg_comp_date=strtotime(date("d-m-Y", strtotime($mData['complete_profile_date']))); 
+
+
+ 
+      $reg_comp_date=strtotime(date("d-m-Y", strtotime($mData['complete_profile_date']))); 
 $trans_date=strtotime(date("d-m-Y", strtotime($mData['transection_date'])));
  
 if($reg_comp_date > $trans_date)
@@ -237,13 +240,46 @@ if($reg_comp_date > $trans_date)
 } else {
     $inv_date = $mData['transection_date'];
 }
-                    echo date("d-m-Y", strtotime($inv_date)); ?><br>
+echo date("d-m-Y", strtotime($inv_date));
 
-                        <b>Received Date:</b> <?php if($mData['complete_profile_date'] !="0000-00-00 00:00:00") { echo date("d-m-Y h:i A", strtotime($mData['transection_date'])); }   ?><br>
+    
+
+
+
+ ?><br>
+
+                        <b>Received Date:</b> <?php /*if($mData['complete_profile_date'] !="0000-00-00 00:00:00") { echo date("d-m-Y h:i A", strtotime($mData['transection_date'])); }*/
+
+
+ 
+      $reg_comp_date=strtotime(date("d-m-Y h:i A", strtotime($mData['complete_profile_date']))); 
+$trans_date=strtotime(date("d-m-Y h:i A", strtotime($mData['transection_date'])));
+ 
+if($reg_comp_date > $trans_date)
+{
+    $inv_date = $mData['complete_profile_date'];
+} else {
+    $inv_date = $mData['transection_date'];
+}
+echo date("d-m-Y h:i A", strtotime($inv_date));
+
+  
+
+
+                           ?><br>
+
 
                         <b>Payment Mode : </b> <?php 
                         if(mysqli_num_rows($qp) > 1){ echo ""; 
-                        $transection_master=$d->select("transection_master","user_id='$user_id'","");
+
+$whereMode ="";
+                         if(isset($_GET['transection_date']) && $_GET['transection_date']!= '' ){
+      $transection_date = date("Y-m-d", strtotime($_GET['transection_date'])); 
+      $whereMode=" and ( DATE(transection_date) ='$transection_date')    order by  transection_id desc  limit 0,1 ";
+    }
+
+
+                        $transection_master=$d->select("transection_master","user_id='$user_id'  $whereMode   ","");
                         $transection_master_data_array= array();
                          while ($transection_master_data_new=mysqli_fetch_array($transection_master )) {
                           $transection_master_data_array[] = $transection_master_data_new['payment_mode'];

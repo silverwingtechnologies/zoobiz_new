@@ -370,7 +370,7 @@ $("#editPrimaryNumberFrm").validate({
         messages: {
             primary_user_mobile: { 
             required: "Please enter primary user mobile number", 
-            remote: "Mobile number alerady registered in Zoobiz"
+            remote: "Mobile number already registered in Zoobiz"
         },
         submitHandler: function(form) {
             $(':input[type="submit"]').prop('disabled', true);

@@ -1208,7 +1208,7 @@ if($userData['active_status']=="0"){
           <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">About Business</label>
             <div class="col-lg-9">
-              <textarea maxlength="300" class="form-control" name="business_description"  type="text" value=""><?php echo $proData['business_description']; ?></textarea>
+              <textarea   class="form-control" name="business_description"  type="text" value=""><?php echo $proData['business_description']; ?></textarea>
             </div>
           </div>
 

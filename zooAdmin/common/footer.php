@@ -208,8 +208,8 @@
     
     <!--Form Validatin Script-->
     <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="assets/js/validate78.js"></script>
-    <script src="assets/js/custom74.js"></script>
+    <script type="text/javascript" src="assets/js/validate79.js"></script>
+    <script src="assets/js/custom75.js"></script>
     
     <!--Select Plugins Js-->
     <script src="assets/plugins/select2/js/select2.min.js"></script>
@@ -229,7 +229,7 @@
     <script src="assets/plugins/material-datepicker/js/moment.min.js"></script>
     <script src="assets/plugins/material-datepicker/js/bootstrap-material-datetimepicker.min.js"></script>
     <script src="assets/plugins/material-datepicker/js/ja.js"></script>
-     <script src="assets/js/dataTables4.js"></script> 
+     <script src="assets/js/dataTables5.js"></script> 
     <script src="assets/js/datepickers3.js"></script> 
     <script type="">
     $(window).load(function() {

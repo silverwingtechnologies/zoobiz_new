@@ -138,11 +138,9 @@ else if(isset($_POST['addSeasonalGreetImage'])){
    $m->set_data('to_name_font_size',$to_name_font_size);
    $m->set_data('show_from_name',$show_from_name);
 
-   if( ($from_name_font_color == "" || $from_name_font_color == "#000") && $from_name_font_color_text !=""  ){
-    $m->set_data('from_name_font_color',$from_name_font_color_text);
-   } else {
+   
      $m->set_data('from_name_font_color',$from_name_font_color);
-   }
+   
    
    $m->set_data('from_name_font_name',$from_name_font_name); 
    $m->set_data('from_name_font_size',$from_name_font_size); 
@@ -248,11 +246,9 @@ else if(isset($_POST['addSeasonalGreetImage'])){
    $m->set_data('to_name_font_size',$to_name_font_size);
    $m->set_data('show_from_name',$show_from_name);
 
-   if( ($from_name_font_color == "" || $from_name_font_color == "#000") && $from_name_font_color_text !=""  ){
-    $m->set_data('from_name_font_color',$from_name_font_color_text);
-   } else {
+  
      $m->set_data('from_name_font_color',$from_name_font_color);
-   }
+  
    
 
     

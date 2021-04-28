@@ -87,7 +87,7 @@ foreach($files as $file) {
 
 
 
-// img/promotion/promotion_center_image_master/
+// img/promotion/promotion_center_image/
 if(0){ 
 echo "<h1>promotion_center_image_master</h1>";
  $files = scandir('../img/promotion/promotion_center_image/');

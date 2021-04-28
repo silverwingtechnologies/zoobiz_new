@@ -297,11 +297,20 @@ $stle_var= "display:block;";
 } else {
  $stle_var= "display:none;";
 }?>
-              <span id="to_name_div"   style="<?php echo $stle_var; ?>"   >
+              <span id="to_name_div"   
+
+
+              <?php if(isset($seasonal_greet_image_id ) && $show_to_name=="No" ){?> style="display: none;" <?php } ?>
+
+               >
                <div   class="form-group row" >
                <label class="col-lg-2 col-form-label form-control-label">To Name Font Color </label>
-                  <div class="col-lg-4">
+                  <div class="col-lg-2">
                <input type="color" id="to_name_font_color" name="to_name_font_color" value="<?php if($seasonal_greet_image_id ){ echo $to_name_font_color; } ?>"> 
+             </div>
+
+              <div class="col-lg-2">
+               <input type="text" class="form-control"  id="to_name_font_color_text" name="to_name_font_color_text" value="<?php if($seasonal_greet_image_id ){ echo $to_name_font_color; } ?>"> 
              </div>
 
 
@@ -387,9 +396,11 @@ $stle_var= "display:block;";
 
               <span id="from_name_div"  <?php if(isset($seasonal_greet_image_id ) && $show_from_name=="No" ){?> style="display: none;" <?php } ?> >
                <div   class="form-group row" >
-               <label class="col-lg-2 col-form-label form-control-label">From Name Font Color </label>
-                  <div class="col-lg-4">
+               <label class="col-lg-2 col-form-label form-control-label">From Name Font Color (select or type) </label>
+                  <div class="col-lg-2">
                <input type="color" id="from_name_font_color" name="from_name_font_color" value="<?php if($seasonal_greet_image_id ){ echo $from_name_font_color; } ?>">
+             </div>
+                <div class="col-lg-2">
                <input type="text" class="form-control"  id="from_name_font_color_text" name="from_name_font_color_text" value="<?php if($seasonal_greet_image_id ){ echo $from_name_font_color; } ?>"> 
              </div>
 
@@ -488,4 +499,7 @@ $stle_var= "display:block;";
       </div>
       <!-- End container-fluid-->
       </div><!--End content-wrapper-->
-      
+      <script type="text/javascript">
+       
+
+      </script>

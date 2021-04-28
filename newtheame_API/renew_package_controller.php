@@ -16,7 +16,7 @@ if (isset($_POST) && !empty($_POST)) {
 			$org_plan_renewal_date = $user_data['plan_renewal_date'];
  
 
-  if (strtotime($today)>strtotime($plan_expire_date)) {
+  if (strtotime($today)>strtotime($org_plan_renewal_date)) {
 		$org_plan_renewal_date = $today;
   }
 			$con->autocommit(FALSE);

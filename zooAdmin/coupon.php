@@ -166,7 +166,7 @@ extract($coupon_master_data);
               <div class="form-group row">
       <label for="client" class="col-lg-2 col-form-label form-control-label">Coupon Amount  </label>
       <div class="col-lg-3">
-        <input maxlength="7" onchange="getNewPriceDiscountFlat();" class="form-control onlyNumber"  id="coupon_amount" type="text" name="coupon_amount" value="<?php echo number_format($coupon_amount,2); ?>" placeholder=""   max="<?php if(isset($coupon_id)){ echo $max_amount; } ?>">
+        <input maxlength="10" onchange="getNewPriceDiscountFlat();" class="form-control onlyNumber"  id="coupon_amount" type="text" name="coupon_amount" value="<?php echo  number_format( $coupon_amount, 2, '.', ''); ?>" placeholder=""   max="<?php if(isset($coupon_id)){ echo $max_amount; } ?>">
       </div>
       <div class="col-lg-2 text-center">
         <span  class="">OR</span>
