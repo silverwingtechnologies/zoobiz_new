@@ -7,18 +7,10 @@ if (isset($_POST) && !empty($_POST)) {
 // //C:\xampp\htdocs\zoobiz\mobileApi\timeline_controller.php
 	if ($key == $keydb) {
 
-
-		if(isset($user_id)){ 
-		$u_qry=$d->select("users_master","user_id='$user_id'");
-        $u_data=mysqli_fetch_array($u_qry);
-
-        $share_user_full_name = $u_data['user_full_name'];
-        $share_user_user_mobile = $u_data['user_mobile'];
-
-        $share_app_content ="Download Zoobiz App & Grow your business across cities. \nAndroid Link:\nhttps://play.google.com/store/apps/details?id=com.silverwing.zoobiz\nIOS Link:\nhttps://apps.apple.com/us/app/zoobiz/id1550560836\n$share_user_full_name\n$share_user_user_mobile";
-    }else{
+		 
     	$share_app_content ="Download Zoobiz App & Grow your business across cities. \nAndroid Link:\nhttps://play.google.com/store/apps/details?id=com.silverwing.zoobiz\nIOS Link:\nhttps://apps.apple.com/us/app/zoobiz/id1550560836";
-    }
+    
+		
 		$charLimit = 150;
 		$response = array();
 		extract(array_map("test_input", $_POST));
@@ -138,7 +130,7 @@ echo "<pre>";print_r($blocked_users_new);exit;*/
                     $user_found_arr[$user_found_data['user_id']] = $user_found_data['cnt'];
                 }
 
-                $data_qry = $d->selectRow("users_master.user_id,users_master.user_profile_pic,users_master.user_full_name,user_employment_details.company_name,user_employment_details.company_logo,users_master.user_first_name,users_master.user_last_name,users_master.user_profile_pic, users_master.user_mobile, users_master.public_mobile ","users_master,user_employment_details", "users_master.user_id=user_employment_details.user_id AND users_master.user_id in ($user_id_array) ");
+                $data_qry = $d->selectRow("users_master.user_id,users_master.user_profile_pic,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,user_employment_details.company_logo,users_master.user_first_name,users_master.user_last_name,users_master.user_profile_pic, users_master.user_mobile, users_master.public_mobile ","users_master,user_employment_details", "users_master.user_id=user_employment_details.user_id AND users_master.user_id in ($user_id_array) ");
  				
 
  				 $DArray = array();
@@ -173,7 +165,7 @@ echo "<pre>";print_r($blocked_users_new);exit;*/
                     $video_data_arr2[$VArray[$dv]['timeline_id']."__".$VArray[$dv]['user_id']][] = $VArray[$dv];
                 }
 	
-                $qlike_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_like_master.like_id,timeline_like_master.timeline_id,timeline_like_master.user_id,users_master.user_full_name,users_master.user_profile_pic,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id in($timeline_id_array) AND timeline_like_master.user_id=users_master.user_id AND timeline_like_master.active_status=0 group by timeline_like_master.timeline_id, timeline_like_master.user_id");
+                $qlike_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_like_master.like_id,timeline_like_master.timeline_id,timeline_like_master.user_id,users_master.user_full_name,users_master.user_mobile,users_master.user_profile_pic,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id in($timeline_id_array) AND timeline_like_master.user_id=users_master.user_id AND timeline_like_master.active_status=0 group by timeline_like_master.timeline_id, timeline_like_master.user_id");
  
                  $LArray = array();
                 $Lcounter = 0 ;
@@ -190,7 +182,7 @@ echo "<pre>";print_r($blocked_users_new);exit;*/
                  }
  				
 
- 				$qcomment = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.comments_id, timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,users_master.user_profile_pic,timeline_comments.modify_date,timeline_comments.comments_id ,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", " group by timeline_comments.comments_id  ORDER BY timeline_comments.comments_id DESC");
+ 				$qcomment = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.comments_id, timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,users_master.user_profile_pic,timeline_comments.modify_date,timeline_comments.comments_id ,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", " group by timeline_comments.comments_id  ORDER BY timeline_comments.comments_id DESC");
  				$CArray = array();
                 $Ccounter = 0 ;
                 foreach ($qcomment as  $value) {
@@ -209,7 +201,7 @@ echo "<pre>";print_r($blocked_users_new);exit;*/
 
                  $parent_comments_id_array = implode(",", $parent_comments_id_array);
 
-                 $sub_cmt_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,users_master.user_profile_pic,timeline_comments.modify_date,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and   timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($parent_comments_id_array)  ", "ORDER BY timeline_comments.comments_id DESC");
+                 $sub_cmt_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,users_master.user_profile_pic,timeline_comments.modify_date,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and   timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($parent_comments_id_array)  ", "ORDER BY timeline_comments.comments_id DESC");
                  $SCArray = array();
                 $SCcounter = 0 ;
                 foreach ($sub_cmt_qry as  $value) {
@@ -322,7 +314,10 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
 } else {
 	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
 }
-
+$feed["share_timeline_text"] .="\n".$user_full_name ;
+   if($feed["user_mobile"] !=""){
+   	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+   }
    
 						$feed["user_name"] = $user_full_name;
 						$feed["city_id"] = $city_data['city_id'];
@@ -696,7 +691,7 @@ if(isset($debug)){
                     $user_found_arr[$user_found_data['user_id']] = $user_found_data['cnt'];
                 }
 
-                $data_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name, users_master.user_id,users_master.user_profile_pic,users_master.user_full_name,user_employment_details.company_name,user_employment_details.company_logo,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","users_master,user_employment_details", "users_master.user_id=user_employment_details.user_id AND users_master.user_id in ($user_id_array) ");
+                $data_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name, users_master.user_id,users_master.user_profile_pic,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,user_employment_details.company_logo,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","users_master,user_employment_details", "users_master.user_id=user_employment_details.user_id AND users_master.user_id in ($user_id_array) ");
  				
 
  				 $DArray = array();
@@ -731,7 +726,7 @@ if(isset($debug)){
                     $video_data_arr2[$VArray[$dv]['timeline_id']."__".$VArray[$dv]['user_id']][] = $VArray[$dv];
                 }
 
-                $qlike_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_like_master.like_id,timeline_like_master.timeline_id,timeline_like_master.user_id,users_master.user_full_name,users_master.user_profile_pic,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id in($timeline_id_array) AND timeline_like_master.user_id=users_master.user_id AND timeline_like_master.active_status=0 group by timeline_like_master.timeline_id, timeline_like_master.user_id");
+                $qlike_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_like_master.like_id,timeline_like_master.timeline_id,timeline_like_master.user_id,users_master.user_full_name,users_master.user_mobile,users_master.user_profile_pic,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id in($timeline_id_array) AND timeline_like_master.user_id=users_master.user_id AND timeline_like_master.active_status=0 group by timeline_like_master.timeline_id, timeline_like_master.user_id");
  
                  $LArray = array();
                 $Lcounter = 0 ;
@@ -748,7 +743,7 @@ if(isset($debug)){
                  }
  				
 
- 				$qcomment = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_comments.comments_id, timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,users_master.user_profile_pic,timeline_comments.modify_date,timeline_comments.comments_id  ,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", "ORDER BY timeline_comments.comments_id DESC");
+ 				$qcomment = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_comments.comments_id, timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,users_master.user_profile_pic,timeline_comments.modify_date,timeline_comments.comments_id  ,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", "ORDER BY timeline_comments.comments_id DESC");
  				$CArray = array();
                 $Ccounter = 0 ;
                 foreach ($qcomment as  $value) {
@@ -767,7 +762,7 @@ if(isset($debug)){
 
                  $parent_comments_id_array = implode(",", $parent_comments_id_array);
 
-                 $sub_cmt_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,users_master.user_profile_pic,timeline_comments.modify_date,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and   timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($parent_comments_id_array)  ", "ORDER BY timeline_comments.comments_id DESC");
+                 $sub_cmt_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,users_master.user_profile_pic,timeline_comments.modify_date,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and   timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($parent_comments_id_array)  ", "ORDER BY timeline_comments.comments_id DESC");
                  $SCArray = array();
                 $SCcounter = 0 ;
                 foreach ($sub_cmt_qry as  $value) {
@@ -948,7 +943,11 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
 } else {
 	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
 }
-						
+		
+		$feed["share_timeline_text"] .="\n".$user_full_name ;
+   if($feed["user_mobile"] !=""){
+   	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+   }				
 						$feed["city_id"] = $city_data['city_id'];
 						$feed["city_name"] = $city_data['city_name'];
 
@@ -1731,7 +1730,7 @@ $m->set_data('timeline_text',htmlspecialchars($timeline_text));
 
 
 				if ($parent_comments_id != 0) {
-					$quc = $d->selectRow("users_master.user_token,users_master.device,users_master.user_id","users_master,timeline_comments", "timeline_comments.user_id=users_master.user_id AND timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id!='$user_id' and timeline_alert=0 and timeline_comments.comments_id = '$parent_comments_id' ");
+					$quc = $d->selectRow("users_master.user_token,users_master.device,users_master.user_id","users_master,timeline_comments", "timeline_comments.user_id=users_master.user_id AND timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id!='$user_id' and timeline_alert=0 and timeline_comments.parent_comments_id = '$parent_comments_id' ");
 				} else {
 					$quc = $d->selectRow("users_master.user_token,users_master.device,users_master.user_id","users_master,timeline_master", "timeline_master.user_id=users_master.user_id AND timeline_master.timeline_id='$timeline_id' AND users_master.user_id!='$user_id' and timeline_alert=0 ");
 				}
@@ -1879,7 +1878,7 @@ $m->set_data('timeline_text',htmlspecialchars($timeline_text));
 				echo json_encode($response);
 			}
 		} else if ($_POST['getComments'] == "getComments" && filter_var($timeline_id, FILTER_VALIDATE_INT) == true) {
-			$qcomment = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,timeline_comments.user_id,timeline_comments.modify_date,user_employment_details.company_logo,timeline_comments.comments_id 
+			$qcomment = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,timeline_comments.user_id,timeline_comments.modify_date,user_employment_details.company_logo,timeline_comments.comments_id 
 							, user_employment_details.company_name,users_master.user_profile_pic ","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id = users_master.user_id and timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", " group by timeline_comments.comments_id  ORDER BY timeline_comments.comments_id DESC");
 
 
@@ -2074,11 +2073,11 @@ $blocked_users = implode(",", $blocked_users);
 
 			if(isset($limit_feed)){
 
-				$qnotification = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_master.meetup_user_id2,timeline_master.meetup_user_id1, timeline_master.timeline_id,timeline_master.timeline_text,users_master.user_full_name,user_employment_details.company_name,timeline_master.user_id,company_logo,timeline_master.feed_type,timeline_master.created_date,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","timeline_master,users_master,user_employment_details", "user_employment_details.user_id=users_master.user_id AND timeline_master.active_status = 0 AND timeline_master.user_id='$user_id' AND users_master.user_id='$user_id'
+				$qnotification = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_master.meetup_user_id2,timeline_master.meetup_user_id1, timeline_master.timeline_id,timeline_master.timeline_text,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,timeline_master.user_id,company_logo,timeline_master.feed_type,timeline_master.created_date,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","timeline_master,users_master,user_employment_details", "user_employment_details.user_id=users_master.user_id AND timeline_master.active_status = 0 AND timeline_master.user_id='$user_id' AND users_master.user_id='$user_id'
 and timeline_master.user_id not in ($blocked_users) ", "ORDER BY timeline_id DESC LIMIT $limit_feed, 10");
 				
 			} else {
-				$qnotification = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.timeline_id,timeline_master.timeline_text,users_master.user_full_name,user_employment_details.company_name,timeline_master.user_id,company_logo,timeline_master.feed_type,timeline_master.created_date,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","timeline_master,users_master,user_employment_details", "user_employment_details.user_id=users_master.user_id AND timeline_master.active_status = 0 AND timeline_master.user_id='$user_id' AND users_master.user_id='$user_id' 
+				$qnotification = $d->selectRow("users_master.user_first_name,users_master.user_last_name, timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.timeline_id,timeline_master.timeline_text,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,timeline_master.user_id,company_logo,timeline_master.feed_type,timeline_master.created_date,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","timeline_master,users_master,user_employment_details", "user_employment_details.user_id=users_master.user_id AND timeline_master.active_status = 0 AND timeline_master.user_id='$user_id' AND users_master.user_id='$user_id' 
 and timeline_master.user_id not in ($blocked_users) ", "ORDER BY timeline_id DESC LIMIT 500");
 			}
 			
@@ -2165,7 +2164,7 @@ and timeline_master.user_id not in ($blocked_users) ", "ORDER BY timeline_id DES
                     $photo_array[$PArray[$pd]['timeline_id']."__".$PArray[$pd]['user_id']][] = $PArray[$pd]; 
                 }
 
-                $qlike_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_like_master.like_id,timeline_like_master.timeline_id,users_master.user_id,users_master.user_full_name,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id in ($timeline_id_array)  AND timeline_like_master.user_id=users_master.user_id AND timeline_like_master.active_status=0");
+                $qlike_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_like_master.like_id,timeline_like_master.timeline_id,users_master.user_id,users_master.user_full_name,users_master.user_mobile,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id in ($timeline_id_array)  AND timeline_like_master.user_id=users_master.user_id AND timeline_like_master.active_status=0");
                 $LArray = array();
                 $Lcounter = 0 ;
                 foreach ($qlike_qry as  $value) {
@@ -2179,7 +2178,7 @@ and timeline_master.user_id not in ($blocked_users) ", "ORDER BY timeline_id DES
                     $qlike_data[$LArray[$pd]['timeline_id']][] = $LArray[$pd]; 
                 }
 
-                $qcomment_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,timeline_comments.modify_date,user_employment_details.company_logo , user_employment_details.company_name,users_master.user_profile_pic ","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id=users_master.user_id and  timeline_comments.timeline_id in ($timeline_id_array)  AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
+                $qcomment_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,timeline_comments.modify_date,user_employment_details.company_logo , user_employment_details.company_name,users_master.user_profile_pic ","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id=users_master.user_id and  timeline_comments.timeline_id in ($timeline_id_array)  AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
                 $QArray = array();
                 $Qcounter = 0 ;
                 foreach ($qcomment_qry as  $value) {
@@ -2207,7 +2206,7 @@ and timeline_master.user_id not in ($blocked_users) ", "ORDER BY timeline_id DES
 
 
                 $comments_id_array = implode(",", $comments_id_array);
-                $sub_data_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,user_employment_details.company_logo,timeline_comments.modify_date, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id = users_master.user_id and timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($comments_id_array)  ", " group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
+                $sub_data_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,user_employment_details.company_logo,timeline_comments.modify_date, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id = users_master.user_id and timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($comments_id_array)  ", " group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
 
                 $SDQArray = array();
                 $SDQcounter = 0 ;
@@ -2303,6 +2302,11 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
 	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
 }
 
+
+$feed["share_timeline_text"] .="\n".$user_full_name ;
+   if($feed["user_mobile"] !=""){
+   	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+   }
 $feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$feed["user_name"] = $data_notification['user_full_name'];
 					$feed["company_name"] = html_entity_decode($data_notification['company_name']);
@@ -2529,14 +2533,14 @@ $blocked_users = implode(",", $blocked_users);
 			if(isset($limit_feed)){
 
 				$qnotification = $d->selectRow("users_master.user_first_name,users_master.user_last_name,
-timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.timeline_id,timeline_master.timeline_text,users_master.user_full_name,users_master.user_id,user_employment_details.company_logo,timeline_master.timeline_id,timeline_master.feed_type,timeline_master.created_date,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","timeline_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and   timeline_master.active_status = 0 AND timeline_master.user_id='$user_id' AND users_master.user_id='$user_id' and timeline_master.user_id not in ($blocked_users)
+timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.timeline_id,timeline_master.timeline_text,users_master.user_full_name,users_master.user_mobile,users_master.user_id,user_employment_details.company_logo,timeline_master.timeline_id,timeline_master.feed_type,timeline_master.created_date,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","timeline_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and   timeline_master.active_status = 0 AND timeline_master.user_id='$user_id' AND users_master.user_id='$user_id' and timeline_master.user_id not in ($blocked_users)
  ", "ORDER BY timeline_id DESC LIMIT $limit_feed, 10");
 
 				 
 				
 			} else {
 				$qnotification = $d->selectRow("users_master.user_first_name,users_master.user_last_name,
-timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.timeline_id,timeline_master.timeline_text,users_master.user_full_name,users_master.user_id,user_employment_details.company_logo,timeline_master.timeline_id,timeline_master.feed_type,timeline_master.created_date,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","timeline_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and   timeline_master.active_status = 0 AND timeline_master.user_id='$user_id' AND users_master.user_id='$user_id' and timeline_master.user_id not in ($blocked_users)
+timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.timeline_id,timeline_master.timeline_text,users_master.user_full_name,users_master.user_mobile,users_master.user_id,user_employment_details.company_logo,timeline_master.timeline_id,timeline_master.feed_type,timeline_master.created_date,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","timeline_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and   timeline_master.active_status = 0 AND timeline_master.user_id='$user_id' AND users_master.user_id='$user_id' and timeline_master.user_id not in ($blocked_users)
 ", "ORDER BY timeline_id DESC LIMIT 500");
 			}
 
@@ -2611,7 +2615,7 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
                     $photo_array[$PArray[$pd]['timeline_id']."__".$PArray[$pd]['user_id']][] = $PArray[$pd]; 
                 }
 
-                $qlike_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_like_master.like_id,timeline_like_master.timeline_id,users_master.user_id,users_master.user_full_name,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id in ($timeline_id_array)  AND timeline_like_master.user_id=users_master.user_id AND timeline_like_master.active_status=0");
+                $qlike_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_like_master.like_id,timeline_like_master.timeline_id,users_master.user_id,users_master.user_full_name,users_master.user_mobile,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id in ($timeline_id_array)  AND timeline_like_master.user_id=users_master.user_id AND timeline_like_master.active_status=0");
                 $LArray = array();
                 $Lcounter = 0 ;
                 foreach ($qlike_qry as  $value) {
@@ -2625,7 +2629,7 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
                     $qlike_data[$LArray[$pd]['timeline_id']][] = $LArray[$pd]; 
                 }
 
-                $qcomment_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,timeline_comments.modify_date,user_employment_details.company_logo , user_employment_details.company_name,users_master.user_profile_pic ","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id=users_master.user_id and  timeline_comments.timeline_id in ($timeline_id_array)  AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
+                $qcomment_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,timeline_comments.modify_date,user_employment_details.company_logo , user_employment_details.company_name,users_master.user_profile_pic ","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id=users_master.user_id and  timeline_comments.timeline_id in ($timeline_id_array)  AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
                 $QArray = array();
                 $Qcounter = 0 ;
                 foreach ($qcomment_qry as  $value) {
@@ -2651,7 +2655,7 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
 
 
                 $comments_id_array = implode(",", $comments_id_array);
-                $sub_data_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,user_employment_details.company_logo,timeline_comments.modify_date, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id = users_master.user_id and timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($comments_id_array)  ", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
+                $sub_data_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name,timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,user_employment_details.company_logo,timeline_comments.modify_date, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id = users_master.user_id and timeline_comments.timeline_id in ($timeline_id_array) AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($comments_id_array)  ", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
 
                 $SDQArray = array();
                 $SDQcounter = 0 ;
@@ -2741,6 +2745,11 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
 } else {
 	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
 }
+
+$feed["share_timeline_text"] .="\n".$user_full_name ;
+   if($feed["user_mobile"] !=""){
+   	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+   }
 					$feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$feed["user_name"] = $data_notification['user_full_name'];
 					$feed["user_id"] = $data_notification['user_id'];
@@ -2954,7 +2963,7 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
                 }
                 $user_id_array = implode(",", $user_id_array);
 
-                $user_qry = $d->selectRow("users_master.user_profile_pic,users_master.user_first_name,users_master.user_last_name,user_employment_details.company_name,users_master.user_full_name,user_employment_details.company_name,users_master.user_id,company_logo,users_master.user_profile_pic","users_master,user_employment_details", "
+                $user_qry = $d->selectRow("users_master.user_profile_pic,users_master.user_first_name,users_master.user_last_name,user_employment_details.company_name,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,users_master.user_id,company_logo,users_master.user_profile_pic","users_master,user_employment_details", "
 							user_employment_details.user_id=users_master.user_id and
 							users_master.user_id in ($user_id_array)  ", "");
 
@@ -2987,7 +2996,7 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
                     $photos_data[$PArray[$l]['user_id']][] = $PArray[$l];
                 }
 
-                 $qlike_q = $d->selectRow("timeline_like_master.like_id,timeline_like_master.timeline_id,users_master.user_id,users_master.user_full_name,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id='$timeline_id' AND timeline_like_master.user_id=users_master.user_id");
+                 $qlike_q = $d->selectRow("timeline_like_master.like_id,timeline_like_master.timeline_id,users_master.user_id,users_master.user_full_name,users_master.user_mobile,timeline_like_master.modify_date,user_employment_details.company_logo,users_master.user_profile_pic","timeline_like_master,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_like_master.timeline_id='$timeline_id' AND timeline_like_master.user_id=users_master.user_id");
                  
                 $LArray = array();
                 $Lcounter = 0 ;
@@ -3006,7 +3015,7 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
                 $clike_new = $d->count_data_direct("like_id", "timeline_like_master", "timeline_id='$timeline_id' AND user_id = '$user_id' AND active_status=0");
  				
 
- 				$qcomment_q = $d->selectRow("timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,timeline_comments.modify_date,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id = users_master.user_id and  timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
+ 				$qcomment_q = $d->selectRow("timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,timeline_comments.modify_date,user_employment_details.company_logo, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", " user_employment_details.user_id = users_master.user_id and  timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
 
 
  				$QArray = array();
@@ -3026,7 +3035,7 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
                 }
                 $comments_id_array = implode(",", $comments_id_array);
 
-                $sub_qry = $d->selectRow("timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_id,user_employment_details.company_logo,timeline_comments.modify_date, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($comments_id_array)  ", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
+                $sub_qry = $d->selectRow("timeline_comments.parent_comments_id,timeline_comments.comments_id,timeline_comments.timeline_id,timeline_comments.msg,users_master.user_full_name,users_master.user_mobile,users_master.user_id,user_employment_details.company_logo,timeline_comments.modify_date, user_employment_details.company_name,users_master.user_profile_pic","timeline_comments,users_master,user_employment_details", "user_employment_details.user_id = users_master.user_id and  timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id in ($comments_id_array)  ", "group by timeline_comments.comments_id ORDER BY timeline_comments.comments_id DESC");
                 $SArray = array();
                 $Scounter = 0 ;
                 foreach ($sub_qry as  $value) {
@@ -3088,6 +3097,11 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
 } else {
 	$feed["share_timeline_text"] ='"'.substr($timeline_text, 0, $charLimit).'"';
 }
+
+$feed["share_timeline_text"] .="\n".$user_full_name ;
+   if($feed["user_mobile"] !=""){
+   	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+   }
 					$feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$timeline_id = $data_notification['timeline_id'];
 					$feed["feed_type"] = $data_notification['feed_type'];

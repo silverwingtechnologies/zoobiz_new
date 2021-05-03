@@ -332,6 +332,7 @@ if($u_data['user_profile_pic']!=""){
       'date_before_1_day' => $date_before_1_day,
       'meetup_date' => $meetup_date,
       'meeting_id' => $meeting_id,
+      'm_title' => "Meetup",
       'fcm_message' => $msgRes1,
       'm_date' => date("Y-m-d",  strtotime($userData['date']) ),
       'm_profile' =>$m_profile ,
@@ -367,7 +368,8 @@ if($opp_user_data['user_profile_pic']!=""){
    $response["fcm_message"] = $msgRes;
    $response["date"] = $meetup_date1;
    $response["end_date"] = $meetup_date2;
-$response["m_profile"] = $m_profile2;
+    $response["m_profile"] = $m_profile2;
+    $response["m_title"] = "Meetup"; 
     $response["m_date"] = date("Y-m-d", strtotime($userData['date']));
    $response["m_time"] = date("H:i", strtotime($meetup_date_minus1hr)) ;// $time11;
 

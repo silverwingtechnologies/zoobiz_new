@@ -91,8 +91,8 @@
                 $toDate = date('Y-m-d', strtotime($toDate));
                 $date=date_create($from);
                 $dateTo=date_create($toDate);
-                $nFrom= date_format($date,"Y-m-d 00:00:01");
-                $nTo= date_format($dateTo,"Y-m-d 23:59:59");
+                $nFrom= date_format($date,"Y-m-d");
+                $nTo= date_format($dateTo,"Y-m-d");
 
 $where="";
 $leftJoin="";
@@ -109,7 +109,7 @@ if (isset($_GET['feature_arr'])!=''  ) {
                  if($_REQUEST['feature_arr'] == 2){
                     $leftJoin .="  , meeting_master    ";
                     // /OR meeting_master.member_id= users_master.user_id
-                    $where=" and (meeting_master.user_id= users_master.user_id ) and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo'";
+                    $where=" and (meeting_master.user_id= users_master.user_id or meeting_master.member_id= users_master.user_id ) and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo'";
                   }
 
                   if($_REQUEST['feature_arr'] == 3){
@@ -126,8 +126,7 @@ if (isset($_GET['feature_arr'])!=''  ) {
                 echo "cities.city_id= users_master.city_id and    user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0 AND users_master.office_member=0  $where ";exit;*/
   //echo "users_master,user_employment_details  $leftJoin";exit;
                 $q3=$d->select("cities,user_employment_details,users_master  $leftJoin","cities.city_id= users_master.city_id and    user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0 AND users_master.office_member=0  $where "," group by users_master.user_id");
-
-                
+                 
                while ($data=mysqli_fetch_array($q3)) {
                 extract($data);
   

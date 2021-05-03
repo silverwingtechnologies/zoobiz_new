@@ -151,7 +151,7 @@
                    <?php  }?>
                   </td>
                   <td class="text-right"><?php echo $i++; ?></td>
-                  <td class='text-center'>
+                  <td class='text-center' >
                     <?php   
                     if ($totalSubCategory==0) {
                       echo "0";
