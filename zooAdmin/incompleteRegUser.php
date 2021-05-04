@@ -61,7 +61,7 @@ error_reporting(0);
                   
                   
                   <th>Name</th>
-                   <th>Mobile</th>
+                   <th>Mobile Number</th>
                   <?php if(isset($_GET['view_otp']) && $_GET['view_otp']==1 ){?>
                   <th>OTP</th>
                   <?php }?>

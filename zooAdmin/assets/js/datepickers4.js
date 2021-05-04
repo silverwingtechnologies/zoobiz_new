@@ -22,7 +22,7 @@ $(document).ready(function() {
         autoclose: true,
         todayHighlight: true,
         startDate: date,
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         minDate: date
     });
     var FromEndDate = new Date();
