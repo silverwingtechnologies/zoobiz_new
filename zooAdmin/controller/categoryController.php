@@ -2,6 +2,58 @@
 include '../common/objectController.php';
 if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 {
+
+   if(isset($addKeywordBtn)) {
+    $m->set_data('business_sub_category_id',$business_sub_category_id);
+$m->set_data('sub_category_keyword',ucwords($sub_category_keyword));
+
+
+ $cat_qry=$d->selectRow("category_name, sub_category_name","business_sub_categories,business_categories","business_categories.business_category_id=business_sub_categories.business_category_id and  business_sub_categories.business_sub_category_id = $business_sub_category_id  ","");
+ $cat_data=mysqli_fetch_array($cat_qry);
+
+
+$a1= array (
+  'business_sub_category_id'=> $m->get_data('business_sub_category_id'),
+  'sub_category_keyword'=> $m->get_data('sub_category_keyword'),
+  'created_by'=> $created_by,
+  'created_at'=> date("Y-m-d H:i:s")
+);
+$q=$d->insert("sub_category_keywords_master",$a1);
+if($q==TRUE) {
+  $_SESSION['msg']=ucwords($category_images)." Keyword Added for ".html_entity_decode($cat_data['sub_category_name']).' - '. html_entity_decode($cat_data['category_name']);
+  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  header("Location: ../manageSubCatKeywords?business_sub_category_id=$business_sub_category_id");
+} else {
+  header("Location: ../manageSubCatKeywords?business_sub_category_id=$business_sub_category_id");
+}
+
+   }
+
+
+   if(isset($editKeywordBtn)) {
+    
+$m->set_data('sub_category_keyword',ucwords($sub_category_keyword));
+
+
+ $cat_qry=$d->selectRow("category_name, sub_category_name","business_sub_categories,business_categories","business_categories.business_category_id=business_sub_categories.business_category_id and  business_sub_categories.business_sub_category_id = $business_sub_category_id  ","");
+ $cat_data=mysqli_fetch_array($cat_qry);
+
+
+$a1= array ( 
+  'sub_category_keyword'=> $m->get_data('sub_category_keyword') 
+);
+$q=$d->update("sub_category_keywords_master",$a1,"sub_category_keywords_id = $sub_category_keywords_id");
+if($q==TRUE) {
+  $_SESSION['msg']=ucwords($category_images)." Keyword Updated for ".html_entity_decode($cat_data['sub_category_name']).' - '. html_entity_decode($cat_data['category_name']);
+  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  header("Location: ../manageSubCatKeywords?business_sub_category_id=$business_sub_category_id");
+} else {
+  header("Location: ../manageSubCatKeywords?business_sub_category_id=$business_sub_category_id");
+}
+
+   }
+
+
   if(isset($addCategory)) {
     $extension=array("jpeg","jpg","png","gif","JPG","JPEG","PNG");
     $uploadedFile = $_FILES['category_images']['tmp_name'];

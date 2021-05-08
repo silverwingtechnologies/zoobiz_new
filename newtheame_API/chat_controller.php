@@ -312,8 +312,8 @@ $recentMember["short_name"] =strtoupper(substr($user_recent_master_data["user_fi
     $member["user_id"]=$recentUser;
     $arr_new = $user_emp_arr[$recentUser];
 
-    $member["company_name"]=$arr_new['company_name'];
-    $member["designation"]=$arr_new['designation'];
+    $member["company_name"]=html_entity_decode($arr_new['company_name']);
+    $member["designation"]=html_entity_decode($arr_new['designation']);
 
 
     if(in_array($recentUser, $user_favorite_master_array_user)){

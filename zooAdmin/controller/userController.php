@@ -5,7 +5,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 {
   /*echo "<pre>";print_r($_POST);exit;*/
 // add main menu
-  //echo "<pre>";print_r($_POST);exit;
+ //echo "<pre>";print_r($_POST);exit;
    if(isset($_POST['checkUserMobile'])){
     $q=$d->select("users_master","user_mobile='$userMobile'");
     $data=mysqli_fetch_array($q);

@@ -8,7 +8,7 @@ if (isset($_POST) && !empty($_POST)) {
     extract(array_map("test_input" , $_POST));
 
     if ($_POST['addMeeting'] == "addMeeting" && filter_var($user_id, FILTER_VALIDATE_INT) == true && filter_var($member_id, FILTER_VALIDATE_INT) == true) {
- 
+
       $date = str_replace("/", "-",$date);
 
       $meeting_date = date("Y-m-d", strtotime($date));
@@ -332,7 +332,6 @@ if($u_data['user_profile_pic']!=""){
       'date_before_1_day' => $date_before_1_day,
       'meetup_date' => $meetup_date,
       'meeting_id' => $meeting_id,
-      'm_title' => "Meetup",
       'fcm_message' => $msgRes1,
       'm_date' => date("Y-m-d",  strtotime($userData['date']) ),
       'm_profile' =>$m_profile ,
@@ -368,8 +367,7 @@ if($opp_user_data['user_profile_pic']!=""){
    $response["fcm_message"] = $msgRes;
    $response["date"] = $meetup_date1;
    $response["end_date"] = $meetup_date2;
-    $response["m_profile"] = $m_profile2;
-    $response["m_title"] = "Meetup"; 
+$response["m_profile"] = $m_profile2;
     $response["m_date"] = date("Y-m-d", strtotime($userData['date']));
    $response["m_time"] = date("H:i", strtotime($meetup_date_minus1hr)) ;// $time11;
 
@@ -602,7 +600,16 @@ $title ="Meetup";//$u_data['user_full_name']." Rescheduled Meeting";
       $member["agenda"]=html_entity_decode($data['agenda']);
       $member["designation"]=html_entity_decode($data['designation']);
       $member["company_name"]=html_entity_decode($data['company_name']);
-      $member["status"]="Meeting ".$data['status'];
+
+      $member["m_status"]=$data['status'];
+        if($data['status']=="Reject"){
+         
+          $member["status"]="May Be Later";
+        } else {
+          $member["status"]="Meeting ".$data['status'];
+        }
+
+      
       $member["reason"]=$data['reason']; 
 
       $member["user_profile_pic"]=$base_url."img/users/members_profile/".$data['user_profile_pic'];
@@ -716,10 +723,10 @@ $opp_user = $d->select("users_master", "  user_id = '$member_id'");
 
 
 else if ($_POST['getMyMeetings'] == "getMyMeetings" && filter_var($user_id, FILTER_VALIDATE_INT) == true  ) {
-
 if(isset($user_id)){
             $d->insert__feature_clicked_log('6',$user_id);
           }
+
 
   $active_usr_qry=$d->select("users_master","active_status=0");
   $active_user_arr = array();
@@ -833,7 +840,16 @@ if(isset($user_id)){
         $member["time"]=$data['time'];
         $member["place"]=$data['place'];
         $member["agenda"]=html_entity_decode($data['agenda']);
-        $member["status"]="Meeting ".$data['status'];
+
+        $member["m_status"]=$data['status'];
+        if($data['status']=="Reject"){
+         
+          $member["status"]="May Be Later";
+        } else {
+          $member["status"]="Meeting ".$data['status'];
+        }
+
+       
         $member["reason"]=$data['reason'];
         $member["designation"]=html_entity_decode($member_d['designation']);
         $member["company_name"]=html_entity_decode($member_d['company_name']); 
@@ -960,7 +976,17 @@ else if ($_POST['getUserMeetings'] == "getUserMeetings" && filter_var($user_id, 
       $member["time"]=$data['time'];
       $member["place"]=$data['place'];
       $member["agenda"]=html_entity_decode($data['agenda']);
-      $member["status"]="Meeting ".$data['status'];
+        $member["m_status"]=$data['status'];
+        if($data['status']=="Reject"){
+         
+          $member["status"]="May Be Later";
+        } else {
+          $member["status"]="Meeting ".$data['status'];
+        }
+
+       
+
+
       $member["reason"]=$data['reason'];
       $member["designation"]=html_entity_decode($member_d['designation']);
       $member["company_name"]=html_entity_decode($member_d['company_name']); 

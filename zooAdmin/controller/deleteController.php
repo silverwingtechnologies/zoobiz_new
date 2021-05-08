@@ -19,6 +19,32 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 {
 
 
+//8may21
+if($_POST['deleteValue']=="deleteKeywords") {
+    $idCount = count($ids);
+    for ($i=0; $i <$idCount ; $i++) { 
+     $gu=$d->select("sub_category_keywords_master","sub_category_keywords_id='$ids[$i]' ");
+     $NewData=mysqli_fetch_array($gu);
+
+$business_sub_category_id = $NewData['business_sub_category_id'];
+     $cat_qry=$d->selectRow("category_name, sub_category_name","business_sub_categories,business_categories","business_categories.business_category_id=business_sub_categories.business_category_id and  business_sub_categories.business_sub_category_id = $business_sub_category_id  ","");
+ $cat_data=mysqli_fetch_array($cat_qry);
+
+
+       $q=$d->delete("sub_category_keywords_master","sub_category_keywords_id ='$ids[$i]'");
+       $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by",$NewData['sub_category_keyword']." Keyword Deleted for ".html_entity_decode($cat_data['sub_category_name']).' - '. html_entity_decode($cat_data['category_name']));
+    }
+      if($q>0) {
+        echo 1;
+         
+
+      } else {
+        echo 0;
+        
+      }
+  }
+//8may21
+
 if($_POST['deleteValue']=="deleteSubscribe") {
     $idCount = count($ids);
     for ($i=0; $i <$idCount ; $i++) { 

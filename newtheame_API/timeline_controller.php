@@ -8,7 +8,7 @@ if (isset($_POST) && !empty($_POST)) {
 	if ($key == $keydb) {
 
 		 
-    	$share_app_content ="Download Zoobiz App & Grow your business across cities. \nAndroid Link:\nhttps://play.google.com/store/apps/details?id=com.silverwing.zoobiz\nIOS Link:\nhttps://apps.apple.com/us/app/zoobiz/id1550560836";
+    	$share_app_content ="Download Zoobiz App & Grow your business across cities. \nAndroid Link:\nhttps://bit.ly/3r1jipR\nIOS Link:\nhttps://apple.co/2RTIy4R";
     
 		
 		$charLimit = 150;
@@ -132,7 +132,7 @@ echo "<pre>";print_r($blocked_users_new);exit;*/
                     $user_found_arr[$user_found_data['user_id']] = $user_found_data['cnt'];
                 }
 
-                $data_qry = $d->selectRow("users_master.user_id,users_master.user_profile_pic,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,user_employment_details.company_logo,users_master.user_first_name,users_master.user_last_name,users_master.user_profile_pic, users_master.user_mobile, users_master.public_mobile ","users_master,user_employment_details", "users_master.user_id=user_employment_details.user_id AND users_master.user_id in ($user_id_array) ");
+                $data_qry = $d->selectRow("users_master.user_id,users_master.user_profile_pic,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,user_employment_details.company_logo,users_master.user_first_name,users_master.user_last_name,users_master.user_profile_pic, users_master.user_mobile, users_master.public_mobile,business_sub_categories.sub_category_name,user_employment_details.company_name  ","users_master,user_employment_details,business_sub_categories", "business_sub_categories.business_sub_category_id = user_employment_details.business_sub_category_id and  users_master.user_id=user_employment_details.user_id AND users_master.user_id in ($user_id_array) ");
  				
 
  				 $DArray = array();
@@ -264,6 +264,8 @@ $data_notification = $dataArray[$tf];
 							}
 
 							$user_full_name = $userData['user_full_name'];
+							$feed["sub_category_name"] = $userData['sub_category_name'];
+							$feed["company_name"] = $userData['company_name'];
 							//11march
 							$feed["user_mobile"] =  $userData["user_mobile"];
 							if($userData['public_mobile'] =="0"){
@@ -281,6 +283,8 @@ $data_notification = $dataArray[$tf];
 							$user_full_name = "ZooBiz";
 							$company_name = "Admin";
 							$feed["short_name"] ="ZB";
+							$feed["sub_category_name"] = "";
+							$feed["company_name"] = "";
 							//11march
 							$feed["user_mobile"] =  "";
 							$feed["mobile_privacy"]=false;
@@ -313,7 +317,7 @@ $data_notification = $dataArray[$tf];
 
 						if($timeline_text!=''){ 
 				if(strlen($feed["timeline_text"]) > $charLimit ){
-					$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+					$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 200)).'...';
 				 //'"'.substr($timeline_text, 0, $charLimit).'..."';
 				} else {
 					$feed["share_timeline_text"] =substr($timeline_text, 0, $charLimit);
@@ -322,6 +326,12 @@ $data_notification = $dataArray[$tf];
 $feed["share_timeline_text"] .="\n".$user_full_name ;
    if($feed["user_mobile"] !=""  && $feed["mobile_privacy"]==false){
    	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+   }
+ 
+ if($feed["sub_category_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($feed["sub_category_name"]);
+   }if($feed["company_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($feed["company_name"]);
    }
    
 						$feed["user_name"] = $user_full_name;
@@ -696,7 +706,7 @@ if(isset($debug)){
                     $user_found_arr[$user_found_data['user_id']] = $user_found_data['cnt'];
                 }
 
-                $data_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name, users_master.user_id,users_master.user_profile_pic,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,user_employment_details.company_logo,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile","users_master,user_employment_details", "users_master.user_id=user_employment_details.user_id AND users_master.user_id in ($user_id_array) ");
+                $data_qry = $d->selectRow("users_master.user_first_name,users_master.user_last_name, users_master.user_id,users_master.user_profile_pic,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,user_employment_details.company_logo,users_master.user_profile_pic,users_master.user_mobile, users_master.public_mobile,business_sub_categories.sub_category_name,user_employment_details.company_name","users_master,user_employment_details,business_sub_categories", "business_sub_categories.business_sub_category_id = user_employment_details.business_sub_category_id and  users_master.user_id=user_employment_details.user_id AND users_master.user_id in ($user_id_array) ");
  				
 
  				 $DArray = array();
@@ -826,7 +836,8 @@ $feed = array();
 
 
 							$user_full_name = $userData['user_full_name'];
-
+							$feed["sub_category_name"] = $userData['sub_category_name'];
+							$feed["company_name"] = $userData['company_name'];
 							//11march
 							$feed["user_mobile"] =  $userData["user_mobile"];
 							if($userData['public_mobile'] =="0"){
@@ -843,6 +854,11 @@ $feed["user_name"] = $user_full_name;
 							$user_full_name = "ZooBiz";
 							$company_name = "Admin";
 							$feed["short_name"] ="ZB";
+
+							
+$feed["sub_category_name"] = "";
+							$feed["company_name"] = "";
+
 $feed["user_name"] = $user_full_name;
 
 $feed["user_mobile"] =  "";
@@ -943,7 +959,7 @@ $timeline_text = $feed["timeline_text"] = html_entity_decode($feed["timeline_tex
  
 if($timeline_text!=''){ 
 if(strlen($feed["timeline_text"]) > $charLimit ){
-	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 200)).'...';
  //'"'.substr($timeline_text, 0, $charLimit).'..."';
 } else {
 	$feed["share_timeline_text"] =substr($timeline_text, 0, $charLimit);
@@ -952,6 +968,12 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
 		$feed["share_timeline_text"] .="\n".$user_full_name ;
    if($feed["user_mobile"] !="" && $feed["mobile_privacy"]==false){
    	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+   }
+
+   if($feed["sub_category_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($feed["sub_category_name"]);
+   }if($feed["company_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($feed["company_name"]);
    }				
 						$feed["city_id"] = $city_data['city_id'];
 						$feed["city_name"] = $city_data['city_name'];
@@ -1166,9 +1188,10 @@ while($getBLockUserData=mysqli_fetch_array($getBLockUserQry)) {
 		
 	  
 }
+
 $blocked_users = implode(",", $blocked_users); 
- $timeline_text = stripslashes($timeline_text);
-$timeline_text = htmlentities($timeline_text,ENT_QUOTES);
+// $timeline_text = stripslashes($timeline_text);
+//$timeline_text = htmlentities($timeline_text,ENT_QUOTES);
 /*if(isset($debug)){
 
 	echo $timeline_text;
@@ -1177,8 +1200,12 @@ $timeline_text = htmlentities($timeline_text,ENT_QUOTES);
 }*/
 
 
-
-$m->set_data('timeline_text',htmlspecialchars($timeline_text));
+/*$timeline_text = addslashes($timeline_text) ;
+          $timeline_text = stripslashes(  html_entity_decode($timeline_text));*/
+$m->set_data('timeline_text',($timeline_text));
+if(isset($debug)){
+	echo $m->get_data('timeline_text');exit;
+}
 
 /*if(isset($debug)){
 
@@ -2301,17 +2328,28 @@ if(in_array($data_notification['timeline_id'], $saved_timeline_array)){
 
 if($timeline_text!=''){ 
 if(strlen($feed["timeline_text"]) > $charLimit ){
-	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 200)).'...';
  //'"'.substr($timeline_text, 0, $charLimit).'..."';
 } else {
 	$feed["share_timeline_text"] =substr($timeline_text, 0, $charLimit);
 }
 }
 
-$feed["share_timeline_text"] .="\n".$user_full_name ;
-   if($feed["user_mobile"] !="" && $feed["mobile_privacy"]==false){
-   	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+
+$u_query = $d->selectRow("*","users_master,user_employment_details,business_sub_categories", "business_sub_categories.business_sub_category_id = user_employment_details.business_sub_category_id and  users_master.user_id=user_employment_details.user_id AND users_master.user_id='$user_id'  ", "");
+			$u_data = mysqli_fetch_array($u_query);
+$feed["share_timeline_text"] .="\n".$u_data['user_full_name'] ;
+   if($u_data["user_mobile"] !="" && $u_data["mobile_privacy"]==1){
+   	$feed["u_data"] .="\n". $u_data["user_mobile"];
    }
+
+   if($u_data["sub_category_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($u_data["sub_category_name"]);
+   }if($u_data["company_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($u_data["company_name"]);
+   }
+
+
 $feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$feed["user_name"] = $data_notification['user_full_name'];
 					$feed["company_name"] = html_entity_decode($data_notification['company_name']);
@@ -2743,17 +2781,27 @@ timeline_master.meetup_user_id2,timeline_master.meetup_user_id1,timeline_master.
 					 $timeline_text =  $feed["timeline_text"] = htmlspecialchars_decode($feed["timeline_text"], ENT_QUOTES);
 						$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
 
+
+$u_query = $d->selectRow("*","users_master,user_employment_details,business_sub_categories", "business_sub_categories.business_sub_category_id = user_employment_details.business_sub_category_id and  users_master.user_id=user_employment_details.user_id AND users_master.user_id='$user_id'  ", "");
+			$u_data = mysqli_fetch_array($u_query);
+
 if($timeline_text!=''){ 
 if(strlen($feed["timeline_text"]) > $charLimit ){
-	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 200)).'...';
  //'"'.substr($timeline_text, 0, $charLimit).'..."';
 } else {
 	$feed["share_timeline_text"] =substr($timeline_text, 0, $charLimit);
 }
 }
-$feed["share_timeline_text"] .="\n".$user_full_name ;
-   if($feed["user_mobile"] !="" && $feed["mobile_privacy"]==false){
-   	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+$feed["share_timeline_text"] .="\n".$u_data['user_full_name'] ;
+   if($u_data["user_mobile"] !="" && $u_data["mobile_privacy"]==1){
+   	$feed["u_data"] .="\n". $u_data["user_mobile"];
+   }
+
+   if($u_data["sub_category_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($u_data["sub_category_name"]);
+   }if($u_data["company_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($u_data["company_name"]);
    }
 					$feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$feed["user_name"] = $data_notification['user_full_name'];
@@ -2968,7 +3016,7 @@ $feed["share_timeline_text"] .="\n".$user_full_name ;
                 }
                 $user_id_array = implode(",", $user_id_array);
 
-                $user_qry = $d->selectRow("users_master.user_profile_pic,users_master.user_first_name,users_master.user_last_name,user_employment_details.company_name,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,users_master.user_id,company_logo,users_master.user_profile_pic","users_master,user_employment_details", "
+                $user_qry = $d->selectRow("users_master.user_profile_pic,users_master.user_first_name,users_master.user_last_name,user_employment_details.company_name,users_master.user_full_name,users_master.user_mobile,user_employment_details.company_name,users_master.user_id,company_logo,users_master.user_profile_pic,business_sub_categories.sub_category_name,user_employment_details.company_name  ","users_master,user_employment_details,business_sub_categories", " business_sub_categories.business_sub_category_id = user_employment_details.business_sub_category_id and  
 							user_employment_details.user_id=users_master.user_id and
 							users_master.user_id in ($user_id_array)  ", "");
 
@@ -3070,6 +3118,10 @@ $feed["share_timeline_text"] .="\n".$user_full_name ;
 						$userData =$u_array[$uid];
 						$userProfile = $base_url . "img/users/recident_profile/" . $userData['user_profile_pic'];
 						$user_full_name = $userData['user_first_name'].' '.$userData['user_last_name'];
+
+						$feed["sub_category_name"] = $userData['sub_category_name'];
+							$feed["company_name"] = $userData['company_name'];
+
 						$company = $userData['company_name'];
 						$feed["user_name"] = $userData['user_full_name'];
 						$feed["company_name"] = html_entity_decode($userData['company_name']);
@@ -3085,6 +3137,8 @@ $feed["share_timeline_text"] .="\n".$user_full_name ;
 						$feed["user_id"] = 0;
 						$feed["user_name"] ='Admin';
 						$feed["company_name"] = 'ZooBiz';
+						$feed["sub_category_name"] = "";
+							$feed["company_name"] = "";
 					}
 //23oct2020
 					
@@ -3097,7 +3151,7 @@ $feed["share_timeline_text"] .="\n".$user_full_name ;
 						$feed["timeline_text"] =html_entity_decode ($feed["timeline_text"]);
 		if($timeline_text!=''){ 			  
 if(strlen($feed["timeline_text"]) > $charLimit ){
-	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 50)).'...';
+	$feed["share_timeline_text"] = implode(' ', array_slice(explode(' ', $timeline_text), 0, 200)).'...';
  //'"'.substr($timeline_text, 0, $charLimit).'..."';
 } else {
 	$feed["share_timeline_text"] =substr($timeline_text, 0, $charLimit);
@@ -3106,6 +3160,12 @@ if(strlen($feed["timeline_text"]) > $charLimit ){
 $feed["share_timeline_text"] .="\n".$user_full_name ;
    if($feed["user_mobile"] !="" && $feed["mobile_privacy"]==false){
    	$feed["share_timeline_text"] .="\n". $feed["user_mobile"];
+   }
+
+   if($feed["sub_category_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($feed["sub_category_name"]);
+   }if($feed["company_name"] !=""){
+   	$feed["share_timeline_text"] .="\n". html_entity_decode($feed["company_name"]);
    }
 					$feed["short_name"] =strtoupper(substr($data_notification["user_first_name"], 0, 1).substr($data_notification["user_last_name"], 0, 1) );
 					$timeline_id = $data_notification['timeline_id'];

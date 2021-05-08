@@ -190,7 +190,58 @@ if (isset($_POST) && !empty($_POST)) {
 				$response["status"] = "201";
 				echo json_encode($response);
 			}
-		}  else if ($_POST['get_user_cities'] == "get_user_cities" && filter_var($country_id, FILTER_VALIDATE_INT) == true
+		} else if ($_POST['get_active_cities'] == "get_active_cities" ) {
+
+			$qA2 = $d->selectRow("city_id,city_name","cities", " city_flag=1", "");
+
+			//CLASSIFIED SETTINGS START
+			 $zoobiz_settings_master = $d->select("zoobiz_settings_master","","");
+             $zoobiz_settings_masterData = mysqli_fetch_array($zoobiz_settings_master);
+
+             if($zoobiz_settings_masterData['classifieds_sel_multiple_cities'] == "1"){
+             	$response["classifieds_sel_multiple_cities"] =true;
+             } else {
+             	$response["classifieds_sel_multiple_cities"] =false;
+             }
+
+             if($zoobiz_settings_masterData['classifieds_sel_multiple_categories'] == "1"){
+             	$response["classifieds_sel_multiple_categories"] =true;
+             } else {
+             	$response["classifieds_sel_multiple_categories"] =false;
+             }
+             
+             $response["classified_max_image_select"] = (int)$zoobiz_settings_masterData["classified_max_image_select"];
+			 $response["classified_max_audio_duration"] =(int) $zoobiz_settings_masterData["classified_max_audio_duration"];
+			 $response["classified_max_document_select"] =(int) $zoobiz_settings_masterData["classified_max_document_select"];
+			//CLASSIFIED SETTINGS END	 
+
+				 
+
+			if (mysqli_num_rows($qA2) > 0) {
+
+				$response["cities"] = array();
+
+				while ($data_app2 = mysqli_fetch_array($qA2)) {
+
+					$cities = array();
+					$cities["city_id"] = $data_app2["city_id"];
+					$cities["city_name"] = $data_app2["city_name"];
+					array_push($response["cities"], $cities);
+
+				}
+
+
+
+				$response["message"] = "Active City Data";
+				$response["status"] = "200";
+				echo json_encode($response);
+			} else {
+
+				$response["message"] = "No Cities";
+				$response["status"] = "201";
+				echo json_encode($response);
+			}
+		} else if ($_POST['get_user_cities'] == "get_user_cities" && filter_var($country_id, FILTER_VALIDATE_INT) == true
 			&& filter_var($state_id, FILTER_VALIDATE_INT) == true && filter_var($user_id, FILTER_VALIDATE_INT) == true ) {
 
 			$qA2 = $d->selectRow("cities.city_id,cities.city_name","cities,users_master", "users_master.city_id = cities.city_id and  users_master.user_id='$user_id' and cities.country_id='$country_id' AND cities.state_id='$state_id' AND cities.city_flag=1", " group by cities.city_id");

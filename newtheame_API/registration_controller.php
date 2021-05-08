@@ -133,11 +133,11 @@ $used_categories = implode(",", $used_categories);
 	$zoobiz_settings_master_data=mysqli_fetch_array($zoobiz_settings_master_qry);
 	$max_member_per_subcategory = $zoobiz_settings_master_data['max_member_per_subcategory'];
 
-
+//and business_sub_categories.business_sub_category_id  in ($used_categories)
 
 			$app_data = $d->selectRow("business_sub_categories.business_sub_category_id,business_categories.business_category_id,business_sub_categories.sub_category_name,business_categories.category_name","business_categories,business_sub_categories", "
 				business_categories.category_status = 0 and
-				business_sub_categories.business_category_id=business_categories.business_category_id AND business_sub_categories.sub_category_status='0' and business_sub_categories.business_sub_category_id  in ($used_categories) ", "ORDER BY business_sub_categories.sub_category_name ASC");
+				business_sub_categories.business_category_id=business_categories.business_category_id AND business_sub_categories.sub_category_status='0'  ", "ORDER BY business_sub_categories.sub_category_name ASC");
 
 			if (mysqli_num_rows($app_data) > 0) {
 

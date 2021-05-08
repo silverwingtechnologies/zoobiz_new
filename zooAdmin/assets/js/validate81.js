@@ -1378,7 +1378,99 @@ submitHandler: function(form) {
         }
     });
 
-
+//8may2021
+$("#addkeywordFrm").validate({
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) { 
+            error.insertAfter(element.parent());      // radio/checkbox?
+        } else if (element.hasClass('select2-hidden-accessible')) {     
+                error.insertAfter(element.next('span'));  // select2
+                element.next('span').addClass('error').removeClass('valid');
+            } else {                                      
+                error.insertAfter(element);               // default
+            }
+        },
+        rules: {
+            sub_category_keyword: {
+                required: true,
+                noSpace:true,
+                remote:
+                {
+                    url: 'uniqueKeyword.php',
+                    type: "post",
+                    data:
+                    {
+                        sub_category_keyword: function()
+                        {
+                            return $('#addkeywordFrm :input[name="sub_category_keyword"]').val();
+                        },
+                        business_sub_category_id: function()
+                        {
+                            return $('#addkeywordFrm :input[name="business_sub_category_id"]').val();
+                        }
+                    } 
+                }
+            } 
+            
+        },
+        messages: {
+            sub_category_keyword: {
+                required : "Please enter keyword",
+                remote:"this keyword already exists for this sub category"
+            } 
+        }
+        , submitHandler: function(form) {
+            form.submit();
+        }
+    });
+$("#editKeywordFrm").validate({
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) { 
+            error.insertAfter(element.parent());      // radio/checkbox?
+        } else if (element.hasClass('select2-hidden-accessible')) {     
+                error.insertAfter(element.next('span'));  // select2
+                element.next('span').addClass('error').removeClass('valid');
+            } else {                                      
+                error.insertAfter(element);               // default
+            }
+        },
+        rules: {
+            sub_category_keyword: {
+                required: true,
+                noSpace:true,
+                remote:
+                {
+                    url: 'uniqueKeyword.php',
+                    type: "post",
+                    data:
+                    {
+                        sub_category_keyword: function()
+                        {
+                            return $('#editKeywordFrm :input[name="sub_category_keyword"]').val();
+                        },
+                        business_sub_category_id: function()
+                        {
+                            return $('#editKeywordFrm :input[name="business_sub_category_id"]').val();
+                        },
+                        sub_category_keywords_id: function()
+                        {
+                            return $('#editKeywordFrm :input[name="sub_category_keywords_id"]').val();
+                        },
+                    } 
+                }
+            } 
+      },
+        messages: {
+            sub_category_keyword: {
+                required : "Please enter keyword",
+                remote:"this keyword already exists for this sub category"
+            } 
+        }
+        , submitHandler: function(form) {
+            form.submit();
+        }
+    });
+//8may2021
 
 //new chnages
 $("#companyFrm").validate({

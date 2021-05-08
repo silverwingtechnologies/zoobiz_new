@@ -47,13 +47,16 @@ if (isset($_POST) && !empty($_POST)) {
 				$today = date('Y-m-d');
 				$plan_expire_date = $user_data['plan_renewal_date'];
 
-				if ($today > $plan_expire_date) {
+				/*if ($today > $plan_expire_date) {
 					$response["message"] = "Your Plan Has been Expired on $plan_expire_date, Please Contact ZooBiz Sales Team";
 					$response["status"] = "201";
 					echo json_encode($response);
 					exit();
 
-				} else if ($user_data['active_status'] == 1) {
+				} else */
+
+
+				if ($user_data['active_status'] == 1) {
 					$response["message"] = "Your Account Is Deactivated, Please Contact ZooBiz Support Team";
 					$response["status"] = "201";
 					echo json_encode($response);

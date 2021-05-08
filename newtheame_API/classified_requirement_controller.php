@@ -2233,7 +2233,70 @@
     $response["status"] = '201';
     echo json_encode($response);
     }
-    } else {
+    } else if ($_POST['getSubCategoryList'] == "getSubCategoryList") {
+
+            $response["sub_category"] = array();
+$category_use_arr = array();
+ $cllassified_id_array = array('0');
+
+  $sub_cat_use_qry1 = $d->selectRow(" cc.classified_id, cc.business_sub_category_id ","cllassifieds_master c, classified_category_master cc ", "cc.classified_id =c.cllassified_id and  c.active_status = 0 ");
+     
+    while ($sub_cat_use_data1 = mysqli_fetch_array($sub_cat_use_qry1)) {
+         $category_use_arr[$sub_cat_use_data1['business_sub_category_id']][] = $sub_cat_use_data1['classified_id'];
+         $cllassified_id_array[] =$sub_cat_use_data1['classified_id'];
+    }
+
+$cllassified_id_array = implode(",", $cllassified_id_array);
+    $sub_cat_use_qry = $d->selectRow("cllassified_id, business_sub_category_id ","cllassifieds_master  ", "active_status = 0 and cllassified_id not in  ($cllassified_id_array)  ");
+     
+    while ($sub_cat_use_data = mysqli_fetch_array($sub_cat_use_qry)) {
+         $category_use_arr[$sub_cat_use_data['business_sub_category_id']][] = $sub_cat_use_data['cllassified_id'];
+    }
+
+   
+  $keywords_qry = $d->selectRow(" business_sub_category_id,GROUP_CONCAT(sub_category_keyword SEPARATOR ', ') as  sub_category_keyword ","sub_category_keywords_master  ", "sub_category_keyword!=''","group by business_sub_category_id");
+     $keywords_arr = array();
+    while ($keywords_d = mysqli_fetch_array($keywords_qry)) {
+         $keywords_arr[$keywords_d['business_sub_category_id']] = $keywords_d['sub_category_keyword'];
+    }
+
+            $app_data = $d->selectRow("business_sub_categories.business_sub_category_id,business_categories.business_category_id,business_sub_categories.sub_category_name,business_categories.category_name","business_categories,business_sub_categories", "
+                business_categories.category_status = 0 and
+                business_sub_categories.business_category_id=business_categories.business_category_id AND business_sub_categories.sub_category_status='0'   ", "ORDER BY business_sub_categories.sub_category_name ASC");
+
+            if (mysqli_num_rows($app_data) > 0) {
+
+                     
+
+                while ($data = mysqli_fetch_array($app_data)) {
+
+                    $sub_category = array();
+                    $sub_category["business_sub_category_id"] = $data["business_sub_category_id"];
+                    $sub_category["business_category_id"] = $data["business_category_id"];
+                    $sub_category["category_name"] = html_entity_decode($data["sub_category_name"] . ' - ' . $data["category_name"]);
+
+                     $full_data =  $category_use_arr[$data["business_sub_category_id"]];
+
+                     $key_data =  $keywords_arr[$data["business_sub_category_id"]];
+                     if(empty($key_data)){
+                        $key_data="";
+                     }
+                     $sub_category["key_data"] = $key_data;   
+                     $sub_category["counter"] = count($full_data);   
+                     //$sub_category["cls"] = implode(",", $full_data);
+                    array_push($response["sub_category"], $sub_category);
+                }
+                $response["message"] = "get Success.";
+                $response["status"] = "200";
+                echo json_encode($response);
+
+            } else {
+                $response["message"] = "No Data Found.";
+                $response["status"] = "201";
+                echo json_encode($response);
+            }
+
+        } else {
     $response["message"] = "wrong tag";
     $response["status"] = "201";
     echo json_encode($response);

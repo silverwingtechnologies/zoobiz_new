@@ -225,6 +225,12 @@
                       <button type="submit" name="" class="btn btn-secondary btn-sm "> View</button>
                     </form>
 
+ 
+                    <form action="manageSubCatKeywords" method="post" style="display: inline-block;">    
+                      <input type="hidden" name="business_sub_category_id" value="<?php echo $business_sub_category_id; ?>">    
+                      <button type="submit" name="" class="btn btn-warning btn-sm ">Keywords(<?php echo $d->count_data_direct("business_category_id","sub_category_keywords_master","business_sub_category_id=$business_sub_category_id ");?>)</button>
+                    </form>
+
                   </td>
                   
 

@@ -1750,7 +1750,14 @@ function editSubCategory(business_category_id,local_service_provider_sub_id,serv
     }
 }
 
+//8may21
+function editSubCategoryKeyword(sub_category_keywords_id,business_sub_category_id,sub_category_keyword) {
 
+ $('#editKeywordFrm :input[name="business_sub_category_id"]').val(business_sub_category_id);
+ $('#editKeywordFrm :input[name="sub_category_keyword"]').val(sub_category_keyword);
+ $('#editKeywordFrm :input[name="sub_category_keywords_id"]').val(sub_category_keywords_id);
+}
+//8may21
 
 function  getCategorySp() {
 
