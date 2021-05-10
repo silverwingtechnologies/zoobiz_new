@@ -1083,6 +1083,13 @@ if($userData['active_status']=="0"){
           </div>
         </div>
 
+        <div class="form-group row">
+          <label class="col-lg-3 col-form-label form-control-label">youtube Url </label>
+          <div class="col-lg-9">
+            <input  class="form-control" name="youtube"  maxlength="260"  type="text" value="<?php echo $youtube; ?>" id="youtube">
+          </div>
+        </div>
+
 
         <input type="hidden" id="user_id_edit" value="<?php echo $user_id;?>">                        
         <input type="hidden" name="isedit" id="isedit" value="yes">

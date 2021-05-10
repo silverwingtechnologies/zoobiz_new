@@ -229,6 +229,7 @@ if(!isset($country_code)){
 					$response["instagram"] = $user_data['instagram'];
 					$response["linkedin"] = $user_data['linkedin'];
 					$response["twitter"] = $user_data['twitter'];
+					$response["youtube"] = $user_data['youtube'];
 $response["short_name"] =strtoupper(substr($user_data["user_first_name"], 0, 1).substr($user_data["user_last_name"], 0, 1) );
 					$response["salutation"] = $user_data['salutation'];
 					$response["country_code"] = $user_data['country_code'];
@@ -441,7 +442,7 @@ $approval_pending=$d->select("interest_master","added_by_member_id='$user_data[u
 			$user_mobile = mysqli_real_escape_string($con, $user_mobile);
 			$otp = mysqli_real_escape_string($con, $otp);
 			 
-				$q = $d->selectRow("last_otp_attempt,user_status,user_id,user_id,device,user_token,zoobiz_id,plan_renewal_date,facebook,instagram,linkedin,twitter,salutation,user_full_name,user_first_name,user_last_name,gender,member_date_of_birth,user_mobile,alt_mobile,whatsapp_number,user_email,public_mobile,email_privacy,user_profile_pic,plan_renewal_date,user_id","users_master", "user_id ='$user_id' AND otp='$otp'");
+				$q = $d->selectRow("last_otp_attempt,user_status,user_id,user_id,device,user_token,zoobiz_id,plan_renewal_date,facebook,instagram,linkedin,twitter,youtube,salutation,user_full_name,user_first_name,user_last_name,gender,member_date_of_birth,user_mobile,alt_mobile,whatsapp_number,user_email,public_mobile,email_privacy,user_profile_pic,plan_renewal_date,user_id","users_master", "user_id ='$user_id' AND otp='$otp'");
 			  $user_data = mysqli_fetch_array($q);
 			
 			 
@@ -498,6 +499,8 @@ if(isset($country_code)){
 			$m->set_data('instagram', $instagram);
 			$m->set_data('linkedin', $linkedin);
 			$m->set_data('twitter', $twitter);
+			$m->set_data('youtube', $youtube);
+
 			if(isset($country_code)){
 				$m->set_data('country_code',$country_code);
 			} else {
@@ -519,6 +522,7 @@ if(isset($country_code)){
 				'instagram' => $m->get_data('instagram'),
 				'linkedin' => $m->get_data('linkedin'),
 				'twitter' => $m->get_data('twitter'),
+				'youtube' => $m->get_data('youtube'),
 			);
 
 			$q = $d->update("users_master", $a, "user_id='$user_id'");

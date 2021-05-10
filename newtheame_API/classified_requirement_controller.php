@@ -187,6 +187,26 @@
     $discussion["business_category_id"] = $data['business_category_id'];
     $discussion["business_sub_category_id"] = $data['business_sub_category_id'];
     $discussion["category_array"] = array();
+
+$catArr = array('0');
+    $fi122 = $d->selectRow(
+    "business_categories.business_category_id,business_categories.category_name",
+    "cllassifieds_master,business_categories",
+    "business_categories.business_category_id=cllassifieds_master.business_category_id AND  cllassifieds_master.cllassified_id='$data[cllassified_id]' "
+    );
+    while ($feeData122 = mysqli_fetch_array($fi122)) {
+    $category_array = array();
+        if(!in_array($feeData122['business_category_id'], $catArr)){
+            $catArr[] = $feeData122['business_category_id'];
+            $category_array["business_category_id"] = $feeData122['business_category_id'];
+            $category_array["category_name"] = $feeData122['category_name'];
+            array_push($discussion["category_array"], $category_array);
+        }
+    
+    }
+
+
+
     $fi1 = $d->selectRow(
     "business_categories.business_category_id,business_categories.category_name",
     "classified_category_master,business_categories",
@@ -194,11 +214,37 @@
     );
     while ($feeData1 = mysqli_fetch_array($fi1)) {
     $category_array = array();
-    $category_array["business_category_id"] = $feeData1['business_category_id'];
-    $category_array["category_name"] = $feeData1['category_name'];
-    array_push($discussion["category_array"], $category_array);
+
+    if(!in_array($feeData1['business_category_id'], $catArr)){
+            $catArr[] = $feeData1['business_category_id'];
+            $category_array["business_category_id"] = $feeData1['business_category_id'];
+            $category_array["category_name"] = $feeData1['category_name'];
+            array_push($discussion["category_array"], $category_array);
+        }
+
+
+   
     }
     $discussion["sub_category_array"] = array();
+
+$subCatArr = array('0');
+   $fi1333 = $d->selectRow(
+    "business_sub_categories.business_sub_category_id,business_sub_categories.sub_category_name",
+    "cllassifieds_master,business_sub_categories",
+    "business_sub_categories.business_sub_category_id=cllassifieds_master.business_sub_category_id AND  cllassifieds_master.cllassified_id='$data[cllassified_id]' "
+    );
+    while ($feeData133 = mysqli_fetch_array($fi1333)) {
+    $sub_category_array = array();
+    if(!in_array($feeData133['business_sub_category_id'], $subCatArr)){
+        $subCatArr[] = $feeData133['business_sub_category_id'];
+        $sub_category_array["business_sub_category_id"] = $feeData133['business_sub_category_id'];
+    $sub_category_array["sub_category_name"] = $feeData133['sub_category_name'];
+    array_push($discussion["sub_category_array"], $sub_category_array);
+    }
+    
+    }
+
+
     $fi1 = $d->selectRow(
     "business_sub_categories.business_sub_category_id,business_sub_categories.sub_category_name",
     "classified_category_master,business_sub_categories",
@@ -206,9 +252,16 @@
     );
     while ($feeData1 = mysqli_fetch_array($fi1)) {
     $sub_category_array = array();
-    $sub_category_array["business_sub_category_id"] = $feeData1['business_sub_category_id'];
+
+     if(!in_array($feeData1['business_sub_category_id'], $subCatArr)){
+        $subCatArr[] = $feeData1['business_sub_category_id'];
+       $sub_category_array["business_sub_category_id"] = $feeData1['business_sub_category_id'];
     $sub_category_array["sub_category_name"] = $feeData1['sub_category_name'];
     array_push($discussion["sub_category_array"], $sub_category_array);
+    }
+
+
+    
     }
     $discussion["cllassified_title"] = html_entity_decode($data['cllassified_title']);
     $discussion["cllassified_description"] = html_entity_decode($data['cllassified_description']);

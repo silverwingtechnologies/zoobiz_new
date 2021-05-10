@@ -18,7 +18,96 @@ if ($_POST['addClick'] == "addClick" && filter_var($user_id, FILTER_VALIDATE_INT
 	echo json_encode($response);
 	exit();
 
-} else  if ($_POST['shareSeasonalGreet'] == "shareSeasonalGreet" && filter_var($user_id, FILTER_VALIDATE_INT) == true && filter_var($promotion_id, FILTER_VALIDATE_INT) == true) {
+}  else   if (isset($change_company_name) && $change_company_name == 'change_company_name' && filter_var($user_id, FILTER_VALIDATE_INT) == true) {
+
+	 $org_users_master_qry = $d->selectRow("*","users_master,user_employment_details", "users_master.user_id = '$user_id' ");
+	 $org_users_master_data = mysqli_fetch_array($org_users_master_qry);
+
+	$requested_company_name = html_entity_decode($requested_company_name);
+	$requested_company_name = stripslashes($requested_company_name);
+	$requested_company_name = htmlentities($requested_company_name,ENT_QUOTES);
+ 
+
+ 					$a11 = array(
+						'requested_company_name'=>$requested_company_name
+					);
+					$result = $d->update("user_employment_details", $a11, "user_id='$user_id'  ");
+					if($result){
+
+						
+ 
+					$admin_mobile_array= array();	
+						$bcc_string = array();
+					$zoobiz_admin_master=$d->select("zoobiz_admin_master","send_notification = '1'    ");
+                            while($zoobiz_admin_master_data = mysqli_fetch_array($zoobiz_admin_master)) {
+                            $admin_mobile_array[] = $zoobiz_admin_master_data['admin_mobile'];
+                            $bcc_string[] =  $zoobiz_admin_master_data['admin_email'];
+                            }
+
+
+
+                     if(!empty($admin_mobile_array)){
+                     	$dashboardLink = $base_url."zooAdmin/welcome";
+                     	$to = $bcc_string;
+                     	$user_full_name = ucfirst($org_users_master_data['user_full_name']);
+						$original_company_name = $org_users_master_data['company_name'];
+						$subject ="Business Name Change - Approval Required";
+						include('../mail/BusinessNameApprovalEmailToAdmin.php');
+						include '../mail_front.php';
+
+						
+                     	$admin_mobile_array = implode(",", $admin_mobile_array);
+
+                     	$fcmArrayAdmins = $d->get_android_fcm("users_master", "user_token!='' AND  lower(device) ='android' and user_mobile in ($admin_mobile_array) AND user_id != $user_id");
+
+					$fcmArrayAdmins1 = $d->get_android_fcm("users_master ", " user_token!='' AND  lower(device) ='ios' and user_mobile in ($admin_mobile_array)   AND user_id != $user_id ");
+				 
+					  if($org_users_master_data['user_profile_pic']!=""){
+	               		 $profile_uN = $base_url . "img/users/members_profile/" . $org_users_master_data['user_profile_pic'];
+	                  } else {
+	                    $profile_uN ="https://zoobiz.in/zooAdmin/img/user.png";
+	                  }
+					$fcm_data_array = array(
+			            'img' =>$profile_uN,
+			            'title' =>ucfirst($org_users_master_data['user_full_name']),
+			            'desc' =>"Business Name Change - Approval Required",
+			            'time' =>date("d M Y h:i A")
+			         );
+ 					$nResident->noti("custom_notification","",0,$fcmArrayAdmins,ucfirst($org_users_master_data['user_full_name']),"Business Name Change - Approval Required",$fcm_data_array);
+         			$nResident->noti_ios("custom_notification","",0,$fcmArrayAdmins1,ucfirst($org_users_master_data['user_full_name']),"Business Name Change - Approval Required",$fcm_data_array);
+
+
+         			 $admin_users_master_qry = $d->selectRow("*","users_master", "user_mobile in ($admin_mobile_array)  AND user_id != $user_id ");
+		         			 while($zoobiz_admin_master_data = mysqli_fetch_array($admin_users_master_qry)) {
+		         			 	$notiAry = array(
+									'user_id' => $zoobiz_admin_master_data['user_id'],
+									'notification_title' => ucfirst($org_users_master_data['user_full_name']),
+									'notification_desc' => "Business Name Change - Approval Required",
+									'notification_date' => date('Y-m-d H:i'),
+									'notification_action' => 'profile',
+									'notification_logo' => 'profile.png',
+									'notification_type' => '13',
+									'other_user_id' => $org_users_master_data['user_id'] 
+									);
+									$d->insert("user_notification", $notiAry);
+		         			 } 
+ 
+                     }
+
+                        $response["message"] = "Business Name Change Request Sent to Admin";
+						$response["status"] = "200";
+						echo json_encode($response);
+
+					} else {
+						$response["message"] = "Fail";
+				$response["status"] = "201";
+				echo json_encode($response);
+					}
+
+         			
+
+
+}  else  if ($_POST['shareSeasonalGreet'] == "shareSeasonalGreet" && filter_var($user_id, FILTER_VALIDATE_INT) == true && filter_var($promotion_id, FILTER_VALIDATE_INT) == true) {
 
 
 			$m->set_data('promotion_id', $promotion_id);
@@ -93,11 +182,13 @@ $q = $d->insert("seasonal_greeting_share_master",$a);
 			$m->set_data('instagram', $instagram);
 			$m->set_data('linkedin', $linkedin);
 			$m->set_data('twitter', $twitter);
+			$m->set_data('youtube', $youtube);
 			$a = array(
 				'facebook' => $m->get_data('facebook'),
 				'instagram' => $m->get_data('instagram'),
 				'linkedin' => $m->get_data('linkedin'),
-				'twitter' => $m->get_data('twitter')
+				'twitter' => $m->get_data('twitter'),
+				'youtube' => $m->get_data('youtube')
 			);
 			$q = $d->update("users_master", $a, "user_id='$user_id'");
 			if ($q == true) {
@@ -378,7 +469,7 @@ $approval_pending=$d->select("interest_master","added_by_member_id='$user_id' an
 
  
 			$full_data_query = $d->selectRow("users_master.plan_renewal_date,users_master.chat_alerts,users_master.timeline_alert,user_employment_details.company_contact_number_privacy,   users_master.user_first_name, users_master.user_last_name, users_master.user_first_name,users_master.user_last_name, users_master.office_member,users_master.user_mobile,users_master.alt_mobile,
-				users_master.invoice_download,users_master.plan_renewal_date,users_master.facebook,users_master.instagram,users_master.linkedin,users_master.twitter,users_master.whatsapp_privacy,users_master.email_privacy,
+				users_master.invoice_download,users_master.plan_renewal_date,users_master.facebook,users_master.instagram,users_master.linkedin,users_master.twitter,users_master.youtube,users_master.whatsapp_privacy,users_master.email_privacy,
 
 				users_master.member_date_of_birth,users_master.gender, users_master.whatsapp_number, users_master.user_email,users_master.cllassified_mute,users_master.user_id,business_categories.business_category_id,business_sub_categories.business_sub_category_id,users_master.user_full_name,users_master.zoobiz_id,users_master.public_mobile,users_master.user_mobile,users_master.user_profile_pic,business_categories.category_name,business_sub_categories.sub_category_name,user_employment_details.company_email ,user_employment_details.company_name ,user_employment_details.designation,user_employment_details.company_contact_number,user_employment_details.company_website,user_employment_details.company_logo,user_employment_details.company_broucher,user_employment_details.company_profile,user_employment_details.gst_number","users_master,user_employment_details,business_categories,business_sub_categories ",
 
@@ -519,6 +610,7 @@ $response["short_name"] =strtoupper(substr($data_app["user_first_name"], 0, 1).s
 				$response["instagram"] = $data_app["instagram"];
 				$response["linkedin"] = $data_app["linkedin"];
 				$response["twitter"] = $data_app["twitter"];
+				$response["youtube"] = $data_app["youtube"];
 
 				if($data_app["cllassified_mute"]=="0"){
 					$response["cllassified_mute"]=true;
@@ -761,7 +853,7 @@ if ($data_app["company_contact_number_privacy"] == 1) {
 			}
 
 			$full_data_query = $d->selectRow("users_master.timeline_alert,user_employment_details.gst_number, users_master.user_first_name, users_master.user_last_name,user_employment_details.company_website, users_master.country_code,user_employment_details.company_landline_number,user_employment_details.search_keyword,users_master.alt_mobile, users_master.user_mobile,
-				users_master.invoice_download,users_master.plan_renewal_date,users_master.facebook,users_master.instagram,users_master.linkedin,users_master.twitter,users_master.whatsapp_privacy,users_master.email_privacy,user_employment_details.business_description,business_adress_master.adress, business_adress_master.adress2 ,business_adress_master.country_id, business_adress_master.add_latitude, business_adress_master.add_longitude,
+				users_master.invoice_download,users_master.plan_renewal_date,users_master.facebook,users_master.instagram,users_master.linkedin,users_master.twitter,users_master.youtube,users_master.whatsapp_privacy,users_master.email_privacy,user_employment_details.business_description,business_adress_master.adress, business_adress_master.adress2 ,business_adress_master.country_id, business_adress_master.add_latitude, business_adress_master.add_longitude,
 user_employment_details.products_servicess,
 				users_master.member_date_of_birth,users_master.gender, users_master.whatsapp_number, users_master.user_email,users_master.cllassified_mute,users_master.user_id,business_categories.business_category_id,business_sub_categories.business_sub_category_id,users_master.user_full_name,users_master.zoobiz_id,users_master.public_mobile,users_master.email_privacy,users_master.whatsapp_privacy,users_master.cllassified_mute,users_master.user_mobile,users_master.user_profile_pic,business_categories.category_name,business_sub_categories.sub_category_name,user_employment_details.company_email ,user_employment_details.company_name ,user_employment_details.designation,user_employment_details.company_contact_number,user_employment_details.company_website,user_employment_details.company_logo,user_employment_details.company_broucher,user_employment_details.company_profile,user_employment_details.gst_number , users_master.refer_by ,  users_master.refere_by_name ,  users_master.refere_by_phone_number, users_master.referred_by_user_id , users_master.remark , user_employment_details.company_contact_number_privacy ","users_master,user_employment_details,business_categories,business_sub_categories,business_adress_master",
 
@@ -1188,6 +1280,7 @@ if($data_app["company_contact_number"]!=0){
 				$response["instagram"] = $data_app["instagram"];
 				$response["linkedin"] = $data_app["linkedin"];
 				$response["twitter"] = $data_app["twitter"];
+				$response["youtube"] = $data_app["youtube"];
 
 				$response["gender"] = $data_app["gender"];
 
@@ -1236,7 +1329,7 @@ if($data_app["company_contact_number"]!=0){
 
 
 			$full_data_query = $d->selectRow(" user_employment_details.search_keyword,users_master.alt_mobile, users_master.user_mobile,
-				users_master.invoice_download,users_master.plan_renewal_date,users_master.facebook,users_master.instagram,users_master.linkedin,users_master.twitter,users_master.whatsapp_privacy,users_master.email_privacy,user_employment_details.business_description,
+				users_master.invoice_download,users_master.plan_renewal_date,users_master.facebook,users_master.instagram,users_master.linkedin,users_master.twitter,users_master.youtube,users_master.whatsapp_privacy,users_master.email_privacy,user_employment_details.business_description,
 
 				users_master.member_date_of_birth,users_master.gender, users_master.whatsapp_number, users_master.user_email,users_master.cllassified_mute,users_master.user_id,business_categories.business_category_id,business_sub_categories.business_sub_category_id,users_master.user_full_name,users_master.zoobiz_id,users_master.public_mobile,users_master.user_mobile,users_master.user_profile_pic,business_categories.category_name,business_sub_categories.sub_category_name,user_employment_details.company_email ,user_employment_details.company_name ,user_employment_details.designation,user_employment_details.company_contact_number,user_employment_details.company_website,user_employment_details.company_logo,user_employment_details.company_broucher,user_employment_details.company_profile,user_employment_details.gst_number","users_master,user_employment_details,business_categories,business_sub_categories ",
 

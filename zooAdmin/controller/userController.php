@@ -714,6 +714,7 @@ echo  "here";exit; */
     $m->set_data('instagram',$instagram);
     $m->set_data('linkedin',$linkedin);
     $m->set_data('twitter',$twitter);
+    $m->set_data('youtube',$youtube);
     $m->set_data('user_social_media_name',$user_social_media_name);
    
    
@@ -735,6 +736,7 @@ echo  "here";exit; */
       'instagram'=> $m->get_data('instagram'),
       'linkedin'=> $m->get_data('linkedin'),
       'twitter'=> $m->get_data('twitter'),
+      'youtube'=> $m->get_data('youtube'),
       'user_social_media_name'=> $m->get_data('user_social_media_name'),
     
     );

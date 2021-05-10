@@ -13,7 +13,7 @@ $page2 = explode('=',$page);*/
 
 $today= date("Y-m-d");
 $user_social_media_name_new=$_REQUEST['f'];
-$qb=$d->select("users_master, user_employment_details","user_employment_details.user_id=users_master.user_id AND   users_master.user_social_media_name='$user_social_media_name_new' and (users_master.facebook !='' OR users_master.instagram !='' OR users_master.linkedin !='' OR users_master.twitter!='')  and users_master.active_status =0 and users_master.plan_renewal_date >$today    ","");
+$qb=$d->select("users_master, user_employment_details","user_employment_details.user_id=users_master.user_id AND   users_master.user_social_media_name='$user_social_media_name_new' and (users_master.facebook !='' OR users_master.instagram !='' OR users_master.linkedin !='' OR users_master.twitter!='' OR users_master.youtube!='')  and users_master.active_status =0 and users_master.plan_renewal_date >$today    ","");
 
 if(mysqli_num_rows($qb)>0) {
 ?>
@@ -394,6 +394,22 @@ $user_data=mysqli_fetch_array($qb);
                     <div class=" col-md-12 col-sm-12 mb-5 text-center">
                         <a target="_blank" href="<?php echo $twitter_link1;?>"  class="button gradient-btn w-100">Twitter</a>
                         <!-- <a target="_blank" href="https://twitter.com/<?php echo $twitter_link1;?>"><img width="80" src="img/twitter.png" alt=""></a> -->
+                    </div>
+                    <?php } ?>
+
+
+                    <?php if($user_data['youtube'] !=''){
+                    
+                    $youtube_link1 = $user_data['youtube'];
+                    if(strpos($youtube_link1, 'youtube.com') !== false){
+                    $youtube_link1 = $youtube_link1;
+                    } else{
+                    $youtube_link1 = "https://www.youtube.com/".$youtube_link1;
+                    }
+                    ?>
+                    <div class=" col-md-12 col-sm-12 mb-5 text-center">
+                        <a target="_blank" href="<?php echo $youtube_link1;?>"  class="button gradient-btn w-100">Youtube</a>
+                      
                     </div>
                     <?php } ?>
                 </div>

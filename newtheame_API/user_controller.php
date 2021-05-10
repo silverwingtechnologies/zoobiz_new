@@ -162,6 +162,7 @@ $response["member_added_details"] = array();
 				$response["instagram"] = $userData["instagram"];
 				$response["linkedin"] = $userData["linkedin"];
 				$response["twitter"] = $userData["twitter"];
+				$response["youtube"] = $userData["youtube"];
 				$response["user_profile_pic"] = $base_url . "img/users/members_profile/" . $userData['user_profile_pic'];
 				$response["follow_status"] = $follow_status;
 				$response["block_status"] = $block_status;
@@ -291,6 +292,7 @@ $response["member_added_details"] = array();
 				$response["instagram"] = $user_data['instagram'];
 				$response["linkedin"] = $user_data['linkedin'];
 				$response["twitter"] = $user_data['twitter'];
+				$response["youtube"] = $user_data['youtube'];
 
 				$response["salutation"] = $user_data['salutation'];
 				$response["user_full_name"] = $user_data['user_full_name'];
@@ -401,6 +403,7 @@ $response["member_added_details"] = array();
 			$response["instagram"] = $user_data['instagram'];
 			$response["linkedin"] = $user_data['linkedin'];
 			$response["twitter"] = $user_data['twitter'];
+			$response["youtube"] = $user_data['youtube'];
 
 			$response["salutation"] = $user_data['salutation'];
 			$response["user_full_name"] = $user_data['user_full_name'];

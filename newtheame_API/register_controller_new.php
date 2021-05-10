@@ -1455,7 +1455,7 @@ $custom_category_name = htmlentities($custom_category_name,ENT_QUOTES);
 				
 
 				$full_data_query = $d->selectRow("users_master.user_mobile,users_master.alt_mobile,
-					users_master.invoice_download,users_master.plan_renewal_date,users_master.facebook,users_master.instagram,users_master.linkedin,users_master.twitter,users_master.whatsapp_privacy,users_master.email_privacy,business_adress_master.adress,business_adress_master.add_latitude,business_adress_master.add_longitude,business_adress_master.pincode,business_adress_master.area_id,
+					users_master.invoice_download,users_master.plan_renewal_date,users_master.facebook,users_master.instagram,users_master.linkedin,users_master.twitter,users_master.youtube,users_master.whatsapp_privacy,users_master.email_privacy,business_adress_master.adress,business_adress_master.add_latitude,business_adress_master.add_longitude,business_adress_master.pincode,business_adress_master.area_id,
 
 					users_master.member_date_of_birth,users_master.gender, users_master.whatsapp_number, users_master.user_email,users_master.cllassified_mute,users_master.user_id,business_categories.business_category_id,business_sub_categories.business_sub_category_id,users_master.user_full_name,users_master.zoobiz_id,users_master.public_mobile,users_master.user_mobile,users_master.user_profile_pic,business_categories.category_name,business_sub_categories.sub_category_name,user_employment_details.company_email ,user_employment_details.company_name ,user_employment_details.designation,user_employment_details.company_contact_number,user_employment_details.company_website,user_employment_details.company_logo,user_employment_details.company_broucher,user_employment_details.company_profile,user_employment_details.gst_number,business_adress_master.state_id,business_adress_master.city_id , business_adress_master.country_id ","users_master,user_employment_details,business_categories,business_sub_categories,business_adress_master",
 
@@ -1516,6 +1516,7 @@ $custom_category_name = htmlentities($custom_category_name,ENT_QUOTES);
 				$response["instagram"] = $data_app["instagram"];
 				$response["linkedin"] = $data_app["linkedin"];
 				$response["twitter"] = $data_app["twitter"];
+				$response["youtube"] = $data_app["youtube"];
 
 				if($data_app["cllassified_mute"]=="1"){
 					$response["cllassified_mute"]=true;

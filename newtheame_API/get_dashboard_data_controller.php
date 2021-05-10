@@ -501,7 +501,7 @@ if($memberAdded > 0 ){
     }
 
 //social media details
-    $user_detail_qry = $d->selectRow("users_master.facebook,users_master.linkedin,users_master.twitter,users_master.instagram,
+    $user_detail_qry = $d->selectRow("users_master.facebook,users_master.linkedin,users_master.twitter,users_master.youtube,users_master.instagram,
         users_master.user_id,business_categories.business_category_id,business_sub_categories.business_sub_category_id,users_master.user_full_name,users_master.zoobiz_id,users_master.public_mobile,users_master.user_mobile,users_master.user_profile_pic,business_categories.category_name,business_sub_categories.sub_category_name,user_employment_details.company_name","users_master,user_employment_details,business_categories,business_sub_categories,business_adress_master", " ( business_categories.category_status = 0 OR business_categories.category_status = 2) and
         business_adress_master.user_id=users_master.user_id AND business_adress_master.adress_type=0 AND users_master.user_id='$user_id'  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  ", "");
 
@@ -512,6 +512,8 @@ if($memberAdded > 0 ){
     $userDetails["facebook"] = $user_detail_data["facebook"];
     $userDetails["linkedin"] = $user_detail_data["linkedin"];
     $userDetails["twitter"] = $user_detail_data["twitter"];
+    $userDetails["youtube"] = $user_detail_data["youtube"];
+    
     $userDetails["instagram"] = $user_detail_data["instagram"];
 //new
     $userDetails["user_id"] = $user_detail_data["user_id"];
