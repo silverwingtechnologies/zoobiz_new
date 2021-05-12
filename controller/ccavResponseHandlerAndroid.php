@@ -234,7 +234,7 @@ $_SESSION['response_status']= $arr_data['order_status'];
 					$m->set_data('is_paid','0');
 				}
 
-				if($coupon_amount > 0){
+				if($coupon_amount > 0 || 1){
 					$paymentAry = array(
 						'user_id' => $user_id,
 						'is_paid' => $m->get_data('is_paid'),

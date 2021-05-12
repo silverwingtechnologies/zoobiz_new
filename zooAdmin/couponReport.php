@@ -124,11 +124,12 @@ error_reporting(0);
                   <td><?php echo $user_mobile; ?></td>
                   <td><?php echo $package_name; ?></td>
                   <td class="text-right"><?php echo $package_master_data['package_amount']; ?></td>
-                  <td class="text-right"><?php if($coupon_amount > 0){
-                    echo $coupon_amount;
-                  } else {
-                     $coupon_per= str_replace(".00","",$coupon_per);
+                  <td class="text-right"><?php if($coupon_per > 0){
+                    $coupon_per= str_replace(".00","",$coupon_per);
                     echo  $coupon_per.'%';
+                  } else {
+                     
+                     echo $coupon_amount;
                   } ?></td>
                   <td class="text-right"><?php echo $transection_amount; ?></td>
                   <td><?php echo $payment_mode; ?></td> 

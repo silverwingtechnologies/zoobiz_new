@@ -2045,6 +2045,20 @@ $subCatArr = array('0');
     }
     }
     } else if (isset($_POST['addCllassifiedNew']) && filter_var($user_id, FILTER_VALIDATE_INT) == true) {
+
+
+         $business_sub_category_id_arr = explode(",", $_POST['business_sub_category_id']);
+         $business_sub_category_id_arr = implode(",", $business_sub_category_id_arr);
+ $qdata_qry=$d->select(" users_master,user_employment_details,business_sub_categories","  business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id and users_master.active_status=0 and  user_employment_details.business_sub_category_id in ($business_sub_category_id_arr)   ","");
+
+
+   $count_array = array('0');
+   while ($qdata_data=mysqli_fetch_array($qdata_qry)) {
+    $count_array[$qdata_data['business_sub_category_id']][] = $qdata_data['business_sub_category_id'];
+  }
+
+
+
     $blocked_users = array('0');
     $getBLockUserQry = $d->selectRow("user_id, block_by", "user_block_master", " block_by='$user_id' or user_id='$user_id'  ", "");
     while ($getBLockUserData = mysqli_fetch_array($getBLockUserQry)) {
@@ -2090,6 +2104,9 @@ $subCatArr = array('0');
          $_POST['business_category_id'] = explode(",", $_POST['business_category_id']);
          $_POST['business_sub_category_id'] = explode(",", $_POST['business_sub_category_id']);
          $total_categories = count($_POST['business_category_id']);
+
+
+         $email_cat = array();
          if ($q1 > 0) {
                               //add multiple categories start
           for ($k = 0; $k < $total_categories; $k++) {
@@ -2097,6 +2114,12 @@ $subCatArr = array('0');
             'classified_id' => $cllassified_id, 'user_id' => $user_id, 'business_category_id' => $_POST['business_category_id'][$k], 'business_sub_category_id' => $_POST['business_sub_category_id'][$k], 'created_at' => date("Y-m-d H:i:s")
           );
            $d->insert("classified_category_master", $a1);
+
+           $cnt_cat = $count_array[$_POST['business_sub_category_id'][$k]];
+           if( count($cnt_cat) <= 0 ){
+            $email_cat[] = $_POST['business_sub_category_id'][$k];
+           } 
+
          }
                               //add multiple categories end
                               //add multiple image start
@@ -2193,6 +2216,27 @@ $subCatArr = array('0');
      $aCity = array('cllassified_id' => $cllassified_id, 'city_id' => $cityAry[$i], 'state_id' => $state_id);
      $d->insert("cllassifieds_city_master", $aCity);
     }
+
+
+    //new code
+     if(!empty($email_cat)){
+        $email_cat = implode(",", $email_cat);
+
+         $user_qry = $d->selectRow(" user_email,user_full_name ","users_master  ", "user_id='$user_id'","");
+         $user_data =   mysqli_fetch_array($user_qry);
+
+        $subcat_qry = $d->selectRow(" business_sub_category_id,GROUP_CONCAT(sub_category_name SEPARATOR ', ') as  sub_category_nameNoUser ","business_sub_categories  ", "business_sub_category_id in ($email_cat)","group by business_sub_category_id");
+        $subcat_data =   mysqli_fetch_array($subcat_qry);
+
+        $to = $user_data['user_email'];
+        $user_full_name = $user_data['user_full_name'];
+        $sub_category_nameNoUser = $subcat_data['sub_category_nameNoUser'];
+                        $subject ="Categorories Do Not Have Member";
+                        include('../mail/categoryNoMemberToUser.php');
+                        include '../mail_front.php';
+
+     }
+    //new code
     $title = "Classified";
     $description = "New Classified Added By $user_name";
 

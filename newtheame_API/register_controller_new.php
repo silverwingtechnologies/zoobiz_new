@@ -59,7 +59,12 @@ if (isset($_POST) && !empty($_POST)) {
 		$package_amount=number_format($package_amount_new+$gst_amount,2,'.','');
 
 		      //9oct2020
-
+if(    $coupon_code ==''  && $package_amount <= 0    ){
+	$response["message"] = "Please Choose Membership Plan";
+			$response["status"] = "201";
+			echo json_encode($response);
+			exit;
+}
 
 
 
@@ -209,7 +214,7 @@ $user_id  = $con->insert_id;
 					}
 					  //6nov2020
 
-					if($coupon_amount > 0){
+					if($coupon_amount > 0 || 1){
 						$paymentAry = array(
 							'user_id' => $user_id,
 							'is_paid' => $m->get_data('is_paid'),
@@ -355,7 +360,7 @@ $user_id  = $con->insert_id;
 
 
 
-	$ref_by_data ="Other ";
+	$ref_by_data ="Social Media ";
 	if($refer_type==2){
 	      /*$refere_by_phone_number = $refer_friend_no;
           $ref_users_master = $d->selectRow("user_mobile,user_token,device,user_full_name","users_master", "user_mobile = '$refere_by_phone_number'");
@@ -373,7 +378,7 @@ $user_id  = $con->insert_id;
 	if($refer_type==1){ 
 		$ref_by_data ="Social Media";
 	} else if($refer_type==3){ 
-		$ref_by_data ="Other ";
+		$ref_by_data ="Social Media ";
 		if($refer_remark !=''){
 			$ref_by_data .=" -".$refer_remark;
 		}
@@ -1204,7 +1209,7 @@ $custom_category_name = htmlentities($custom_category_name,ENT_QUOTES);
 				$getData = $d->selectRow("fcm_content,share_within_city","custom_settings_master", " status = 0 and send_fcm=1 and flag = 0 ", "");
 
 
-				$ref_by_data ="Other 1";
+				$ref_by_data ="Social Media";
 				if($users_master_data['refer_by']==2){
 					$refere_by_phone_number = $users_master_data['refere_by_phone_number'];
 					$refer_friend_id = $users_master_data['referred_by_user_id'];
@@ -1222,7 +1227,7 @@ $custom_category_name = htmlentities($custom_category_name,ENT_QUOTES);
 				if($users_master_data['refer_by'] ==1){ 
 					$ref_by_data ="Social Media";
 				} else if($users_master_data['refer_by']==3){ 
-					$ref_by_data ="Other 2";
+					$ref_by_data ="Social Media";
 					if($remark !=''){
 						$ref_by_data .=" -".$users_master_data['remark'];
 					}

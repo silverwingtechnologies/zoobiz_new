@@ -20,7 +20,7 @@ if ($_POST['addClick'] == "addClick" && filter_var($user_id, FILTER_VALIDATE_INT
 
 }  else   if (isset($change_company_name) && $change_company_name == 'change_company_name' && filter_var($user_id, FILTER_VALIDATE_INT) == true) {
 
-	 $org_users_master_qry = $d->selectRow("*","users_master,user_employment_details", "users_master.user_id = '$user_id' ");
+	 $org_users_master_qry = $d->selectRow("*","user_employment_details,users_master", "user_employment_details.user_id =users_master.user_id and   users_master.user_id = '$user_id' ");
 	 $org_users_master_data = mysqli_fetch_array($org_users_master_qry);
 
 	$requested_company_name = html_entity_decode($requested_company_name);

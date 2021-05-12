@@ -212,11 +212,12 @@ if(isset($_REQUEST['paid_trans']) && ($_REQUEST['paid_trans']==2   ) ){
                     <?php } else {  ?>
                   <td class="text-right"><?php echo $transection_amount; ?></td>
                   <?php } if($_REQUEST['paid_trans']==2 || $_REQUEST['paid_trans']==4 ){  ?>
-                     <td class="text-right"><?php if($coupon_amount > 0){
-                    echo $coupon_amount;
-                  } else {
+                     <td class="text-right"><?php if($coupon_per > 0){
                      $coupon_per= str_replace(".00","",$coupon_per);
                     echo  $coupon_per.'%';
+                  } else {
+                    
+                    echo $coupon_amount;
                   } ?></td>
                   <td class="text-right"><?php echo $transection_amount; ?></td>
 

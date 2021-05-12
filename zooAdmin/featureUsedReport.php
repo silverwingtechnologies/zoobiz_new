@@ -164,12 +164,14 @@
                       }
                     }
                     if($_REQUEST['feature_arr'] == 4 || $_REQUEST['feature_arr'] ==2){
-                     $meet_data_qry=$d->select(" meeting_master"," user_id in ($user_id_array) and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo' and status='Pending' ","");
+                     $meet_data_qry=$d->select(" meeting_master"," ( (user_id in ($user_id_array) and status='Pending')  or (user_id = action_user_id and status='Reschedule')  ) and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo'   ","");
                      $meet_count_array = array();
                      while ($meet_data=mysqli_fetch_array($meet_data_qry)) {
                       $meet_count_array[$meet_data['user_id']][] = $meet_data['user_id'];
                     }
-                    $meet_acc_data_qry=$d->select(" meeting_master"," user_id in ($user_id_array) and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo' and status='Approve'  ","");
+
+                    
+                    $meet_acc_data_qry=$d->select(" meeting_master","  user_id in ($user_id_array)   and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo'  and status='Approve'  ","");
                     $meet_acc_count_array = array();
                     while ($meet_acc_data=mysqli_fetch_array($meet_acc_data_qry)) {
                       $meet_acc_count_array[$meet_acc_data['user_id']][] = $meet_acc_data['user_id'];
@@ -184,10 +186,10 @@
                     while ($meet_del_data=mysqli_fetch_array($meet_del_data_qry)) {
                       $meet_del_count_array[$meet_del_data['user_id']][] = $meet_del_data['user_id'];
                     }
-                    $meet_res_data_qry=$d->select(" meeting_master"," user_id in ($user_id_array) and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo' and status='Reschedule' ","");
+                    $meet_res_data_qry=$d->select(" meeting_master"," action_user_id in ($user_id_array) and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo' and status='Reschedule' ","");
                     $meet_res_count_array = array();
                     while ($meet_res_data=mysqli_fetch_array($meet_res_data_qry)) {
-                      $meet_res_count_array[$meet_res_data['user_id']][] = $meet_res_data['user_id'];
+                      $meet_res_count_array[$meet_res_data['action_user_id']][] = $meet_res_data['action_user_id'];
                     }
                     $meet_inv_data_qry=$d->select(" meeting_master"," member_id in ($user_id_array) and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo' and status='Approve'  ","");
                     $meet_inv_count_array = array();
