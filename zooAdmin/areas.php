@@ -83,7 +83,7 @@
         <div class="card-body">
           <div class="table-responsive">
             <?php if (isset($_GET['cId'])) { ?>
-            <table id="example" class="table table-bordered">
+            <table id="exampleList" class="table table-bordered">
               <thead>
                 <tr>
                  

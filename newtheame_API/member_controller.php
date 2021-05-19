@@ -832,12 +832,17 @@ while($getBLockUserData=mysqli_fetch_array($getBLockUserQry)) {
 	 	}
  }
 
+
+ $q_query=$d->select("users_master,cities","users_master.user_id= $user_id and users_master.city_id= cities.city_id","");
+ $q_data=mysqli_fetch_array($q_query);
+
+$member_city_id=  $q_data['city_id'];
              
-			$meq = $d->selectRow("users_master.user_id,business_categories.business_category_id,business_sub_categories.business_sub_category_id,users_master.user_full_name ,users_master.user_first_name,users_master.user_last_name ,users_master.zoobiz_id,users_master.public_mobile,users_master.user_mobile,users_master.user_profile_pic,business_categories.category_name,business_sub_categories.sub_category_name,user_employment_details.company_name, user_employment_details.company_logo, user_employment_details.search_keyword",
+			$meq = $d->selectRow("users_master.user_id,business_categories.business_category_id,business_sub_categories.business_sub_category_id,users_master.user_full_name ,users_master.user_first_name,users_master.user_last_name ,users_master.zoobiz_id,users_master.public_mobile,users_master.user_mobile,users_master.user_profile_pic,business_categories.category_name,business_sub_categories.sub_category_name,user_employment_details.company_name, user_employment_details.company_logo, user_employment_details.search_keyword,cities.city_name",
 				
-				"users_master,user_employment_details,business_categories,business_sub_categories", 
-				"     business_categories.category_status = 0 and  
-				business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  and   users_master.user_id != $user_id AND users_master.office_member=0 AND users_master.active_status=0  $where  ", ""); 
+				"users_master,user_employment_details,business_categories,business_sub_categories,cities", 
+				"  users_master.city_id= cities.city_id and     business_categories.category_status = 0 and  
+				business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  and   users_master.user_id != $user_id AND users_master.office_member=0 AND users_master.active_status=0  $where  ", "ORDER BY FIELD(users_master.city_id, $member_city_id) desc"); 
        
 			$user_favorite_master_q = $d->selectRow("member_id,flag","user_favorite_master", "user_id='$user_id'  ", "");
 			
@@ -895,6 +900,7 @@ while($getBLockUserData=mysqli_fetch_array($getBLockUserQry)) {
 $member["short_name"] =strtoupper(substr($data["user_first_name"], 0, 1).substr($data["user_last_name"], 0, 1) );
 					$member["user_id"] = $data["user_id"];
 					$member["user_name"] = html_entity_decode($data["user_full_name"]);
+					$member["city_name"] = html_entity_decode($data["city_name"]);
 					$member["company_name"] = html_entity_decode($data["company_name"]);
 					$member["category_name"] = html_entity_decode($data["category_name"]);
 					$member["sub_category_name"] = html_entity_decode($data["sub_category_name"]);

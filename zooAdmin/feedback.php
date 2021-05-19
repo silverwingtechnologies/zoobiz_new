@@ -34,7 +34,7 @@
               <thead>
                 <tr>
                   <th class="deleteTh">
-                    <input type="checkbox" class="selectAll" label="check all"  />
+                   Select
                   </th>
                   <th class="text-right">#</th>
                  

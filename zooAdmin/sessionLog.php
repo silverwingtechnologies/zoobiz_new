@@ -36,9 +36,7 @@
               <table id="example" class="table table-bordered">
                 <thead>
                     <tr>
-                      <th class="deleteTh">
-                          #
-                      </th>
+                     
                       <th class="text-right">#</th>
                       <th>Name</th>
                       <th>User Role</th>
@@ -55,8 +53,7 @@
                       // print_r($data);
                      ?>
                     <tr>
-                    <td class='text-center'> <?php echo $i; ?> 
-                    </td>
+                   
                       <td class="text-right"><?php echo $i++; ?></td>
                         <td><?php echo $data["name"]; ?></td>
                         <td><?php echo $data["role_name"]; ?></td>

@@ -27,7 +27,7 @@ type="restaurant"
 
  
 user_profile_pic="../img/users/members_profile/107315842_profile.png"   /><marker id="345" 
-  company ="dfsdf"  
+  company ="dfsdf &amp; debuf"  
  user_email ="divya@silverwingteam.com" 
 user_mobile ="2345342332" 
 username ="Ms Dev Raval" 
@@ -1364,20 +1364,6 @@ lng="72.4160214"
 type="restaurant" 
 
  
-user_profile_pic="img/user.png"   /><marker id="107" 
-  company ="Umiya Industries"  
- user_email ="divya@silverwingteam.com" 
-user_mobile ="9725528865" 
-username ="Mr. Divya Raval" 
-gender ="Male" 
-adress ="101,Parshwa tower" 
-adress2 ="" 
- 
-lat="23.1098626" 
-lng="72.4160214" 
-type="restaurant" 
-
- 
 user_profile_pic="img/user.png"   /><marker id="108" 
   company ="regfgd"  
  user_email ="" 
@@ -1413,20 +1399,6 @@ user_mobile ="1231231231"
 username ="Mr. Zcsd Asdas" 
 gender ="Male" 
 adress ="asdsad" 
-adress2 ="" 
- 
-lat="22.9778146" 
-lng="72.4979419" 
-type="restaurant" 
-
- 
-user_profile_pic="img/user.png"   /><marker id="115" 
-  company ="sewrdf"  
- user_email ="" 
-user_mobile ="2112121212" 
-username ="Mr. Sdfs Sdf" 
-gender ="Male" 
-adress ="dsfsfsdf" 
 adress2 ="" 
  
 lat="22.9778146" 
@@ -1630,17 +1602,17 @@ lng="72.5482111"
 type="restaurant" 
 
  
-user_profile_pic="../img/users/members_profile/406943719_profile.png"   /><marker id="253" 
+user_profile_pic="../img/users/members_profile/406943719_profile.png"   /><marker id="115" 
   company ="SWT 3"  
  user_email ="abcdefghijklmnopqrstuvwxyz1234567890@gmail.com" 
 user_mobile ="9725528865" 
 username ="Miss Divya Raval" 
 gender ="Male" 
-adress ="Near Pakwan Cross Road" 
+adress ="dsfsfsdf" 
 adress2 ="" 
  
-lat="23.0386593" 
-lng="72.5118581" 
+lat="22.9778146" 
+lng="72.4979419" 
 type="restaurant" 
 
  
@@ -1689,7 +1661,7 @@ type="restaurant"
 user_profile_pic="../img/users/members_profile/877279895_profile.png"   /><marker id="289" 
   company ="dsfdsfs"  
  user_email ="dravalEE@test.com" 
-user_mobile ="3243242342" 
+user_mobile ="1231231234" 
 username ="Miss Dsfdsf Dsfdsf" 
 gender ="Male" 
 adress ="SDFDS" 

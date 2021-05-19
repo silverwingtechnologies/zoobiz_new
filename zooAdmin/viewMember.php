@@ -340,8 +340,31 @@ $difference_days= $d->plan_days_left($plan_renewal_date);
                 </div>                   
               </div>
             </div>
-
-
+ <hr>
+               <div class="media align-items-center">
+                <div>
+                 <i class="fa fa-info" aria-hidden="true"></i>  
+               </div>
+               <div class="media-body text-left">
+                <div class="progress-wrapper">Android Latest Version Code: 
+                  <?php  $app_version_master=$d->select("app_version_master","","");
+                         $app_version_master_data=mysqli_fetch_array($app_version_master);
+                         echo $app_version_master_data['version_code_android'];
+                  ?>
+               </div>                   
+              </div>
+            </div>
+ <hr>
+               <div class="media align-items-center">
+                <div>
+                 <i class="fa fa-info" aria-hidden="true"></i>  
+               </div>
+               <div class="media-body text-left">
+                <div class="progress-wrapper">iOS Latest Version Code: 
+                  <?php  echo $app_version_master_data['version_code_ios']; ?>
+              </div>                   
+              </div>
+            </div>
           <?php }?> 
 
 
@@ -573,6 +596,29 @@ if (isset($_SESSION['zoobiz_admin_id'])) { ?>
 </div>
 </div>
 
+<hr>
+ <div class="media align-items-center">
+  <div>
+   <i class="fa fa-info" aria-hidden="true"></i>  
+ </div>
+ <div class="media-body text-left">
+  <div class="progress-wrapper">Transaction Details: 
+     <button class="btn btn-warning btn-sm"  data-toggle="collapse" data-target="#demo<?php echo $user_id; ?>">view</button>
+       <div id="demo<?php echo $user_id; ?>" class="collapse">
+    <?php 
+    $transection_master_qry=$d->select("transection_master","user_id ='$user_id'"," order by transection_date desc");
+     while ($transection_master_data=mysqli_fetch_array($transection_master_qry)) {
+          echo 'Package/Coupon Name: '.$transection_master_data['package_name'].'<br>';
+          echo 'Payment Mode: '.$transection_master_data['payment_mode'].'<br>';
+          echo 'Date: '.date("Y-m-d H:i:s", strtotime($transection_master_data['transection_date'])).'<br>';
+          echo 'Amount: '.number_format($transection_master_data['transection_amount'],2,'.','').'<hr>';
+     }
+      ?>
+    </div>
+  </div>                   
+</div>
+</div>
+ 
 
 <hr>
 <div class="row">

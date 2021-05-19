@@ -27,7 +27,7 @@
             <!-- <div class="card-header"><i class="fa fa-table"></i> Data Exporting</div> -->
             <div class="card-body">
               <div class="table-responsive">
-              <table id="example" class="table table-bordered">
+              <table id="exampleList" class="table table-bordered">
                 <thead>
                     <tr>
                       <th class="text-center">#</th>
@@ -66,6 +66,8 @@
                         <?php if ($totalAsignPckg==0) {
                          ?>
                         <input type="checkbox" class="multiDelteCheckbox"  value="<?php echo $row['package_id']; ?>">
+                        <?php } else { ?> 
+                          <input title="Used Plans" type="checkbox"  disabled="">
                         <?php } ?>
                     </td>
                         <td class="text-right"><?php echo $i++; ?></td>

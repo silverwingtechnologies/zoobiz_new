@@ -27,7 +27,7 @@
             <!-- <div class="card-header"><i class="fa fa-table"></i> Data Exporting</div> -->
             <div class="card-body">
               <div class="table-responsive">
-              <table id="example" class="table table-bordered">
+              <table id="exampleList" class="table table-bordered">
                 <thead>
                     <tr>
                         <th class="text-right">Sr.No</th>
