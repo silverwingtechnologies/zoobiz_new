@@ -46,9 +46,8 @@
                   <th class="text-right">#</th>
                  
                   <th>Name</th>
-                  <th>Email</th>
-                  <th>Mobile</th>
-                  <th>Company</th>
+                  <th>Business Name</th>
+                  <th>Mobile</th> 
                    <th>Action</th>
                    <th>Active Status</th>
                    <th>Office Member</th>
@@ -75,10 +74,8 @@
                   </td> -->
                   <td class="text-right"><?php echo $i++; ?></td>
                   <td><?php echo  $salutation.' '.$user_full_name; ?></td>
-                  <td><?php echo $user_email ; ?></td>
-                  <td><?php echo $user_mobile; ?></td>
-                  <td><?php  echo wordwrap($company_name,20,"<br>\n");  
-                   ?></td>
+                  <td><?php echo html_entity_decode($company_name) ; ?></td>
+                  <td><?php echo $user_mobile; ?></td> 
                    <td>
                     <form action="viewMember" method="get">    
                           <input type="hidden" name="id" value="<?php echo $user_id; ?>">    

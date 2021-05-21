@@ -34,9 +34,8 @@
                   <th class="text-right">#</th>
                  
                   <th>Name</th>
-                  <th>Email</th>
-                  <th>Mobile</th>
-                  <th>Company</th>
+                  <th>Business Name</th>
+                  <th>Mobile</th> 
                    
                    
                 </tr>
@@ -53,11 +52,9 @@
                     <input type="checkbox" class="multiDelteCheckbox"  value="<?php echo $data['feedback_id']; ?>">
                   </td> -->
                   <td class="text-right"><?php echo $i++; ?></td>
-                  <td> <a href="memberView?id=<?php echo $user_id; ?>"><?php echo  $salutation.' '.$user_full_name; ?></td>
-                  <td><?php echo $user_email ; ?></td>
-                  <td><?php echo $user_mobile; ?></td>
-                  <td><?php  echo wordwrap($company_name,20,"<br>\n");  
-                   ?></td>
+                  <td> <a href="memberView?id=<?php echo $user_id; ?>"><?php echo  $salutation.' '.$user_full_name; ?></td> 
+                    <td><?php echo html_entity_decode($company_name) ; ?></td>
+                  <td><?php echo $user_mobile; ?></td> 
                      
 
                </tr>
