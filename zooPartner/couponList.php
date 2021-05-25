@@ -57,7 +57,7 @@
               <tbody>
                 <?php
                 $i=1;
-                $q=$d->select("coupon_master,zoobiz_admin_master,package_master","  package_master.package_id =coupon_master.plan_id and    coupon_master.created_by =zoobiz_admin_master.zoobiz_admin_id and package_master.is_cpn_package=0 and    coupon_master.coupon_status=0  order by coupon_master.coupon_name
+                $q=$d->select("coupon_master,zoobiz_admin_master,package_master","  package_master.package_id =coupon_master.plan_id and    coupon_master.created_by =zoobiz_admin_master.partner_login_id and package_master.is_cpn_package=0 and    coupon_master.coupon_status=0  order by coupon_master.coupon_name
                   asc ");
                 while ($data=mysqli_fetch_array($q)) {
                   extract($data);
@@ -149,7 +149,7 @@
               <tbody>
                 <?php
                 $i=1;
-                $q=$d->select("coupon_master,zoobiz_admin_master,package_master","  package_master.package_id =coupon_master.plan_id and    coupon_master.created_by =zoobiz_admin_master.zoobiz_admin_id and package_master.is_cpn_package=1 and    coupon_master.coupon_status=0  order by coupon_master.coupon_name
+                $q=$d->select("coupon_master,zoobiz_admin_master,package_master","  package_master.package_id =coupon_master.plan_id and    coupon_master.created_by =zoobiz_admin_master.partner_login_id and package_master.is_cpn_package=1 and    coupon_master.coupon_status=0  order by coupon_master.coupon_name
                   asc ");
                 while ($data=mysqli_fetch_array($q)) {
                   extract($data);

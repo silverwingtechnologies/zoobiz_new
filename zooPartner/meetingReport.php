@@ -151,9 +151,9 @@ error_reporting(0);
 
                   <td class="text-right"><?php echo $i++; ?></td>
 
-                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo $user_full_name; ?></a></td>
+                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo $user_full_name; ?></a></td>
                   <?php $mem = $member_arr[$member_id]; ?> 
-                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $member_id; ?>" ><?php echo $mem; ?></a></td>
+                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $member_id; ?>" ><?php echo $mem; ?></a></td>
 
 
                   <td><?php echo date("d-m-Y",strtotime($date)) ; ?></td>

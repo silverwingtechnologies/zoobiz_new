@@ -357,7 +357,7 @@
             <div class="">
               <form  id="advertiseFrm" action="controller/profileController.php" method="post" enctype="multipart/form-data">
           <?php 
-            if(isset($_SESSION['zoobiz_admin_id'])) {
+            if(isset($_SESSION['partner_login_id'])) {
             $qa=$d->select("advertisement_master","");
             $advdata=mysqli_fetch_array($qa);
             extract($advdata);

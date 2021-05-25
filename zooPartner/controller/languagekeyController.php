@@ -17,7 +17,7 @@ if(isset($_POST['AddLanguageKey'])) {
 	if ($q === TRUE) {
 		
 		$_SESSION['msg']="Language Key Added Successfully";
-		$d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+		$d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 		
 		header ("location:../manageLanguagKeys");
 		
@@ -31,7 +31,7 @@ if(isset($_POST['AddLanguageKey'])) {
 	if($q===TRUE) {
 		$_SESSION['msg']="Language Key Deleted";
 		
-		$d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+		$d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 		header ('location:../manageLanguagKeys');
 	} 	else 	{
 		$_SESSION['msg1']="Language Key Not Deleted";
@@ -55,7 +55,7 @@ if(isset($_POST['AddLanguageKey'])) {
 			
 			$_SESSION['msg']="Language Key Updated Successfully";
 			 
-			$d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+			$d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 			header ("location:../manageLanguagKeys");
 			
 		} else {

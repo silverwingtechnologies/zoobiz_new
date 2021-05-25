@@ -59,7 +59,7 @@
                 
                   
                    <td><?php echo $version_code; ?></td> 
-                   <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo $user_full_name; ?></a></td>
+                   <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo $user_full_name; ?></a></td>
                
                  <td> <?php echo $user_mobile; ?> </td>
                   <td> <?php echo $device; ?> </td>

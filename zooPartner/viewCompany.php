@@ -29,7 +29,7 @@ extract($compData);
         <div class="col-lg-4">
           <div class="card profile-card-2">
             <div class="card-img-block">
-              <img class="img-fluid" src="img/Free-hd-building-wallpaper.jpg" alt="Card image cap">
+              <img class="img-fluid" src="../zooAdmin/img/Free-hd-building-wallpaper.jpg" alt="Card image cap">
             </div>
             <div class="card-body pt-5">
               <img id="blah"  onerror="this.src='../zooAdmin/img/user.png'" src="../img/company/<?php echo $company_logo; ?>"  width="75" height="75"   src="#" alt="your image" class='profile' />

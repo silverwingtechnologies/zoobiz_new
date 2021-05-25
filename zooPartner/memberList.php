@@ -77,7 +77,7 @@
                   <td><?php echo html_entity_decode($company_name) ; ?></td>
                   <td><?php echo $user_mobile; ?></td> 
                    <td>
-                    <form action="viewMember" method="get">    
+                    <form action="memberView" method="get">    
                           <input type="hidden" name="id" value="<?php echo $user_id; ?>">    
                           <button type="submit" name="" class="btn btn-danger btn-sm "> View Profile</button>
                         </form>

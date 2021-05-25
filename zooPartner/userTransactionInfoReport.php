@@ -200,7 +200,7 @@ if(isset($_REQUEST['paid_trans']) && ($_REQUEST['paid_trans']==2   ) ){
                   <td class="text-right"><?php echo $i++; ?></td>
                    <td><?php  echo $city_name; ?></td>
                   <td><?php  echo $company_name; ?></td>
-                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
                    <td><?php echo $device; ?></td>
                   <td><?php echo $user_mobile; ?></td>
                   <td><?php echo $package_name; ?></td>

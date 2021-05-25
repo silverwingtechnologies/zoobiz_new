@@ -105,7 +105,7 @@ extract($_REQUEST);
                     <?php 
                     $isProfileComplete = $user_employment_details_array[$user_id];
                    if(!empty($isProfileComplete)) {?> 
-                      <form action="viewMember" method="get">    
+                      <form action="memberView" method="get">    
                           <input type="hidden" name="id" value="<?php echo $user_id; ?>">    
                           <button type="submit" name="" class="btn btn-secondary btn-sm "> View Profile</button>
                         </form>

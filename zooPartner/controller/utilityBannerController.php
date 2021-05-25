@@ -84,7 +84,7 @@ if(isset($_POST) && !empty($_POST) )
 
     if($q==TRUE) {
        $_SESSION['msg']="Utility Banner Added";
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
        header("Location: ../utilityBanners");
     } else {
         $_SESSION['msg1']="Something Wrong";
@@ -243,7 +243,7 @@ if(isset($_POST) && !empty($_POST) )
 
     if($q==TRUE) {
        $_SESSION['msg']="Utility Banner Added";
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
        header("Location: ../utilityBanners?frame_id=$frame_id&viewDetail=true");
     } else {
         $_SESSION['msg1']="Something Wrong";
@@ -319,7 +319,7 @@ if(isset($_POST) && !empty($_POST) )
                 $q = $d->update("utility_banner_master", $a,"banner_id='$banner_id_edit'");
     if($q==TRUE) {
         $_SESSION['msg']="Utility Banner Updated...";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: ../utilityBanners");
     } else {
       $_SESSION['msg1']="Something Went Wrong.";
@@ -332,7 +332,7 @@ if(isset($_POST) && !empty($_POST) )
      $q = $d->delete("utility_banner_master","banner_id='$banner_id'");
     if($q==TRUE) {
         $_SESSION['msg']="Utility Banner Deleted";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: ../utilityBanners");
     } else {
       $_SESSION['msg1']="Something Went Wrong.";
@@ -380,7 +380,7 @@ if(isset($deleteGalleryPhoto)  ) {
                 }
        if($success) {
         $_SESSION['msg']="Utility Banner Image Deleted";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: ../utilityBanners?frame_id=$frame_id&viewDetail=true");
     } else {
       $_SESSION['msg1']="Something Went Wrong.";

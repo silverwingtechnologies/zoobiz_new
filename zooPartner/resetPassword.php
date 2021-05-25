@@ -53,9 +53,9 @@ $get_array = array();
    
                     extract(array_map("test_input" , $_GET));
                     $forgotTime=date("Y-m-d");
-                    $q=$d->select("zoobiz_admin_master","forgot_token='$t' AND zoobiz_admin_id = '$f' AND token_date='$forgotTime'");
+                    $q=$d->select("zoobiz_admin_master","forgot_token='$t' AND partner_login_id = '$f' AND token_date='$forgotTime'");
 
-                    //echo "forgot_token='$t' AND zoobiz_admin_id = '$f' AND token_date='$forgotTime'";
+                    //echo "forgot_token='$t' AND partner_login_id = '$f' AND token_date='$forgotTime'";
                     $data=mysqli_fetch_array($q);
                     if ($data>0) {
                     $_SESSION['forgot_admin_id']=$f;

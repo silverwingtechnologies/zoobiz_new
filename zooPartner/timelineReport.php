@@ -84,7 +84,7 @@ error_reporting(0);
                     <input type="checkbox" class="multiDelteCheckbox"  value="<?php echo $data['feedback_id']; ?>">
                   </td> -->
                   <td class="text-right"><?php echo $i++; ?></td>
-                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
                   <td class="text-right">
                     <?php echo  $totalUsage; ?>
                   </td>
@@ -95,7 +95,7 @@ error_reporting(0);
                    ?></td>
                   <td><?php echo $device; ?></td>
                    <!-- <td>
-                    <form action="viewMember" method="get">    
+                    <form action="memberView" method="get">    
                           <input type="hidden" name="id" value="<?php echo $user_id; ?>">    
                           <button type="submit" name="" class="btn btn-danger btn-sm "> View Profile</button>
                         </form>

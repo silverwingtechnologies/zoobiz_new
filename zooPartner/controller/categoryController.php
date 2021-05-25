@@ -21,7 +21,7 @@ $a1= array (
 $q=$d->insert("sub_category_keywords_master",$a1);
 if($q==TRUE) {
   $_SESSION['msg']=ucwords($category_images)." Keyword Added for ".html_entity_decode($cat_data['sub_category_name']).' - '. html_entity_decode($cat_data['category_name']);
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
   header("Location: ../manageSubCatKeywords?business_sub_category_id=$business_sub_category_id");
 } else {
   header("Location: ../manageSubCatKeywords?business_sub_category_id=$business_sub_category_id");
@@ -45,7 +45,7 @@ $a1= array (
 $q=$d->update("sub_category_keywords_master",$a1,"sub_category_keywords_id = $sub_category_keywords_id");
 if($q==TRUE) {
   $_SESSION['msg']=ucwords($category_images)." Keyword Updated for ".html_entity_decode($cat_data['sub_category_name']).' - '. html_entity_decode($cat_data['category_name']);
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
   header("Location: ../manageSubCatKeywords?business_sub_category_id=$business_sub_category_id");
 } else {
   header("Location: ../manageSubCatKeywords?business_sub_category_id=$business_sub_category_id");
@@ -172,7 +172,7 @@ $a1= array (
 $q=$d->insert("business_categories",$a1);
 if($q==TRUE) {
   $_SESSION['msg']=$category_name." Business Category Added";
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
   header("Location: ../mainCategories");
 } else {
   header("Location: ../mainCategories");
@@ -301,7 +301,7 @@ $a1= array (
 $q=$d->update("business_categories",$a1,"business_category_id='$business_category_id'");
 if($q==TRUE) {
   $_SESSION['msg']=$category_name. " Business Category Updated";
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
   header("Location: ../mainCategories");
 } else {
   header("Location: ../mainCategories");
@@ -373,7 +373,7 @@ if(isset($addSubCategory)) {
                 $q=$d->insert("business_sub_categories",$a1);
                 if($q==TRUE) {
                   $_SESSION['msg']=$sub_category_name. " Sub Category Added";
-                  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+                  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
                 //3dec2020
                   $last_auto_id=$d->last_auto_id("business_sub_categories");
                   $res=mysqli_fetch_array($last_auto_id);
@@ -458,7 +458,7 @@ if(isset($addSubCategory)) {
                 $q=$d->update("business_sub_categories",$a1,"business_sub_category_id='$business_sub_category_id'");
                 if($q==TRUE) {
                   $_SESSION['msg']=$sub_category_name." Sub Category Updated";
-                  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+                  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
                   header("Location: ../subCategories");
                 } else {
                   header("Location: ../subCategories");
@@ -481,7 +481,7 @@ if(isset($addSubCategory)) {
                $adm_data=$d->selectRow("sub_category_name","business_sub_categories"," business_sub_category_id='$business_sub_category_id_val'");
                $data_q=mysqli_fetch_array($adm_data);
                $_SESSION['msg']=$data_q['sub_category_name']." Related Sub Category Updated";
-               $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+               $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
                header("Location: ../subCategories");
              } else {
               header("Location: ../subCategories");
@@ -526,7 +526,7 @@ if(isset($addSubCategory)) {
                
                $data_q=mysqli_fetch_array($adm_data);
                $_SESSION['msg']=$data_q['sub_category_name']." Related Sub Category Updated";
-               $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+               $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
                header("Location: ../subCategories");
              } else {
               header("Location: ../subCategories");
@@ -569,7 +569,7 @@ if(isset($addSubCategory)) {
            
            $data_q=mysqli_fetch_array($adm_data);
            $_SESSION['msg']=$data_q['category_name']." Related Sub Category Updated";
-           $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+           $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
            header("Location: ../mainCategories");
          } else {
           header("Location: ../mainCategories");
@@ -651,7 +651,7 @@ if(isset($addSubCategory)) {
        $adm_data=$d->selectRow("category_name","business_categories"," business_category_id='$business_category_id_val'");
        $data_q=mysqli_fetch_array($adm_data);
        $_SESSION['msg']=$data_q['category_name']." Related Sub Category Updated";
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
        header("Location: ../mainCategories");
      } else {
       header("Location: ../mainCategories");

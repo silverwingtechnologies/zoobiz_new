@@ -13,7 +13,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   $m->set_data('end_date',date("Y-m-d",strtotime($end_date)));
   $m->set_data('order_date',date("Y-m-d",strtotime($order_date)));
   $m->set_data('status',$status);
- $m->set_data('created_by',$_SESSION[zoobiz_admin_id]);
+ $m->set_data('created_by',$_SESSION[partner_login_id]);
    $created_at = date('Y-m-d H:i:s');
    $m->set_data('created_at',$created_at);
   
@@ -30,7 +30,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   $q=$d->insert("seasonal_greet_master",$a);
  if($q>0) {
     $_SESSION['msg']=ucfirst($title)." Seasonal Greeting Added";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../seasonalGreetList");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -42,7 +42,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       $m->set_data('start_date',date("Y-m-d",strtotime($start_date)));
   $m->set_data('end_date',date("Y-m-d",strtotime($end_date)));
   $m->set_data('status',$status);
- $m->set_data('created_by',$_SESSION[zoobiz_admin_id]);
+ $m->set_data('created_by',$_SESSION[partner_login_id]);
    $created_at = date('Y-m-d H:i:s');
    
   
@@ -61,7 +61,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   $q=$d->update("seasonal_greet_master",$a,"seasonal_greet_id ='$seasonal_greet_id'");
  if($q>0) {
     $_SESSION['msg']=ucfirst($title)." Seasonal Greeting Updated";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../seasonalGreetList");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -145,7 +145,7 @@ else if(isset($_POST['addSeasonalGreetImage'])){
    $m->set_data('from_name_font_name',$from_name_font_name); 
    $m->set_data('from_name_font_size',$from_name_font_size); 
     $m->set_data('status',$status); 
-   $m->set_data('created_by',$_SESSION[zoobiz_admin_id]);
+   $m->set_data('created_by',$_SESSION[partner_login_id]);
    $m->set_data('created_at',date('Y-m-d H:i:s'));
    
      $m->set_data('logo_alignment',$logo_alignment);
@@ -184,7 +184,7 @@ else if(isset($_POST['addSeasonalGreetImage'])){
   $q=$d->insert("seasonal_greet_image_master",$a);
  if($q>0) {
     $_SESSION['msg']=ucfirst($title_on_image)." Seasonal Greeting Image Added";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../manageSeasonalGreet?seasonal_greet_id=$seasonal_greet_id");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -256,7 +256,7 @@ else if(isset($_POST['addSeasonalGreetImage'])){
    $m->set_data('from_name_font_size',$from_name_font_size); 
 
    $m->set_data('status',$status); 
-   $m->set_data('created_by',$_SESSION[zoobiz_admin_id]);
+   $m->set_data('created_by',$_SESSION[partner_login_id]);
    
    $m->set_data('logo_alignment',$logo_alignment);
      $m->set_data('to_text_alignment',$to_text_alignment);
@@ -291,7 +291,7 @@ else if(isset($_POST['addSeasonalGreetImage'])){
   $q=$d->update("seasonal_greet_image_master",$a,"seasonal_greet_image_id = '$seasonal_greet_image_id'");
  if($q>0) {
     $_SESSION['msg']=ucfirst($title_on_image)." Seasonal Greeting Image Updated";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../manageSeasonalGreet?seasonal_greet_id=$seasonal_greet_id");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -328,7 +328,7 @@ if(isset($_POST['delete_seasonal_greet_id'])){
 
 
     $_SESSION['msg']=$data_q['title']." Seasonal Greeting Deleted";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../seasonalGreetList");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -356,7 +356,7 @@ if(isset($_POST['delete_seasonal_greet_image_id'])){
     
   
     $_SESSION['msg']=$data_q['title_on_image']." Deleted";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../manageSeasonalGreet?seasonal_greet_id=$seasonal_greet_id");
   } else {
     $_SESSION['msg1']="Something Wrong";

@@ -12,7 +12,7 @@
       <div class="col-lg-4">
        <div class="card profile-card-2">
         <div class="card-img-block">
-          <img class="img-fluid" src="img/Free-hd-building-wallpaper.jpg" alt="Card image cap">
+          <img class="img-fluid" src="../zooAdmin/img/Free-hd-building-wallpaper.jpg" alt="Card image cap">
         </div>
         <div class="card-body pt-5">
            <img id="blah"  onerror="this.src='../zooAdmin/img/user.png'" src="img/profile/<?php echo $_SESSION['admin_profile']; ?>"  width="75" height="75"   src="#" alt="your image" class='profile' />
@@ -23,7 +23,7 @@
         <div class="card-body border-top">
 
            <?php 
-         $role_master=$d->select("role_master","role_id='$_SESSION[role_id]'");
+         $role_master=$d->select("role_master","role_id='$_SESSION[partner_role_id]'");
       $role_master_data=mysqli_fetch_array($role_master);
        ?>
 
@@ -122,13 +122,13 @@
 <div class="tab-pane active" id="edit">
   <form id="profileDetailFrm" action="controller/profileController.php" method="post" enctype="multipart/form-data">
     <?php   
-      if(isset($_SESSION['zoobiz_admin_id'])) {
-      $q=$d->select("zoobiz_admin_master","zoobiz_admin_id='$_SESSION[zoobiz_admin_id]'");
+      if(isset($_SESSION['partner_login_id'])) {
+      $q=$d->select("zoobiz_admin_master","partner_login_id='$_SESSION[partner_login_id]'");
       $data=mysqli_fetch_array($q);
       extract($data);
       } ?>
 
-      <input   name="zoobiz_admin_id" type="hidden" value="<?php echo $_SESSION['zoobiz_admin_id']; ?>">
+      <input   name="partner_login_id" type="hidden" value="<?php echo $_SESSION['partner_login_id']; ?>">
 
 
     <div class="form-group row">

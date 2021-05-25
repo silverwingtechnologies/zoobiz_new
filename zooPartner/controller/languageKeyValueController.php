@@ -66,7 +66,7 @@ for ($a=0; $a <count($_POST['language_key_id']) ; $a++) {
 	}*/
 	if ($q === TRUE) {
         $_SESSION['msg']="Language Key Values Added Successfully";
-		$d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+		$d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 		header ("location:../language_key_master_value_list");
 		
 	}else {
@@ -114,7 +114,7 @@ for ($a=0; $a <count($_POST['language_key_id']) ; $a++) {
 	{
            
 		$_SESSION['msg']="Value Update Successfully";
-		$d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+		$d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 		header ("location:../manageLanguageValue?key_name=$key_name");
 		
 	}
@@ -125,7 +125,7 @@ for ($a=0; $a <count($_POST['language_key_id']) ; $a++) {
 	if ($q === TRUE) {
 
 		$_SESSION['msg']="Language Key Value Deleted Successfully";
-		$d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+		$d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 
 		header ("location:../manageLanguageValue");
 
@@ -144,7 +144,7 @@ for ($a=0; $a <count($_POST['language_key_id']) ; $a++) {
 	if ($q === TRUE){
 
 		$_SESSION['msg']="Language Key Value Updated Successfully";
-		$d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+		$d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 
 		header ("location:../manageLanguageValue");
 

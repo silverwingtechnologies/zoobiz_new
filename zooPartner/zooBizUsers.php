@@ -168,7 +168,7 @@ while($business_sub_categories_data=mysqli_fetch_array($business_sub_categories_
                   <td class="text-right"><?php echo $i++; ?></td>
                   <td><?php echo  $zoobiz_id; ?></td>
                    
-                  <td><a  target="_blank"  title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                  <td><a  target="_blank"  title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
                   <td><?php echo  $user_mobile; ?></td>
                    <?php if(isset($_GET['view_otp']) && $_GET['view_otp']==1 ){?>
                   <td><?php echo  $otp; ?></td>
@@ -183,7 +183,7 @@ while($business_sub_categories_data=mysqli_fetch_array($business_sub_categories_
                   <td data-order="<?php echo date("U",strtotime($last_login)); ?>" ><?php if($last_login=="0000-00-00 00:00:00"){ echo "-"; }else  echo date("d-m-Y h:i:s A", strtotime($last_login)); ?></td>
                     
                    <!-- <td>
-                    <form action="viewMember" method="get">    
+                    <form action="memberView" method="get">    
                           <input type="hidden" name="id" value="<?php echo $user_id; ?>">    
                           <button type="submit" name="" class="btn btn-danger btn-sm "> View Profile</button>
                         </form>

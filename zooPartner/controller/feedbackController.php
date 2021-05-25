@@ -25,7 +25,7 @@ if(isset($_POST) && !empty($_POST) ) {
     $d->insert("feedback_reply_master", $a1);
 
 
-   $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+   $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
    header("Location: ../feedback");
  }
  if(isset($deleteFeedback)) {
@@ -39,7 +39,7 @@ if(isset($_POST) && !empty($_POST) ) {
 
 
     $_SESSION['msg']=$data_q['subject']." Inquiry Deleted";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("Location: ../feedback");
   } else {
     $_SESSION['msg1']="Something Wrong";

@@ -17,7 +17,7 @@ if(isset($_POST['AddLanguage'])) {
 
 		$_SESSION['msg']=$language_name."Language Added Successfully";
 		 
-		 $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+		 $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 		header ("location:../manageLanguage");
 
 	} else {
@@ -32,7 +32,7 @@ if(isset($_POST['AddLanguage'])) {
 
 		$_SESSION['msg']= $data_q['language_name']." Language Deleted Successfully";
 		 
- $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+ $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 		header ("location:../manageLanguage");
 
 	} else {
@@ -58,7 +58,7 @@ if(isset($_POST['AddLanguage'])) {
 
 		$_SESSION['msg']=$language_name." Language Updated";
 		 
-		 $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+		 $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 		header ("location:../manageLanguage");
 
 	} else {

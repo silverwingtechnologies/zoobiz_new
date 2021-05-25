@@ -22,7 +22,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('resident_app_menu',$a1,"app_menu_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('$menu_title is deactivated'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('$menu_title is deactivated'));
         echo 1;
       } else {
         echo 0;
@@ -40,7 +40,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('resident_app_menu',$a1,"app_menu_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('$menu_title is activated'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('$menu_title is activated'));
         echo 1;
       } else {
         echo 0;
@@ -86,7 +86,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: classified reminder is disabled'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: classified reminder is disabled'));
         echo 1;
       } else {
         echo 0;
@@ -100,7 +100,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: classified reminder is enabled'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: classified reminder is enabled'));
         echo 1;
       } else {
         echo 0;
@@ -114,7 +114,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: Meetup reminder is disabled'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: Meetup reminder is disabled'));
         echo 1;
       } else {
         echo 0;
@@ -128,7 +128,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: Meetup reminder is enabled'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: Meetup reminder is enabled'));
         echo 1;
       } else {
         echo 0;
@@ -142,7 +142,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: Timeline reminder is disabled'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: Timeline reminder is disabled'));
         echo 1;
       } else {
         echo 0;
@@ -156,7 +156,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: Timeline reminder is enabled'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: Timeline reminder is enabled'));
         echo 1;
       } else {
         echo 0;
@@ -171,7 +171,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: Max Capacity for City/Sub Category is disabled'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: Max Capacity for City/Sub Category is disabled'));
         echo 1;
       } else {
         echo 0;
@@ -185,7 +185,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: Max Capacity for City/Sub Category is enabled'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: Max Capacity for City/Sub Category is enabled'));
         echo 1;
       } else {
         echo 0;
@@ -199,7 +199,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: show city wise users set to true'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: show city wise users set to true'));
         echo 1;
       } else {
         echo 0;
@@ -213,7 +213,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: show city wise users set to false'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: show city wise users set to false'));
         echo 1;
       } else {
         echo 0;
@@ -234,7 +234,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         $q=$d->update('upi_app_master',$a1,"active_status=0");
 
 
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: upi set to false'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: upi set to false'));
         echo 1;
       } else {
         echo 0;
@@ -248,7 +248,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: upi set to true'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: upi set to true'));
 
   //header("Location: ../upiList");exit;
         echo 1;
@@ -291,7 +291,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: In App Payment set to false'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: In App Payment set to false'));
         echo 1;
       } else {
         echo 0;
@@ -304,7 +304,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       );
       $q=$d->update('zoobiz_settings_master',$a1,"setting_id='$id'");
       if($q>0) {
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: In App Payment set to true'));
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: In App Payment set to true'));
         echo 1;
       } else {
         echo 0;
@@ -349,11 +349,11 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         $m->set_data('status',$status);
         $a1= array ('status'=> $m->get_data('status')
       );
-      $q=$d->update('zoobiz_admin_master',$a1,"zoobiz_admin_id='$id'");
+      $q=$d->update('zoobiz_admin_master',$a1,"partner_login_id='$id'");
       if($q>0) {
-        $adm_data=$d->selectRow("admin_name","zoobiz_admin_master"," zoobiz_admin_id='$id'");
+        $adm_data=$d->selectRow("admin_name","zoobiz_admin_master"," partner_login_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$data_q['admin_name']." is Deactivated");
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$data_q['admin_name']." is Deactivated");
         echo 1;
       } else {
         echo 0;
@@ -366,11 +366,11 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         $a1= array ('status'=> $m->get_data('status')
       );
 
-      $q=$d->update('zoobiz_admin_master',$a1,"zoobiz_admin_id='$id'");
+      $q=$d->update('zoobiz_admin_master',$a1,"partner_login_id='$id'");
       if($q>0) {
-        $adm_data=$d->selectRow("admin_name","zoobiz_admin_master"," zoobiz_admin_id='$id'");
+        $adm_data=$d->selectRow("admin_name","zoobiz_admin_master"," partner_login_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$data_q['admin_name']." is Activated");
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$data_q['admin_name']." is Activated");
         echo 1;
       } else {
         echo 0;
@@ -568,7 +568,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     $q=$d->update('custom_settings_master',$a1,"custom_id='$id'");
     if($q>0) {
 
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('Send FCM set to true'));
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('Send FCM set to true'));
       echo 1;
     } else {
       echo 0;
@@ -585,7 +585,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   );
     $q=$d->update('custom_settings_master',$a1,"custom_id='$id'");
     if($q>0) {
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('Share within city set to false'));
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('Share within city set to false'));
       echo 1;
     } else {
       echo 0;
@@ -599,7 +599,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   );
     $q=$d->update('custom_settings_master',$a1,"custom_id='$id'");
     if($q>0) {
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('Share within city set to true'));
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('Share within city set to true'));
       echo 1;
     } else {
       echo 0;
@@ -742,7 +742,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
       $gu=$d->select("users_master","user_id='$id'  ");
       $userData=mysqli_fetch_array($gu);
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$userData['user_full_name']." Activated");
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$userData['user_full_name']." Activated");
 
       echo 1;
     } else {
@@ -760,7 +760,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
       $gu=$d->select("users_master","user_id='$id'  ");
       $userData=mysqli_fetch_array($gu);
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$userData['user_full_name']." Deactivated");
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$userData['user_full_name']." Deactivated");
 
       echo 1;
     } else {
@@ -778,7 +778,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
        $adm_data=$d->selectRow("country_name","countries"," country_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
         $_SESSION['msg'] =$data_q['country_name']." activated";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       echo 1;
     } else {
       echo 0;
@@ -795,7 +795,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
        $adm_data=$d->selectRow("country_name","countries"," country_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
         $_SESSION['msg'] =$data_q['country_name']." deactivated";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       echo 1;
     } else {
       echo 0;
@@ -812,7 +812,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
        $adm_data=$d->selectRow("state_name","states"," state_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
         $_SESSION['msg'] =$data_q['state_name']." activated";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 
       echo 1;
     } else {
@@ -830,7 +830,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       $adm_data=$d->selectRow("state_name","states"," state_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
         $_SESSION['msg'] =$data_q['state_name']." deactivated";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       echo 1;
     } else {
       echo 0;
@@ -847,7 +847,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
        $adm_data=$d->selectRow("city_name","cities"," city_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
         $_SESSION['msg'] =$data_q['city_name']." activated";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       echo 1;
     } else {
       echo 0;
@@ -864,7 +864,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       $adm_data=$d->selectRow("city_name","cities"," city_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
         $_SESSION['msg'] =$data_q['city_name']." deactivated";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       echo 1;
     } else {
       echo 0;
@@ -881,7 +881,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       $adm_data=$d->selectRow("area_name","area_master"," area_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
         $_SESSION['msg'] =$data_q['area_name']." activated";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       echo 1;
     } else {
       echo 0;
@@ -898,7 +898,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       $adm_data=$d->selectRow("area_name","area_master"," area_id='$id'");
         $data_q=mysqli_fetch_array($adm_data);
         $_SESSION['msg'] =$data_q['area_name']." deactivated";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       echo 1;
     } else {
       echo 0;

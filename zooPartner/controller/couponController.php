@@ -35,7 +35,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   } else {
     $m->set_data('coupon_limit','0');
   }
-  $m->set_data('created_by',$_SESSION[zoobiz_admin_id]);
+  $m->set_data('created_by',$_SESSION[partner_login_id]);
    $created_at = date('Y-m-d H:i:s');
    $m->set_data('created_at',$created_at);
   
@@ -59,7 +59,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   
   if($q>0) {
     $_SESSION['msg']=ucfirst($coupon_name)." Coupon Added";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../couponList");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -86,7 +86,7 @@ $updated_at = date('Y-m-d H:i:s');
   } else {
     $m->set_data('coupon_limit','0');
   }
-     $m->set_data('updated_by',$_SESSION[zoobiz_admin_id]);
+     $m->set_data('updated_by',$_SESSION[partner_login_id]);
   
 
   $m->set_data('cpn_expiry',$cpn_expiry);
@@ -130,7 +130,7 @@ $q1=$d->update("coupon_master",$a,"coupon_id = '$coupon_id'");
  
 if(  $q1>0) {
   $_SESSION['msg']=ucfirst($coupon_name). " Coupon Updated";
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
   header("location:../couponList");
 } else {
   $_SESSION['msg1']="Something Wrong";
@@ -146,7 +146,7 @@ if(  $q1>0) {
         
   if($q>0 ) {
     $_SESSION['msg']=$data_q['coupon_name']." Coupon Deleted";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../couponList");
   } else {
     $_SESSION['msg1']="Something Wrong";

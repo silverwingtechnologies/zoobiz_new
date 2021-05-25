@@ -7,7 +7,7 @@
         <ol class="breadcrumb">
            <li class="breadcrumb-item"><a href="subCategories">Business Sub Categories</a></li>
            <li class="breadcrumb-item"><a href="mainCategories">Business Categories</a></li>
-           <li class="breadcrumb-item"><a href="viewMember?id=<?php echo $_GET['user_id'];?>">View Member</a></li>
+           <li class="breadcrumb-item"><a href="memberView?id=<?php echo $_GET['user_id'];?>">View Member</a></li>
             <li class="breadcrumb-item active" aria-current="page">Member Approved</li>
          </ol>
       </div>
@@ -62,7 +62,7 @@
          
         <div class="col-6 col-lg-6 col-xl-4">
           <div class="card gradient-ohhappiness">
-                        <a href="viewMember?id=<?php echo $_GET['id'];?>">
+                        <a href="memberView?id=<?php echo $_GET['id'];?>">
             <div class="p-2">
               <div class="media align-items-center">
               <div class="media-body">

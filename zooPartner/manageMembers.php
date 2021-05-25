@@ -180,7 +180,7 @@ $array_counter = array();
             while ($unitData=mysqli_fetch_array($uq)) {
              ?>
               <div class="col-6 col-lg-3 col-xl-3">
-                 <a href="viewMember?id=<?php echo $unitData['user_id']; ?>">
+                 <a href="memberView?id=<?php echo $unitData['user_id']; ?>">
                 <div class="card gradient-quepal no-bottom-margin">
                   <div class="card-body text-center">
                  <h6 class="text-white mt-2">

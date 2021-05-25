@@ -22,7 +22,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 		if($q==TRUE) {
             $_SESSION['msg']="FCM Custom Data Inserted";
 
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -35,7 +35,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="FCM Custom Data Updated";
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -59,7 +59,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 		if($q==TRUE) {
             $_SESSION['msg']="Custom Welcome user message Inserted";
 
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -72,7 +72,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="Custom Welcome user message  Updated";
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -81,23 +81,23 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 	} else if (isset($_POST['adminNotificationData'])) {
 
 
-		 //echo "<pre>";print_r($_POST['zoobiz_admin_id']);exit;
+		 //echo "<pre>";print_r($_POST['partner_login_id']);exit;
 		$m->set_data('send_notification','0');
 		 	$a = array('send_notification'=>$m->get_data('send_notification') );
 		$q = $d->update("zoobiz_admin_master",$a,"admin_mobile != 0");
 
-		for ($p=0; $p <count($_POST['zoobiz_admin_id']) ; $p++) { 
+		for ($p=0; $p <count($_POST['partner_login_id']) ; $p++) { 
 
-			$zoobiz_admin_id = $_POST['zoobiz_admin_id'][$p];
+			$partner_login_id = $_POST['partner_login_id'][$p];
 			$m->set_data('send_notification','1');
 		 	$a = array('send_notification'=>$m->get_data('send_notification') );
-			 $q = $d->update("zoobiz_admin_master",$a,"zoobiz_admin_id ='$zoobiz_admin_id'");
+			 $q = $d->update("zoobiz_admin_master",$a,"partner_login_id ='$partner_login_id'");
 		}
                
 
 		if($q==TRUE) {
             $_SESSION['msg']="Custom Zoobiz Admin Notification Updated";
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by", $_SESSION['msg']);
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by", $_SESSION['msg']);
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -124,7 +124,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="Custom SMS API Configuration Updated";
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by", $_SESSION['msg']);
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by", $_SESSION['msg']);
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -146,7 +146,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="Max Member Per City/Subcategory is updated to ".$max_member_per_subcategory.' from '.$org_data['max_member_per_subcategory'];
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -165,7 +165,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="Timeline Reminder Days is updated to ".$timeline_reminder_days.' from '.$org_data['timeline_reminder_days'];
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -184,7 +184,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="Meetup Reminder Days is updated to ".$meetup_reminder_days.' from '.$org_data['meetup_reminder_days'];
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -203,7 +203,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="Classified Reminder Days is updated to ".$classified_reminder_days.' from '.$org_data['classified_reminder_days'];
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -233,7 +233,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="Classified Settings Updated";
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -259,7 +259,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="App Pop Up Settings Updated";
-             $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
+             $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",ucwords('GLOBAL: '.$_SESSION['msg']));
 			header('location:../customSettings');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";

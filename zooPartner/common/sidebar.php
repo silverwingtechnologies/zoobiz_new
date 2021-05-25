@@ -8,6 +8,9 @@
          if(in_array($menu_id, $accessMenuIdArr)){
          ?>
          <li class="<?= ($_GET['f'] == $data['menu_link']) ? 'active':''; ?>">
+          <?php if($data['menu_link']=="payments"){
+            $data['menu_link']="paymentsMonthly";
+          } ?>
           <a href="<?php echo $data['menu_link']; ?>" class="waves-effect ">
             <i class="<?php echo $data['menu_icon']; ?>"></i> <span><?php echo $data['menu_name']; ?></span> 
           </a>

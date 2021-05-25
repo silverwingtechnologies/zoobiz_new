@@ -261,7 +261,7 @@ $h=0;
                 <?php while ($subData=mysqli_fetch_array($subComment)) {  ?>
                 <div class="subCommentDiv pl-3">
                       <p><?php if($subData['admin_id']!=0){ 
-                      $qad=$d->select("zoobiz_admin_master","zoobiz_admin_id='$subData[admin_id]'");
+                      $qad=$d->select("zoobiz_admin_master","partner_login_id='$subData[admin_id]'");
                       $adminData=mysqli_fetch_array($qad);
                       ?>
                       <img class="rounded-circle" id="blah"  onerror="this.src='../zooAdmin/img/user.png'" src="img/profile/<?php echo $adminData['admin_profile']; ?>"  width="30" height="30"   src="#" alt="your image" class='profile' />

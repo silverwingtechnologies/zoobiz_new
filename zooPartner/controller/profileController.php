@@ -75,7 +75,7 @@ if(isset($_POST) && !empty($_POST) )
        'admin_profile'=>$m->get_data('admin_profile'),
     ); 
 
-    $q_temp=$d->update("zoobiz_admin_master",$a,"zoobiz_admin_id='$_SESSION[zoobiz_admin_id]'");
+    $q_temp=$d->update("zoobiz_admin_master",$a,"partner_login_id='$_SESSION[partner_login_id]'");
     if($q_temp>0){
 
       $_SESSION['full_name']= $full_name;  
@@ -95,7 +95,7 @@ if(isset($_POST) && !empty($_POST) )
   if(isset($_POST["passwordChange"])) {
     extract(array_map("test_input" , $_POST));
     if ($password== $password2) {
-      $q = $d->select("zoobiz_admin_master","zoobiz_admin_id='$_SESSION[zoobiz_admin_id]'");
+      $q = $d->select("zoobiz_admin_master","partner_login_id='$_SESSION[partner_login_id]'");
       $data = mysqli_fetch_array($q);
       if (password_verify($old_password, $data['admin_password'])) {
         $password = password_hash($password, PASSWORD_DEFAULT);
@@ -103,7 +103,7 @@ if(isset($_POST) && !empty($_POST) )
         $a1= array (
           'admin_password'=> $m->get_data('password'),
         );
-        $insert=$d->update('zoobiz_admin_master',$a1,"zoobiz_admin_id='$_SESSION[zoobiz_admin_id]'"); 
+        $insert=$d->update('zoobiz_admin_master',$a1,"partner_login_id='$_SESSION[partner_login_id]'"); 
         if ($insert == true) {
           $_SESSION['msg']= $_SESSION['full_name']."'s Password Changed Successfully..!";
            $d->insert_log("","$society_id","$_SESSION[bms_admin_id]","$created_by",$_SESSION['msg']);

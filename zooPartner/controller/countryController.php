@@ -20,7 +20,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         $q=$d->update("countries",$a1,"country_id='$country_id'");
       if($q==TRUE) {
           $_SESSION['msg']=$country_name. " Data Updated";
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: $url");
       } else {
         header("Location: $url");
@@ -45,7 +45,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         $q=$d->update("states",$a1,"state_id='$state_id'");
       if($q==TRUE) {
           $_SESSION['msg']=$state_name." Data Updated";
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: $url");
       } else {
         header("Location: $url");
@@ -70,7 +70,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         $q=$d->update("cities",$a1,"city_id='$city_id'");
       if($q==TRUE) {
           $_SESSION['msg']=$city_name." Data Updated";
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: $url");
       } else {
         header("Location: $url");
@@ -94,7 +94,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       $q=$d->delete("area_master","area_id='$area_id'");
       if($q==TRUE) {
           $_SESSION['msg']=$data_q['area_name']." Data Deleted";
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: $url");
       } else {
         header("Location: $url");
@@ -130,11 +130,11 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       if ($area_id!=0 && $area_id!='') {
         $q=$d->update("area_master",$a1,"area_id='$area_id'");
           $_SESSION['msg']=$area_name." Area Updated";
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       } else {
 
           $_SESSION['msg']=$area_name." Area Added";
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         $q=$d->insert("area_master",$a1);
       }
 
@@ -188,7 +188,7 @@ if($isbug=='true'){
       
 
           $_SESSION['msg']=$area_name." Area Added";
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         $q=$d->insert("area_master",$a1);
    
           
@@ -276,7 +276,7 @@ if($isbug=='true'){
           
            }
               $_SESSION['msg']="Area CSV Uploaded";
-              $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+              $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
               header("Location: ../areas?cId=$country_id&sId=$state_id&cityId=$city_id");
       
            fclose($file); 

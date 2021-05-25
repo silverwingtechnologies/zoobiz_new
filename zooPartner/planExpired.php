@@ -72,8 +72,8 @@
                  <td><?php echo $i++; ?></td>
                  <td>
                   
-                  <?php if($_SESSION['role_id'] == 1 || $_SESSION['role_id'] == 2   ){ ?>
-                  <a href="viewMember?id=<?php echo $newUserData['user_id']; ?>"><?php echo $newUserData['user_full_name']; ?></a></td>
+                  <?php if($_SESSION['partner_role_id'] == 1 || $_SESSION['partner_role_id'] == 2   ){ ?>
+                  <a href="memberView?id=<?php echo $newUserData['user_id']; ?>"><?php echo $newUserData['user_full_name']; ?></a></td>
                   <?php } else { ?> 
                     <a href="memberView?id=<?php echo $newUserData['user_id']; ?>"><?php echo $newUserData['user_full_name']; ?></a>
                    <?php } ?>

@@ -45,7 +45,7 @@
               <tbody>
                 <?php
                 $i=1;
-                $q=$d->select("seasonal_greet_master,zoobiz_admin_master","  seasonal_greet_master.created_by =zoobiz_admin_master.zoobiz_admin_id   order by seasonal_greet_master.created_at
+                $q=$d->select("seasonal_greet_master,zoobiz_admin_master","  seasonal_greet_master.created_by =zoobiz_admin_master.partner_login_id   order by seasonal_greet_master.created_at
                   desc ");
                 while ($data=mysqli_fetch_array($q)) {
                   extract($data);

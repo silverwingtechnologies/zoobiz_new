@@ -8,11 +8,11 @@ include 'checkLogin.php';
 include 'accessControl.php';
 include 'accessControlPage.php';
 date_default_timezone_set('Asia/Calcutta');
-if (isset($_SESSION['zoobiz_admin_id'])) {
-    $zoobiz_admin_id = $_SESSION['zoobiz_admin_id'];
+if (isset($_SESSION['partner_login_id'])) {
+    $partner_login_id = $_SESSION['partner_login_id'];
 }
 
-if(isset($_SESSION['role_id']) && $_SESSION['role_id'] ==1   ){ 
+if(isset($_SESSION['partner_role_id']) && $_SESSION['partner_role_id'] ==1   ){ 
   $arr_get = array();
 
   //echo "<pre>";print_r($_GET);exit;
@@ -163,7 +163,7 @@ if(!isset($_GET['map_view_filter_city_id'])){
       <a   href="<?php echo $base_url;?>" target="_blank" class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect"  ><i class="fa fa-globe"></i></a>
     </li> 
 
-<?php  if($_SESSION['role_id'] == 1     ){  ?>
+<?php  if($_SESSION['partner_role_id'] == 1     ){  ?>
     <li class="nav-item dropdown-lg">
       <a  data-toggle="modal" data-target="#dealModal"  class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect"  href="javascript:void();"><i class="fa fa-certificate"></i><span class="badge badge-warning badge-up">+</span> </a>
     </li> 
@@ -184,7 +184,7 @@ if(!isset($_GET['map_view_filter_city_id'])){
      
     </li>
     <li class="nav-item dropdown-lg">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" href="logout.php">
+      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" href="logout">
       <i class="fa fa-power-off"></i></a>
     </li>
     <li class="nav-item dropdown-lg">

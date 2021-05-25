@@ -87,7 +87,7 @@ $role_name = $role_master_data['role_name'];
         $d->send_sms($admin_mobile,$msg);*/
 
     $_SESSION['msg']= ucfirst($admin_name)." Admin Added";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../adminList");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -146,11 +146,11 @@ $a =array(
   );
 
  
-$q=$d->update("zoobiz_admin_master",$a,"zoobiz_admin_id = '$zoobiz_admin_id_edit'");
+$q=$d->update("zoobiz_admin_master",$a,"partner_login_id = '$partner_login_id_edit'");
   
   if($q>0) {
     $_SESSION['msg']=ucfirst($admin_name) ." Admin Updated";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../adminList");
   } else {
     $_SESSION['msg1']="Something Wrong";

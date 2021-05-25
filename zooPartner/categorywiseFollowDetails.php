@@ -81,7 +81,7 @@
                   
                   <td><?php echo $i++; ?></td>
                   <td><?php echo $category_name; ?></td>
-                  <td> <a href="viewMember?id=<?php echo $user_id; ?>"><?php echo $user_full_name; ?></a></td>
+                  <td> <a href="memberView?id=<?php echo $user_id; ?>"><?php echo $user_full_name; ?></a></td>
                   
                 
 

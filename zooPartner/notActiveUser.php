@@ -42,7 +42,7 @@ $date_before_1_day = date("Y-m-d", strtotime($currDate."-".$_REQUEST['days']." d
 
    $where= " AND user_token!='' and DATE(last_login) <= '".$date_before_1_day."'  and office_member = 0 ";
 
-/*if($_SESSION[zoobiz_admin_id] == 7 ){
+/*if($_SESSION[partner_login_id] == 7 ){
   echo $where;
 }*/
      $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND users_master.active_status=0  AND user_employment_details.user_id=users_master.user_id  and users_master.last_login !='0000-00-00 00:00:00'  $where group by users_master.user_id  ","");
@@ -168,7 +168,7 @@ $numberDays = intval($numberDays);
                     <input type="checkbox" class="multiDelteCheckbox"  value="<?php echo $data['feedback_id']; ?>">
                   </td> -->
                   <td class="text-right"><?php echo $i++; ?></td>
-                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
                   <td><?php echo $user_email ; ?></td>
                   <td><?php echo $user_mobile; ?></td>
                   <td><?php  echo $company_name;
@@ -177,7 +177,7 @@ $numberDays = intval($numberDays);
                   <td><?php echo $numberDays; ?></td>
                  <td data-order="<?php echo date("U",strtotime($last_login)); ?>"><?php echo date("d-m-Y h:i:s A",strtotime($last_login));  ?></td>
                   <!--  <td>
-                    <form action="viewMember" method="get">    
+                    <form action="memberView" method="get">    
                           <input type="hidden" name="id" value="<?php echo $user_id; ?>">    
                           <button type="submit" name="" class="btn btn-danger btn-sm "> View Profile</button>
                         </form>

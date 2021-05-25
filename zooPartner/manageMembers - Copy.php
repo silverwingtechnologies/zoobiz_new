@@ -118,7 +118,7 @@
               <div class="col-6 col-lg-3 col-xl-3">
                 <div class="card gradient-quepal no-bottom-margin">
                   <div class="card-body text-center">
-                  <a href="viewMember?id=<?php echo $unitData['user_id']; ?>"><h6 class="text-white mt-2">
+                  <a href="memberView?id=<?php echo $unitData['user_id']; ?>"><h6 class="text-white mt-2">
                     <span style="float: left;" class="user-profile" > <img onerror="this.src='../zooAdmin/img/user.png'"  src="../img/users/members_profile/<?php echo $unitData['user_profile_pic']; ?>" class="img-circle" alt="user avatar">  </i></span>
                     <?php echo  $unitData['salutation'].' '.$unitData['user_full_name']; ?> <br>(<?php echo $unitData['company_name']; ?>)  </h6></a>
                 </div>

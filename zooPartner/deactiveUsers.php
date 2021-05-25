@@ -110,7 +110,7 @@ $zoobiz_admin_master=$d->select("zoobiz_admin_master","");
      $zoobiz_admin_master_arr = array();         
        
 while($zoobiz_admin_master_data =mysqli_fetch_array($zoobiz_admin_master)) {
-   $zoobiz_admin_master_arr[$zoobiz_admin_master_data['zoobiz_admin_id']] = $zoobiz_admin_master_data['admin_name'];
+   $zoobiz_admin_master_arr[$zoobiz_admin_master_data['partner_login_id']] = $zoobiz_admin_master_data['admin_name'];
    
 }
 
@@ -134,7 +134,7 @@ $where="";
                     <td class="text-right"><?php echo $i++; ?></td>
                     <td><?php echo  $zoobiz_id; ?></td>
 
-                    <td><a  target="_blank"  title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                    <td><a  target="_blank"  title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
                     <td><?php echo  $user_mobile; ?></td>
                     <td><?php echo  $user_email; ?></td>
                     <td><?php $cat_array = $business_categories_array[$business_category_id];

@@ -46,8 +46,8 @@ extract($_REQUEST);
                       $data_u=mysqli_fetch_array($qu);
 
                       $q = $d->select("log_master" ,"  app_user_id ='$user_id' ","order by log_id  DESC limit 2000");
-                    } else if ($_SESSION['role_id']==1){ 
-                      $q = $d->select("log_master,zoobiz_admin_master" ,"zoobiz_admin_master.zoobiz_admin_id =log_master.user_id and  log_master.user_id!=0 and log_master.user_id!= log_master.user_name ","order by log_master.log_id  DESC limit 2000");
+                    } else if ($_SESSION['partner_role_id']==1){ 
+                      $q = $d->select("log_master,zoobiz_admin_master" ,"zoobiz_admin_master.partner_login_id =log_master.user_id and  log_master.user_id!=0 and log_master.user_id!= log_master.user_name ","order by log_master.log_id  DESC limit 2000");
                     } else {
                       $q = $d->select("log_master,zoobiz_admin_master" ,"log_master.user_id!=0 and log_master.user_id!= log_master.user_name","order by log_master.log_id  DESC limit 2000");
                     }

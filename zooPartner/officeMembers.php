@@ -74,7 +74,7 @@ while($business_sub_categories_data=mysqli_fetch_array($business_sub_categories_
                   <td class="text-right"><?php echo $i++; ?></td>
                   <td><?php echo  $zoobiz_id; ?></td>
                    
-                  <td><a  target="_blank"  title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                  <td><a  target="_blank"  title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
                   <td><?php echo  $user_mobile; ?></td>
                     <td><?php echo  $user_email; ?></td>
                   <td><?php $cat_array = $business_categories_array[$business_category_id];

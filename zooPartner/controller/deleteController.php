@@ -32,7 +32,7 @@ $business_sub_category_id = $NewData['business_sub_category_id'];
 
 
        $q=$d->delete("sub_category_keywords_master","sub_category_keywords_id ='$ids[$i]'");
-       $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by",$NewData['sub_category_keyword']." Keyword Deleted for ".html_entity_decode($cat_data['sub_category_name']).' - '. html_entity_decode($cat_data['category_name']));
+       $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by",$NewData['sub_category_keyword']." Keyword Deleted for ".html_entity_decode($cat_data['sub_category_name']).' - '. html_entity_decode($cat_data['category_name']));
     }
       if($q>0) {
         echo 1;
@@ -51,7 +51,7 @@ if($_POST['deleteValue']=="deleteSubscribe") {
      $gu=$d->select("subscribe_master","subscribe_id='$ids[$i]' ");
      $NewData=mysqli_fetch_array($gu);
        $q=$d->delete("subscribe_master","subscribe_id ='$ids[$i]'");
-       $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by",$NewData['email']." Subscriber Deleted");
+       $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by",$NewData['email']." Subscriber Deleted");
     }
       if($q>0) {
         echo 1;
@@ -76,7 +76,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
     }
       if($q>0) {
         echo 1;
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by"," Hide Registration Number Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by"," Hide Registration Number Deleted");
         $_SESSION['msg']="Hide Registration Number Deleted"; 
 
       } else {
@@ -97,7 +97,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
     }
       if($q>0) {
         echo 1;
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Interests Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Interests Deleted");
         $_SESSION['msg']="Interests Deleted."; 
 
       } else {
@@ -114,7 +114,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
     }
       if($q>0) {
         echo 1;
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Notification  Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Notification  Deleted");
         $_SESSION['msg']="Notification  Deleted."; 
 
       } else {
@@ -135,7 +135,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
       if($q>0) {
         echo 1;
         $_SESSION['msg']="Feedback  Deleted.";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by","Feedback Deleted");
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by","Feedback Deleted");
         // header("location:../categories");
       } else {
         echo 0;
@@ -163,7 +163,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
       if($q>0) {
         echo 1;
         $_SESSION['msg']="Classified  Deleted."; 
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by","Classified  Deleted");
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by","Classified  Deleted");
       } else {
         echo 0;
         $_SESSION['msg1']="Something Wrong"; 
@@ -181,7 +181,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
       if($q>0) {
         echo 1;
         $_SESSION['msg']="Frame Image Deleted."; 
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       } else {
         echo 0;
         $_SESSION['msg1']="Something Wrong"; 
@@ -196,7 +196,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
       if($q>0) {
         echo 1;
         $_SESSION['msg']="Center Image Deleted."; 
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       } else {
         echo 0;
         $_SESSION['msg1']="Something Wrong"; 
@@ -218,7 +218,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
         echo 1;
         $pack_name = implode(", ", $pack_name);
         $_SESSION['msg']= $pack_name." Package(s)  Deleted.";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         // header("location:../categories");
       } else {
         echo 0;
@@ -245,7 +245,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
         echo 1;
          $cat_name = implode(", ",  $cat_name);
         $_SESSION['msg']=$cat_name." Category/Categories  Deleted.";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         // header("location:../categories");
       } else {
         echo 0;
@@ -272,7 +272,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
         echo 1;
          $sub_cat_name = implode(", ",  $sub_cat_name);
         $_SESSION['msg']=$sub_cat_name. " Sub Category/Categories Deleted.";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         // header("location:../categories");
       } else {
         echo 0;
@@ -288,7 +288,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
     }
       if($q>0) {
         echo 1;
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","User Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","User Deleted");
         $_SESSION['msg']="User Deleted.";
         // header("location:../categories");
       } else {
@@ -304,7 +304,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
     $idCount = count($ids);
     $a = array(
             'status' => 1,
-            'update_by_admin_id' =>$_SESSION['zoobiz_admin_id'],
+            'update_by_admin_id' =>$_SESSION['partner_login_id'],
             'update_date'=> date("Y-m-d H:i:s")
           );
     for ($i=0; $i <$idCount ; $i++) { 
@@ -313,9 +313,9 @@ if($_POST['deleteValue']=="deleteHideNumber") {
     }
       if($q>0) {
         echo 1;
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Session Log Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Session Log Deleted");
         $_SESSION['msg']="Session Log Deleted.";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by","Session Deleted");
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by","Session Deleted");
         // header("location:../categories");
       } else {
         echo 0;
@@ -332,10 +332,10 @@ if($_POST['deleteValue']=="deleteHideNumber") {
     }
       if($q>0) {
         echo 1;
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Other Log Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Other Log Deleted");
         $_SESSION['msg']="Other Log Deleted.";
         
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by","Other Log Deleted");
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by","Other Log Deleted");
         // header("location:../categories");
       } else {
         echo 0;
@@ -353,7 +353,7 @@ if($_POST['deleteValue']=="deleteHideNumber") {
     }
       if($q>0) {
         echo 1;
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Notification Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Notification Deleted");
         $_SESSION['msg']="Notification Deleted.";
         // header("location:../categories");
       } else {

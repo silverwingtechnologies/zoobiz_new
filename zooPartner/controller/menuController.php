@@ -31,7 +31,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
          
         $_SESSION['msg']=$menu_name. " New Menu  added.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../mainMenu");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -64,7 +64,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
          
         $_SESSION['msg']=$menu_nameEdit." Menu Updated.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../mainMenu");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -96,7 +96,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
          
         $_SESSION['msg']=$sub_menu_name." Sub Menu added.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../subMenu");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -124,7 +124,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         
         $_SESSION['msg']=$sub_menu_name. " Sub Menu Updated.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../subMenu");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -146,7 +146,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       $q=$d->insert("icons",$a);
       if($q>0) {
         $_SESSION['msg']="Menu Icon added.";
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../icons");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -160,7 +160,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
          
         $_SESSION['msg']="Menu Icon Deleted.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../icons");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -175,7 +175,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         
         $_SESSION['msg']="Menu Deleted.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../mainMenu");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -205,7 +205,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       if($q>0) {
         
         $_SESSION['msg']=$role_name." New Role Added.";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../roleType");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -238,7 +238,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
          
         $_SESSION['msg']=$role_nameEdit. " Role Updated Added.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../roleType");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -254,7 +254,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     
       if($q>0) {
         $_SESSION['msg']=$data_q['role_name']." Role Type Deleted.";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../roleType");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -275,7 +275,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         
         $_SESSION['msg']="Privileges Updated";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../roleType");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -306,7 +306,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         } 
         $_SESSION['msg']=$sub_menu_name. " Page added.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../pages");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -334,7 +334,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         
         $_SESSION['msg']=$sub_menu_name." Page Updated.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../pages");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -352,7 +352,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       
         $_SESSION['msg']=$data_q['menu_name']." Page Deleted.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../pages");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -372,10 +372,10 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
          unlink("../".$data_q['menu_link'].".php");
 
 
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Menu Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Menu Deleted");
         $_SESSION['msg']=$data_q['menu_name']." Menu Deleted.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../subMenu");
       } else {
         $_SESSION['msg1']="Something Wrong";

@@ -62,7 +62,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		$data = mysqli_fetch_array($q); 
 
-        if( $data > 0 && mysqli_num_rows($q) > 0 ){
+        if(   mysqli_num_rows($q) > 0 ){
         	$m->set_data('country_id', $selected_country_id);
         	$m->set_data('state_id', $selected_state_id);
         	$m->set_data('city_id', $selected_city_id);
@@ -75,7 +75,9 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 		          'city_id'=> $m->get_data('city_id'),
 		          'status' =>'1'
         	 );
-             $d->update("partner_login_master",$a,"partnerNumber='$mobile' or  admin_email='$mobile' ");
+
+        	  
+             $d->update("partner_login_master",$a,"partnerNumber='$mobile'  ");
 
              $role_master_q=$d->select("role_master","role_name like '%partner%'");
              $role_master_data = mysqli_fetch_array($role_master_q); 
@@ -91,7 +93,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 			$_SESSION['admin_type'] =$role_master_data['role_name']; 	
 			$_SESSION['plan_expire_date'] = $data['plan_expire_date']; 	
 			$_SESSION['complaint_category_id'] = $data['complaint_category_id']; 	
-			$_SESSION['role_id'] = $role_master_data['role_id']; 	
+			$_SESSION['partner_role_id'] = $role_master_data['role_id']; 	
 			
 			$_SESSION['msg']= "Welcome $_SESSION[admin_name]";
 		$_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT']; # Save The User Agent
@@ -150,8 +152,8 @@ if(isset($_POST["mobile"])) {
 		    header("location:../");
 		    exit;
 		}
-		$_SESSION['zoobiz_admin_id'] = $data['zoobiz_admin_id'];
-		$_SESSION['role_id'] = $data['role_id'];
+		$_SESSION['partner_login_id'] = $data['partner_login_id'];
+		$_SESSION['partner_role_id'] = $data['role_id'];
 		$_SESSION['full_name'] = $data['admin_name'];
 		$_SESSION['mobile_number'] = $data['admin_mobile'];
 		$_SESSION['admin_email'] = $data['admin_email'];
@@ -164,7 +166,7 @@ if(isset($_POST["mobile"])) {
 		$_SESSION['loginTime']=date("d M,Y h:i:sa");//Login Time
 	
 
-	$m->set_data('admin_id', $data['zoobiz_admin_id']);
+	$m->set_data('admin_id', $data['partner_login_id']);
         $m->set_data('name',$data['admin_name']);
         $m->set_data('ip_address',$_SERVER['REMOTE_ADDR']);
         $m->set_data('browser',$_SERVER['HTTP_USER_AGENT']);
@@ -221,7 +223,7 @@ extract($data);
 		$admin_email = $data['admin_email'];
 		$token = bin2hex(openssl_random_pseudo_bytes(16));
 		$forgotTime=date("Y-m-d");//Token Date
-		$forgotLink=$base_url."zooAdmin/resetPassword.php?t=".$token."&f=".$data['zoobiz_admin_id'];
+		$forgotLink=$base_url."zooAdmin/resetPassword.php?t=".$token."&f=".$data['partner_login_id'];
 
 		$m->set_data('token',$token);
 		$m->set_data('token_date',$forgotTime);
@@ -230,7 +232,7 @@ extract($data);
 			'token_date'=> $m->get_data('token_date')
 		);
  
-		$d->update('zoobiz_admin_master',$a1,"zoobiz_admin_id='$data[zoobiz_admin_id]' "); 
+		$d->update('zoobiz_admin_master',$a1,"partner_login_id='$data[partner_login_id]' "); 
 
 		$to = $admin_email;
 		$subject = "Forgot Password - ZooBiz";
@@ -271,12 +273,12 @@ if(isset($_POST["password2"])) {
 		'token_date'=> $m->get_data('token_date'),
 	);
 	
-	$qForgot = $d->update("zoobiz_admin_master",$forgot,"zoobiz_admin_id= '$_SESSION[forgot_admin_id]'");
+	$qForgot = $d->update("zoobiz_admin_master",$forgot,"partner_login_id= '$_SESSION[forgot_admin_id]'");
 	if ($qForgot>0) {
-		 $adm_data=$d->selectRow("admin_name","zoobiz_admin_master"," zoobiz_admin_id='$_SESSION[forgot_admin_id]'");
+		 $adm_data=$d->selectRow("admin_name","zoobiz_admin_master"," partner_login_id='$_SESSION[forgot_admin_id]'");
         $data_q=mysqli_fetch_array($adm_data);
 		$_SESSION['msg']= $data_q['admin_name']." set new password.";
-		$d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+		$d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 		header("location:../index.php");
 	} 
 	else {

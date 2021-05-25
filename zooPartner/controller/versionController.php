@@ -24,7 +24,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="App Version Inserted";
-            $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+            $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 			header('location:../appVersion');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";
@@ -50,7 +50,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 		if($q==TRUE) {
             $_SESSION['msg']="App Version Updated";
-            $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+            $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 			header('location:../appVersion');
 		} else {
 			$_SESSION['msg1']="Something went wrong.";

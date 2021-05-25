@@ -45,7 +45,7 @@ if(file_exists($uploadedFile)) {
   
   if($q>0) {
     $_SESSION['msg']="Frame Added";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../frameList");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -110,7 +110,7 @@ if(file_exists($uploadedFile)) {
   $q=$d->update("frame_master",$a,"frame_id = '$frame_id' ");
   if($q>0 ) {
     $_SESSION['msg']="Frame Updated";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../frameList");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -126,7 +126,7 @@ if(file_exists($uploadedFile)) {
        
   if($q>0 ) {
     $_SESSION['msg']="Frame Deleted";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../frameList");
   } else {
     $_SESSION['msg1']="Something Wrong";

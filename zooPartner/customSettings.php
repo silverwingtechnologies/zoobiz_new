@@ -212,7 +212,7 @@
 
                       
 
-                      <input <?php  if( $bData['send_notification'] =="1"){ echo "checked"; } ?> type="checkbox" class="pagePrivilege" value="<?php echo $bData['zoobiz_admin_id']; ?>" name="zoobiz_admin_id[]">
+                      <input <?php  if( $bData['send_notification'] =="1"){ echo "checked"; } ?> type="checkbox" class="pagePrivilege" value="<?php echo $bData['partner_login_id']; ?>" name="partner_login_id[]">
 
                       <span class="custom-control-indicator"></span>
 

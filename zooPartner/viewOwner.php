@@ -138,7 +138,7 @@ if ($user_status==0) {
         </div>
       <?php } endif ?>
       <hr>
-      <?php if($installed_by==$_SESSION['zoobiz_admin_id']){ ?>
+      <?php if($installed_by==$_SESSION['partner_login_id']){ ?>
       <div class="row">
         <div class="col-xs-6 col-12">
            <form action="controller/userController.php" method="post">

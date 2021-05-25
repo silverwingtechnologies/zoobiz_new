@@ -101,7 +101,7 @@ if(isset($_POST) && !empty($_POST) )
       'send_to'=> $m->get_data('send_to'),
       'send_to_details'=> $m->get_data('send_to_details'),
       'created_at'=> $m->get_data('created_at') ,
-      'created_by' =>$_SESSION[zoobiz_admin_id]
+      'created_by' =>$_SESSION[partner_login_id]
     
     );
 
@@ -272,7 +272,7 @@ business_categories.category_status = 0 and
         }
     
       $_SESSION['msg']=$deal_title." Deal Send to".$dec;
-      $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("Location: ../welcome");
   
   }

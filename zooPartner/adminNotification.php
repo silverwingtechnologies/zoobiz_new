@@ -50,7 +50,7 @@
                         <td><?php echo $i++; ?></td>
                         <td>
 <?php if($ref_id!=0 ){ ?>
-<a href="viewMember.php?id=<?php echo $ref_id; ?>"><?php echo $notification_tittle; ?></a>
+<a href="memberView.php?id=<?php echo $ref_id; ?>"><?php echo $notification_tittle; ?></a>
 <?php } else { ?>  
                           <?php echo $notification_tittle;  } ?>
                           <?php /* <a href="readNotification.php?link=<?php echo $row['admin_click_action']; ?>&id=<?php echo $row['notification_id']; ?>"> --><?php echo $notification_tittle; ?><!-- </a> -->

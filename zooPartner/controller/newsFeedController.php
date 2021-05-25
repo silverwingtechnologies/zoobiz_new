@@ -37,7 +37,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
    
   if($q>0) {
        
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id_new]","Mihir Mehta",$data_q['timeline_text']." News Feed Deleted- From Front");
+    $d->insert_log("","0","$_SESSION[partner_login_id_new]","Mihir Mehta",$data_q['timeline_text']." News Feed Deleted- From Front");
     echo 1;
   } else {
     echo 0;
@@ -79,7 +79,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         // $path = $abspath."/fincasys/img/users/recident_feed/feed2019_08_1310141930.png";
         // unlink($path);
    // $_SESSION['msg'] = $data_q['timeline_text']." News Feed Deleted";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$data_q['timeline_text']." News Feed Deleted");
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$data_q['timeline_text']." News Feed Deleted");
     echo 1;
   } else {
     echo 0;
@@ -104,7 +104,7 @@ $msg = $data_q['msg'];
 
 
    //  $_SESSION['msg'] = $data_q['msg']." Timeline Comment Deleted";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$data_q['msg']." Timeline Comment Deleted");
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$data_q['msg']." Timeline Comment Deleted");
   echo 1;
 } else {
   echo 0;
@@ -174,7 +174,7 @@ if (isset($addFeed)) {
           $feed_msg = stripslashes(  html_entity_decode($feed_msg));
 
 
-        $m->set_data('admin_id',$_SESSION['zoobiz_admin_id']);
+        $m->set_data('admin_id',$_SESSION['partner_login_id']);
         $m->set_data('feed_type',$feedType);
         $m->set_data('feed_msg',$feed_msg);
         $m->set_data('send_notification_to_user',$send_notification_to_user);
@@ -237,7 +237,7 @@ if($send_notification_to_user==1){
 }
 //9dec2020
          $_SESSION['msg']=$feed_msg. " new post added"; 
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
          header("Location: ../timeline");
        } else {
         header("Location: ../timeline");

@@ -63,7 +63,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         }
 
         $_SESSION['msg']="Parking Added";
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Parking Added");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Parking Added");
         header("location:../parkings");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -79,7 +79,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     
       if($q>0) {
          $_SESSION['msg']="Parking Deleted";
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Parking Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Parking Deleted");
         header("location:../parkings");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -97,7 +97,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
       if($q>0) {
          $_SESSION['msg']="Parking Name Updated";
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Parking Name Updated");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Parking Name Updated");
         header("location:../parkings?society_parking_id=$society_parking_id");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -134,7 +134,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
       if($q>0) {
 
          $_SESSION['msg']="Parking Allocated";
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Parking Allocated");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Parking Allocated");
 
         header("location:../viewOwner?id=$user_id");
       } else {
@@ -169,7 +169,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 
          $_SESSION['msg']="Parking Un Allocated";
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Parking Un Allocated");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Parking Un Allocated");
         header("location:../viewOwner?id=$user_id");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -185,7 +185,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
        $q=$d->delete("parking_master","parking_id='$deleteParking_id' AND society_id='$society_id'");
     
       if($q>0) {
-        $d->insert_log("","$society_id","$_SESSION[zoobiz_admin_id]","$created_by","Parking Deleted");
+        $d->insert_log("","$society_id","$_SESSION[partner_login_id]","$created_by","Parking Deleted");
         echo "1";
       } else {
         echo 0;

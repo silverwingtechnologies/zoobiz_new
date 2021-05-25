@@ -78,7 +78,7 @@
                      <?php
                      while ($data3=mysqli_fetch_array($q3)) {
                       ?>
-                      <a  target="_blank"  title="View Profile"  href="viewMember?id=<?php echo $data3['member_id']; ?>" ><?php echo  $data3['user_full_name']; ?></a><br>
+                      <a  target="_blank"  title="View Profile"  href="memberView?id=<?php echo $data3['member_id']; ?>" ><?php echo  $data3['user_full_name']; ?></a><br>
                       <?php
                      }
                   } ?>

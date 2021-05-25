@@ -58,7 +58,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
        
         $_SESSION['msg']=$menu_title. " New App Menu Added.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../appMenu");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -121,7 +121,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
        
         $_SESSION['msg']=$menu_title. " New App Menu Edited.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../appMenu");
       } else {
         $_SESSION['msg1']="Something Wrong";
@@ -141,7 +141,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
          
         $_SESSION['msg']=$menu_title ."App Menu  Deleted.";
 
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("location:../appMenu");
       } else {
         $_SESSION['msg1']="Something Wrong";

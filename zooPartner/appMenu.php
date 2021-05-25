@@ -75,7 +75,7 @@
                         <input type="hidden" name="app_menu_id" value="<?php echo $data['app_menu_id']; ?>">
                         <button name="editMenu" class="btn btn-primary btn-sm" data-toggle="tooltip" title="edit menu"> <i class="fa fa-pencil"></i></button>
                       </form>
-                      <?php if($_SESSION['role_id']==1){ ?> 
+                      <?php if($_SESSION['partner_role_id']==1){ ?> 
                       <form class="deleteForm<?php echo $data['app_menu_id']; ?>" style ='float: left;' action="controller/appMenuController.php" method="post">
                         <input type="hidden" name="app_menu_id_delete" value="<?php echo $data['app_menu_id']; ?>">
                      

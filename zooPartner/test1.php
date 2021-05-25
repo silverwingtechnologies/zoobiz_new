@@ -60,8 +60,8 @@
 </div>
 <div class="tab-pane active" id="edit">
     <?php 
-      if(isset($_SESSION['zoobiz_admin_id'])) {
-      $q=$d->select("zoobiz_admin_master","zoobiz_admin_id='$_SESSION[zoobiz_admin_id]'");
+      if(isset($_SESSION['partner_login_id'])) {
+      $q=$d->select("zoobiz_admin_master","partner_login_id='$_SESSION[partner_login_id]'");
       $data=mysqli_fetch_array($q);
       extract($data);
       } ?>

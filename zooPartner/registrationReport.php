@@ -95,7 +95,7 @@ $company_master_qry=$d->select("company_master","  company_id = '$company_id'   
                   
                   <td class="text-right"><?php echo $i++; ?></td>
                    
-                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
 
 
                   <?php

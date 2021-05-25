@@ -199,7 +199,7 @@ extract($_REQUEST);
         <img  onerror="this.src='../zooAdmin/img/user.png'" class="imgRedonda lazyload" src="../img/infinity.gif"  data-src="../img/users/members_profile/<?php echo $userData['user_profile_pic']; ?>" width="10%">
       <?php }     if($userData['user_full_name']=='') { echo 'ZooBiz Admin';//$admin_data['admin_name']; 
         } else {?> 
-        <a class="profileName" href="viewMember?id=<?php echo $data_notification['user_id']; ?>" target="_blank">
+        <a class="profileName" href="memberView?id=<?php echo $data_notification['user_id']; ?>" target="_blank">
          <?php  echo $userData['salutation'].' '. $userData['user_full_name']; ?> </a>
           <?php } ?>
  
@@ -233,7 +233,7 @@ extract($_REQUEST);
            <div class="form-group row" style="padding-right: 75px !important;padding-left: 75px !important;">
             <div class="col-lg-4" style="text-align: center;">
            
-            <a      href="viewMember?id=<?php echo $meetup_user_id1_data['user_id']; ?>"> 
+            <a      href="memberView?id=<?php echo $meetup_user_id1_data['user_id']; ?>"> 
 
            <img  onerror="this.src='../zooAdmin/img/user.png'" class="imgRedonda lazyload" src="../img/infinity.gif"  data-src="../img/users/members_profile/<?php echo $meetup_user_id1_data['user_profile_pic']; ?>" width="10%">
            <p style="word-break: break-all !important;"><?php echo $meetup_user_id1_data['user_full_name']; ?></p>
@@ -241,7 +241,7 @@ extract($_REQUEST);
          </div>
          <div class="col-lg-4" style="text-align: center;"><p style="word-break: break-all !important;">Are <br>Saying </p><img  class="imgRedonda lazyload" src="../img/infinity.gif"   data-src="../img/lets_meet_icon.png" width="100%"></div>
          <div class="col-lg-4" style="text-align: center;">
-            <a     href="viewMember?id=<?php echo $meetup_user_id2_data['user_id']; ?>"> 
+            <a     href="memberView?id=<?php echo $meetup_user_id2_data['user_id']; ?>"> 
            <img  onerror="this.src='../zooAdmin/img/user.png'" class="imgRedonda lazyload" src="../img/infinity.gif" data-src="../img/users/members_profile/<?php echo $meetup_user_id2_data['user_profile_pic']; ?>" width="10%">
            <p style="word-break: break-all !important;"><?php echo $meetup_user_id2_data['user_full_name']; ?></p>
          </a>
@@ -397,7 +397,7 @@ $totalCmt = mysqli_num_rows($qcomment);
 
 
            <p>
-          <a style="padding-left: 5px !important;" href="viewMember?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?> </a> <span class="pull-right"><?php echo time_elapsed_string($data_comment['modify_date']); ?></span>
+          <a style="padding-left: 5px !important;" href="memberView?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?> </a> <span class="pull-right"><?php echo time_elapsed_string($data_comment['modify_date']); ?></span>
           <br> <?php echo html_entity_decode($data_comment['msg']); ?>    
          </p>
         
@@ -418,7 +418,7 @@ $totalCmt = mysqli_num_rows($qcomment);
           <i title="Delete Comment" class="text-danger fa fa-trash-o "  data-toggle="modal" data-target="#editFloor" onclick="deleteComment('<?php echo $comments_id; ?>')"></i>
         </span>
             <p>
-          <a style="padding-left: 5px !important;"  href="viewMember?id=<?php echo $data_Sub_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_Sub_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_Sub_comment['modify_date']); ?></span> <br><?php echo html_entity_decode($data_Sub_comment['msg']); ?> 
+          <a style="padding-left: 5px !important;"  href="memberView?id=<?php echo $data_Sub_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_Sub_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_Sub_comment['modify_date']); ?></span> <br><?php echo html_entity_decode($data_Sub_comment['msg']); ?> 
           </p>
 
           
@@ -458,7 +458,7 @@ $totalCmt = mysqli_num_rows($qcomment);
           <i title="Delete Comment" class="text-danger fa fa-trash-o "  data-toggle="modal" data-target="#editFloor" onclick="deleteComment('<?php echo $comments_id; ?>')"></i>
         </span>
             <p>
-          <a style="padding-left: 5px !important;"  href="viewMember?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_comment['modify_date']); ?></span> <br><?php echo html_entity_decode($data_comment['msg']); ?> 
+          <a style="padding-left: 5px !important;"  href="memberView?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_comment['modify_date']); ?></span> <br><?php echo html_entity_decode($data_comment['msg']); ?> 
           </p>
 
           
@@ -479,7 +479,7 @@ $totalCmt = mysqli_num_rows($qcomment);
           <i title="Delete Comment" class="text-danger fa fa-trash-o "  data-toggle="modal" data-target="#editFloor" onclick="deleteComment('<?php echo $comments_id; ?>')"></i>
         </span>
             <p>
-          <a style="padding-left: 5px !important;"  href="viewMember?id=<?php echo $data_Sub_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_Sub_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_Sub_comment['modify_date']); ?></span> <br><?php echo html_entity_decode($data_Sub_comment['msg']); ?> 
+          <a style="padding-left: 5px !important;"  href="memberView?id=<?php echo $data_Sub_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_Sub_comment['user_name']; ?></a><span class="pull-right"><?php echo time_elapsed_string($data_Sub_comment['modify_date']); ?></span> <br><?php echo html_entity_decode($data_Sub_comment['msg']); ?> 
           </p>
 
           
@@ -490,7 +490,7 @@ $totalCmt = mysqli_num_rows($qcomment);
         } 
         //IS_248
 
-        $qcomment=$d->select("timeline_comments,zoobiz_admin_master ","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=zoobiz_admin_master.zoobiz_admin_id order by timeline_comments.modify_date asc limit 0,100");
+        $qcomment=$d->select("timeline_comments,zoobiz_admin_master ","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=zoobiz_admin_master.partner_login_id order by timeline_comments.modify_date asc limit 0,100");
          while($data_comment=mysqli_fetch_array($qcomment)) {
             $comments_id=$data_comment['comments_id'];
             
@@ -505,7 +505,7 @@ $totalCmt = mysqli_num_rows($qcomment);
         </span>
         
         <p class=" cls-content text-justify ">
-          <a   href="viewMember?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?></a> <?php echo html_entity_decode($data_comment['msg']); ?> at <?php echo date("d-m-Y H:i A", strtotime($data_comment['modify_date'])); ?>  
+          <a   href="memberView?id=<?php echo $data_comment['user_id']; ?>" target="_blank" class="profileName1 text-primary"> <?php echo $data_comment['user_name']; ?></a> <?php echo html_entity_decode($data_comment['msg']); ?> at <?php echo date("d-m-Y H:i A", strtotime($data_comment['modify_date'])); ?>  
          </p>
 
            

@@ -13,7 +13,7 @@ if (isset($comment_id_delete)) {
 
       if ($q1>0) {
           $_SESSION['msg']="Comment Deleted";
-          $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by","Classified Comment Deleted");
+          $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by","Classified Comment Deleted");
          header("location:../classifiedHistory?id=$cllassified_id");
       }else{
         $_SESSION['msg1']="Soenthing Wrong.";

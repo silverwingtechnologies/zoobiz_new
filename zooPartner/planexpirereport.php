@@ -98,7 +98,7 @@ error_reporting(0);
                   
                   <td class="text-right"><?php echo $i++; ?></td>
                    
-                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
                   <td><?php echo $city_name ; ?></td>
                   <td><?php echo $user_email ; ?></td>
                   <td><?php echo $user_mobile; ?></td>

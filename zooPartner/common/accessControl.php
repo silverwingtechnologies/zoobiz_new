@@ -1,5 +1,5 @@
 <?php 
-	$access=$d->select("role_master","role_id='$_SESSION[role_id]'");
+	$access=$d->select("role_master","role_id='$_SESSION[partner_role_id]'");
 	$accessData=mysqli_fetch_array($access);
 	$accessMenuId=$accessData['menu_id'];
 	$accessMenuIdArr=explode(",", $accessMenuId);

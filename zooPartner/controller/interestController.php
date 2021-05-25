@@ -23,7 +23,7 @@ $m->set_data('interest_name',$interest_name);
       $a1= array (
        'interest_name'=> $m->get_data('interest_name'), 
        'int_status'=> 'Admin Approved',
-       'added_by' =>$_SESSION[zoobiz_admin_id]
+       'added_by' =>$_SESSION[partner_login_id]
       );
       $q=$d->update("interest_master",$a1,"interest_id='$interest_id'");
 
@@ -61,7 +61,7 @@ $m->set_data('interest_name',$interest_name);
  
 
       $_SESSION['msg']=$interest_name." Interest Approved";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("Location: ../welcome");
     } else {
       header("Location: ../welcome");
@@ -115,7 +115,7 @@ extract($int_details);
 
 
       $_SESSION['msg']=$interest_name." Interest Rejected";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("Location: ../welcome");
     } else {
       header("Location: ../welcome");
@@ -137,7 +137,7 @@ extract($int_details);
     $q=$d->insert("interest_master",$a1);
     if($q==TRUE) {
       $_SESSION['msg']=$interest_name." Interest Added";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("Location: ../interests");
     } else {
       header("Location: ../interests");
@@ -157,7 +157,7 @@ extract($int_details);
     $q=$d->update("interest_master",$a1,"interest_id='$interest_id'");
     if($q==TRUE) {
       $_SESSION['msg']=$interest_name. " Interest Updated";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("Location: ../interests");
     } else {
       header("Location: ../interests");

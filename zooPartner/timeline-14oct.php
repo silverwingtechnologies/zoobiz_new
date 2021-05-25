@@ -375,7 +375,7 @@
         } 
         //IS_248
 
-        $qcomment=$d->select("timeline_comments,zoobiz_admin_master ","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=zoobiz_admin_master.zoobiz_admin_id order by timeline_comments.modify_date asc limit 0,100");
+        $qcomment=$d->select("timeline_comments,zoobiz_admin_master ","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=zoobiz_admin_master.partner_login_id order by timeline_comments.modify_date asc limit 0,100");
          while($data_comment=mysqli_fetch_array($qcomment)) {
             $comments_id=$data_comment['comments_id'];
             

@@ -30,7 +30,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
 			$_SESSION['msg']="Data Updated Successfully";
 
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by","Email Configuration Updated");
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by","Email Configuration Updated");
 			header('location:../emailConfigration');
 		}
 		else

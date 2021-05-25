@@ -63,7 +63,7 @@ $users_master_data=mysqli_fetch_array($users_master);
               <tr>
                <td><?php echo $i++; ?></td>
                <td><?php  echo $company_name; ?></td>
-               <td><a href="viewMember?id=<?php echo $user_id; ?>"><?php echo  $user_full_name; ?></a> </td>
+               <td><a href="memberView?id=<?php echo $user_id; ?>"><?php echo  $user_full_name; ?></a> </td>
                <td><?php echo $user_mobile; ?></td>
                <td data-order="<?php echo date("U",strtotime($created_at)); ?>"><?php if($created_at == '0000-00-00 00:00:00') { echo "N/A";} else {  echo date("d-m-Y h:i:s A",strtotime($created_at)); }  ?></td>
              </tr>

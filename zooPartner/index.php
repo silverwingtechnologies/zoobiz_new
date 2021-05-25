@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if(isset($_SESSION['zoobiz_admin_id']))
+if(isset($_SESSION['partner_login_id']))
 {
    header("location:welcome");
 }
@@ -17,7 +17,7 @@ if(isset($_SESSION['zoobiz_admin_id']))
   <meta name="author" content=""/>
   <title>Login | ZooBiz</title>
   <!--favicon-->
-  <link rel="icon" href="../zooAdmin/img/fav.png" type="image/png">
+  <link rel="icon" href="../img/fav.png" type="image/png">
   <!-- Bootstrap core CSS-->
   <link href="../zooAdmin/../zooAdmin/assets/css/bootstrap.min.css" rel="stylesheet"/>
   <!-- animate CSS-->

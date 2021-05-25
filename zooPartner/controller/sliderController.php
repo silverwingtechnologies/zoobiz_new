@@ -84,7 +84,7 @@ if(isset($_POST) && !empty($_POST) )
                 $q = $d->insert("slider_master", $a);
     if($q==TRUE) {
         $_SESSION['msg']="New Slider Added...";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: ../sliderImages");
     } else {
       $_SESSION['msg1']="Something Went Wrong.";
@@ -169,7 +169,7 @@ if(isset($_POST) && !empty($_POST) )
                 $q = $d->update("slider_master", $a,"slider_id='$slider_id_edit'");
     if($q==TRUE) {
         $_SESSION['msg']="Slider Updated...";
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: ../sliderImages");
     } else {
       $_SESSION['msg1']="Something Went Wrong.";
@@ -201,7 +201,7 @@ $a = array(
 
         $_SESSION['msg']="Slider Deleted";
         
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
         header("Location: ../sliderImages");
     } else {
       $_SESSION['msg1']="Something Went Wrong.";

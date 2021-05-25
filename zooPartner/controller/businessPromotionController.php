@@ -77,7 +77,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     'auto_expire'=> $m->get_data('auto_expire'),
     'text_color' => $m->get_data('text_color'),
     'created_at'=> date("Y-m-d H:i:s"),
-    'created_by'=> $_SESSION[zoobiz_admin_id]  
+    'created_by'=> $_SESSION[partner_login_id]  
   );
   $q=$d->insert("promotion_master",$a);
 
@@ -200,7 +200,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 //center end
 
   $_SESSION['msg']=$event_name." Added";
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
   header("location:../promoteBusiness");
 } else {
   $_SESSION['msg1']="Something Wrong";
@@ -297,7 +297,7 @@ $uploadedFile = $_FILES['event_frame']['tmp_name'];
     'auto_expire'=> $m->get_data('auto_expire'),
     'text_color'=> $m->get_data('text_color'),
     'updated_at'=> date("Y-m-d H:i:s"),
-    'updated_by'=> $_SESSION[zoobiz_admin_id]  
+    'updated_by'=> $_SESSION[partner_login_id]  
   ); 
 
 
@@ -422,7 +422,7 @@ $q_del2=$d->delete("promotion_rel_frame_master","promotion_id='$promotion_id'  "
 //center end
    
   $_SESSION['msg']=$event_name. " Updated";
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
   header("location:../promoteBusiness");
 } else {
   $_SESSION['msg1']="Something Wrong";
@@ -511,7 +511,7 @@ if($qf){
   $adm_data=$d->selectRow("event_name","promotion_master"," promotion_id='$promotion_id'");
         $data_q=mysqli_fetch_array($adm_data);
     $_SESSION['msg']= $data_q['event_name']." Event Frame Updated";
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 
   header("location:../manageFrame?promotion_id=$promotion_id");
 } else {
@@ -578,7 +578,7 @@ if($qccc){
     $_SESSION['msg']= $data_q['event_name']." Center Image Updated";
 
    // $_SESSION['msg']="Promotion Center Image Updated";
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 
   header("location:../manageCenterImage?promotion_id=$promotion_id");
 } else {
@@ -603,7 +603,7 @@ if($qccc){
         $data_q=mysqli_fetch_array($adm_data);
     $_SESSION['msg']= $data_q['event_name']." Frame Deleted";
 
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../manageFrame?promotion_id=$promotion_id");
     } else {
       $_SESSION['msg1']="Something Wrong";
@@ -623,7 +623,7 @@ else if(isset($_POST['deleteCenterImageId'])){
         $data_q=mysqli_fetch_array($adm_data);
     $_SESSION['msg']= $data_q['event_name']." Center Image Deleted";
 
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../manageCenterImage?promotion_id=$promotion_id");
     } else {
       $_SESSION['msg1']="Something Wrong";
@@ -647,7 +647,7 @@ $adm_data=$d->selectRow("event_name","promotion_master"," promotion_id='$promoti
     $_SESSION['msg']= $data_q['event_name']." Deleted";
 
 
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../promoteBusiness");
     } else {
       $_SESSION['msg1']="Something Wrong";
@@ -666,7 +666,7 @@ $adm_data=$d->selectRow("event_name","promotion_master"," promotion_id='$promoti
       $_SESSION['msg']="Frame Image Deleted";
 
 
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../managePromotionImages?tab=frm_tab");
     } else {
       $_SESSION['msg1']="Something Wrong";
@@ -681,7 +681,7 @@ $adm_data=$d->selectRow("event_name","promotion_master"," promotion_id='$promoti
   
      if($q>0 ) {
       $_SESSION['msg']="Center Image Deleted";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../managePromotionImages?tab=center_tab");
     } else {
       $_SESSION['msg1']="Something Wrong";

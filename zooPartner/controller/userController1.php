@@ -84,7 +84,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
             default:
                $_SESSION['msg1']="Invalid Logo";
-                header("Location: ../viewMember?id=$user_id");
+                header("Location: ../memberView?id=$user_id");
                 exit;
                 break;
             }*/
@@ -92,7 +92,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
           } else{
             $_SESSION['msg1']="Invalid Company Logo";
-            header("location:../viewMember?id=$user_id");
+            header("location:../memberView?id=$user_id");
             exit();
           }
         } else {
@@ -111,12 +111,12 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
             
             if(($_FILES['company_broucher']['size'] >= $maxsize) || ($_FILES["company_broucher"]["size"] == 0)) {
                 $_SESSION['msg1']="Company Broucher too large. Must be less than 10 MB.";
-                header("location:../viewMember?id=$user_id");
+                header("location:../memberView?id=$user_id");
                 exit();
             }
             if(!in_array($extId, $extensionResume) && (!empty($_FILES["company_broucher"]["type"]))) {
                  $_SESSION['msg1']="Invalid Company Broucher File format, Only  JPG,PDF, PNG,Doc are allowed.";
-                header("location:../viewMember?id=$user_id");
+                header("location:../memberView?id=$user_id");
                 exit();
             }
            if(count($errors) === 0) {
@@ -139,12 +139,12 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
             
             if(($_FILES['company_profile']['size'] >= $maxsize) || ($_FILES["company_profile"]["size"] == 0)) {
                 $_SESSION['msg1']="Company Profile too large. Must be less than 10 MB.";
-                header("location:../viewMember?id=$user_id");
+                header("location:../memberView?id=$user_id");
                 exit();
             }
             if(!in_array($extId, $extensionResume) && (!empty($_FILES["company_profile"]["type"]))) {
                  $_SESSION['msg1']="Invalid Company Profile File format, Only  JPG,PDF, PNG,Doc are allowed.";
-                header("location:../viewMember?id=$user_id");
+                header("location:../memberView?id=$user_id");
                 exit();
             }
            if(count($errors) === 0) {
@@ -202,11 +202,11 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         $data_q=mysqli_fetch_array($adm_data);
       $_SESSION['msg']=$data_q['user_full_name']."'s User Employment Data Updated";
 
-        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
-      header("location:../viewMember?id=$user_id");
+        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
+      header("location:../memberView?id=$user_id");
     } else {
       $_SESSION['msg1']="Something Wrong";
-      header("location:../viewMember?id=$user_id");
+      header("location:../memberView?id=$user_id");
     }
   }
 
@@ -375,11 +375,11 @@ $androidLink = 'https://play.google.com/store/apps/details?id=com.silverwing.zoo
 
       $_SESSION['msg']=$data_q['user_full_name']."'s Custom Sub Category Approved";
 
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
-      header("location:../viewMember?id=$user_id");
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
+      header("location:../memberView?id=$user_id");
     } else {
       $_SESSION['msg1']="Something Wrong";
-      header("location:../viewMember?id=$user_id");
+      header("location:../memberView?id=$user_id");
     }
    }
 //16feb21
@@ -443,11 +443,11 @@ if(isset($plan_renewal_date) && $plan_renewal_date !=""){
      $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id'");
         $data_q=mysqli_fetch_array($adm_data);
       $_SESSION['msg']=$data_q['user_full_name']."'s Billing Data Updated";
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
-      header("location:../viewMember?id=$user_id");
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
+      header("location:../memberView?id=$user_id");
     } else {
       $_SESSION['msg1']="Something Wrong";
-      header("location:../viewMember?id=$user_id");
+      header("location:../memberView?id=$user_id");
     }
 
   }
@@ -463,7 +463,7 @@ if(isset($plan_renewal_date) && $plan_renewal_date !=""){
         
      if($main_users_master_data['user_mobile'] ==$main_users_master_data['refere_by_phone_number']){
       $_SESSION['msg1']="You Can't add the same number as Reference.";
-      header("location:../viewMember?id=$refer_user_id");
+      header("location:../memberView?id=$refer_user_id");
       exit;
      }   
  $m->set_data('refer_by',$refer_by);
@@ -590,12 +590,12 @@ echo  "here";exit; */
         $data_q=mysqli_fetch_array($adm_data);
 
       $_SESSION['msg']=$data_q['user_full_name']."'s Refer By Data Updated";
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 
        if(isset($returnReport)){
          header("location:../$returnReport?refer_by=$refer_by_new&from=$fromDate_new&toDate=$toDate_new");
        } else {
-        header("location:../viewMember?id=$refer_user_id");
+        header("location:../memberView?id=$refer_user_id");
        }
       
     } else {
@@ -603,7 +603,7 @@ echo  "here";exit; */
       if(isset($returnReport)){
          header("location:../$returnReport?refer_by=$refer_by_new&from=$fromDate_new&toDate=$toDate_new");
        } else {
-        header("location:../viewMember?id=$refer_user_id");
+        header("location:../memberView?id=$refer_user_id");
        }
     }
     }
@@ -656,7 +656,7 @@ echo  "here";exit; */
 
             default:
                $_SESSION['msg1']="Invalid Profile Photo";
-                header("Location: ../viewMember?id=$user_id");
+                header("Location: ../memberView?id=$user_id");
                 exit;
                 break;
             }
@@ -664,7 +664,7 @@ echo  "here";exit; */
 
           } else{
             $_SESSION['msg1']="Invalid Profile Photo";
-            header("location:../viewMember?id=$user_id");
+            header("location:../memberView?id=$user_id");
             exit();
           }
         } else {
@@ -723,11 +723,11 @@ echo  "here";exit; */
       $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id'");
         $data_q=mysqli_fetch_array($adm_data);
       $_SESSION['msg']=$data_q['user_full_name']."'s User Basic Data Updated";
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
-      header("location:../viewMember?id=$user_id");
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
+      header("location:../memberView?id=$user_id");
     } else {
       $_SESSION['msg1']="Something Wrong";
-      header("location:../viewMember?id=$user_id");
+      header("location:../memberView?id=$user_id");
     }
 
   }
@@ -739,7 +739,7 @@ echo  "here";exit; */
          if ($totalAddress<1) {
               $response["message"] = "";
               $_SESSION['msg1']="Need at least 1 primary address";
-               header("location:../viewMember?id=$user_id");
+               header("location:../memberView?id=$user_id");
               exit();
          }
                     
@@ -751,11 +751,11 @@ echo  "here";exit; */
 
 
       $_SESSION['msg']=$data_q['user_full_name']."'s User Address Deleted";
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
-      header("location:../viewMember?id=$user_id");
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
+      header("location:../memberView?id=$user_id");
     } else {
       $_SESSION['msg1']="Something Wrong";
-      header("location:../viewMember?id=$user_id");
+      header("location:../memberView?id=$user_id");
     }
 
   }
@@ -807,7 +807,7 @@ echo  "here";exit; */
                $totalAddress=  $d->count_data_direct("adress_id","business_adress_master","user_id='$user_id' AND adress_type=0 ");
                if ($totalAddress<1) {
                     $_SESSION['msg1']="Need at least 1st primary address";
-                    header("location:../viewMember?id=$user_id");
+                    header("location:../memberView?id=$user_id");
                     exit();
                }
 
@@ -831,7 +831,7 @@ echo  "here";exit; */
                if ($totalAddress<1) {
                   
                     $_SESSION['msg1']="Need at least 1st primary address";
-                    header("location:../viewMember?id=$user_id");
+                    header("location:../memberView?id=$user_id");
                     exit();
                }
 
@@ -846,13 +846,13 @@ echo  "here";exit; */
         $data_q=mysqli_fetch_array($adm_data);
 
  $_SESSION['msg']=$data_q['user_full_name']."'s User Business Address Update Sucessfully !";
-               $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
-                    header("location:../viewMember?id=$user_id");
+               $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
+                    header("location:../memberView?id=$user_id");
                     exit();
 
         }else{
               $_SESSION['msg1']="Update Not Done !";
-                header("location:../viewMember?id=$user_id");
+                header("location:../memberView?id=$user_id");
                 exit();
         }
 
@@ -919,7 +919,7 @@ echo  "here";exit; */
 
             default:
                $_SESSION['msg1']="Invalid Profile Photo";
-                header("Location: ../viewMember?id=$user_id");
+                header("Location: ../memberView?id=$user_id");
                 exit;
                 break;
             }
@@ -927,7 +927,7 @@ echo  "here";exit; */
 
           } else{
             $_SESSION['msg1']="Invalid Profile Photo";
-            header("location:../viewMember?id=$user_id");
+            header("location:../memberView?id=$user_id");
             exit();
           }
         } else {
@@ -983,7 +983,7 @@ if($user_profile_pic!=""){
 
             default:
                $_SESSION['msg1']="Invalid Logo";
-                header("Location: ../viewMember?id=$user_id");
+                header("Location: ../memberView?id=$user_id");
                 exit;
                 break;
             }
@@ -991,7 +991,7 @@ if($user_profile_pic!=""){
 
           } else{
             $_SESSION['msg1']="Invalid Company Logo";
-            header("location:../viewMember?id=$user_id");
+            header("location:../memberView?id=$user_id");
             exit();
           }
         } else {
@@ -1462,12 +1462,12 @@ $ref_mobile = $ref_users_master_data['user_mobile'];
 
 
       $_SESSION['msg']=ucfirst($user_first_name).' '.ucfirst($user_last_name)." New Member Added";
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
-      header("location:../viewMember?id=$user_id");
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
+      header("location:../memberView?id=$user_id");
     } else {
       mysqli_query("ROLLBACK");
       $_SESSION['msg1']="Something Wrong";
-      header("location:../viewMember?id=$user_id");
+      header("location:../memberView?id=$user_id");
     }
 
   }
@@ -1481,7 +1481,7 @@ $userData=mysqli_fetch_array($gu);
 
 $a1= array (
       'active_status'=>'0',
-      'inactive_by' => $_SESSION['zoobiz_admin_id']
+      'inactive_by' => $_SESSION['partner_login_id']
     );
 $q=$d->update("users_master",$a1,"user_id='$active_user_id' ");
 if($q>0) {
@@ -1493,9 +1493,9 @@ $q22=$d->update("user_notification",$a22," user_id='$active_user_id' or other_us
 
 
       $_SESSION['msg']=$userData['user_full_name']." Activated";
-      $d->insert_log("0","0","$_SESSION[zoobiz_admin_id]","$created_by","User Activated");
+      $d->insert_log("0","0","$_SESSION[partner_login_id]","$created_by","User Activated");
         
-      header("location:../viewMember?id=".$active_user_id);
+      header("location:../memberView?id=".$active_user_id);
 } else {
       $_SESSION['msg1']="Something Wrong";
       header("location:../manageMembers");
@@ -1592,8 +1592,8 @@ $d->delete("slider_master","user_id='$force_delete_user_id'");
       //delete user timeline
 
       $_SESSION['msg']=$userData['user_full_name']." Deleted Permanently..! ";
-      $d->insert_log("0","0","$_SESSION[zoobiz_admin_id]","$created_by","User Deactivated - Logout Forcefully");
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("0","0","$_SESSION[partner_login_id]","$created_by","User Deactivated - Logout Forcefully");
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../manageMembers");
     } else {
       $_SESSION['msg1']="Something Wrong";
@@ -1612,7 +1612,7 @@ $userData=mysqli_fetch_array($gu);
  
    $a1= array (
       'active_status'=>'1',
-      'inactive_by' => $_SESSION['zoobiz_admin_id'],
+      'inactive_by' => $_SESSION['partner_login_id'],
       'user_token' =>'',
       'device' =>''
     );
@@ -1666,8 +1666,8 @@ $q22=$d->update("user_notification",$a22," user_id='$delete_user_id' or other_us
       //delete user timeline
 
       $_SESSION['msg']=$userData['user_full_name']." Deactivated";
-      $d->insert_log("0","0","$_SESSION[zoobiz_admin_id]","$created_by","User Deactivated - Logout Forcefully");
-       $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("0","0","$_SESSION[partner_login_id]","$created_by","User Deactivated - Logout Forcefully");
+       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../manageMembers");
     } else {
       $_SESSION['msg1']="Something Wrong";
@@ -1701,11 +1701,11 @@ $q22=$d->update("user_notification",$a22," user_id='$delete_user_id' or other_us
 
  
   
-$d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by","Manual Logout From Admin Panel");
+$d->insert_log("","0","$_SESSION[partner_login_id]","$created_by","Manual Logout From Admin Panel");
 
 
-     $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
-    header("location:../viewMember?id=$user_id");
+     $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
+    header("location:../memberView?id=$user_id");
     exit();
 
   }
@@ -1775,12 +1775,12 @@ $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by","Manual Logout 
         $data_q=mysqli_fetch_array($adm_data);
 
         $_SESSION['msg']=$data_q['user_full_name']."'s Plan renewed successfully !";
-         $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
-        header("location:../viewMember?id=$user_id");
+         $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
+        header("location:../memberView?id=$user_id");
       } else {
         mysqli_query("ROLLBACK");
         $_SESSION['msg1']="Something Wrong";
-        header("location:../viewMember?id=$user_id");
+        header("location:../memberView?id=$user_id");
       }
 
 

@@ -154,7 +154,7 @@
                
                   var contentString = '<div >'+
 
-              '<div> <a href="viewMember?id='+ id+'" target="_blank" > <img id="blah"    src="'+profile+'"  width="75" height="75"   src="#" alt="your image" class="profile" style="border-radius: 50%;" />  <span style="display: inline-block;" class="media-name"> <b><h4>'+name+'</h4></b></span></a>  <div> <br>'+
+              '<div> <a href="memberView?id='+ id+'" target="_blank" > <img id="blah"    src="'+profile+'"  width="75" height="75"   src="#" alt="your image" class="profile" style="border-radius: 50%;" />  <span style="display: inline-block;" class="media-name"> <b><h4>'+name+'</h4></b></span></a>  <div> <br>'+
               '<div>Mobile: </b>'+ user_mobile+' </b> </div> <br>'+
               '<div><b>Email: </b>'+ user_email+' </b>  </div> <br>'+
               '<div>  <b>Gender: </b>'+ gender+' </div> <br>'+

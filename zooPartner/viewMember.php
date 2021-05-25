@@ -7,7 +7,7 @@ if(filter_var($id, FILTER_VALIDATE_INT) != true){
     window.location.href='manageMembers';
     </script>");
 }
-/*if( ($_SESSION['role_id'] != 1 && $_SESSION['role_id'] != 2) ){
+/*if( ($_SESSION['partner_role_id'] != 1 && $_SESSION['partner_role_id'] != 2) ){
   // header('location:../memberView?id='.$id);exit;
    $_SESSION['msg1']='Invalid User';
    echo ("<script LANGUAGE='JavaScript'>
@@ -80,7 +80,7 @@ $followers= mysqli_num_rows($tq33);
   <div class="col-lg-4">
     <div class="card profile-card-2">
       <div class="card-img-block">
-        <img class="img-fluid" src="img/Free-hd-building-wallpaper.jpg" alt="Card image cap">
+        <img class="img-fluid" src="../zooAdmin/img/Free-hd-building-wallpaper.jpg" alt="Card image cap">
       </div>
       <div class="card-body pt-5">
         <img id="blah"  onerror="this.src='../zooAdmin/img/user.png'" src="../img/users/members_profile/<?php echo $user_profile_pic; ?>"  width="75" height="75"   src="#" alt="your image" class='profile' />
@@ -551,7 +551,7 @@ if ($memberAdded > 0 ) { ?>
           //7oct2020
 
 //22dec2020
-if (isset($_SESSION['zoobiz_admin_id'])) { ?> 
+if (isset($_SESSION['partner_login_id'])) { ?> 
 
  <hr>
  <div class="media align-items-center">
@@ -713,7 +713,7 @@ if (isset($_SESSION['zoobiz_admin_id'])) { ?>
 
 
                <?php //26april21
-                 if ($_SESSION['role_id'] ==1 ) { ?>
+                 if ($_SESSION['partner_role_id'] ==1 ) { ?>
                     <li class="nav-item">
                       <a href="javascript:void();" data-target="#superTab" data-toggle="pill" class="nav-link "><i class="fa fa-pencil"></i> <span class="hidden-xs">User Mobile </span></a>
                     </li>

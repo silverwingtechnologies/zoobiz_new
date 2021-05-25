@@ -18,11 +18,11 @@ if (isset($_SESSION['society_id'])) {
 }
 extract(array_map("test_input" , $_POST));
 
-if(isset($validateAdmin_email) && $validateAdmin_email=="yes" && isset($zoobiz_admin_id) && $zoobiz_admin_id !="0"  ){
-//$zoobiz_admin_id=$_SESSION[zoobiz_admin_id];
+if(isset($validateAdmin_email) && $validateAdmin_email=="yes" && isset($partner_login_id) && $partner_login_id !="0"  ){
+//$partner_login_id=$_SESSION[partner_login_id];
     $admin_email = strtolower(trim($admin_email));
 
-$q=$d->select("zoobiz_admin_master","lower(admin_email)='$admin_email' and zoobiz_admin_id != '$zoobiz_admin_id'  ");
+$q=$d->select("zoobiz_admin_master","lower(admin_email)='$admin_email' and partner_login_id != '$partner_login_id'  ");
      
   
    if(mysqli_num_rows($q) >0 ){
@@ -34,7 +34,7 @@ $q=$d->select("zoobiz_admin_master","lower(admin_email)='$admin_email' and zoobi
 }else
 
 if(isset($validateAdmin_email) && $validateAdmin_email=="yes"){
-//$zoobiz_admin_id=$_SESSION[zoobiz_admin_id];
+//$partner_login_id=$_SESSION[partner_login_id];
    $admin_email = strtolower(trim($admin_email));
 $q=$d->select("zoobiz_admin_master","lower(admin_email)='$admin_email'    ");
      

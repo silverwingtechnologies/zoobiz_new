@@ -237,7 +237,7 @@
                     
                     <td class="text-right"><?php echo $i++; ?></td>
                     
-                    <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
+                    <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $salutation.' '.$user_full_name; ?></a></td>
                     <?php
                     $transection_master=$d->select("transection_master","user_id = '$user_id'  "," order by transection_id desc");
                     $transection_master_data=mysqli_fetch_array($transection_master);

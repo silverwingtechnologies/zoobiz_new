@@ -144,7 +144,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   $q=$d->insert("payment_getway_master",$payment_info);
   if($q>0) {
     $_SESSION['msg']=ucfirst($company_name)." Company Added";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../companyList");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -283,7 +283,7 @@ $q2=$d->update("payment_getway_master",$payment_info,"company_id = '$company_id'
 
 if($q2>0 && $q1>0) {
   $_SESSION['msg']=ucfirst($company_name). " Company Updated";
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
   header("location:../companyList");
 } else {
   $_SESSION['msg1']="Something Wrong";
@@ -356,7 +356,7 @@ if(  $q1>0) {
     
 
   $_SESSION['msg']=ucfirst($company_name). " Company Detail Updated";
-  $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+  $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
   header("location:../viewCompany?company_id=$company_id");
 } else {
   $_SESSION['msg1']="Something Wrong";
@@ -447,7 +447,7 @@ $m->set_data('ccav_merchant_id',$ccav_merchant_id);
 
 
     $_SESSION['msg']=$data_q['company_name']. " Payment Details Updated";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../viewCompany?company_id=$company_id");
   } else {
     $_SESSION['msg1']="Something Wrong";
@@ -482,7 +482,7 @@ $m->set_data('ccav_merchant_id',$ccav_merchant_id);
         
   if($q>0 ) {
     $_SESSION['msg']= $data_q['company_name']. " Company Deleted";
-    $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+    $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("location:../companyList");
   } else {
     $_SESSION['msg1']="Something Wrong";

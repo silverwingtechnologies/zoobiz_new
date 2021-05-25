@@ -269,7 +269,7 @@
 <?php }
 
 $e_time = microtime(true);
-if($_SESSION['zoobiz_admin_id'] == 7 ){
+if($_SESSION['partner_login_id'] == 7 ){
 echo " <br>Time Taken =". ($e_time - $s_time); 
 }
  ?>

@@ -15,7 +15,7 @@ if (isset($temp_user_id)) {
  
       $_SESSION['msg']= "Temp User ucfirst($main_users_master_data[user_full_name])  Deleted";
 
-     $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+     $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
      if(isset($toDate) && $toDate!='' && isset($from) && $from!='' ){
  
         header("location:../failedRegistration?toDate=$toDate&from=$from");
@@ -34,7 +34,7 @@ if (isset($temp_user_id)) {
 
  if($main_users_master_data[user_mobile] == $primary_user_mobile){
     $_SESSION['msg']= "Nothing to update";
-  header("location:../viewMember?id=".$primary_user_id);exit;
+  header("location:../memberView?id=".$primary_user_id);exit;
  }
   $a =array(
       'user_mobile'=> $primary_user_mobile
@@ -46,13 +46,13 @@ if (isset($temp_user_id)) {
  
       $_SESSION['msg']= ucfirst($main_users_master_data[user_full_name])." Primary mobile number changed from $main_users_master_data[user_mobile] to  $primary_user_mobile by $created_by";
 
-     $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+     $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
      
-        header("location:../viewMember?id=".$primary_user_id);
+        header("location:../memberView?id=".$primary_user_id);
       
     } else {
       $_SESSION['msg1']="Something Wrong";
-      header("location:../viewMember?id=".$primary_user_id);
+      header("location:../memberView?id=".$primary_user_id);
     }
 
 
@@ -72,7 +72,7 @@ if (isset($temp_user_id)) {
    if($q>0  ) {
  
       $_SESSION['msg']= $hide_mobile_number." Added ";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../hideRegiNotifiation");
       
     } else {
@@ -96,7 +96,7 @@ if (isset($temp_user_id)) {
    if($q>0  ) {
  
       $_SESSION['msg']= $hide_mobile_number." Updated ";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../hideRegiNotifiation");
       
     } else {
@@ -163,7 +163,7 @@ if(isset($appBusinessName) && $appBusinessName=="Approve") {
  
 
       $_SESSION['msg']=$msg;
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("Location: ../welcome");
     } else {
       header("Location: ../welcome");
@@ -226,7 +226,7 @@ extract($bn_details);
 
 
       $_SESSION['msg']=$msg;
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("Location: ../welcome");
     } else {
       header("Location: ../welcome");

@@ -13,7 +13,7 @@ if(isset($deletepackage)) {
   if($q==TRUE) {
      $_SESSION['msg']=$data_q['package_name']." Package Deleted";
      
-     $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+     $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("Location: ../plans");
   } else {
      $_SESSION['msg1']="Package Not Deleted";
@@ -55,7 +55,7 @@ if(isset($addpackage)) {
     $q=$d->insert("package_master",$a1);
   if($q==TRUE) {
       $_SESSION['msg']=$package_name." Package Added";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
 
     header("Location: ../plans");
   } else {
@@ -98,7 +98,7 @@ $m->set_data('time_slab',$time_slab);
     $q=$d->update("package_master",$a1,"package_id='$package_id'");
   if($q==TRUE) {
       $_SESSION['msg']=$package_name." Package Updated";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
     header("Location: ../plans");
   } else {
     header("Location: ../plans");

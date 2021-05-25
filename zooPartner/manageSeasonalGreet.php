@@ -55,7 +55,7 @@ $seasonal_greet_master_d=mysqli_fetch_array($seasonal_greet_master_qry);
               <tbody>
                 <?php
                 $i=1;
-                $q=$d->select("zoobiz_admin_master,seasonal_greet_image_master","  seasonal_greet_image_master.created_by =zoobiz_admin_master.zoobiz_admin_id and seasonal_greet_image_master.seasonal_greet_id ='$seasonal_greet_id'   order by seasonal_greet_image_master.created_at
+                $q=$d->select("zoobiz_admin_master,seasonal_greet_image_master","  seasonal_greet_image_master.created_by =zoobiz_admin_master.partner_login_id and seasonal_greet_image_master.seasonal_greet_id ='$seasonal_greet_id'   order by seasonal_greet_image_master.created_at
                   desc ");
                 while ($data=mysqli_fetch_array($q)) {
                   extract($data);

@@ -83,9 +83,9 @@ $where12="";
                   
                   <td class="text-right"><?php echo $i++; ?></td>
                  <td><?php echo $category_name; ?></td> 
-                  <td><a target="_blank"   title="View Profile"  href="viewMember?id=<?php echo $user_id; ?>" ><?php echo $user_full_name; ?></a></td>
+                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo $user_full_name; ?></a></td>
                  <!-- <td>
-                   <form action="viewMember" method="get">    
+                   <form action="memberView" method="get">    
                           <input type="hidden" name="id" value="<?php echo $user_id; ?>">    
                           <button type="submit" name="" class="btn btn-secondary btn-sm "> View Profile</button>
                         </form>

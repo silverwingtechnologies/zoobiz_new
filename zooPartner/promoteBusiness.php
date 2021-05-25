@@ -39,7 +39,7 @@
                   <th>Manage</th>
                   <th>Start Date</th>
                   <th>End Date</th>
-                  <?php if($_SESSION['role_id'] == 1){  ?>
+                  <?php if($_SESSION['partner_role_id'] == 1){  ?>
                   <th>Action</th>
                   <?php } ?> 
                 </tr>
@@ -111,7 +111,7 @@
 
                     <td data-order="<?php echo date("U",strtotime($data['event_end_date'])); ?>" > <?php echo date("d-m-Y", strtotime($data['event_end_date']));  ?> </td>
 
-<?php if($_SESSION['role_id'] == 1){  ?>
+<?php if($_SESSION['partner_role_id'] == 1){  ?>
                     <td>
             <?php if($event_status == 0) {
               $es = "Running";

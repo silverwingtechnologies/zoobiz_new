@@ -34,7 +34,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     $m->set_data('floor_id',$floor_id);
     $m->set_data('unit_id',$unit_id);
     $m->set_data('member_status',1);
-    $m->set_data('installed_by',$_SESSION['zoobiz_admin_id']);
+    $m->set_data('installed_by',$_SESSION['partner_login_id']);
      $m->set_data('register_date',date('Y-m-d H:i:s'));
     if ($user_mobile=='') {
       $m->set_data('user_status',2);
@@ -64,7 +64,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     $q=$d->insert("users_master",$a);
     if($q>0) {
       $_SESSION['msg']="User Added";
-      $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+      $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
       header("location:../viewOwner?id=$parent_id");
     } else {
       $_SESSION['msg1']="Something Wrong";
