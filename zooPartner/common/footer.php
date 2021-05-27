@@ -185,8 +185,7 @@
     <script src="../zooAdmin/assets/plugins/summernote/dist/summernote-bs4.min.js"></script>
     <!-- Chart js -->
     <script src="../zooAdmin/assets/plugins/Chart.js/Chart.min.js"></script>
-    <!-- Index js -->
-    <!-- <script src="../zooAdmin/assets/js/index.js"></script> -->
+   
     <!--Lightbox-->
     <script src="../zooAdmin/assets/plugins/fancybox/js/jquery.fancybox.min.js"></script>
     
@@ -208,7 +207,7 @@
     
     <!--Form Validatin Script-->
     <script src="../zooAdmin/assets/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="../zooAdmin/assets/js/validate81.js"></script>
+    <script type="text/javascript" src="../zooAdmin/assets/js/validate82.js"></script>
     <script src="../zooAdmin/assets/js/custom80.js"></script>
     
     <!--Select Plugins Js-->
@@ -231,11 +230,18 @@
     <script src="../zooAdmin/assets/plugins/material-datepicker/js/ja.js"></script>
      <script src="../zooAdmin/assets/js/dataTables8.js"></script> 
     <script src="../zooAdmin/assets/js/datepickers4.js"></script> 
+    <script type="text/javascript">
+      
+    </script>
+     <!-- Index js -->
+       
     <script type="">
     $(window).load(function() {
     $('.ajax-loader').hide();
     // .. $("#spinner").fadeOut("slow");
     });
+
+
     </script>
   </body>
 </html>

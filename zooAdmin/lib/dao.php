@@ -34,27 +34,33 @@ class dao implements interface1
     //11march21
 
    //NEW SMS CODE
+
+     function partner_login_otp($partnerNumber,$otp_web) {
+        // $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$partnerNumber&from=ZOOBIZ&templatename=Partner+Login+-+Admin+Panel&var1=$otp_web");
+
+ $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=$partnerNumber&from=ZOOBIZ&templatename=Partner+Login+-+Admin+Panel&var1=$otp_web");
+
+    }
+    
     function sms_reminder1($mobile,$many) {
         $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=User+Profile+Complete+Reminder1&var1=$many");
     }
 
-    function partner_login_otp($partnerNumber,$otp_web) {
-        $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$partnerNumber&from=ZOOBIZ&templatename=Partner+Login+-+Admin+Panel&var1=$otp_web");
-    }
-
     function sms_reminder2($mobile,$more) {
-        $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=User+Profile+Complete+Reminder+2&var1=$more");
+        $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=User+Profile+Complete+Reminder+2&var1=$more");
+
+        //https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=9687271071&from=ZOOBIZ&templatename=User+Profile+Complete+Reminder+2&var1=VAR1_VALUE&var2=VAR2_VALUE
     }
 
     function sms_reminder3($mobile,$sec) {
-        $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=User+Profile+Complete+Reminder3&var1=$sec");
+        $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=User+Profile+Complete+Reminder3&var1=$sec");
     }
 
      function sms_admin_reset_password($mobile,$full_name,$forgotLink) {
        $full_name=urlencode($full_name);
          $forgotLink1=urlencode($forgotLink);
 
-        $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=Reset+Password+-+Admin+Panel&var1=$full_name&var2=$forgotLink1");
+        $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=Reset+Password+-+Admin+Panel&var1=$full_name&var2=$forgotLink1");
     }
 
      function sms_member_refferal($mobile,$member_name,$city_name,$reffered_person_name) {
@@ -62,7 +68,7 @@ class dao implements interface1
          $city_name=urlencode($city_name);
          $reffered_person_name=urlencode($reffered_person_name);
 
-         $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=Member+Referral+Message&var1=$member_name&var2=$city_name");
+         $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=Member+Referral+Message&var1=$member_name&var2=$city_name");
     }
 
   function sms_to_admin_on_new_user_registration($mobile,$uname,$city_name,$ref_by_data) {
@@ -70,7 +76,7 @@ class dao implements interface1
          $uname=urlencode($uname);
          $ref_by_data=urlencode($ref_by_data);
 
-         $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=Notification+To+Admin+On+New+Member+Registration&var1=$uname&var2=$city_name&var3=$ref_by_data");
+         $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=Notification+To+Admin+On+New+Member+Registration&var1=$uname&var2=$city_name&var3=$ref_by_data");
     }
 
    function sms_to_member_on_registration($mobile,$member_name,$alink,$ilink) {
@@ -80,21 +86,21 @@ class dao implements interface1
 
         
 
-        $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=Welcome+Message+On+Register&var1=$member_name&var2=$alink&var3=$ilink");
+        $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=Welcome+Message+On+Register&var1=$member_name&var2=$alink&var3=$ilink");
         
          //$sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$mobile&from=ZOOBIZ&templatename=Member+Welcome+Message&var1=$member_name");
     }
 
       function sms_to_user_on_account_approval_request($user_mobile,$user_full_name){
        $user_full_name=urlencode($user_full_name); 
-       $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$user_mobile&from=ZOOBIZ&templatename=Account+Approval+Message&var1=$user_full_name");
+       $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=$user_mobile&from=ZOOBIZ&templatename=Account+Approval+Message&var1=$user_full_name");
    }
 
    function sms_to_admin_on_category_app($admin_mobile,$admin_name,$custom_category_name,$link){
        $admin_name=urlencode($admin_name); 
        $link=urlencode($link); 
        $custom_category_name=urlencode($custom_category_name); 
-       $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=2eb6de0f-3a58-11e9-8806-0200cd936042&to=$admin_mobile&from=ZOOBIZ&templatename=Category+Approval+SMS+to+Admin&var1=$admin_name&var2=$custom_category_name&var3=$link");
+       $sms= file_get_contents("https://2factor.in/API/R1/?module=TRANS_SMS&apikey=6b667f58-bc6f-11eb-8089-0200cd936042&to=$admin_mobile&from=ZOOBIZ&templatename=Category+Approval+SMS+to+Admin&var1=$admin_name&var2=$custom_category_name&var3=$link");
     }
 //NEW SMS CODE
 

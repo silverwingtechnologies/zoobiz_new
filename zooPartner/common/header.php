@@ -176,7 +176,7 @@ if(!isset($_GET['map_view_filter_city_id'])){
 
     <li class="nav-item">
       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-        <span class="user-profile"> <img onerror="this.src='../zooAdmin/img/user.png'"  src="../img/users/members_profile/<?php echo $_SESSION['admin_profile']; ?>" class="img-circle" alt="user avatar"> 
+        <span class="user-profile"> <img onerror="this.src='../zooAdmin/img/user.png'"  src="../zooAdmin/img/profile/<?php echo $_SESSION['admin_profile']; ?>" class="img-circle" alt="user avatar"> 
           <?php
         echo  $_SESSION['admin_name'] ;
         ?>  </span>

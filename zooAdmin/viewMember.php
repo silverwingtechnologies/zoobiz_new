@@ -635,6 +635,40 @@ if (isset($_SESSION['zoobiz_admin_id'])) { ?>
 </div>
 <?php } ?> 
 
+
+<?php   
+
+$interest_qry = $d->selectRow("*","interest_master,interest_relation_master","interest_relation_master.interest_id  = interest_master.interest_id and  interest_relation_master.member_id ='$user_id' and interest_master.int_status!='User Added'   and interest_master.status= 0   ", "");
+ 
+ 
+
+
+  if(mysqli_num_rows($interest_qry)>0) {  
+
+     $interest_array = array();
+       while ($interest_data=mysqli_fetch_array($interest_qry)) { 
+        
+     $interest_array[] = html_entity_decode($interest_data['interest_name']);
+     
+ }
+ $interest_array = implode(", ", $interest_array);
+ ?> 
+ <hr>
+ <div class="media align-items-center">
+  <div>
+   <i class="fa fa-info" aria-hidden="true"></i>  
+ </div>
+ <div class="media-body text-left">
+  <div class="progress-wrapper">Interests: 
+    <?php echo $interest_array;?>
+    <br> 
+    <a   href="userInterests?user_id=<?php echo $user_id;?>"   class="btn btn-primary btn-sm" type="">Edit Interests</a>
+  </div>                   
+</div>
+</div>
+<?php } ?> 
+
+
 <hr>
 <div class="row">
   <div class="col-xs-6 col-12">

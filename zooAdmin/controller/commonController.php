@@ -5,7 +5,42 @@ if(isset($_REQUEST) && !empty($_REQUEST) )//it can be $_GET doesn't matter
 {
  
 
-if (isset($temp_user_id)) {
+if (isset($interestedBtn)) {
+  
+  $main_users_master = $d->selectRow("*","users_master", "user_id = '$user_id'    ");
+  $main_users_master_data = mysqli_fetch_array($main_users_master);
+
+    $d->delete("interest_relation_master","member_id='$user_id'");
+  
+ 
+ for ($f=0; $f < count($_POST['interest_id']) ; $f++) { 
+
+  if($_POST['interest_id'][$f]!=0 && $_POST['interest_id'][$f] !=""){
+    $a =array(
+      'interest_id'=> $_POST['interest_id'][$f],
+      'member_id' =>$user_id,
+      'created_at' =>date("Y-m-d H:i:s")
+    );
+    $q=$d->insert("interest_relation_master",$a);
+  }
+  
+ }
+ 
+  if($q>0  ) {
+      $_SESSION['msg']= ucfirst($main_users_master_data[user_full_name]) ."'s inetrest Updated";
+
+     $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$_SESSION['msg']);
+     
+        header("location:../viewMember?id=$user_id");
+        exit;
+     } else {
+      $_SESSION['msg1']="Something Wrong";
+      header("location:../viewMember?id=$user_id");
+      exit;
+    }
+
+
+} if (isset($temp_user_id)) {
  
   $main_users_master = $d->selectRow("*","users_master_temp", "user_id = '$temp_user_id'    ");
   $main_users_master_data = mysqli_fetch_array($main_users_master);

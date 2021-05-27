@@ -2288,6 +2288,111 @@ $("#adminFrm").validate({
         
     });
 //15dec2020
+
+//27may21
+$("#partnerFrm").validate({
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) { 
+                error.insertAfter(element.parent());      // radio/checkbox?
+            } else if (element.hasClass('select2-hidden-accessible')) {     
+                error.insertAfter(element.next('span'));  // select2
+                element.next('span').addClass('error').removeClass('valid');
+            } else {                                      
+                error.insertAfter(element);               // default
+            }
+        },
+        rules: {
+            role_id:{
+                required: true
+            },
+            partner_name:{
+                required: true,
+                noSpace:true
+            },
+            
+            
+            partner_mobile:{
+                required: true,
+                noSpace:true ,
+                remote: { 
+                    url: 'ajaxPartnerData.php',
+                    type: "post",
+                    data: {
+                         partner_mobile: function() {
+                            return $('#partnerFrm :input[name="partner_mobile"]').val();
+                        }, zoobiz_partner_id: function() {
+                            return $('#partnerFrm :input[name="zoobiz_partner_id_edit"]').val();
+                        } 
+                     } 
+                }
+            },
+
+             
+ 
+            partner_profile:{
+                  required:{
+                    depends: function(element) { 
+                     return $("#partnerFrm :input[name='isedit']"). val() =="no"  ;
+                  }
+                 },
+
+                filesize:true
+            } 
+              ,
+        },
+        messages: {
+            //5nov2020
+            role_id:{
+                required: "Please select role"
+            },
+            partner_name:{
+                required: "Please enter Partner name"
+            },
+            
+            partner_mobile:{
+                required: "Please enter mobile number",
+                remote:"Mobile number already exists",
+                maxlength: "PLEASE ENTER AT LEAST 10 digits.",
+                minlength: "PLEASE ENTER AT LEAST 10 digits."
+            },
+            
+            partner_profile:{
+                 required:"Please select profile" 
+            } 
+        },
+        submitHandler: function(form) {
+             form.submit(); 
+            
+        }
+        
+    });
+
+ $('#editInterestFrm').validate({ // initialize the plugin
+        rules: {
+            'interest_id[]': {
+                required: true,
+                maxlength: 5
+            }
+        },
+        messages: {
+            'interest_id[]': {
+                required: "You must check at least 1 box",
+                maxlength: "Check no more than {0} boxes"
+            }
+        },
+       errorPlacement: function (error, element) {
+    if (element.attr("type") == "checkbox") {  
+        
+        $("#chkError").addClass('text-danger');
+        $("#chkError").html("<center><b>No More Then 5 Interests Are Allowed.</b></center>");
+    } else {
+        error.insertAfter(element);
+    }
+  }
+    });
+
+//27may21
+
 $("#memberBasicFrm").validate({
         errorPlacement: function (error, element) {
             if (element.parent('.input-group').length) { 

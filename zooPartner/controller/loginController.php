@@ -10,7 +10,10 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 	if(isset($_POST["partnerNumber"]) && $_POST['SendOPT'] =="yes") {
 		extract(array_map("test_input" , $_POST));
 
-		$q=$d->select("users_master","user_mobile='$partnerNumber' and active_status=0 ");
+	 
+		$q=$d->select("zoobiz_partner_master,role_master","zoobiz_partner_master.role_id=role_master.role_id AND zoobiz_partner_master.partner_mobile='$partnerNumber'   ");
+
+
 		if ( mysqli_num_rows($q) == 1) {
 
 		 $bms_admin_master_data = mysqli_fetch_array($q);
@@ -20,18 +23,13 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
          $m->set_data('otp_web', $otp_web);
          $m->set_data('partnerNumber', $partnerNumber);   
          $a1= array (
-          'otp_web'=> $m->get_data('otp_web'),
-          'partnerNumber'=> $m->get_data('partnerNumber'),
-          'login_time' => date("Y-m-d H:i:s")
+          'otp'=> $m->get_data('otp_web'),
+           
         );
 
-         $partner_login_master1=$d->select("partner_login_master","partnerNumber='$partnerNumber' and status=0 ");
-
-         if ( mysqli_num_rows($partner_login_master1) > 0 ) {
-	        $result=$d->update("partner_login_master",$a1,"partnerNumber='$partnerNumber' and status=0");
-	    } else {
-	    	$result=$d->insert("partner_login_master",$a1);
-	    }
+          
+	        $result=$d->update("zoobiz_partner_master",$a1,"partner_mobile='$partnerNumber'");
+	     
        if($result){
         	 
 			$d->partner_login_otp($partnerNumber,$otp_web);
@@ -56,7 +54,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 		$otp_web=mysqli_real_escape_string($con, $otp_web);
 	  
 		 
-			$q=$d->select("partner_login_master, users_master","users_master.user_mobile ='$mobile' and   partner_login_master.partnerNumber='$mobile' AND partner_login_master.otp_web='$otp_web'");
+			$q=$d->select("zoobiz_partner_master, role_master","role_master.role_id =zoobiz_partner_master.role_id and   zoobiz_partner_master.partner_mobile='$mobile' AND zoobiz_partner_master.otp='$otp_web'");
 		 
 
 
@@ -83,16 +81,13 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
              $role_master_data = mysqli_fetch_array($role_master_q); 
 
 
-			$_SESSION['admin_name'] = $data['user_full_name']; 
-			$_SESSION['full_name'] = $data['user_full_name']; 
+			$_SESSION['admin_name'] = $data['partner_name']; 
+			$_SESSION['full_name'] = $data['partner_name']; 
 			
-			$_SESSION['secretary_mobile'] = $data['user_mobile'];
-			$_SESSION['secretary_email'] = $data['user_email'];
-			$_SESSION['admin_profile'] = $data['user_profile_pic'];  
-			$_SESSION['partner_login_id'] = $data['partner_login_id']; 	 
-			$_SESSION['admin_type'] =$role_master_data['role_name']; 	
-			$_SESSION['plan_expire_date'] = $data['plan_expire_date']; 	
-			$_SESSION['complaint_category_id'] = $data['complaint_category_id']; 	
+			$_SESSION['secretary_mobile'] = $data['partner_mobile']; 
+			$_SESSION['admin_profile'] = $data['partner_profile'];  
+			$_SESSION['partner_login_id'] = $data['zoobiz_partner_id']; 	 
+			$_SESSION['admin_type'] =$role_master_data['role_name']; 	  	
 			$_SESSION['partner_role_id'] = $role_master_data['role_id']; 	
 			
 			$_SESSION['msg']= "Welcome $_SESSION[admin_name]";

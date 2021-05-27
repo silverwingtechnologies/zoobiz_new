@@ -56,6 +56,11 @@ tableList.buttons().container().appendTo('#exampleList_wrapper .col-md-6:eq(0)')
 tableList2.buttons().container().appendTo('#exampleList2_wrapper .col-md-6:eq(0)');
 
 
+
+
+
+
+
     var table1 = $('#exampleReport').DataTable({
         "bPaginate": false,
         "bLengthChange": false,

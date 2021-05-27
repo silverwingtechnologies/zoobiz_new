@@ -342,6 +342,42 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   }
 //22dec2020
 
+//27may21
+  if($_POST['status']=="partnerDeactive") {
+      $status=1;
+        $m->set_data('status',$status);
+        $a1= array ('status'=> $m->get_data('status')
+      );
+      $q=$d->update('zoobiz_partner_master',$a1,"zoobiz_partner_id='$id'");
+      if($q>0) {
+        $adm_data=$d->selectRow("partner_name","zoobiz_partner_master"," zoobiz_partner_id='$id'");
+        $data_q=mysqli_fetch_array($adm_data);
+        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$data_q['partner_name']." is Deactivated");
+        echo 1;
+      } else {
+        echo 0;
+      }
+  }
+
+  if($_POST['status']=="partnerActive") {
+      $status=0;
+        $m->set_data('status',$status);
+        $a1= array ('status'=> $m->get_data('status')
+      );
+
+      $q=$d->update('zoobiz_partner_master',$a1,"zoobiz_partner_id='$id'");
+      if($q>0) {
+        $adm_data=$d->selectRow("partner_name","zoobiz_partner_master"," zoobiz_partner_id='$id'");
+        $data_q=mysqli_fetch_array($adm_data);
+        $d->insert_log("","0","$_SESSION[zoobiz_admin_id]","$created_by",$data_q['partner_name']." is Activated");
+        echo 1;
+      } else {
+        echo 0;
+      }
+  }
+//27may21
+
+
 //15dec2020
   
   if($_POST['status']=="adminDeactive") {
