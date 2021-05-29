@@ -135,7 +135,7 @@ while($business_sub_categories_data=mysqli_fetch_array($business_sub_categories_
  
 //24nov2020
  
-                    $q=$d->selectRow("users_master.*,cllassifieds_master.* "," users_master,cllassifieds_master LEFT JOIN classified_category_master on  cllassifieds_master.cllassified_id = classified_category_master.classified_id $leftWhere ","users_master.user_id =cllassifieds_master.user_id  AND users_master.office_member=0 AND users_master.active_status=0  and   cllassifieds_master.user_id != 0   "," group by cllassifieds_master.cllassified_id ORDER BY cllassifieds_master.cllassified_id DESC");
+                    $q=$d->selectRow("users_master.*,cllassifieds_master.* "," users_master,cllassifieds_master LEFT JOIN classified_category_master on  cllassifieds_master.cllassified_id = classified_category_master.classified_id $leftWhere ","users_master.user_id =cllassifieds_master.user_id  AND users_master.office_member=0 AND users_master.active_status=0  and   cllassifieds_master.user_id != 0 and users_master.city_id='$selected_city_id'    "," group by cllassifieds_master.cllassified_id ORDER BY cllassifieds_master.cllassified_id DESC");
                     $i = 0;
                     while($row=mysqli_fetch_array($q)) {
                       $i++;
@@ -206,7 +206,7 @@ while($business_sub_categories_data=mysqli_fetch_array($business_sub_categories_
                        <td>
                         <?php
                        
-                           $q111=$d->select("users_master","user_id='$row[user_id]'","");
+                           $q111=$d->select("users_master","user_id='$row[user_id]' and city_id='$selected_city_id' ","");
                           $userdata=mysqli_fetch_array($q111);
                           echo $userdata['salutation'].' '.$userdata['user_full_name'];
                         ?>

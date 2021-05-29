@@ -18,7 +18,7 @@
     $nTo= date_format($dateTo,"Y-m-d 23:59:59");
     $where="";
     
-    $office_members_qry=$d->selectRow("user_id","users_master"," office_member =1"," ");
+    $office_members_qry=$d->selectRow("user_id","users_master"," office_member =1 and city_id='$selected_city_id' "," ");
     $office_array = array('0');
     while ($office_members_data=mysqli_fetch_array($office_members_qry)) {
     $office_array[] =$office_members_data['user_id'];
@@ -115,7 +115,7 @@
                   $user_id_array = implode(",", $user_id_array);
                   
                   
-                  $q=$d->select("users_master,user_employment_details"," users_master.user_id in($user_id_array)  and  user_employment_details.user_id=users_master.user_id  AND  users_master.active_status=0    ","");
+                  $q=$d->select("users_master,user_employment_details"," users_master.user_id in($user_id_array)  and  user_employment_details.user_id=users_master.user_id  AND  users_master.active_status=0  and users_master.city_id='$selected_city_id'   ","");
                   $details_array = array();
                   while ($u_data=mysqli_fetch_array($q)) {
                   $details_array[$u_data['user_id']] =$u_data;
@@ -131,7 +131,7 @@
                     <td class="text-right"><?php echo $i++; ?></td>
                     
                     
-                    <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php  echo $user_data['user_full_name'];  ?></a></td>
+                    <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_data['user_id']; ?>" ><?php  echo $user_data['user_full_name'];  ?></a></td>
                     <td><?php echo $user_data['user_mobile']; ?></td>
                     <td><?php echo $user_data['company_name']; ?></td>
                     <td><?php echo date("d-m-Y H:i:s", strtotime($dataArray[$l]['created_at']));?></td>

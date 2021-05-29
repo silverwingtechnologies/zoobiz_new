@@ -134,7 +134,7 @@ if(isset($_POST) && !empty($_POST) )
         }
       
      
-  $users_master_qry = $d->select("users_master,cities"," cities.city_id =users_master.city_id and  users_master.active_status=0  $sub_where   ","");
+  $users_master_qry = $d->select("users_master,cities"," cities.city_id =users_master.city_id and  users_master.active_status=0 and users_master.city_id='$selected_city_id'  $sub_where   ","");
             $user_ids_array = array('0');
              while ($users_master_data=mysqli_fetch_array($users_master_qry)) {
               $user_ids_array[] =$users_master_data['user_id'];
@@ -157,7 +157,7 @@ if(isset($_POST) && !empty($_POST) )
 business_categories.category_status = 0 and 
     user_employment_details.business_category_id =business_categories.business_category_id AND 
 
-     user_employment_details.user_id =users_master.user_id and    users_master.active_status=0  $sub_where   ","");
+     user_employment_details.user_id =users_master.user_id and    users_master.active_status=0  and users_master.city_id='$selected_city_id'  $sub_where   ","");
             $user_ids_array = array('0');
              while ($users_master_data=mysqli_fetch_array($users_master_qry)) {
               $user_ids_array[] =$users_master_data['user_id'];
@@ -176,7 +176,7 @@ business_categories.category_status = 0 and
         }
        
       
-  $users_master_qry = $d->select("user_employment_details,users_master , business_sub_categories"," business_sub_categories.sub_category_status = 0 and   user_employment_details.business_sub_category_id =business_sub_categories.business_sub_category_id AND   user_employment_details.user_id =users_master.user_id and     users_master.active_status=0  $sub_where   ","");
+  $users_master_qry = $d->select("user_employment_details,users_master , business_sub_categories"," business_sub_categories.sub_category_status = 0 and   user_employment_details.business_sub_category_id =business_sub_categories.business_sub_category_id AND   user_employment_details.user_id =users_master.user_id and     users_master.active_status=0 and users_master.city_id='$selected_city_id'  $sub_where   ","");
             $user_ids_array = array('0');
              while ($users_master_data=mysqli_fetch_array($users_master_qry)) {
               $user_ids_array[] =$users_master_data['user_id'];
@@ -186,7 +186,7 @@ business_categories.category_status = 0 and
 
 
 } else  if($send_to =="5"  ){
-   $users_master_qry = $d->select("user_employment_details,users_master , business_sub_categories"," business_sub_categories.sub_category_status = 0 and   user_employment_details.business_sub_category_id =business_sub_categories.business_sub_category_id AND   user_employment_details.user_id =users_master.user_id and     users_master.active_status=0   and users_master.gender='Male'  ","");
+   $users_master_qry = $d->select("user_employment_details,users_master , business_sub_categories"," business_sub_categories.sub_category_status = 0 and   user_employment_details.business_sub_category_id =business_sub_categories.business_sub_category_id AND   user_employment_details.user_id =users_master.user_id and     users_master.active_status=0   and users_master.gender='Male'  and users_master.city_id='$selected_city_id'  ","");
             $user_ids_array = array('0');
              while ($users_master_data=mysqli_fetch_array($users_master_qry)) {
               $user_ids_array[] =$users_master_data['user_id'];
@@ -196,7 +196,7 @@ business_categories.category_status = 0 and
 
 
 } else  if($send_to =="6"  ){
-   $users_master_qry = $d->select("user_employment_details,users_master , business_sub_categories"," business_sub_categories.sub_category_status = 0 and   user_employment_details.business_sub_category_id =business_sub_categories.business_sub_category_id AND   user_employment_details.user_id =users_master.user_id and     users_master.active_status=0   and users_master.gender='Female'  ","");
+   $users_master_qry = $d->select("user_employment_details,users_master , business_sub_categories"," business_sub_categories.sub_category_status = 0 and   user_employment_details.business_sub_category_id =business_sub_categories.business_sub_category_id AND   user_employment_details.user_id =users_master.user_id and     users_master.active_status=0   and users_master.gender='Female' and users_master.city_id='$selected_city_id'  ","");
             $user_ids_array = array('0');
              while ($users_master_data=mysqli_fetch_array($users_master_qry)) {
               $user_ids_array[] =$users_master_data['user_id'];
@@ -206,7 +206,7 @@ business_categories.category_status = 0 and
 
 
 }else  if($send_to =="7"  ){
-   $users_master_qry = $d->select("user_employment_details,users_master , business_adress_master","     business_adress_master.user_id =users_master.user_id AND business_adress_master.adress_type = 0 and   user_employment_details.user_id =users_master.user_id and     users_master.active_status=0   and business_adress_master.pincode='$pincode'  ","");
+   $users_master_qry = $d->select("user_employment_details,users_master , business_adress_master","     business_adress_master.user_id =users_master.user_id AND business_adress_master.adress_type = 0 and   user_employment_details.user_id =users_master.user_id and     users_master.active_status=0   and business_adress_master.pincode='$pincode' and users_master.city_id='$selected_city_id'  ","");
             $user_ids_array = array('0');
              while ($users_master_data=mysqli_fetch_array($users_master_qry)) {
               $user_ids_array[] =$users_master_data['user_id'];
@@ -236,8 +236,8 @@ business_categories.category_status = 0 and
 
 
 
-         $fcmArray=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='android' $where");
-         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='ios' $where ");
+         $fcmArray=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='android' and city_id='$selected_city_id' $where");
+         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='ios' and city_id='$selected_city_id' $where ");
 
          
 

@@ -15,7 +15,7 @@ if(filter_var($id, FILTER_VALIDATE_INT) != true){
     </script>");
 }*/
 
-$qq=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","users_master.user_id='$id'  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  ","");
+$qq=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","users_master.user_id='$id'  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  and users_master.city_id='$selected_city_id'  ","");
 $userData=mysqli_fetch_array($qq);
 extract($userData);
 
@@ -23,9 +23,9 @@ $nqBlock=$d->select("business_houses","user_id='$user_id'" ,"");
 $bData=mysqli_fetch_array($nqBlock);
 error_reporting(0);
 
-$tq22=$d->select("users_master,follow_master,user_employment_details,business_categories,business_sub_categories","business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND follow_master.follow_to=users_master.user_id AND follow_master.follow_by='$id'","ORDER BY users_master.user_full_name ASC");
+$tq22=$d->select("users_master,follow_master,user_employment_details,business_categories,business_sub_categories","business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND follow_master.follow_to=users_master.user_id AND follow_master.follow_by='$id'  and users_master.city_id='$selected_city_id' ","ORDER BY users_master.user_full_name ASC");
 
-$tq33=$d->select("users_master,follow_master,user_employment_details,business_categories,business_sub_categories","business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND follow_master.follow_by=users_master.user_id AND follow_master.follow_to='$id'","ORDER BY users_master.user_full_name ASC");
+$tq33=$d->select("users_master,follow_master,user_employment_details,business_categories,business_sub_categories","business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND follow_master.follow_by=users_master.user_id AND follow_master.follow_to='$id'  and users_master.city_id='$selected_city_id' ","ORDER BY users_master.user_full_name ASC");
 $following= mysqli_num_rows($tq22);
 $followers= mysqli_num_rows($tq33);
 
@@ -413,7 +413,7 @@ $difference_days= $d->plan_days_left($plan_renewal_date);
       user_employment_details.user_id = users_master.user_id and
       business_adress_master.user_id = users_master.user_id and
       states.state_id = business_adress_master.state_id and
-      users_master.user_id='$user_id' and transection_master.is_paid = 0   group by DATE(transection_master.transection_date)  order by transection_master.transection_id asc    ");
+      users_master.user_id='$user_id' and transection_master.is_paid = 0   and users_master.city_id='$selected_city_id'   group by DATE(transection_master.transection_date)  order by transection_master.transection_id asc    ");
     if($transection_master_data_new['is_paid'] == 0 && mysqli_num_rows($qp)  > 0 ){
 
       
@@ -530,7 +530,7 @@ if ($refer_by!='0') { ?>
 <?php
  //7oct2020
 
-$memberAdded=$d->count_data_direct("user_mobile"," users_master  "," refere_by_phone_number ='$user_mobile'");
+$memberAdded=$d->count_data_direct("user_mobile"," users_master  "," refere_by_phone_number ='$user_mobile'  and city_id='$selected_city_id' ");
 
 if ($memberAdded > 0 ) { ?>
  <hr>
@@ -912,7 +912,7 @@ if(strtotime($today) <=   strtotime($validDateToEdit) ||1 ) {
                               $meq = $d->selectRow("users_master.user_id,business_categories.business_category_id,business_sub_categories.business_sub_category_id,users_master.user_full_name,users_master.zoobiz_id,users_master.user_profile_pic,business_categories.category_name,business_sub_categories.sub_category_name,user_employment_details.company_name,user_employment_details.designation,cities.city_name,area_master.area_name,users_master.public_mobile,users_master.user_mobile
     ","users_master,user_employment_details,business_categories,business_sub_categories,business_adress_master,cities,area_master", " 
     business_categories.category_status = 0 and
-    area_master.area_id=business_adress_master.area_id AND cities.city_id=business_adress_master.city_id AND business_adress_master.user_id=users_master.user_id AND business_adress_master.adress_type=0 AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.office_member=0 AND users_master.active_status=0   and (users_master.user_id ='$referred_by_user_id' OR users_master.user_mobile='$refere_by_phone_number' ) ", "");
+    area_master.area_id=business_adress_master.area_id AND cities.city_id=business_adress_master.city_id AND business_adress_master.user_id=users_master.user_id AND business_adress_master.adress_type=0 AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.office_member=0 AND users_master.active_status=0   and (users_master.user_id ='$referred_by_user_id' OR users_master.user_mobile='$refere_by_phone_number' )  and users_master.city_id='$selected_city_id' ", "");
   if (mysqli_num_rows($meq) > 0) {
     while ($blockRow=mysqli_fetch_array($meq)) {
       ?>

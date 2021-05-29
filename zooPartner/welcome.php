@@ -73,7 +73,7 @@ $allowedMenus = array();
              <?php 
 
 
-             $selected_city_id = $_SESSION['city_id'];
+            
 
                $y = date("Y");
              $m = date("m");
@@ -215,7 +215,7 @@ echo $selected_city_id;*/
 
               $today_date = date("Y-m-d");
 
-              $nq3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","  business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id and users_master.user_mobile!='0' AND users_master.active_status=0 and users_master.plan_renewal_date >= '$today_date'    ","ORDER BY plan_renewal_date ASC  ");
+              $nq3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","  business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id and users_master.user_mobile!='0' AND users_master.active_status=0 and users_master.plan_renewal_date >= '$today_date'   and users_master.city_id='$selected_city_id'    ","ORDER BY plan_renewal_date ASC  ");
               $toalExp = 0 ;
                while ($newUserData=mysqli_fetch_array($nq3)) {
 
@@ -262,7 +262,7 @@ echo $selected_city_id;*/
 
               $today_date = date("Y-m-d");
 
-              $nq1=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","  business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id and users_master.user_mobile!='0' AND users_master.active_status=0 and users_master.plan_renewal_date < '$today_date'   ","ORDER BY plan_renewal_date ASC  ");
+              $nq1=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","  business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id and users_master.user_mobile!='0' AND users_master.active_status=0 and users_master.plan_renewal_date < '$today_date'   and users_master.city_id='$selected_city_id'   ","ORDER BY plan_renewal_date ASC  ");
               echo mysqli_num_rows($nq1);
                ?></h4>
             </div>

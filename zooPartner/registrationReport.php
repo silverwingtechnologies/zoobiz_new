@@ -78,7 +78,7 @@ error_reporting(0);
                 $nTo= date_format($dateTo,"Y-m-d 23:59:59");
 
 
-                $q3=$d->select("users_master,user_employment_details,cities","cities.city_id= users_master.city_id and  user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0 and  users_master.register_date  BETWEEN '$nFrom' AND '$nTo' and users_master.office_member = 0 AND users_master.active_status=0  ","");
+                $q3=$d->select("users_master,user_employment_details,cities","cities.city_id= users_master.city_id and  user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0 and  users_master.register_date  BETWEEN '$nFrom' AND '$nTo' and users_master.office_member = 0 AND users_master.active_status=0 and users_master.city_id='$selected_city_id'  ","");
                while ($data=mysqli_fetch_array($q3)) {
                 extract($data);
                

@@ -75,7 +75,7 @@ $where="";
 
                 $where=" and  users_master_temp.register_date  BETWEEN '$nFrom' AND '$nTo' ";
 }
-                $users_master=$d->select("users_master","","");
+                $users_master=$d->select("users_master"," city_id='$selected_city_id' ","");
                 $completed_users = array('0');
 
                while ($users_master_data=mysqli_fetch_array($users_master)) {

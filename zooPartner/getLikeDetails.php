@@ -12,7 +12,7 @@ if (isset($timeline_id)) {
  
 
 
-     $likes_qry=$d->select("timeline_like_master,users_master","timeline_like_master.timeline_id='$timeline_id' AND timeline_like_master.user_id=users_master.user_id AND users_master.office_member=0 and timeline_like_master.active_status=0 AND users_master.active_status=0     order by timeline_like_master.modify_date desc    ");
+     $likes_qry=$d->select("timeline_like_master,users_master","timeline_like_master.timeline_id='$timeline_id' AND timeline_like_master.user_id=users_master.user_id AND users_master.office_member=0 and timeline_like_master.active_status=0 AND users_master.active_status=0  and users_master.city_id='$selected_city_id'   order by timeline_like_master.modify_date desc    ");
          while($likes_data=mysqli_fetch_array($likes_qry)) {
             
 

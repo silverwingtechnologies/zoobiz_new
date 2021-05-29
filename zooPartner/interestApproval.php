@@ -41,7 +41,7 @@
          
 $today_date = date("Y-m-d");
 
-              $nq=$d->select("users_master,user_employment_details,interest_master","  interest_master.added_by_member_id=users_master.user_id and    user_employment_details.user_id=users_master.user_id and users_master.user_mobile!='0' AND users_master.active_status=0 and interest_master.int_status='User Added'   "," group by interest_master.interest_id  ORDER BY interest_master.created_at ASC  ");
+              $nq=$d->select("users_master,user_employment_details,interest_master","  interest_master.added_by_member_id=users_master.user_id and    user_employment_details.user_id=users_master.user_id and users_master.user_mobile!='0' AND users_master.active_status=0 and interest_master.int_status='User Added'   "," group by interest_master.interest_id and users_master.city_id='$selected_city_id'  ORDER BY interest_master.created_at ASC  ");
 
 
               while ($newUserData=mysqli_fetch_array($nq)) { ?>

@@ -29,6 +29,25 @@ $(document).ready(function() {
 
 
 
+var catTablePar = $('#catTablePar').DataTable({
+        lengthChange: false,
+        buttons: ['copy', 'excel', 'pdf', 'print', 'colvis'] ,
+         "columnDefs": [
+             { "orderable": false, "targets": 0 }
+          ], "order": [[ 1, "asc" ]]
+    });
+      catTablePar.buttons().container().appendTo('#catTablePar_wrapper .col-md-6:eq(0)');
+
+      var subCatTablePar = $('#subCatTablePar').DataTable({
+        lengthChange: false,
+        buttons: ['copy', 'excel', 'pdf', 'print', 'colvis'] ,
+         "columnDefs": [  
+             { "orderable": false, "targets": 0 }
+          ], "order": [[ 1, "asc" ]]
+    });
+      subCatTablePar.buttons().container().appendTo('#subCatTablePar_wrapper .col-md-6:eq(0)');
+
+
     var table = $('#example').DataTable({
         lengthChange: false,
         buttons: ['copy', 'excel', 'pdf', 'print', 'colvis']  

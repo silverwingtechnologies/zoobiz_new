@@ -79,22 +79,22 @@ error_reporting(0);
                   $where =" and s.promotion_id='$seasonal_greet_id'";
                 }
 
-                $q3=$d->select("  user_employment_details, users_master a LEFT JOIN seasonal_greeting_share_master s ON a.user_id = s.user_id AND a.active_status=0  and s.is_new = 1   $where  " ,"user_employment_details.user_id = a.user_id and   s.user_id IS NULL  and a.user_mobile!='0'   
+                $q3=$d->selectRow("a.*","   user_employment_details, users_master a LEFT JOIN seasonal_greeting_share_master s ON a.user_id = s.user_id AND a.active_status=0 and a.city_id='$selected_city_id'   and s.is_new = 1   $where  " ,"user_employment_details.user_id = a.user_id and   s.user_id IS NULL  and a.user_mobile!='0'   
                   "," group by a.user_id  ORDER BY a.user_full_name asc ");
  
- 
+  
                  while ($data=mysqli_fetch_array($q3)) {
 
              
                   
                  extract($data);
-
+//echo "<pre>";print_r($data);echo "</pre>";
                  ?>
                  <tr>
 
                   <td class="text-right"><?php echo $i++; ?></td>
 
-                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo $user_full_name; ?></a></td>
+                  <td><a target="_blank"   title="View Profile"  href="memberView?id=<?php echo $data['user_id']; ?>" ><?php echo $user_full_name; ?></a></td>
                    
                   
 

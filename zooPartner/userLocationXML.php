@@ -10,7 +10,7 @@ $where="";
  }
   $queyNew=$d->select("users_master,business_adress_master,user_employment_details,area_master","area_master.area_id=business_adress_master.area_id and   
 business_adress_master.adress_type = 0 and 
-    user_employment_details.user_id =users_master.user_id and    business_adress_master.user_id =users_master.user_id and /*business_adress_master.add_latitude!='' and  business_adress_master.add_longitude!='' AND*/ users_master.active_status=0 AND users_master.office_member=0    $where    "); 
+    user_employment_details.user_id =users_master.user_id and    business_adress_master.user_id =users_master.user_id and /*business_adress_master.add_latitude!='' and  business_adress_master.add_longitude!='' AND*/ users_master.active_status=0 AND users_master.office_member=0  and users_master.city_id='$selected_city_id'    $where    "); 
 
  while($row = mysqli_fetch_array($queyNew)) {
 /*$company_id = $row['company_id'];

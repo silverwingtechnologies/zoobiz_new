@@ -9,9 +9,9 @@ extract(array_map("test_input" , $_POST));
 <?php
 if(isset($checkCPN) && $checkCPN =="yes" && isset($user_social_media_name)  ){
 if($user_id_edit !=0){
-    $coupon_master=$d->select("users_master"," user_social_media_name ='$user_social_media_name'  and user_id !=$user_id_edit   ","");
+    $coupon_master=$d->select("users_master"," user_social_media_name ='$user_social_media_name'  and user_id !=$user_id_edit  and city_id='$selected_city_id'  ","");
 } else {
- $coupon_master=$d->select("users_master"," user_social_media_name ='$user_social_media_name     ","");
+ $coupon_master=$d->select("users_master"," user_social_media_name ='$user_social_media_name  and city_id='$selected_city_id'    ","");
  }           
              if(mysqli_num_rows($coupon_master) > 0  ){
                 echo "0";

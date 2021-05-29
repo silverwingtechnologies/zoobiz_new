@@ -45,7 +45,7 @@ $date_before_1_day = date("Y-m-d", strtotime($currDate."-".$_REQUEST['days']." d
 /*if($_SESSION[partner_login_id] == 7 ){
   echo $where;
 }*/
-     $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND users_master.active_status=0  AND user_employment_details.user_id=users_master.user_id  and users_master.last_login !='0000-00-00 00:00:00'  $where group by users_master.user_id  ","");
+     $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND users_master.active_status=0  AND user_employment_details.user_id=users_master.user_id  and users_master.last_login !='0000-00-00 00:00:00'  and users_master.city_id='$selected_city_id'  $where group by users_master.user_id  ","");
 }
                  
  
@@ -64,14 +64,14 @@ $date_before_1_day = date("Y-m-d", strtotime($currDate."-".$_REQUEST['days']." d
                   
                  
 
-                  $q1=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","     business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id $where  AND  lower(users_master.device) ='android' AND users_master.active_status=0  group by users_master.user_id","");
+                  $q1=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","     business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id $where  AND  lower(users_master.device) ='android' AND users_master.active_status=0 and users_master.city_id='$selected_city_id'  group by users_master.user_id","");
                   echo mysqli_num_rows($q1);
 
                   ?>
                 </td>
                 <td  class="text-center">
                   <?php 
-                  $q2=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","     business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id $where AND  lower(users_master.device) ='ios' AND users_master.active_status=0 group by users_master.user_id","");
+                  $q2=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","     business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id $where AND  lower(users_master.device) ='ios' AND users_master.active_status=0 and users_master.city_id='$selected_city_id' group by users_master.user_id","");
                   echo mysqli_num_rows($q2);
 
                   ?>

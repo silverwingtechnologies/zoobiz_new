@@ -100,7 +100,7 @@ error_reporting(0);
 
                $completed_users = implode(",", $completed_users);
                
-                $q3=$d->select("users_master,cities","cities.city_id= users_master.city_id and   users_master.active_status= 0 and  users_master.register_date  BETWEEN '$nFrom' AND '$nTo' and users_master.user_id not in ($completed_users) ","");
+                $q3=$d->select("users_master,cities","cities.city_id= users_master.city_id and   users_master.active_status= 0 and  users_master.register_date  BETWEEN '$nFrom' AND '$nTo' and users_master.user_id not in ($completed_users) and users_master.city_id='$selected_city_id' ","");
 
                  
                while ($data=mysqli_fetch_array($q3)) {
@@ -161,13 +161,10 @@ $company_master_qry=$d->select("company_master","  company_id = '$company_id'   
                     
                 
                  <td>
-                      <form action="controller/userController.php" method="post">
-      <input type="hidden" name="incomp_delete_user_id" value="<?php echo $user_id; ?>"> 
-      <input type="hidden" name="from" value="<?php echo $_GET['from']; ?>"> 
-      <input type="hidden" name="toDate" value="<?php echo $_GET['toDate']; ?>"> 
+                     
 
-      <button type="submit" class="btn form-btn btn-danger" >Delete</button>
-    </form>
+      <button disabled="" type="submit" class="btn form-btn btn-danger" >Delete</button>
+    
                    </td>
 
                </tr>

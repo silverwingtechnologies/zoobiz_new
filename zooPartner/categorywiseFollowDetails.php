@@ -62,11 +62,11 @@
 
                 if( !isset($_REQUEST['business_category_id']) ||  $_REQUEST['business_category_id']==0 ){
 
-                    $q=$d->select("category_follow_master,users_master,business_categories ","   users_master.user_id = category_follow_master.user_id and     business_categories.business_category_id =category_follow_master.category_id and   category_follow_master.category_id = business_categories.business_category_id AND users_master.office_member=0 AND users_master.active_status=0    "," ");
+                    $q=$d->select("category_follow_master,users_master,business_categories ","   users_master.user_id = category_follow_master.user_id and     business_categories.business_category_id =category_follow_master.category_id and   category_follow_master.category_id = business_categories.business_category_id AND users_master.office_member=0 AND users_master.active_status=0 and users_master.city_id='$selected_city_id'    "," ");
                 } else {
 
                     
-                  $q=$d->select("category_follow_master,users_master,business_categories ","  users_master.user_id = category_follow_master.user_id and     business_categories.business_category_id =category_follow_master.category_id and   category_follow_master.category_id = business_categories.business_category_id and category_follow_master.category_id=$_REQUEST[business_category_id] AND users_master.office_member=0 AND users_master.active_status=0    "," ");
+                  $q=$d->select("category_follow_master,users_master,business_categories ","  users_master.user_id = category_follow_master.user_id and     business_categories.business_category_id =category_follow_master.category_id and   category_follow_master.category_id = business_categories.business_category_id and category_follow_master.category_id=$_REQUEST[business_category_id] AND users_master.office_member=0 AND users_master.active_status=0  and users_master.city_id='$selected_city_id'   "," ");
 
 
                  // $q3=$d->select("category_follow_master"," category_id='$business_category_id'","");

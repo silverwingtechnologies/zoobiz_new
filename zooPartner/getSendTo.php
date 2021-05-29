@@ -9,7 +9,7 @@ if(isset($send_to) && $send_to =="1") {
 	?> 
 	
                     	<?php
-	 $users_master_qry=$d->select("users_master, user_employment_details"," user_employment_details.user_id =users_master.user_id and   users_master.active_status=0  AND users_master.office_member=0     ","");
+	 $users_master_qry=$d->select("users_master, user_employment_details"," user_employment_details.user_id =users_master.user_id and   users_master.active_status=0  AND users_master.office_member=0  and users_master.city_id='$selected_city_id'    ","");
 	 if (mysqli_num_rows($users_master_qry) > 0) {
 	 	?>
 	 	  <option value="0">All</option>

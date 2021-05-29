@@ -43,7 +43,7 @@ $m->set_data('interest_name',$interest_name);
                 $d->insert("user_notification", $notiAry);
 
  
-                $u_dta_qry = $d->selectRow("*","users_master", "user_token!='' AND user_id ='$user_id'    ");
+                $u_dta_qry = $d->selectRow("*","users_master", "user_token!='' AND user_id ='$user_id' and city_id='$selected_city_id'    ");
                 $u_dta = mysqli_fetch_array($u_dta_qry);
 
    $fcm_data_array = array(
@@ -94,7 +94,7 @@ extract($int_details);
                 $d->insert("user_notification", $notiAry);
 
  
-                $u_dta_qry = $d->selectRow("*","users_master", "user_token!='' AND user_id ='$added_by_member_id'    ");
+                $u_dta_qry = $d->selectRow("*","users_master", "user_token!='' AND user_id ='$added_by_member_id' and city_id='$selected_city_id'    ");
                 $u_dta = mysqli_fetch_array($u_dta_qry);
 
 

@@ -30,7 +30,7 @@
                     <select name="user_id" id="user_id" class="form-control" required="">
                       <?php 
                       extract($_REQUEST);
-                      $qss=$d->select("users_master","user_id='$user_id'");
+                      $qss=$d->select("users_master","user_id='$user_id' and city_id='$selected_city_id' ");
                       while ($sData=mysqli_fetch_array($qss)) {
                        ?>
                        <option value="<?php echo $sData['user_id']; ?>"><?php echo $sData['user_full_name']; ?></option>

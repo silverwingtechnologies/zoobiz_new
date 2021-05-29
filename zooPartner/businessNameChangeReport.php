@@ -92,7 +92,7 @@ if(isset($_GET['request_status']) && $_GET['request_status'] != "0"){
                 }
 
              
-                $q3=$d->select("users_master,business_name_change_request_masater,user_employment_details"," user_employment_details.user_id = users_master.user_id and  users_master.user_id =business_name_change_request_masater.user_id    $where ","group by business_name_change_request_id");
+                $q3=$d->select("users_master,business_name_change_request_masater,user_employment_details"," user_employment_details.user_id = users_master.user_id and  users_master.user_id =business_name_change_request_masater.user_id  and users_master.city_id='$selected_city_id'   $where ","group by business_name_change_request_id");
               $i=1;
                 while ($data=mysqli_fetch_array($q3)) {
                   extract($data);

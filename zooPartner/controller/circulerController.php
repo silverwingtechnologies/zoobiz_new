@@ -68,8 +68,8 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
           $d->insertAllUserNotification($title,$description,"circulars",'','');
             
 //17SEPT2020
-         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND  lower(device)='android'  ");
-         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!='' AND  lower(device) ='ios'   ");
+         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND  lower(device)='android' and  city_id='$selected_city_id'   ");
+         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!='' AND  lower(device) ='ios' and  city_id='$selected_city_id'   ");
        $nResident->noti("circulars","",0,$fcmArray,"Circular",'"'.$circular_title.'" '."Added By $created_by",'circulars');
          $nResident->noti_ios("circulars","",0,$fcmArrayIos,"Circular",'"'.$circular_title.'" '."Added By $created_by",'circulars');
 
@@ -118,8 +118,8 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
             
 //17SEPT2020
         
-         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND  lower(device)='android'   ");
-         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='ios'  ");
+         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND  lower(device)='android' and city_id='$selected_city_id'   ");
+         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='ios' and  city_id='$selected_city_id'  ");
          $nResident->noti("circulars","",0,$fcmArray,"Circular",'"'.$circular_title.'" '."Updated By $created_by",'circulars');
          $nResident->noti_ios("circulars","",0,$fcmArrayIos,"Circular",'"'.$circular_title.'" '."Updated By $created_by",'circulars');
          // print_r($fcmArrayIosay);

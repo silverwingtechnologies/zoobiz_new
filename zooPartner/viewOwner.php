@@ -1,6 +1,6 @@
 <?php 
 extract($_REQUEST);
-$qq=$d->select("users_master,unit_master,block_master,floors_master","users_master.user_id='$id' AND unit_master.unit_id=users_master.unit_id AND block_master.block_id=floors_master.block_id AND floors_master.floor_id=unit_master.floor_id AND users_master.society_id='$society_id' AND users_master.member_status=0");
+$qq=$d->select("users_master,unit_master,block_master,floors_master","users_master.user_id='$id' AND unit_master.unit_id=users_master.unit_id AND block_master.block_id=floors_master.block_id AND floors_master.floor_id=unit_master.floor_id AND users_master.society_id='$society_id' AND users_master.member_status=0  and users_master.city_id='$selected_city_id'");
 $userData=mysqli_fetch_array($qq);
 extract($userData);
 error_reporting(0);
@@ -119,7 +119,7 @@ if ($user_status==0) {
            <?php endif ?>
       </div>
       <?php if ($user_type==1): 
-       $fq=$d->select("users_master","user_type=0 AND member_status=0 AND unit_id='$unit_id'");
+       $fq=$d->select("users_master","user_type=0 AND member_status=0 AND unit_id='$unit_id'  and city_id='$selected_city_id' ");
         $ownerData=mysqli_fetch_array($fq);
         if ($ownerData>0) {
         ?>
@@ -182,7 +182,7 @@ if ($user_status==0) {
     <div class="tab-content p-3">
      
       <div class="tab-pane " id="messages">
-        <?php  $fq=$d->select("users_master","unit_id='$unit_id' AND member_status=1 AND society_id='$society_id' AND user_type='$user_type'");
+        <?php  $fq=$d->select("users_master","unit_id='$unit_id' AND member_status=1 AND society_id='$society_id' AND user_type='$user_type'  and city_id='$selected_city_id' ");
 
         if(mysqli_num_rows($fq)>0) { ?>
         <div class="table-responsive">

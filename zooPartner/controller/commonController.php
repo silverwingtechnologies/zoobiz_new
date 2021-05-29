@@ -29,7 +29,7 @@ if (isset($temp_user_id)) {
 
 
 } else if (isset($primary_user_id)) {
-  $main_users_master = $d->selectRow("*","users_master", "user_id = '$primary_user_id'    ");
+  $main_users_master = $d->selectRow("*","users_master", "user_id = '$primary_user_id' and city_id='$selected_city_id'    ");
   $main_users_master_data = mysqli_fetch_array($main_users_master);
 
  if($main_users_master_data[user_mobile] == $primary_user_mobile){
@@ -40,7 +40,7 @@ if (isset($temp_user_id)) {
       'user_mobile'=> $primary_user_mobile
     );
  
-    $q=$d->update("users_master",$a,"user_id='$primary_user_id'");
+    $q=$d->update("users_master",$a,"user_id='$primary_user_id' and city_id='$selected_city_id' ");
 
    if($q>0  ) {
  
@@ -145,7 +145,7 @@ if(isset($appBusinessName) && $appBusinessName=="Approve") {
                 $d->insert("user_notification", $notiAry);
 
  
-                $u_dta_qry = $d->selectRow("*","users_master", "user_token!='' AND user_id ='$user_id'    ");
+                $u_dta_qry = $d->selectRow("*","users_master", "user_token!='' AND user_id ='$user_id' and city_id='$selected_city_id'    ");
                 $u_dta = mysqli_fetch_array($u_dta_qry);
 
                  $fcm_data_array = array(
@@ -205,7 +205,7 @@ extract($bn_details);
                 $d->insert("user_notification", $notiAry);
 
  
-                $u_dta_qry = $d->selectRow("*","users_master", "user_token!='' AND user_id ='$added_by_member_id'    ");
+                $u_dta_qry = $d->selectRow("*","users_master", "user_token!='' AND user_id ='$added_by_member_id' and city_id='$selected_city_id'    ");
                 $u_dta = mysqli_fetch_array($u_dta_qry);
 
 

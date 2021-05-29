@@ -63,7 +63,7 @@ error_reporting(0);
               <tbody>
                 <?php 
                 $i=1;
-                $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories"," business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id   and users_master.active_status = 0","");
+                $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories"," business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id   and users_master.city_id='$selected_city_id'   and users_master.active_status = 0","");
                while ($data=mysqli_fetch_array($q3)) {
                 extract($data);
                 extract(array_map("test_input" , $_GET));

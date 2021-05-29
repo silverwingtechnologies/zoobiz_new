@@ -130,7 +130,7 @@ $_REQUEST['paid_trans'] = 0 ; ?>
          
                
             
- $q3=$d->select("users_master,user_employment_details,company_master,transection_master,business_categories,business_sub_categories, plan_renew_master ","plan_renew_master.transaction_id =transection_master.transection_id and   company_master.company_id= users_master.company_id AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id  and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.office_member=0 AND users_master.active_status= 0       $where group by DATE(plan_renew_master.renew_date),plan_renew_master.user_id  order by plan_renew_master.renew_date  asc  ","");
+ $q3=$d->select("users_master,user_employment_details,company_master,transection_master,business_categories,business_sub_categories, plan_renew_master ","plan_renew_master.transaction_id =transection_master.transection_id and   company_master.company_id= users_master.company_id AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id  and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.office_member=0 AND users_master.active_status= 0  and users_master.city_id='$selected_city_id'       $where group by DATE(plan_renew_master.renew_date),plan_renew_master.user_id  order by plan_renew_master.renew_date  asc  ","");
 
    
  

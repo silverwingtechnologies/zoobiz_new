@@ -70,7 +70,7 @@
                         </form>
                       </div>
 
-                      <?php $users_master=$d->select("users_master","  company_id= '$company_id' ","");
+                      <?php $users_master=$d->select("users_master","  company_id= '$company_id' and city_id='$selected_city_id'  ","");
                       if (mysqli_num_rows($users_master) <= 0 ) { ?>
                         <div style="display: inline-block;">
                         <form  action="controller/companyController.php" method="post">

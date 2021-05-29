@@ -42,7 +42,7 @@ extract($_REQUEST);
                     $i=1;
                     if (isset($user_id)){ 
 
-                      $qu = $d->select("users_master" ," user_id ='$user_id' ","");
+                      $qu = $d->select("users_master" ," user_id ='$user_id' and users_master.city_id='$selected_city_id' ","");
                       $data_u=mysqli_fetch_array($qu);
 
                       $q = $d->select("log_master" ,"  app_user_id ='$user_id' ","order by log_id  DESC limit 2000");

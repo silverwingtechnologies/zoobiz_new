@@ -202,8 +202,8 @@ $timeline_id  = $con->insert_id;
         if($q==TRUE) {
          
 
-         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='android' and timeline_alert=0");
-         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='ios' and timeline_alert=0 ");
+         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='android' and timeline_alert=0 and city_id='$selected_city_id' ");
+         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!='' AND lower(device)='ios' and timeline_alert=0  and city_id='$selected_city_id' ");
 
          //8march21
           /*$last_auto_id=$d->last_auto_id("timeline_master");
@@ -249,7 +249,7 @@ if($send_notification_to_user==1){
     if (isset($addComment)) {
       $user_name = "ZooBiz";
       $block_name = "Admin";
-      $users_master_qry=$d->select("users_master, floors_master , block_master "," users_master.block_id = block_master.block_id and users_master.floor_id = floors_master.floor_id and   users_master.user_id=".$user_id,""); 
+      $users_master_qry=$d->select("users_master, floors_master , block_master "," users_master.block_id = block_master.block_id and users_master.floor_id = floors_master.floor_id and users_master.city_id='$selected_city_id'  and   users_master.user_id=".$user_id,""); 
       if(mysqli_num_rows($users_master_qry)>0){
        while($users_master_data=mysqli_fetch_array($users_master_qry)) {
         $user_name = $users_master_data['user_full_name'];
@@ -293,8 +293,8 @@ if($send_notification_to_user==1){
     }
 
 
-    $fcmArray=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='android' and timeline_alert=0 and user_id=".$user_id);
-$fcmArrayIos=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='ios' and timeline_alert=0  and user_id=".$user_id);
+    $fcmArray=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='android' and timeline_alert=0 and city_id='$selected_city_id' and user_id=".$user_id);
+$fcmArrayIos=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='ios' and timeline_alert=0 and city_id='$selected_city_id' and user_id=".$user_id);
 
 
     $nResident->noti("$notiImg",$society_id,$fcmArray,"ZooBiz",$feed_msg,'announcement');
@@ -333,7 +333,7 @@ if (isset($likeVar)) {
 } else { 
 
 
-  $users_master_qry=$d->select("users_master, floors_master , block_master "," users_master.block_id = block_master.block_id and users_master.floor_id = floors_master.floor_id and   users_master.user_id=".$user_id,""); 
+  $users_master_qry=$d->select("users_master, floors_master , block_master "," users_master.block_id = block_master.block_id and users_master.floor_id = floors_master.floor_id and users_master.city_id='$selected_city_id'  and   users_master.user_id=".$user_id,""); 
   if(mysqli_num_rows($users_master_qry)>0){
    while($users_master_data=mysqli_fetch_array($users_master_qry)) {
     $user_name = $users_master_data['user_full_name'];
@@ -376,8 +376,8 @@ if($q==TRUE) {
 }
 
 
-$fcmArray=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='android' and timeline_alert=0 and user_id=".$user_id);
-$fcmArrayIos=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='ios' and timeline_alert=0 and user_id=".$user_id);
+$fcmArray=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='android' and timeline_alert=0 and city_id='$selected_city_id' and user_id=".$user_id);
+$fcmArrayIos=$d->get_android_fcm("users_master"," user_token!='' AND lower(device)='ios' and timeline_alert=0 and city_id='$selected_city_id'  and user_id=".$user_id);
 
 $nResident->noti("$notiImg",$society_id,$fcmArray,"ZooBiz",$feed_msg,'announcement');
 $nResident->noti_ios("$notiImg",$society_id,$fcmArrayIos,"ZooBiz",$feed_msg,'announcement');

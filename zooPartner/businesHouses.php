@@ -113,7 +113,7 @@ while($business_sub_categories_data=mysqli_fetch_array($business_sub_categories_
                   } 
 
                 $i=1;
-              $q=$d->select("users_master,business_houses,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND business_houses.user_id= users_master.user_id $where ","ORDER BY business_houses.order_id ASC");
+              $q=$d->select("users_master,business_houses,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND business_houses.user_id= users_master.user_id and users_master.city_id='$selected_city_id' $where ","ORDER BY business_houses.order_id ASC");
               $alredyAray=array();
                while ($data=mysqli_fetch_array($q)) {
                 extract($data);
@@ -173,7 +173,7 @@ while($business_sub_categories_data=mysqli_fetch_array($business_sub_categories_
                         <option value="">-- Select --</option>
                          <?php
                          $ids = join("','",$alredyAray);   
-                          $q=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND users_master.user_id NOT IN  ('$ids') ");
+                          $q=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id and users_master.city_id='$selected_city_id'  AND users_master.user_id NOT IN  ('$ids') ");
                         while($row=mysqli_fetch_array($q)){ ?> 
                         <option value="<?php echo $row['user_id']; ?>"><?php echo $row['user_full_name']; ?>-<?php echo $row['category_name']; ?></option>
                         <?php }?>

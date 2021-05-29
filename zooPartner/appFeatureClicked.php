@@ -62,7 +62,7 @@
                   $from =date('Y-m-01');
                   $toDate =date('Y-m-t');
                   }
-                  $office_members_qry=$d->selectRow("user_id","users_master"," office_member =1"," ");
+                  $office_members_qry=$d->selectRow("user_id","users_master"," office_member =1 and  city_id='$selected_city_id' "," ");
                   $office_array = array('0');
                   while ($office_members_data=mysqli_fetch_array($office_members_qry)) {
                   $office_array[] =$office_members_data['user_id'];

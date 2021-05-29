@@ -61,9 +61,9 @@ error_reporting(0); ?>
 									$j=1;?>
 									<tr>
 										<td colspan="2"><strong>Total</strong></td>
-										<td><?php echo $d->count_data_direct("users_id","users_master","installed_by = '$partner_login_id' AND CAST(register_date as DATE) >= '$startDate' AND CAST(register_date as DATE) <= '$endDate'"); ?></td>
-										<td><?php echo $d->count_data_direct("users_id","users_master","installed_by = '$partner_login_id' AND CAST(register_date as DATE) >= '$startDate' AND CAST(register_date as DATE) <= '$endDate' AND user_token != ''"); ?></td>
-										<td><?php echo $d->count_data_direct("users_id","users_master","installed_by = '$partner_login_id' AND CAST(register_date as DATE) >= '$startDate' AND CAST(register_date as DATE) <= '$endDate' AND user_token = ''"); ?></td>
+										<td><?php echo $d->count_data_direct("users_id","users_master","installed_by = '$partner_login_id' AND CAST(register_date as DATE) >= '$startDate' AND CAST(register_date as DATE) <= '$endDate' and city_id='$selected_city_id' "); ?></td>
+										<td><?php echo $d->count_data_direct("users_id","users_master","installed_by = '$partner_login_id' AND CAST(register_date as DATE) >= '$startDate' AND CAST(register_date as DATE) <= '$endDate' AND user_token != '' and city_id='$selected_city_id' "); ?></td>
+										<td><?php echo $d->count_data_direct("users_id","users_master","installed_by = '$partner_login_id' AND CAST(register_date as DATE) >= '$startDate' AND CAST(register_date as DATE) <= '$endDate' AND user_token = '' and city_id='$selected_city_id' "); ?></td>
 									</tr>
 								</tbody>
 							</table>
@@ -81,7 +81,7 @@ error_reporting(0); ?>
 										</thead>
 										<tbody>
 											<?php
-											$q3=$d->select("users_master,unit_master,block_master,floors_master","block_master.block_id=floors_master.block_id AND users_master.floor_id=floors_master.floor_id AND users_master.unit_id=unit_master.unit_id AND block_master.block_id=unit_master.block_id AND unit_master.unit_status!=0 AND unit_master.unit_status!=4 AND users_master.installed_by = '$partner_login_id'  AND CAST(users_master.register_date as DATE) >= '$startDate' AND CAST(users_master.register_date as DATE) <= '$endDate'","ORDER BY unit_master.unit_id ASC");
+											$q3=$d->select("users_master,unit_master,block_master,floors_master","block_master.block_id=floors_master.block_id AND users_master.floor_id=floors_master.floor_id AND users_master.unit_id=unit_master.unit_id AND block_master.block_id=unit_master.block_id AND unit_master.unit_status!=0 AND unit_master.unit_status!=4 AND users_master.installed_by = '$partner_login_id'  AND CAST(users_master.register_date as DATE) >= '$startDate' AND CAST(users_master.register_date as DATE) <= '$endDate' and users_master.city_id='$selected_city_id' ","ORDER BY unit_master.unit_id ASC");
 											$i=1;
 											while ($data=mysqli_fetch_array($q3)) {
 											?>

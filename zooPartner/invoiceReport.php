@@ -173,7 +173,7 @@ $_REQUEST['paid_trans'] = 0 ; ?>
                  }
                  $renew_trans_ids = implode(",",$renew_trans_ids);
 
- $q3=$d->select("users_master,user_employment_details,company_master,transection_master,business_categories,business_sub_categories ","company_master.company_id= users_master.company_id AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id  and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.office_member=0 AND users_master.active_status= 0    and transection_master.transection_id not in ($renew_trans_ids)   $where group by transection_master.user_id order by user_employment_details.complete_profile_date  asc  ","");
+ $q3=$d->select("users_master,user_employment_details,company_master,transection_master,business_categories,business_sub_categories ","company_master.company_id= users_master.company_id AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id  and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.office_member=0 AND users_master.active_status= 0    and transection_master.transection_id not in ($renew_trans_ids)  and users_master.city_id='$selected_city_id'  $where group by transection_master.user_id order by user_employment_details.complete_profile_date  asc  ","");
 
   
  

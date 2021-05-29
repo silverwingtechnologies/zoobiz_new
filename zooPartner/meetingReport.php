@@ -107,7 +107,7 @@ error_reporting(0);
                   $where =" and meeting_master.status='$meet_status'";
                 }
 
-                $q3=$d->select("users_master,meeting_master"," meeting_master.user_id = users_master.user_id  and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo' and users_master.user_mobile!='0' AND users_master.active_status=0    $where 
+                $q3=$d->select("users_master,meeting_master"," meeting_master.user_id = users_master.user_id  and  meeting_master.date  BETWEEN '$nFrom' AND '$nTo' and users_master.user_mobile!='0' AND users_master.active_status=0 and users_master.city_id='$selected_city_id'    $where 
                   ","ORDER BY meeting_master.date desc ");
  
  
@@ -127,7 +127,7 @@ error_reporting(0);
                 }
                 $member_id_array = implode(",", $member_id_array);
  
-                $member_qry=$d->selectRow("user_full_name,user_id","users_master"," user_id in($member_id_array) ");
+                $member_qry=$d->selectRow("user_full_name,user_id","users_master"," user_id in($member_id_array)  and city_id='$selected_city_id' ");
 
                 $BArray = array();
                 $Bcounter = 0 ;

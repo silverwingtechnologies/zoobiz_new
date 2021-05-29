@@ -138,7 +138,7 @@
                       echo "cities.city_id= users_master.city_id and    user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0 AND users_master.office_member=0  $where ";exit;*/
                         //echo "users_master,user_employment_details  $leftJoin";exit;
                       
-                      $q3=$d->selectRow("users_master.user_id as MainUserId, users_master.salutation, users_master.user_full_name, users_master.refer_by, users_master.refere_by_name, users_master.refere_by_phone_number, users_master.user_email, users_master.user_mobile ,cities.city_name,user_employment_details.* ","cities,user_employment_details,users_master  $leftJoin","cities.city_id= users_master.city_id and    user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0 AND users_master.office_member=0  $where "," group by users_master.user_id");
+                      $q3=$d->selectRow("users_master.user_id as MainUserId, users_master.salutation, users_master.user_full_name, users_master.refer_by, users_master.refere_by_name, users_master.refere_by_phone_number, users_master.user_email, users_master.user_mobile ,cities.city_name,user_employment_details.* ","cities,user_employment_details,users_master  $leftJoin","cities.city_id= users_master.city_id and    user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0 and users_master.city_id='$selected_city_id' AND users_master.office_member=0  $where "," group by users_master.user_id");
                       
 
                       $dataArray = array();

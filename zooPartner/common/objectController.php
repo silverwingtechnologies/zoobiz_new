@@ -11,6 +11,7 @@ $m = new model();
  
 $con=$d->dbCon();
  
+ $selected_city_id = $_SESSION['city_id'];
  
 
 extract(array_map("test_input" , $_POST));

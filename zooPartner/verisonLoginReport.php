@@ -20,14 +20,14 @@
               <tr>
                 <td class="text-center">
                   <?php 
-                  $q1=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","   business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.user_token!='' AND  lower(users_master.device) ='android' and users_master.office_member = 0 AND users_master.active_status=0   order by users_master.last_login desc","");
+                  $q1=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","   business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.user_token!='' AND  lower(users_master.device) ='android' and users_master.office_member = 0 AND users_master.active_status=0   and users_master.city_id='$selected_city_id'  order by users_master.last_login desc","");
                   echo mysqli_num_rows($q1);
 
                   ?>
                 </td>
                 <td  class="text-center">
                   <?php 
-                  $q2=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.user_token!='' AND  lower(users_master.device) ='ios' and users_master.office_member = 0 AND users_master.active_status=0  order by users_master.last_login desc","");
+                  $q2=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.user_token!='' AND  lower(users_master.device) ='ios' and users_master.office_member = 0 AND users_master.active_status=0  and users_master.city_id='$selected_city_id'  order by users_master.last_login desc","");
 
                    
 
@@ -39,7 +39,7 @@
                 <td  class="text-center">
                   <?php 
 
-                  $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.user_token!='' AND users_master.active_status=0   AND    users_master.office_member = 0 order by users_master.last_login desc","");
+                  $q3=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.user_token!='' AND users_master.active_status=0   AND    users_master.office_member = 0  and users_master.city_id='$selected_city_id' order by users_master.last_login desc","");
 
 
                   
@@ -81,7 +81,7 @@
                  
                   
 
-                  $q4=$d->selectRow("count(*) as counter,version_code,device", "users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.user_token!='' AND users_master.active_status=0   AND    users_master.office_member = 0  group by version_code,device  order by version_code desc ",""); 
+                  $q4=$d->selectRow("count(*) as counter,version_code,device", "users_master,user_employment_details,business_categories,business_sub_categories","    business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  AND users_master.user_token!='' AND users_master.active_status=0   AND    users_master.office_member = 0   and users_master.city_id='$selected_city_id'  group by version_code,device  order by version_code desc ",""); 
 
 
                while ($data=mysqli_fetch_array($q4)) {

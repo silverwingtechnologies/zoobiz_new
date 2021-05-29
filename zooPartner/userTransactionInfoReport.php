@@ -41,7 +41,7 @@ $transCond ="";
 }
 $where .=$transCond;
 
- $summ_qry=$d->select("users_master,user_employment_details,cities,transection_master","cities.city_id= users_master.city_id and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0      $where group by transection_master.user_id   ","");
+ $summ_qry=$d->select("users_master,user_employment_details,cities,transection_master","cities.city_id= users_master.city_id and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0   and users_master.city_id='$selected_city_id'      $where group by transection_master.user_id   ","");
  $paid_total = 0 ;
  $free_total = 0 ; 
  while ($summ_data=mysqli_fetch_array($summ_qry)) {
@@ -100,7 +100,7 @@ $where .=$transCond;
           <?php 
         
    
-          $qry=$d->select("cities"," city_flag=1","ORDER BY city_name ASC");
+          $qry=$d->select("cities"," city_flag=1  and city_id='$selected_city_id' ","ORDER BY city_name ASC");
           //onchange="this.form.submit();"
           ?>
        
@@ -182,13 +182,13 @@ $where .=$transCond;
 
 
 if(isset($_REQUEST['paid_trans']) && ($_REQUEST['paid_trans']==2   ) ){
-    $q3=$d->select("transection_master,coupon_master,user_employment_details,users_master, company_master ,business_categories,business_sub_categories,cities "," cities.city_id= users_master.city_id  AND  user_employment_details.user_id =users_master.user_id and company_master.company_id =users_master.company_id  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id and   coupon_master.coupon_id =transection_master.coupon_id and users_master.user_id =transection_master.user_id  and users_master.office_member=0 AND    users_master.active_status= 0  $where  ","");
+    $q3=$d->select("transection_master,coupon_master,user_employment_details,users_master, company_master ,business_categories,business_sub_categories,cities "," cities.city_id= users_master.city_id  AND  user_employment_details.user_id =users_master.user_id and company_master.company_id =users_master.company_id  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id and   coupon_master.coupon_id =transection_master.coupon_id and users_master.user_id =transection_master.user_id  and users_master.office_member=0  AND    users_master.active_status= 0  and users_master.city_id='$selected_city_id'   $where  ","");
   } else if( isset($_REQUEST['paid_trans']) && (  $_REQUEST['paid_trans']==4 ) ){
 
-    $q3=$d->select(" user_employment_details,users_master, company_master ,business_categories,business_sub_categories,cities, transection_master  LEFT JOIN coupon_master on  transection_master.coupon_id =     coupon_master.coupon_id       "," cities.city_id= users_master.city_id  AND  user_employment_details.user_id =users_master.user_id and company_master.company_id =users_master.company_id  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id and    users_master.user_id =transection_master.user_id  and users_master.office_member=0 AND    users_master.active_status= 0  $where  ","");
+    $q3=$d->select(" user_employment_details,users_master, company_master ,business_categories,business_sub_categories,cities, transection_master  LEFT JOIN coupon_master on  transection_master.coupon_id =     coupon_master.coupon_id       "," cities.city_id= users_master.city_id  AND  user_employment_details.user_id =users_master.user_id and company_master.company_id =users_master.company_id  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id and    users_master.user_id =transection_master.user_id  and users_master.office_member=0 AND    users_master.active_status= 0   and users_master.city_id='$selected_city_id'  $where  ","");
     
   } else {
-     $q3=$d->select("users_master,user_employment_details,cities,transection_master ,business_categories,business_sub_categories ","cities.city_id= users_master.city_id  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and users_master.office_member=0 AND  users_master.active_status= 0       $where group by transection_master.user_id   ","");
+     $q3=$d->select("users_master,user_employment_details,cities,transection_master ,business_categories,business_sub_categories ","cities.city_id= users_master.city_id  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id and   users_master.user_id =transection_master.user_id and    user_employment_details.user_id =users_master.user_id and users_master.office_member=0 AND  users_master.active_status= 0  and users_master.city_id='$selected_city_id'      $where group by transection_master.user_id   ","");
   }
   
  

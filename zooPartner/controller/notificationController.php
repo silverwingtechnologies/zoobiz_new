@@ -57,8 +57,8 @@ if($business_category_id !="0"){
 
 if($send_to==0){
   $d->insertAllUserNotification($title,$description,"custom_notification",'',"active_status=0 $where");
-   $fcmArray=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='android' $where");
-         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='ios' $where ");
+   $fcmArray=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='android' and city_id='$selected_city_id'  $where");
+         $fcmArrayIos=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='ios' and city_id='$selected_city_id'  $where ");
 
            $nResident->noti("custom_notification","",$society_id,$fcmArray,$title,$description,$fcm_data_array);
          $nResident->noti_ios("custom_notification","",$society_id,$fcmArrayIos,$title,$description,$fcm_data_array);
@@ -66,14 +66,14 @@ if($send_to==0){
 
        } else  if($send_to==1){
         $d->insertAllUserNotificationToIos($title,$description,"custom_notification",'',"active_status=0 $where");
-        $fcmArrayIos=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='ios' $where ");
+        $fcmArrayIos=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='ios' and city_id='$selected_city_id'  $where ");
 
          $nResident->noti_ios("custom_notification","",$society_id,$fcmArrayIos,$title,$description,$fcm_data_array);
 
 
        } else if($send_to==2){
          $d->insertAllUserNotificationToAndroid($title,$description,"custom_notification",'',"active_status=0 $where");
-        $fcmArray=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='android' $where");
+        $fcmArray=$d->get_android_fcm("users_master","user_token!=''  AND lower(device)='android' and city_id='$selected_city_id'  $where");
 
            $nResident->noti("custom_notification","",$society_id,$fcmArray,$title,$description,$fcm_data_array);
        }

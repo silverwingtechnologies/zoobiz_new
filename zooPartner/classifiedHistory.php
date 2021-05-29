@@ -103,7 +103,7 @@ $h=0;
             <p><b>Created By :</b>
            <?php
            
-               $q111=$d->select("users_master","user_id='$data[user_id]'","");
+               $q111=$d->select("users_master","user_id='$data[user_id]' and city_id='$selected_city_id' ","");
               $userdata=mysqli_fetch_array($q111);
               echo $userdata['salutation'].' '.$userdata['user_full_name'] ;
             ?>
@@ -221,7 +221,7 @@ $h=0;
         ?>
         <?php
 
-                   $q111=$d->select("users_master","user_id='$timelineData[user_id]'","");
+                   $q111=$d->select("users_master","user_id='$timelineData[user_id]' and city_id='$selected_city_id' ","");
                     $userdataComment=mysqli_fetch_array($q111);
                    $user_full_name= $userdataComment['salutation'].' '.$userdataComment['user_full_name'] ;
                 ?>
@@ -260,7 +260,7 @@ $h=0;
                       <img class="rounded-circle" id="blah"  onerror="this.src='../zooAdmin/img/user.png'" src="img/profile/<?php echo $adminData['admin_profile']; ?>"  width="30" height="30"   src="#" alt="your image" class='profile' />
                       <?php echo $adminData['admin_name'];} else {
 
-                         $q111=$d->select("users_master","user_id='$subData[user_id]'","");
+                         $q111=$d->select("users_master","user_id='$subData[user_id]' and city_id='$selected_city_id' ","");
                           $userdataComment=mysqli_fetch_array($q111);
                          $user_full_name=$userdataComment['salutation'].' '.$userdataComment['user_full_name'];
                       ?>

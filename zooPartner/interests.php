@@ -53,7 +53,7 @@
                   <td class='text-center'>
                      <?php 
                    
-                    $q3=$d->select("interest_relation_master,users_master","users_master.user_id =interest_relation_master.member_id and   interest_relation_master.interest_id='$interest_id'",""); 
+                    $q3=$d->select("interest_relation_master,users_master","users_master.user_id =interest_relation_master.member_id and   interest_relation_master.interest_id='$interest_id' and users_master.city_id='$selected_city_id' ",""); 
                  $totalCategory =   mysqli_num_rows($q3);
                   if ($totalCategory==0) {
                   ?>  

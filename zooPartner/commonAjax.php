@@ -15,7 +15,7 @@ extract(array_map("test_input" , $_POST));
 
 if(isset($primary_user_mobile) && isset($primary_user_mobile)){ 
  
-$q=$d->select("users_master","user_mobile='$primary_user_mobile' and user_id !='$primary_user_id' ");
+$q=$d->select("users_master","user_mobile='$primary_user_mobile' and user_id !='$primary_user_id' and city_id='$selected_city_id'  ");
      
  
    if(mysqli_num_rows($q) >0 ){

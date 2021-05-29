@@ -6,7 +6,7 @@ if(filter_var($id, FILTER_VALIDATE_INT) != true){
     window.location.href='manageMembers';
     </script>");
 }
-$qq=$d->selectRow("users_master.*, user_employment_details.*, business_sub_categories.business_category_id as realBcat , business_sub_categories.business_sub_category_id as realSubBcat, business_sub_categories.sub_category_name  ","users_master,business_sub_categories,user_employment_details","users_master.user_id='$id'  AND business_sub_categories.business_category_id='-2' and    business_sub_categories.incepted_user_id=user_employment_details.user_id AND    user_employment_details.user_id=users_master.user_id  ","");
+$qq=$d->selectRow("users_master.*, user_employment_details.*, business_sub_categories.business_category_id as realBcat , business_sub_categories.business_sub_category_id as realSubBcat, business_sub_categories.sub_category_name  ","users_master,business_sub_categories,user_employment_details","users_master.user_id='$id'  AND business_sub_categories.business_category_id='-2' and    business_sub_categories.incepted_user_id=user_employment_details.user_id AND    user_employment_details.user_id=users_master.user_id  and users_master.city_id='$selected_city_id'  ","");
 $userData=mysqli_fetch_array($qq);
 extract($userData);
 

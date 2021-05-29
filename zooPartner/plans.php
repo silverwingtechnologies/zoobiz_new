@@ -60,7 +60,7 @@
                   while($row=mysqli_fetch_array($q))
                   {
                     extract($row);
-                     $totalAsignPckg= $d->count_data_direct("plan_id","users_master","plan_id='$row[package_id]'");
+                     $totalAsignPckg= $d->count_data_direct("plan_id","users_master","plan_id='$row[package_id]' and city_id='$selected_city_id' ");
 
                      if($gst_slab_id !="0"){
                        $gst_master=$d->select("gst_master","slab_id = '$gst_slab_id'","");
@@ -146,7 +146,7 @@
                   while($row=mysqli_fetch_array($q))
                   {
                     extract($row);
-                     $totalAsignPckg= $d->count_data_direct("plan_id","users_master","plan_id='$row[package_id]'");
+                     $totalAsignPckg= $d->count_data_direct("plan_id","users_master","plan_id='$row[package_id]' and city_id='$selected_city_id' ");
 
                      if($gst_slab_id !="0"){
                        $gst_master=$d->select("gst_master","slab_id = '$gst_slab_id'","");

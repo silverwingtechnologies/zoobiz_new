@@ -173,7 +173,7 @@ date_default_timezone_set('Asia/Calcutta');
           $feedCount=1;
          while($data_notification=mysqli_fetch_array($qn)) {
           $user_id=$data_notification['user_id'];
-          $qad=$d->select("users_master","user_id='$user_id' AND active_status=0 ");
+          $qad=$d->select("users_master","user_id='$user_id' AND active_status=0   and city_id='$selected_city_id' ");
           $userData=mysqli_fetch_array($qad);
 
 
@@ -227,10 +227,10 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
         if($data_notification['meetup_user_id1'] != 0  &&  $data_notification['meetup_user_id2'] != 0 ){
           $meetup_user_id1 = $data_notification['meetup_user_id1'];
           $meetup_user_id2 = $data_notification['meetup_user_id2'];
-          $meetup_user_id1_q=$d->select("users_master","user_id='$meetup_user_id1' AND active_status=0 ");
+          $meetup_user_id1_q=$d->select("users_master","user_id='$meetup_user_id1' AND active_status=0  and city_id='$selected_city_id'  ");
           $meetup_user_id1_data=mysqli_fetch_array($meetup_user_id1_q);
 
-          $meetup_user_id2_q=$d->select("users_master","user_id='$meetup_user_id2' AND active_status=0 ");
+          $meetup_user_id2_q=$d->select("users_master","user_id='$meetup_user_id2' AND active_status=0  and city_id='$selected_city_id'  ");
           $meetup_user_id2_data=mysqli_fetch_array($meetup_user_id2_q);
 
            ?>
@@ -337,7 +337,7 @@ $admin_data =  $adamin_array[$data_notification['admin_id']];
                 <li>
           <?php
 
-$qlike=$d->select("timeline_like_master,users_master","timeline_like_master.user_id =users_master.user_id and    timeline_like_master.timeline_id='$timeline_id' AND timeline_like_master.active_status = 0      AND users_master.active_status=0  "); 
+$qlike=$d->select("timeline_like_master,users_master","timeline_like_master.user_id =users_master.user_id and    timeline_like_master.timeline_id='$timeline_id' AND timeline_like_master.active_status = 0      AND users_master.active_status=0   and users_master.city_id='$selected_city_id'  "); 
  
 $likesCount = mysqli_num_rows($qlike);
 
@@ -357,7 +357,7 @@ $likesCount = mysqli_num_rows($qlike);
                   <a class="iconos" href="#" data-toggle="modal" data-target="#mymodal<?php echo $timeline_id;?>" ><i class="fa fa-comment-o"></i> Comment (<?php echo $totalCmt= $d->count_data_direct("ctimeline_commentsnews_comments","timeline_id='$timeline_id'"); ?>) </a>
                   <?php */ ?>
 
-                  <?php  $qcomment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0   AND users_master.active_status=0   order by timeline_comments.comments_id desc  "); 
+                  <?php  $qcomment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0   AND users_master.active_status=0  and users_master.city_id='$selected_city_id'   order by timeline_comments.comments_id desc  "); 
 
 $totalCmt = mysqli_num_rows($qcomment);
                    ?>
@@ -384,7 +384,7 @@ $totalCmt = mysqli_num_rows($qcomment);
         <?php 
         $counterCmt = 1;
         if ($totalCmt>0) {
-         $qcomment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0  AND users_master.active_status=0 order by timeline_comments.comments_id desc  ");
+         $qcomment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0  AND users_master.active_status=0  and users_master.city_id='$selected_city_id'  order by timeline_comments.comments_id desc  ");
          while($data_comment=mysqli_fetch_array($qcomment)) {
             $comments_id=$data_comment['comments_id'];
 
@@ -408,7 +408,7 @@ $totalCmt = mysqli_num_rows($qcomment);
 
           <br><br>
         </div>
-         <?php  $subComment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id='$comments_id'  AND users_master.active_status=0 order by timeline_comments.modify_date asc  limit 0,100 ");
+         <?php  $subComment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id='$comments_id'  AND users_master.active_status=0  and users_master.city_id='$selected_city_id'  order by timeline_comments.modify_date asc  limit 0,100 ");
 
          while($data_Sub_comment=mysqli_fetch_array($subComment)) {
             $comments_id=$data_Sub_comment['comments_id'];?>
@@ -443,7 +443,7 @@ $totalCmt = mysqli_num_rows($qcomment);
                     <?php 
         
         if ($totalCmt>0) {
-          $qcomment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0  AND users_master.active_status=0  group by timeline_comments.comments_id order by timeline_comments.modify_date asc  limit 0,100 ");
+          $qcomment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id=0  AND users_master.active_status=0   and users_master.city_id='$selected_city_id'  group by timeline_comments.comments_id order by timeline_comments.modify_date asc  limit 0,100 ");
 
          while($data_comment=mysqli_fetch_array($qcomment)) {
             $comments_id=$data_comment['comments_id'];
@@ -465,7 +465,7 @@ $totalCmt = mysqli_num_rows($qcomment);
           <br><br>
         </div>
         <!-- sub comment -->
-        <?php  $subComment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id='$comments_id'  AND users_master.active_status=0 order by timeline_comments.modify_date asc  limit 0,100 ");
+        <?php  $subComment=$d->select("timeline_comments,users_master","timeline_comments.timeline_id='$timeline_id' AND timeline_comments.user_id=users_master.user_id AND timeline_comments.parent_comments_id='$comments_id'  AND users_master.active_status=0  and users_master.city_id='$selected_city_id'  order by timeline_comments.modify_date asc  limit 0,100 ");
 
          while($data_Sub_comment=mysqli_fetch_array($subComment)) {
             $comments_id=$data_Sub_comment['comments_id'];?>

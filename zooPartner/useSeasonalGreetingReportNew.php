@@ -80,7 +80,7 @@ error_reporting(0);
                   $where =" and seasonal_greeting_share_master.promotion_id='$seasonal_greet_id'";
                 }
 
-                $q3=$d->select("  user_employment_details, users_master, seasonal_greeting_share_master   " ," seasonal_greeting_share_master.user_id= users_master.user_id and seasonal_greeting_share_master.is_new = 1  and  user_employment_details.user_id = users_master.user_id   and users_master.user_mobile!='0'  AND users_master.active_status=0   $where
+                $q3=$d->select("  user_employment_details, users_master, seasonal_greeting_share_master   " ," seasonal_greeting_share_master.user_id= users_master.user_id and seasonal_greeting_share_master.is_new = 1  and  user_employment_details.user_id = users_master.user_id   and users_master.user_mobile!='0'  AND users_master.active_status=0   and users_master.city_id='$selected_city_id'  $where
                   "," group by users_master.user_id ORDER BY users_master.user_full_name asc ");
  
  

@@ -129,14 +129,7 @@ $selected_city_id = $_SESSION['city_id'];
                   $i = 0;
                   while($row=mysqli_fetch_array($q))
                   {
-                    if($_GET['mode']==1 && $row['razorpay_payment_id']=='' ){
-                      continue;
-                    }
-
-                    if($_GET['mode']==2 && $row['razorpay_payment_id']!='' ){
-                      continue;
-                    }
-                  // extract($row);
+                    
                   $i++;
                   
                   ?>

@@ -82,7 +82,7 @@ error_reporting(0);
                 /*$q3=$d->select("  user_employment_details, users_master a LEFT JOIN meeting_master s ON a.user_id = s.user_id and  s.date  BETWEEN '$nFrom' AND '$nTo'    " ,"user_employment_details.user_id = a.user_id and (s.user_id IS NULL or s.member_id IS NULL )    
                   "," group by a.user_id  ORDER BY a.user_full_name asc ");*/
 
-                $q3=$d->selectRow("a.user_id,a.user_full_name,a.user_mobile,a.user_email","  user_employment_details, users_master a LEFT JOIN meeting_master s ON  (a.user_id = s.user_id OR a.user_id = s.member_id  ) and  s.date  BETWEEN '$nFrom' AND '$nTo'  AND a.active_status=0      " ,"user_employment_details.user_id = a.user_id and (s.user_id IS NULL or s.member_id IS NULL ) and a.user_mobile!='0' 
+                $q3=$d->selectRow("a.user_id,a.user_full_name,a.user_mobile,a.user_email","  user_employment_details, users_master a LEFT JOIN meeting_master s ON  (a.user_id = s.user_id OR a.user_id = s.member_id  and a.city_id='$selected_city_id' ) and  s.date  BETWEEN '$nFrom' AND '$nTo'  AND a.active_status=0      " ,"user_employment_details.user_id = a.user_id and (s.user_id IS NULL or s.member_id IS NULL ) and a.user_mobile!='0' 
                   "," group by a.user_id  ORDER BY a.user_full_name asc ");
  
  

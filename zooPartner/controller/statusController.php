@@ -318,7 +318,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         $m->set_data('office_member',$office_member);
         $a1= array ('office_member'=> $m->get_data('office_member')
       );
-      $q=$d->update('users_master',$a1,"user_id='$id'");
+      $q=$d->update('users_master',$a1,"user_id='$id' and city_id='$selected_city_id' ");
       if($q>0) {
 
         echo 1;
@@ -333,7 +333,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
         $a1= array ('office_member'=> $m->get_data('office_member')
       );
 
-      $q=$d->update('users_master',$a1,"user_id='$id'");
+      $q=$d->update('users_master',$a1,"user_id='$id' and city_id='$selected_city_id' ");
       if($q>0) {
         echo 1;
       } else {
@@ -644,7 +644,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     $m->set_data('email_privacy',$isActive);
     $a1= array ('email_privacy'=> $m->get_data('email_privacy')
   );
-    $q=$d->update('users_master',$a1,"user_id='$id'");
+    $q=$d->update('users_master',$a1,"user_id='$id' and city_id='$selected_city_id' ");
     if($q>0) {
       $notiAry = array(
               'user_id'=>$id,
@@ -666,7 +666,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     $m->set_data('email_privacy',$isActive);
     $a1= array ('email_privacy'=> $m->get_data('email_privacy')
   );
-    $q=$d->update('users_master',$a1,"user_id='$id'");
+    $q=$d->update('users_master',$a1,"user_id='$id' and city_id='$selected_city_id' ");
     if($q>0) {
       $notiAry = array(
               'user_id'=>$id,
@@ -691,7 +691,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     $m->set_data('invoice_download',$isActive);
     $a1= array ('invoice_download'=> $m->get_data('invoice_download')
   );
-    $q=$d->update('users_master',$a1,"user_id='$id'");
+    $q=$d->update('users_master',$a1,"user_id='$id' and city_id='$selected_city_id' ");
     if($q>0) {
        $notiAry = array(
               'user_id'=>$id,
@@ -714,7 +714,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     $m->set_data('invoice_download',$isActive);
     $a1= array ('invoice_download'=> $m->get_data('invoice_download')
   );
-    $q=$d->update('users_master',$a1,"user_id='$id'");
+    $q=$d->update('users_master',$a1,"user_id='$id' and city_id='$selected_city_id'");
     if($q>0) {
       $notiAry = array(
               'user_id'=>$id,
@@ -737,10 +737,10 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     $m->set_data('active_status',$isActive);
     $a1= array ('active_status'=> $m->get_data('active_status')
   );
-    $q=$d->update('users_master',$a1,"user_id='$id'");
+    $q=$d->update('users_master',$a1,"user_id='$id' and city_id='$selected_city_id' ");
     if($q>0) {
 
-      $gu=$d->select("users_master","user_id='$id'  ");
+      $gu=$d->select("users_master","user_id='$id'  and city_id='$selected_city_id'  ");
       $userData=mysqli_fetch_array($gu);
       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$userData['user_full_name']." Activated");
 
@@ -755,10 +755,10 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
     $m->set_data('active_status',$isActive);
     $a1= array ('active_status'=> $m->get_data('active_status')
   );
-    $q=$d->update('users_master',$a1,"user_id='$id'");
+    $q=$d->update('users_master',$a1,"user_id='$id' and city_id='$selected_city_id' ");
     if($q>0) {
 
-      $gu=$d->select("users_master","user_id='$id'  ");
+      $gu=$d->select("users_master","user_id='$id'  and city_id='$selected_city_id'  ");
       $userData=mysqli_fetch_array($gu);
       $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$userData['user_full_name']." Deactivated");
 

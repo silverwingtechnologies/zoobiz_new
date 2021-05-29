@@ -81,7 +81,7 @@ if(!isset($_GET['city_id'])){
 
  
 //9nov2020
-  $temp_qry=$d->select("users_master,user_employment_details,business_categories,business_sub_categories,business_adress_master","business_adress_master.user_id=users_master.user_id AND business_adress_master.adress_type=0     AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND users_master.active_status=0   ","");
+  $temp_qry=$d->select("users_master,user_employment_details,business_categories,business_sub_categories,business_adress_master","business_adress_master.user_id=users_master.user_id AND business_adress_master.adress_type=0     AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND users_master.active_status=0 and users_master.city_id='$selected_city_id'   ","");
 $array_counter = array();
  while ($temp_data=mysqli_fetch_array($temp_qry)) {
       $array_counter[$temp_data['city_id']][] =$temp_data;  
@@ -159,7 +159,7 @@ $array_counter = array();
     while ($floorData=mysqli_fetch_array($fq)) {
       $city_id=$floorData['city_id'];
       $state_id=$floorData['state_id'];
-    $uq=$d->select("users_master,user_employment_details,business_categories,business_sub_categories,business_adress_master","business_adress_master.user_id=users_master.user_id AND business_adress_master.adress_type=0 AND business_adress_master.city_id='$city_id'  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND users_master.active_status=0   ","");
+    $uq=$d->select("users_master,user_employment_details,business_categories,business_sub_categories,business_adress_master","business_adress_master.user_id=users_master.user_id AND business_adress_master.adress_type=0 AND business_adress_master.city_id='$city_id'  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND users_master.active_status=0  and users_master.city_id='$selected_city_id'  ","");
     if (mysqli_num_rows($uq)>0) {
    ?>
 

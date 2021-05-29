@@ -62,9 +62,9 @@
 
                 if( !isset($_REQUEST['company_id']) ||  $_REQUEST['company_id']==0 ){
 
-                  $q=$d->select("company_master,users_master","company_master.company_id = users_master.company_id and   company_master.status=0 and users_master.office_member = 0 AND users_master.office_member=0 AND users_master.active_status=0  ","ORDER BY company_master.company_name ASC");
+                  $q=$d->select("company_master,users_master","company_master.company_id = users_master.company_id and   company_master.status=0 and users_master.office_member = 0 AND users_master.office_member=0 AND users_master.active_status=0 and users_master.city_id='$selected_city_id'  ","ORDER BY company_master.company_name ASC");
                 } else {
-                  $q=$d->select("company_master,users_master","company_master.company_id = users_master.company_id and company_master.company_id=$_REQUEST[company_id] and  company_master.status=0 and users_master.office_member = 0 AND users_master.office_member=0 AND users_master.active_status=0  ","ORDER BY company_master.company_name ASC");
+                  $q=$d->select("company_master,users_master","company_master.company_id = users_master.company_id and company_master.company_id=$_REQUEST[company_id] and  company_master.status=0 and users_master.office_member = 0 AND users_master.office_member=0 AND users_master.active_status=0 and users_master.city_id='$selected_city_id'  ","ORDER BY company_master.company_name ASC");
                 }
                   
               

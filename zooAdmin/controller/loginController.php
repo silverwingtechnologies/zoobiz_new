@@ -114,7 +114,7 @@ extract($data);
 		 }*/
 		/*$msg= "Dear $full_name\nYou have requested to reset your password for ZooBiz Admin Panel.\nPlease click below link to reset the same.\n\n$forgotLink\n\nThanks Team ZooBiz";
        	$d->send_sms($admin_mobile,$msg);*/
-       	//$d->sms_admin_reset_password($admin_mobile,$full_name,$forgotLink);
+       	 $d->sms_admin_reset_password($admin_mobile,$full_name,$forgotLink);
 
         // Redirqt to homepage
 		$_SESSION['msg']= "Password reset link sent to ".$admin_email;

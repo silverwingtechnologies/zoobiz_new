@@ -10,7 +10,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
   $society_name = $data['society_name'];
   if(isset($_POST['user_first_name'])){
 
-    $qselect=$d->select("users_master","user_mobile='$user_mobile' AND user_mobile!=''");
+    $qselect=$d->select("users_master","user_mobile='$user_mobile' AND user_mobile!='' and city_id='$selected_city_id' ");
     $user_data = mysqli_fetch_array($qselect);
     if($user_data==true){
       $_SESSION['msg1']="Mobile is Already Registered.";

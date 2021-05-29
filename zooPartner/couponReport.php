@@ -105,7 +105,7 @@ error_reporting(0);
                 $where .=" and  transection_master.coupon_id  = '$coupon_id' ";
 }                
                
-                $q3=$d->select("transection_master,coupon_master,users_master, company_master","company_master.company_id =users_master.company_id and   coupon_master.coupon_id =transection_master.coupon_id and users_master.user_id =transection_master.user_id and    users_master.active_status= 0  $where  ","");
+                $q3=$d->select("transection_master,coupon_master,users_master, company_master","company_master.company_id =users_master.company_id and   coupon_master.coupon_id =transection_master.coupon_id and users_master.user_id =transection_master.user_id and    users_master.active_status= 0 and users_master.city_id='$selected_city_id'  $where  ","");
                while ($data=mysqli_fetch_array($q3)) {
                 extract($data);
                

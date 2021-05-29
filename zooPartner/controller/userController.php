@@ -194,7 +194,7 @@ if(isset($_POST) && !empty($_POST) )//it can be $_GET doesn't matter
 
     $q=$d->update("user_employment_details",$a,"user_id='$user_id'");
     if($q>0) {
-      $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id'");
+      $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id' and city_id='$selected_city_id' ");
         $data_q=mysqli_fetch_array($adm_data);
       $_SESSION['msg']=$data_q['user_full_name']."'s User Employment Data Updated";
 
@@ -244,7 +244,7 @@ $ac =array(
   
     if($q>0) {
 
-      $adm_data=$d->selectRow("*","users_master"," user_id='$user_id'");
+      $adm_data=$d->selectRow("*","users_master"," user_id='$user_id' and city_id='$selected_city_id' ");
         $data_q=mysqli_fetch_array($adm_data);
 
 $androidLink = 'https://play.google.com/store/apps/details?id=com.silverwing.zoobiz';
@@ -255,12 +255,12 @@ $androidLink = 'https://play.google.com/store/apps/details?id=com.silverwing.zoo
         //ref start
 
           $ref_by_data ="";
-          $main_users_master = $d->selectRow("*","users_master", "  user_id='$user_id'   ");
+          $main_users_master = $d->selectRow("*","users_master", "  user_id='$user_id' and city_id='$selected_city_id'    ");
           $main_users_master_data = mysqli_fetch_array($main_users_master);
 
           if($main_users_master_data['refer_by']==2){ 
             $refere_by_phone_number = $main_users_master_data['refere_by_phone_number'];
-            $ref_users_master = $d->selectRow("*","users_master", "user_mobile = '$refere_by_phone_number'    ");
+            $ref_users_master = $d->selectRow("*","users_master", "user_mobile = '$refere_by_phone_number' and city_id='$selected_city_id'   ");
 
            
 
@@ -355,16 +355,16 @@ $androidLink = 'https://play.google.com/store/apps/details?id=com.silverwing.zoo
           }
 
 
-          $user_employment_details_qry = $d->selectRow("user_id","users_master", " active_status=0 $where ", "");
+          $user_employment_details_qry = $d->selectRow("user_id","users_master", " active_status=0 and city_id='$selected_city_id'  $where ", "");
           $user_ids_array = array('0');
           while ($user_employment_details_data = mysqli_fetch_array($user_employment_details_qry)) {
             $user_ids_array[] = $user_employment_details_data['user_id'];
           }
           $user_ids_array = implode(",", $user_ids_array);
 
-          $fcmArray = $d->get_android_fcm("users_master", "user_token!='' AND  lower(device) ='android' and user_id in ($user_ids_array) AND user_id != $user_id");
+          $fcmArray = $d->get_android_fcm("users_master", "user_token!='' AND  lower(device) ='android' and user_id in ($user_ids_array) AND user_id != $user_id and city_id='$selected_city_id' ");
 
-          $fcmArrayIos = $d->get_android_fcm("users_master ", " user_token!='' AND  lower(device) ='ios' and user_id in ($user_ids_array)   AND user_id != $user_id ");
+          $fcmArrayIos = $d->get_android_fcm("users_master ", " user_token!='' AND  lower(device) ='ios' and user_id in ($user_ids_array)   AND user_id != $user_id  and city_id='$selected_city_id' ");
 
 
 
@@ -439,7 +439,7 @@ $androidLink = 'https://play.google.com/store/apps/details?id=com.silverwing.zoo
 
 if(isset($plan_renewal_date) && $plan_renewal_date !=""){
 
-  $users_master=$d->select("users_master","user_id ='$user_id'  ","");
+  $users_master=$d->select("users_master","user_id ='$user_id' and city_id='$selected_city_id'  ","");
   $users_master_data=mysqli_fetch_array($users_master);
 
   $plan_renewal_date = date("Y-m-d", strtotime($plan_renewal_date));
@@ -453,13 +453,13 @@ if(isset($plan_renewal_date) && $plan_renewal_date !=""){
       'plan_renewal_date_old'=> $m->get_data('plan_renewal_date_old') 
     );
 
-    $q=$d->update("users_master",$user_array," user_id='$user_id'");
+    $q=$d->update("users_master",$user_array," user_id='$user_id' and city_id='$selected_city_id' ");
 }
     
 
 
     if($q>0) {
-     $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id'");
+     $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id' and city_id='$selected_city_id' ");
         $data_q=mysqli_fetch_array($adm_data);
       $_SESSION['msg']=$data_q['user_full_name']."'s Billing Data Updated";
        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
@@ -474,7 +474,7 @@ if(isset($plan_renewal_date) && $plan_renewal_date !=""){
 //2nov2020
     if(isset($_POST['refer_user_id'])){
 
-      $main_users_master = $d->selectRow("*","users_master", "user_id = '$refer_user_id'    ");
+      $main_users_master = $d->selectRow("*","users_master", "user_id = '$refer_user_id' and city_id='$selected_city_id'    ");
 
 
         $main_users_master_data = mysqli_fetch_array($main_users_master);
@@ -492,7 +492,7 @@ if(isset($plan_renewal_date) && $plan_renewal_date !=""){
       $m->set_data('refere_by_phone_number','');
 
       if($refer_by==2){
-          $ref_u_qry=$d->selectRow("*","users_master"," user_id ='$refer_friend_id'","");
+          $ref_u_qry=$d->selectRow("*","users_master"," user_id ='$refer_friend_id' and city_id='$selected_city_id' ","");
           $ref_u_data=mysqli_fetch_array($ref_u_qry);
           
           $m->set_data('referred_by_user_id',$refer_friend_id);
@@ -524,7 +524,7 @@ if($refer_by== 1){
     );
   /*echo "<pre>";print_r($_POST); 
 echo "<pre>";print_r($a);exit;*/
-       $q=$d->update("users_master",$a,"user_id='$refer_user_id'");
+       $q=$d->update("users_master",$a,"user_id='$refer_user_id' and city_id='$selected_city_id' ");
     if($q>0) {
 
 
@@ -537,7 +537,7 @@ echo "<pre>";print_r($a);exit;*/
 
 
         //  $refere_by_phone_number = $refere_by_phone_number;
-          $ref_users_master = $d->selectRow("user_mobile,user_token,device,user_full_name,user_id","users_master", "  user_id = '$refer_friend_id'   ");
+          $ref_users_master = $d->selectRow("user_mobile,user_token,device,user_full_name,user_id","users_master", "  user_id = '$refer_friend_id'  and city_id='$selected_city_id'   ");
           $mem_city_id =  $main_users_master_data['city_id'];
           $cities = $d->selectRow("city_name","cities", "city_id = '$mem_city_id'    ");
           $cities_data = mysqli_fetch_array($cities);
@@ -605,7 +605,7 @@ echo  "here";exit; */
   //refer by user end  
 
 
-      $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$refer_user_id'");
+      $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$refer_user_id' and city_id='$selected_city_id' ");
         $data_q=mysqli_fetch_array($adm_data);
 
       $_SESSION['msg']=$data_q['user_full_name']."'s Refer By Data Updated";
@@ -742,7 +742,7 @@ echo  "here";exit; */
 
     $q=$d->update("users_master",$a,"user_id='$user_id'");
     if($q>0) {
-      $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id'");
+      $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id' and city_id='$selected_city_id' ");
         $data_q=mysqli_fetch_array($adm_data);
       $_SESSION['msg']=$data_q['user_full_name']."'s User Basic Data Updated";
        $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by",$_SESSION['msg']);
@@ -768,8 +768,8 @@ echo  "here";exit; */
 
     $q=$d->delete("business_adress_master","user_id='$user_id' AND adress_id='$adress_id'");
     if($q>0) {
-      $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id'");
-        $data_q=mysqli_fetch_array($adm_data);
+      $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id' and city_id='$selected_city_id' ");
+        $data_q=mysqli_fetch_array($adm_data); 
 
 
       $_SESSION['msg']=$data_q['user_full_name']."'s User Address Deleted";
@@ -820,7 +820,7 @@ echo  "here";exit; */
                    $acc = array(
                     'city_id' => $m->get_data('city_id')
                  );
-                 $d->update("users_master",$acc,"user_id='$user_id'");
+                 $d->update("users_master",$acc,"user_id='$user_id' and city_id='$selected_city_id' ");
 
                 $d->update("business_adress_master",$a11,"user_id='$user_id'");
             }else if ($adress_type==1) {
@@ -846,7 +846,7 @@ echo  "here";exit; */
                   $acc = array(
                     'city_id' => $m->get_data('city_id')
                  );
-                 $d->update("users_master",$acc,"user_id='$user_id'");
+                 $d->update("users_master",$acc,"user_id='$user_id' and city_id='$selected_city_id' ");
                 $d->update("business_adress_master",$a11,"user_id='$user_id' AND adress_id!='$adress_id'");
             } else if ($adress_type==1) {
                $totalAddress=  $d->count_data_direct("adress_id","business_adress_master","user_id='$user_id' AND adress_type=0 AND adress_id!='$adress_id'");
@@ -864,7 +864,7 @@ echo  "here";exit; */
         }
 
        if ($d==true) {
-        $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id'");
+        $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id' and city_id='$selected_city_id' ");
         $data_q=mysqli_fetch_array($adm_data);
 
  $_SESSION['msg']=$data_q['user_full_name']."'s User Business Address Update Sucessfully !";
@@ -889,7 +889,7 @@ echo  "here";exit; */
      $con -> autocommit(FALSE);
 
 
-    $q=$d->select("users_master","user_mobile='$user_mobile'");
+    $q=$d->select("users_master","user_mobile='$user_mobile' and city_id='$selected_city_id' ");
     $data=mysqli_fetch_array($q);
     if ($data>0) {
          $_SESSION['msg1']="Mobile number alerady register";
@@ -1121,7 +1121,7 @@ $m->set_data('office_member',$office_member);
       $m->set_data('refere_by_phone_number','');
 
       if($refer_by==2){
-          $ref_u_qry=$d->selectRow("*","users_master"," user_id ='$refer_friend_id'","");
+          $ref_u_qry=$d->selectRow("*","users_master"," user_id ='$refer_friend_id' and city_id='$selected_city_id' ","");
           $ref_u_data=mysqli_fetch_array($ref_u_qry);
           
           $m->set_data('referred_by_user_id',$refer_friend_id);
@@ -1326,7 +1326,7 @@ $ref_by_data ="";
        //refer by user start
    $cities = $d->selectRow("city_name","cities", "city_id = '$city_id'    ");
           $cities_data = mysqli_fetch_array($cities);
-        $main_users_master = $d->selectRow("*","users_master", "user_mobile = '$user_mobile'    ");
+        $main_users_master = $d->selectRow("*","users_master", "user_mobile = '$user_mobile' and  city_id='$selected_city_id'    ");
 
 
         $main_users_master_data = mysqli_fetch_array($main_users_master);
@@ -1334,7 +1334,7 @@ $ref_by_data ="";
         if($refer_by==2){ 
           $refere_by_phone_number = $main_users_master_data['user_mobile'];//$refere_by_phone_number;
           $refere_by_name = $main_users_master_data['refere_by_name'];
-          $ref_users_master = $d->selectRow("*","users_master", "  user_id = '$refer_friend_id'    ");
+          $ref_users_master = $d->selectRow("*","users_master", "  user_id = '$refer_friend_id'  and city_id='$selected_city_id'   ");
  
        
 
@@ -1442,7 +1442,7 @@ $getData = $d->select("custom_settings_master"," status = 0 and send_fcm=1 and f
               $where = " and  city_id ='$city_id'";
             }
             
-            $user_employment_details_qry = $d->select("users_master"," active_status=0 $where  ","");
+            $user_employment_details_qry = $d->select("users_master"," active_status=0 and city_id='$selected_city_id'  $where  ","");
 
             $user_ids_array = array('0');
              while ($user_employment_details_data=mysqli_fetch_array($user_employment_details_qry)) {
@@ -1451,9 +1451,9 @@ $getData = $d->select("custom_settings_master"," status = 0 and send_fcm=1 and f
              $user_ids_array = implode(",", $user_ids_array);
 
             
-         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND  lower(device)='android' and user_id in ($user_ids_array)  ");
+         $fcmArray=$d->get_android_fcm("users_master","user_token!='' AND  lower(device)='android' and city_id='$selected_city_id'  and user_id in ($user_ids_array)  ");
          
-        $fcmArrayIos=$d->get_android_fcm("users_master "," user_token!='' AND  lower(device)='ios' and user_id in ($user_ids_array)    ");
+        $fcmArrayIos=$d->get_android_fcm("users_master "," user_token!='' AND  lower(device)='ios' and city_id='$selected_city_id'  and user_id in ($user_ids_array)    ");
 
          $d->insertAllUserNotificationMemberSpecial($title,$description,"viewMemeber",$user_profile_pic,"active_status=0 and user_id in ($user_ids_array) AND user_id != $user_id",11,$new_user_id);
 
@@ -1487,7 +1487,7 @@ $getData = $d->select("custom_settings_master"," status = 0 and send_fcm=1 and f
 
  if (isset($active_user_id)) {
 
-$gu=$d->select("users_master","user_id='$active_user_id'  ");
+$gu=$d->select("users_master","user_id='$active_user_id' and city_id='$selected_city_id' ");
 $userData=mysqli_fetch_array($gu);
 
 
@@ -1495,7 +1495,7 @@ $a1= array (
       'active_status'=>'0',
       'inactive_by' => $_SESSION['partner_login_id']
     );
-$q=$d->update("users_master",$a1,"user_id='$active_user_id' ");
+$q=$d->update("users_master",$a1,"user_id='$active_user_id' and city_id='$selected_city_id' ");
 if($q>0) {
 
    $a22= array (
@@ -1517,13 +1517,13 @@ $q22=$d->update("user_notification",$a22," user_id='$active_user_id' or other_us
 //temp incomplete delete start
 if (isset($incomp_delete_user_id)) {
  
-  $main_users_master = $d->selectRow("*","users_master", "user_id = '$incomp_delete_user_id'    ");
+  $main_users_master = $d->selectRow("*","users_master", "user_id = '$incomp_delete_user_id'  and city_id='$selected_city_id'   ");
 
 
         $main_users_master_data = mysqli_fetch_array($main_users_master);
 $user_mobile_del = $main_users_master_data['user_mobile'];
 
- $q = $d->delete("users_master","user_id='$incomp_delete_user_id'");
+ $q = $d->delete("users_master","user_id='$incomp_delete_user_id' and city_id='$selected_city_id'");
  $q2 = $d->delete("transection_master","user_id='$incomp_delete_user_id'");
  $q2 = $d->delete("users_master_temp","user_mobile='$user_mobile_del'");
  if($q>0 && $q2>0) {
@@ -1542,14 +1542,14 @@ $user_mobile_del = $main_users_master_data['user_mobile'];
 //temp force delete user start
 if (isset($force_delete_user_id)) {
 
-$gu=$d->select("users_master,user_employment_details","user_employment_details.user_id = users_master.user_id and  users_master.user_id='$force_delete_user_id'  ");
+$gu=$d->select("users_master,user_employment_details","user_employment_details.user_id = users_master.user_id and  users_master.user_id='$force_delete_user_id' and users_master.city_id='$selected_city_id'  ");
 $userData=mysqli_fetch_array($gu);
  
 
 
 
  
- $q = $d->delete("users_master","user_id='$force_delete_user_id'");
+ $q = $d->delete("users_master","user_id='$force_delete_user_id' and city_id='$selected_city_id' ");
     
     if($q>0) {
 
@@ -1618,7 +1618,7 @@ $d->delete("slider_master","user_id='$force_delete_user_id'");
 
   if (isset($delete_user_id)) {
 
-$gu=$d->select("users_master","user_id='$delete_user_id'  ");
+$gu=$d->select("users_master","user_id='$delete_user_id' and city_id='$selected_city_id'  ");
 $userData=mysqli_fetch_array($gu);
  
  
@@ -1628,7 +1628,7 @@ $userData=mysqli_fetch_array($gu);
       'user_token' =>'',
       'device' =>''
     );
-$q=$d->update("users_master",$a1,"user_id='$delete_user_id' ");
+$q=$d->update("users_master",$a1,"user_id='$delete_user_id' and city_id='$selected_city_id' ");
 
 
     
@@ -1705,9 +1705,9 @@ $q22=$d->update("user_notification",$a22," user_id='$delete_user_id' or other_us
             'user_token'=>$m->get_data('user_token')
         );
 
-        $qdelete = $d->update("users_master",$a,"user_id='$user_id'");
+        $qdelete = $d->update("users_master",$a,"user_id='$user_id' and city_id='$selected_city_id' ");
 
-         $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id'");
+         $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id' and city_id='$selected_city_id' ");
         $data_q=mysqli_fetch_array($adm_data);
     $_SESSION['msg']=$data_q['user_full_name']." Logout Forcefully From Web Portal";
 
@@ -1778,12 +1778,12 @@ $d->insert_log("","0","$_SESSION[partner_login_id]","$created_by","Manual Logout
       'plan_renewal_date'=> $plan_renewal_date,
       );
 
-      $q=$d->update("users_master",$a,"user_id='$user_id'");
+      $q=$d->update("users_master",$a,"user_id='$user_id' and city_id='$selected_city_id' ");
       $q3=$d->insert("transection_master",$paymentAry);
        
       if($q and $q3) {
         $con -> commit();
-        $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id'");
+        $adm_data=$d->selectRow("user_full_name","users_master"," user_id='$user_id' and city_id='$selected_city_id' ");
         $data_q=mysqli_fetch_array($adm_data);
 
         $_SESSION['msg']=$data_q['user_full_name']."'s Plan renewed successfully !";

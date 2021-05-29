@@ -106,7 +106,7 @@ if ( isset($_GET['from']) || isset($_GET['toDate']) || isset($_GET['slider_statu
                   <td><?php echo  $slider_mobile; ?></td>
                   <td> <?php
                     if($user_id  != 0 ){
-                    $users_master_qry = $d->select("users_master","user_id='$user_id' ");
+                    $users_master_qry = $d->select("users_master","user_id='$user_id' and city_id='$selected_city_id' ");
                     $users_master_data = mysqli_fetch_array($users_master_qry);
                     ?><a  target="_blank"  title="View Profile"  href="memberView?id=<?php echo $user_id; ?>" ><?php echo  $users_master_data['user_full_name']; ?></a> <?php
                     } else {

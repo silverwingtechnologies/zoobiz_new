@@ -6,7 +6,7 @@ if(filter_var($id, FILTER_VALIDATE_INT) != true){
     window.location.href='manageMembers';
     </script>");
 }
-$qq=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","users_master.user_id='$id'  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id  ","");
+$qq=$d->select("users_master,user_employment_details,business_categories,business_sub_categories","users_master.user_id='$id'  AND business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id and users_master.city_id='$selected_city_id'  ","");
 $userData=mysqli_fetch_array($qq);
 extract($userData);
 
@@ -14,9 +14,9 @@ $nqBlock=$d->select("business_houses","user_id='$user_id'" ,"");
 $bData=mysqli_fetch_array($nqBlock);
 error_reporting(0);
 
-$tq22=$d->select("users_master,follow_master,user_employment_details,business_categories,business_sub_categories","business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND follow_master.follow_to=users_master.user_id AND follow_master.follow_by='$id'","ORDER BY users_master.user_full_name ASC");
+$tq22=$d->select("users_master,follow_master,user_employment_details,business_categories,business_sub_categories","business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND follow_master.follow_to=users_master.user_id AND follow_master.follow_by='$id' and users_master.city_id='$selected_city_id' ","ORDER BY users_master.user_full_name ASC");
 
-$tq33=$d->select("users_master,follow_master,user_employment_details,business_categories,business_sub_categories","business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND follow_master.follow_by=users_master.user_id AND follow_master.follow_to='$id'","ORDER BY users_master.user_full_name ASC");
+$tq33=$d->select("users_master,follow_master,user_employment_details,business_categories,business_sub_categories","business_sub_categories.business_sub_category_id=user_employment_details.business_sub_category_id AND   business_categories.business_category_id=user_employment_details.business_category_id AND user_employment_details.user_id=users_master.user_id AND follow_master.follow_by=users_master.user_id AND follow_master.follow_to='$id' and users_master.city_id='$selected_city_id' ","ORDER BY users_master.user_full_name ASC");
 $following= mysqli_num_rows($tq22);
 $followers= mysqli_num_rows($tq33);
 
@@ -362,7 +362,7 @@ if ($refer_by!='0') { ?>
 <?php
  //7oct2020
 
-$memberAdded=$d->count_data_direct("user_mobile"," users_master  "," refere_by_phone_number ='$user_mobile'");
+$memberAdded=$d->count_data_direct("user_mobile"," users_master  "," refere_by_phone_number ='$user_mobile' and city_id='$selected_city_id' ");
 
 if ($memberAdded > 0 ) { ?>
  <hr>

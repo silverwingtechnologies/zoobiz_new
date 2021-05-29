@@ -87,7 +87,7 @@
                  <td class="text-right">
                    <?php 
                    
-                   $q3=$d->select("users_master"," company_id='$company_id'    AND office_member=0 AND active_status=0  ","");
+                   $q3=$d->select("users_master"," company_id='$company_id'    AND office_member=0 AND active_status=0  and city_id='$selected_city_id'  ","");
                   echo mysqli_num_rows($q3);
 
                   ?>  

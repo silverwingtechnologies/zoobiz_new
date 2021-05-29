@@ -117,7 +117,7 @@ if (isset($_REQUEST['social_media'])!='' && $_REQUEST['social_media'] != 0 ) {
 
                   
                 if(in_array("0", $_REQUEST['social_media'])){
-                   $where .=" and  users_master.facebook  = '' ";
+                    $where .=" and  users_master.facebook  = '' ";
                 }
                 if(in_array("1", $_REQUEST['social_media'])){
                    $where .=" and  users_master.instagram  = '' ";
@@ -136,7 +136,7 @@ if (isset($_REQUEST['social_media'])!='' && $_REQUEST['social_media'] != 0 ) {
    $where =" and  user_employment_details.company_logo  = '' and  user_employment_details.company_broucher  = '' and  user_employment_details.company_profile  = '' and  users_master.facebook  = '' and  users_master.instagram  = '' and  users_master.linkedin  = '' and  users_master.twitter  = ''  ";
  }
 
-                $q3=$d->select("users_master,user_employment_details,cities","cities.city_id= users_master.city_id and  user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0 AND users_master.office_member=0  $where ","");
+                $q3=$d->select("users_master,user_employment_details,cities","cities.city_id= users_master.city_id and  user_employment_details.user_id =users_master.user_id and  users_master.active_status= 0  and users_master.city_id='$selected_city_id'  AND users_master.office_member=0  $where ","");
                while ($data=mysqli_fetch_array($q3)) {
                 extract($data);
                
